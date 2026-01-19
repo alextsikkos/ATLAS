@@ -1,0 +1,794 @@
+[
+  {
+    "id": "SigninRiskPolicy",
+    "name": "Risky sign-in -> MFA",
+    "tier": 1,
+    "category": "Identity",
+    "secureScoreControlIds": ["SigninRiskPolicy"]
+  },
+  {
+    "id": "UserRiskPolicy",
+    "name": "Risky user -> MFA + password change",
+    "tier": 1,
+    "category": "Identity",
+    "secureScoreControlIds": ["UserRiskPolicy"]
+  },
+  {
+    "id": "AdminMFAV2",
+    "name": "Admins -> MFA",
+    "tier": 1,
+    "category": "Identity",
+    "secureScoreControlIds": ["AdminMFAV2"]
+  },
+  {
+    "id": "DisableUserConsentToApps",
+    "name": "Disable user consent to apps",
+    "tier": 2,
+    "category": "Identity",
+    "approvalRequired": true,
+    "detectOnly": true,    
+    "secureScoreControlIds": ["IntegratedApps"]
+  },
+  {
+    "id": "SelfServicePasswordReset",
+    "name": "Enable SSPR for all users",
+    "tier": 2,
+    "category": "Identity",
+    "approvalRequired": true,
+    "detectOnly": false,
+    "secureScoreControlIds": ["SelfServicePasswordReset"]
+  },
+  {
+    "id": "BlockLegacyAuthenticationPolicy",
+    "name": "Block legacy authentication",
+    "tier": 1,
+    "category": "Identity",
+    "secureScoreControlIds": ["BlockLegacyAuthentication"]
+  },
+  {
+  "id": "BlockLegacyAuthenticationStatus",
+  "name": "Legacy authentication blocked (status check)",
+  "tier": 1,
+  "category": "Identity",
+  "detectOnly": true,
+  "secureScoreControlIds": ["BlockLegacyAuthentication"]
+},
+{
+  "id": "MDETamperProtectionStatus",
+  "name": "Defender for Endpoint tamper protection enabled (status check)",
+  "tier": 1,
+  "category": "Endpoint",
+  "detectOnly": true,
+  "dataSource": "mde",
+  "description": "Detect-only: checks whether tamper protection is enabled across endpoints (or at least reports whether the signal is available)."
+},
+{
+  "id": "MDOSafeLinks",
+  "name": "Defender for Office 365: Safe Links enabled (status check)",
+  "tier": 2,
+  "category": "Email",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "dataSource": "mdo",
+  "description": "Detect-only: checks whether Safe Links is configured (placeholder until MDO API wiring exists)."
+},
+{
+  "id": "MDOSafeAttachments",
+  "name": "Defender for Office 365: Safe Attachments enabled (status check)",
+  "tier": 2,
+  "category": "Email",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "dataSource": "mdo",
+  "description": "Detect-only: checks whether Safe Attachments is configured (placeholder until MDO API wiring exists)."
+},
+{
+  "id": "MDOAntiPhish",
+  "name": "Defender for Office 365: Anti-phish configured (status check)",
+  "tier": 2,
+  "category": "Email",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "dataSource": "mdo",
+  "description": "Detect-only: checks whether Anti-phish policies are configured (placeholder until MDO API wiring exists)."
+},
+{
+  "id": "EXOSPFRecordsAllDomains",
+  "name": "Exchange Online: SPF records published for all domains",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": ["exo_SPF_records_for_all_domains"]
+},
+{
+  "id": "MDOAntiSpam",
+  "name": "Defender for Office 365: Anti-spam configured",
+  "category": "Email",
+  "tier": 2,
+  "detectOnly": true,
+  "handler": "detect_anti_spam_status"
+},
+{
+  "id": "MDOAntiMalware",
+  "name": "Defender for Office 365: Anti-malware configured",
+  "category": "Email",
+  "tier": 2,
+  "detectOnly": true,
+  "handler": "detect_anti_malware_status"
+},
+{
+  "id": "MDOPresetSecurityPolicies",
+  "name": "Defender for Office 365: Preset security policies (Standard/Strict) enabled",
+  "category": "Email",
+  "tier": 2,
+  "approvalRequired": true,
+  "detectOnly": false
+},
+{
+  "id": "EXODKIMEnabledAllDomains",
+  "name": "Exchange Online: DKIM enabled for all custom domains",
+  "category": "Email",
+  "tier": 2,
+  "detectOnly": true
+},
+{
+  "id": "EXODMARCAllDomains",
+  "name": "Email: DMARC record exists for all custom domains",
+  "category": "Email",
+  "tier": 2,
+  "detectOnly": true
+},
+{
+  "id": "CAAdminSignInFrequencySessionTimeout",
+  "name": "Conditional Access: Admin sign-in frequency set + browser sessions not persistent (Secure Score)",
+  "tier": 3,
+  "category": "Identity",
+  "detectOnly": false,
+  "approvalRequired": true,
+  "canCauseLockout": true,
+  "requiresOnboardingDiscussion": true,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["aad_sign_in_freq_session_timeout"]
+},
+{
+  "id": "CAAdminPhishingResistantMFA",
+  "name": "Conditional Access: Require phishing-resistant MFA strength for administrators (Secure Score)",
+  "tier": 3,
+  "canCauseLockout": true,
+  "requiresOnboardingDiscussion": true,
+  "default_mode": "detect-only",
+  "category": "Identity",
+  "detectOnly": false,
+  "approvalRequired": true,
+  "secureScoreControlIds": ["aad_phishing_MFA_strength"]
+},
+{
+  "id": "PasswordProtection",
+  "name": "Entra ID: Password protection enabled (Secure Score)",
+  "tier": 2,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": true,
+  "secureScoreControlIds": ["aad_password_protection"]
+},
+{
+  "id": "CAAdminBlockLegacyAuth",
+  "name": "Conditional Access: Block legacy authentication for admins (ATLAS-owned)",
+  "tier": 1,
+  "default_mode": "report-only",
+  "approvalRequired": true,
+  "detectOnly": false
+},
+{
+  "id": "CAAllUsersBlockLegacyAuth",
+  "name": "Conditional Access: Block legacy authentication for all users (ATLAS-owned)",
+  "tier": 1,
+  "default_mode": "report-only",
+  "approvalRequired": true,
+  "detectOnly": false
+},
+{
+  "id": "CAAdminMFAAllApps",
+  "name": "Conditional Access: Require MFA for admins across all apps (ATLAS-owned)",
+  "tier": 1,
+  "default_mode": "report-only",
+  "approvalRequired": true,
+  "detectOnly": false
+},
+{
+  "id": "Tier3AuthMethodsReadiness",
+  "name": "Tier 3 Readiness: Phishing-resistant MFA methods available (FIDO2 / WHfB) + TAP bootstrap",
+  "tier": 3,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": true,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": []
+},
+{
+  "id": "Tier3BreakGlassReadiness",
+  "name": "Tier 3 Readiness: Break-glass accounts present and safe",
+  "tier": 3,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": true,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": []
+},
+{
+  "id": "CustomerLockboxEnabled",
+  "name": "Microsoft 365: Customer Lockbox enabled (Secure Score)",
+  "tier": 2,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["CustomerLockBoxEnabled"]
+},
+{
+  "id": "McasFirewallLogUpload",
+  "name": "Defender for Cloud Apps: Firewall log upload configured (Secure Score)",
+  "tier": 2,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["McasFirewallLogUpload"]
+},
+{
+  "id": "AdminAccountsSeparateCloudOnly",
+  "name": "Entra ID: Separate cloud-only admin accounts (Secure Score)",
+  "tier": 2,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["aad_admin_accounts_separate_unassigned_cloud_only"]
+},
+{
+  "id": "AdminConsentWorkflowEnabled",
+  "name": "Entra ID: Admin consent workflow enabled (Secure Score)",
+  "tier": 2,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["aad_admin_consent_workflow"]
+},
+{
+  "id": "LinkedInConnectionsDisabled",
+  "name": "Entra ID: LinkedIn account connections disabled (Secure Score)",
+  "tier": 1,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["aad_linkedin_connection_disables"]
+},
+{
+  "id": "ThirdPartyAppsRestricted",
+  "name": "Entra ID: Third party integrated applications restricted (Secure Score)",
+  "tier": 2,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["aad_third_party_apps"]
+},
+{
+  "id": "CustomBannedPasswords",
+  "name": "Entra ID: Custom banned passwords list used (Secure Score)",
+  "tier": 2,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["aad_custom_banned_passwords"]
+},
+{
+  "id": "LimitedAdminRolesAzureManagement",
+  "name": "Entra ID: Microsoft Azure Management limited to admin roles (Secure Score)",
+  "tier": 2,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["aad_limited_administrative_roles"]
+},
+{
+  "id": "PasswordProtectionOnPremGap",
+  "name": "Entra ID: Password protection enabled for on-prem AD (Secure Score gap only)",
+  "tier": 2,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["aad_password_protection"]
+},
+{
+  "id": "PhishingResistantMfaStrengthGap",
+  "name": "Entra ID: Phishing-resistant MFA strength required for admins (Secure Score gap only)",
+  "tier": 3,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "requiresOnboardingDiscussion": true,
+  "secureScoreControlIds": ["aad_phishing_MFA_strength"]
+},
+{
+  "id": "GlobalAdminCountOptimised",
+  "name": "Limit number of Global Administrators",
+  "tier": 1,
+  "category": "Identity",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["OneAdmin"]
+},
+{
+  "id": "AuditLogSearchEnabled",
+  "name": "Enable unified audit log search",
+  "tier": 1,
+  "category": "M365",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["mip_search_auditlog"]
+},
+{
+  "id": "MailboxAuditingEnabled",
+  "name": "Ensure mailbox auditing is enabled for all users",
+  "tier": 1,
+  "category": "M365",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["exo_mailboxaudit"]
+},
+{
+  "id": "RoleOverlap",
+  "name": "Use least privileged administrative roles",
+  "tier": 1,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["RoleOverlap"]
+},
+{
+  "id": "SharePointIdleSessionTimeout",
+  "name": "Sign out inactive users in SharePoint Online",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["spo_idle_session_timeout"]
+},
+{
+  "id": "SharePointModernAuthRequired",
+  "name": "Require modern authentication for SharePoint applications",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["spo_legacy_auth"]
+},
+{
+  "id": "AdminOwnedAppsRestricted",
+  "name": "Restrict user owned apps and services",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["admincenter_owned_apps_and_services"]
+},
+{
+  "id": "IntegratedAppsRestricted",
+  "name": "Restrict integrated applications access",
+  "tier": 1,
+  "category": "Identity",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["IntegratedApps"]
+},
+{
+  "id": "TeamsRestrictAnonymousJoin",
+  "name": "Teams: Restrict anonymous users from joining meetings (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["meeting_restrictanonymousjoin_v1"]
+},
+{
+  "id": "TeamsAutoAdmitInvitedOnly",
+  "name": "Teams: Only invited users should be automatically admitted (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["meeting_autoadmitusers_v1"]
+},
+{
+  "id": "TeamsDesignatedPresenterConfigured",
+  "name": "Teams: Configure which users are allowed to present (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["meeting_designatedpresenter_v1"]
+},
+{
+  "id": "TeamsRestrictDialInBypassLobby",
+  "name": "Teams: Restrict dial-in users from bypassing lobby (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["meeting_pstnusersbypasslobby_v1"]
+},
+{
+  "id": "TeamsLimitExternalControl",
+  "name": "Teams: Limit external participants from having control (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["meeting_externalrequestcontrol_v1"]
+},
+{
+  "id": "OneDriveBlockSyncUnmanagedDevices",
+  "name": "OneDrive: Block sync from unmanaged devices (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["spo_block_onedrive_sync_unmanaged_devices"]
+},
+{
+  "id": "SharePointExternalSharingManaged",
+  "name": "SharePoint: External sharing managed via domain allow/deny list (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["spo_external_sharing_managed"]
+},
+{
+  "id": "SharePointGuestUsersCannotReshare",
+  "name": "SharePoint: Guest users cannot share items they don't own (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["spo_external_users_sharing"]
+},
+{
+  "id": "SwayBlockExternalSharing",
+  "name": "Sway: Prevent sharing with people outside the organization (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["sway_block_sharing_with_outside_users"]
+},
+{
+  "id": "EXOMailTipsEnabled",
+  "name": "Exchange Online: Ensure MailTips are enabled for end users (Secure Score)",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["exo_mailtipsenabled"]
+},
+{
+  "id": "EXOOutlookAddinsBlocked",
+  "name": "Exchange Online: Ensure users installing Outlook add-ins is not allowed (Secure Score)",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["exo_outlookaddins"]
+},
+{
+  "id": "EXOStorageProvidersRestricted",
+  "name": "Exchange Online: Restrict additional storage providers in Outlook on the web (Secure Score)",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["exo_storageproviderrestricted"]
+},
+{
+  "id": "EXOCalendarExternalSharingDisabled",
+  "name": "Exchange Online: Ensure external calendar sharing is not available (Secure Score)",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["exo_individualsharing"]
+},
+{
+  "id": "MDOSafeDocumentsEnabled",
+  "name": "Defender for Office 365: Turn on Safe Documents for Office clients (Secure Score)",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "default_mode": "detect-only",
+  "secureScoreControlIds": ["mdo_safedocuments"]
+},
+{
+  "id": "MDOTurnOnMDOForSPOODTeams",
+  "name": "Defender for Office 365: Turn on MDO for SharePoint, OneDrive, and Teams (Secure Score)",
+  "tier": 2,
+  "category": "Apps",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["mdo_atpprotection"]
+},
+{
+  "id": "MDOHighConfidenceSpamAction",
+  "name": "Defender for Office 365: Action for high confidence spam (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["mdo_highconfidencespamaction"]
+},
+{
+  "id": "MDOPhishingAction",
+  "name": "Defender for Office 365: Action for phishing detection (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["mdo_highconfidencephishaction"]
+},
+{
+  "id": "MDOBulkSpamAction",
+  "name": "Defender for Office 365: Action for bulk spam detection (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["mdo_bulkspamaction"]
+},
+{
+  "id": "MDOBulkComplaintLevelThreshold",
+  "name": "Defender for Office 365: Set BCL threshold to 6 or lower (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["mdo_bulkcomplaintlevel"]
+},
+{
+  "id": "MDOThresholdReachedAction",
+  "name": "Defender for Office 365: Block users who reached message limit (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["mdo_thresholdreachedaction"]
+},
+{
+  "id": "MDOMailboxIntelligenceProtection",
+  "name": "Defender for Office 365: Enable mailbox intelligence for impersonation protection (Secure Score)",
+  "tier": 2,
+  "category": "Apps",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["mdo_mailboxintelligenceprotection"]
+},
+{
+  "id": "TeamsRestrictAnonymousStartMeeting",
+  "name": "Teams: Restrict anonymous users from starting meetings (Secure Score)",
+  "tier": 1,
+  "category": "Apps",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
+  "secureScoreControlIds": ["meeting_anonymousstartmeeting_v1"]
+},
+{
+  "id": "MDOQuarantineRetentionPeriod",
+  "name": "Defender for Office 365: Quarantine retention period configured (Secure Score)",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": ["mdo_quarantineretentionperiod"]
+},
+{
+  "id": "MDOAllowedSendersRestricted",
+  "name": "Defender for Office 365: Allowed senders/domains not overly permissive (Secure Score)",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": ["mdo_allowedsenderscombined"]
+},
+{
+  "id": "MDOSpamNotificationsAdminsOnly",
+  "name": "Defender for Office 365: Spam notifications sent only to admins (Secure Score)",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": ["mdo_spam_notifications_only_for_admins"]
+},
+{
+  "id": "MDOSafeLinksOfficeApps",
+  "name": "Defender for Office 365: Safe Links enabled for Office applications (Secure Score)",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": ["mdo_safelinksforOfficeApps"]
+},
+{
+  "id": "MDOAntiPhishingPoliciesTuned",
+  "name": "Defender for Office 365: Anti-phishing policies tuned beyond defaults (Secure Score)",
+  "tier": 2,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": ["mdo_antiphishingpolicies"]
+},
+{
+  "id": "MDOBlockAutoForwarding",
+  "name": "Defender for Office 365: Automatic email forwarding blocked (Secure Score)",
+  "tier": 2,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": ["mdo_blockmailforward"]
+},
+{
+  "id": "MDOMailboxIntelligenceActionsConfigured",
+  "name": "Defender for Office 365: Mailbox intelligence actions configured (Secure Score)",
+  "tier": 2,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": ["mdo_mailboxintelligenceprotectionaction"]
+},
+{
+  "id": "MDOTargetedUsersProtection",
+  "name": "Defender for Office 365: Targeted user impersonation protection enabled (Secure Score)",
+  "tier": 2,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": ["mdo_targetedusersprotection"]
+},
+{
+  "id": "MDOTargetedDomainProtection",
+  "name": "Defender for Office 365: Targeted domain impersonation protection enabled (Secure Score)",
+  "tier": 2,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": ["mdo_enabledomainstoprotect"]
+},
+{
+  "id": "MDOSafetyTipsEnabled",
+  "name": "Defender for Office 365: Impersonation safety tips enabled (Secure Score)",
+  "tier": 1,
+  "category": "Email",
+  "detectOnly": true,
+  "secureScoreControlIds": [
+    "mdo_similardomainssafetytips",
+    "mdo_similaruserssafetytips",
+    "mdo_unusualcharacterssafetytips"
+  ]
+},
+{
+  "id": "TeamsExternalAccessRestricted",
+  "name": "Teams: External access restricted (Secure Score)",
+  "tier": 2,
+  "category": "Collaboration",
+  "detectOnly": true,
+  "secureScoreControlIds": ["teams_external_access_restricted"]
+},
+{
+  "id": "TeamsFederationRestricted",
+  "name": "Teams: Federation restricted to allowed domains (Secure Score)",
+  "tier": 2,
+  "category": "Collaboration",
+  "detectOnly": true,
+  "secureScoreControlIds": ["teams_federation_restricted"]
+},
+{
+  "id": "TeamsFileSharingRestricted",
+  "name": "Teams: File sharing restricted (Secure Score)",
+  "tier": 2,
+  "category": "Collaboration",
+  "detectOnly": true,
+  "secureScoreControlIds": ["teams_file_sharing_restricted"]
+},
+{
+  "id": "SharePointDefaultSharingRestricted",
+  "name": "SharePoint: Default sharing permissions restricted (Secure Score)",
+  "tier": 2,
+  "category": "Collaboration",
+  "detectOnly": true,
+  "secureScoreControlIds": ["spo_default_sharing_permissions"]
+},
+{
+  "id": "OneDriveExternalSharingRestricted",
+  "name": "OneDrive: External sharing restricted (Secure Score)",
+  "tier": 2,
+  "category": "Collaboration",
+  "detectOnly": true,
+  "secureScoreControlIds": ["onedrive_external_sharing_restricted"]
+},
+{
+  "id": "SharePointLinkExpirationConfigured",
+  "name": "SharePoint: Anonymous link expiration configured (Secure Score)",
+  "tier": 1,
+  "category": "Collaboration",
+  "detectOnly": true,
+  "secureScoreControlIds": ["spo_anonymous_link_expiration"]
+},
+{
+  "id": "SharePointDefaultLinkTypeRestricted",
+  "name": "SharePoint: Default link type restricted (Secure Score)",
+  "tier": 1,
+  "category": "Collaboration",
+  "detectOnly": true,
+  "secureScoreControlIds": ["spo_default_link_type"]
+},
+{
+  "id": "OneDriveSyncRestricted",
+  "name": "OneDrive: Sync restricted to domain-joined devices (Secure Score)",
+  "tier": 2,
+  "category": "Collaboration",
+  "detectOnly": true,
+  "secureScoreControlIds": ["onedrive_sync_restricted"]
+}
+
+]
