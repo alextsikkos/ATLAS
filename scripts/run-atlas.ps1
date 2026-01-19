@@ -23,5 +23,8 @@ if ($staged) {
 Write-Host "=== Pushing ==="
 git push
 
+Write-Host "=== Running ATLAS at commit ==="
+git rev-parse --short HEAD
+
 Write-Host "=== Running ATLAS ==="
 python -m engine.main --tenant $TenantPath
