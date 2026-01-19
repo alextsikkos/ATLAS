@@ -1,0 +1,22 @@
+{
+  "tenant": "example",
+  "controlId": "EXOStorageProvidersRestricted",
+  "action": "detect_only",
+  "state": "NOT_EVALUATED",
+  "displayName": "Exchange Online: Restrict additional storage providers in Outlook on the web (Secure Score)",
+  "mode": "detect-only",
+  "status": 424,
+  "details": {
+    "reason": "EXO PowerShell call failed",
+    "stderr": "Import-Module : The specified module 'ExchangeOnlineManagement' was not loaded because no valid module file was found \nin any module directory.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\exo_storage_providers_restricted.ps1:10 char:1\n+ Import-Module ExchangeOnlineManagement\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : ResourceUnavailable: (ExchangeOnlineManagement:String) [Import-Module], FileNotFoundExce \n   ption\n    + FullyQualifiedErrorId : Modules_ModuleNotFound,Microsoft.PowerShell.Commands.ImportModuleCommand",
+    "stdout": "",
+    "exitCode": 1,
+    "script": "engine\\detectors\\exo_storage_providers_restricted.ps1",
+    "reasonCode": "DETECTOR_ERROR",
+    "reasonDetail": "EXO detector failed: EXO PowerShell call failed"
+  },
+  "reasonCode": "DETECTOR_ERROR",
+  "reasonDetail": "EXO detector failed: EXO PowerShell call failed",
+  "reason": "EXO detector failed: EXO PowerShell call failed",
+  "durationSeconds": 0.403
+}
