@@ -407,6 +407,9 @@ CAPABILITY_ENFORCERS = {
     "CAAdminPhishingResistantMFA",
     "CAAdminSignInFrequencySessionTimeout",
     "SharePointDefaultLinkTypeRestricted",
+    "ThirdPartyAppsRestricted",
+    "IntegratedAppsRestricted",
+    "AdminOwnedAppsRestricted",
     "SharePointDefaultSharingRestricted",
     "SharePointLinkExpirationConfigured",
 

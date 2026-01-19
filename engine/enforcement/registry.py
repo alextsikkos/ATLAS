@@ -18,3 +18,9 @@ def register(control_id: str, fn: EnforcerFn) -> None:
 
 def get_enforcer(control_id: str) -> Optional[EnforcerFn]:
     return ENFORCER_REGISTRY.get(control_id)
+    # Load enforcers that register via import side-effects.
+    # Keep this additive and best-effort; enforcement must never fail due to import wiring.
+    try:
+        import engine.enforcement.authorization_policy_bulk  # noqa: F401
+    except Exception:
+        pass
