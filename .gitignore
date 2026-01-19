@@ -1,7 +1,4 @@
 # --- Secrets / tenant-specific ---
-tenants/*.json
-tenants/**/*.json
-approvals/**
 secrets/**
 **/*.pfx
 **/*.p12
@@ -11,14 +8,7 @@ secrets/**
 **/*cert*
 **/*thumbprint*
 **/*password*
-BACKUP/
 tenants/
-
-# --- Output / audit artifacts ---
-output/**
-reports/**
-*.log
-*.tmp
 
 # --- Python ---
 __pycache__/

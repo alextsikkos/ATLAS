@@ -1,0 +1,21 @@
+{
+  "controlId": "EXOCalendarExternalSharingDisabled",
+  "name": "Exchange Online: Ensure external calendar sharing is not available (Secure Score)",
+  "category": "Email",
+  "tier": 1,
+  "mode": "detect-only",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "DETECTOR_ERROR",
+  "reasonDetail": "EXO detector failed: EXO PowerShell call failed",
+  "details": {
+    "reason": "EXO PowerShell call failed",
+    "stderr": "Import-Module : The specified module 'ExchangeOnlineManagement' was not loaded because no valid module file was found \nin any module directory.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\exo_calendar_external_sharing_disabled.ps1:9 char:1\n+ Import-Module ExchangeOnlineManagement\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : ResourceUnavailable: (ExchangeOnlineManagement:String) [Import-Module], FileNotFoundExce \n   ption\n    + FullyQualifiedErrorId : Modules_ModuleNotFound,Microsoft.PowerShell.Commands.ImportModuleCommand",
+    "stdout": "",
+    "exitCode": 1,
+    "script": "exo_calendar_external_sharing_disabled.ps1",
+    "reasonCode": "DETECTOR_ERROR",
+    "reasonDetail": "EXO detector failed: EXO PowerShell call failed"
+  },
+  "tenant": "example",
+  "durationSeconds": 0.397
+}

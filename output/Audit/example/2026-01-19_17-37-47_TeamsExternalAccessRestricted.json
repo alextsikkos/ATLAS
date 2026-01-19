@@ -1,0 +1,33 @@
+{
+  "tenant": "example",
+  "controlId": "TeamsExternalAccessRestricted",
+  "action": "detect_only",
+  "state": "NOT_EVALUATED",
+  "displayName": "Teams: External access restricted (Secure Score)",
+  "mode": "report-only",
+  "status": 200,
+  "scorePct": null,
+  "missingSecureScoreControlIds": [
+    "teams_external_access_restricted"
+  ],
+  "secureScoreControlId": "TeamsExternalAccessRestricted",
+  "title": "Teams: External access restricted (Secure Score)",
+  "implementationStatus": "",
+  "actionUrl": "",
+  "details": {
+    "reasonCode": "FALLBACK_DETECTOR_PREREQ_MISSING",
+    "reasonDetail": "Teams tenant settings fallback requires MicrosoftTeams PowerShell module on the runner host."
+  },
+  "fallbackDetector": {
+    "name": "teams_tenant_settings",
+    "result": {
+      "ok": false,
+      "error": "MicrosoftTeams PowerShell module is not installed. Install-Module MicrosoftTeams",
+      "tenant": {}
+    }
+  },
+  "reason": "detect-only registry control (no enforcement implemented)",
+  "reasonCode": "FALLBACK_DETECTOR_PREREQ_MISSING",
+  "reasonDetail": "Teams tenant settings fallback requires MicrosoftTeams PowerShell module on the runner host.",
+  "durationSeconds": 0.28
+}

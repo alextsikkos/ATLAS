@@ -1,0 +1,7 @@
+{
+  "controlId": "UserRiskPolicy",
+  "approved": true,
+  "approvedBy": "Alex",
+  "approvedAt": "2026-01-01T00:00:00Z",
+  "mode": "report-only"
+}

@@ -1,0 +1,33 @@
+{
+  "tenant": "example",
+  "controlId": "BlockLegacyAuthenticationStatus",
+  "action": "detect",
+  "state": "COMPLIANT",
+  "displayName": "Legacy authentication blocked (status check)",
+  "approved": false,
+  "mode": "detect-only",
+  "status": 200,
+  "details": {
+    "securityDefaultsEnabled": false,
+    "policy": {
+      "found": true,
+      "enabled": true,
+      "policyId": "371d1d61-5d46-487f-8a32-c167e8b3b27a",
+      "displayName": "ATLAS - Block Legacy Auth (Admins)",
+      "state": "enabled",
+      "clientAppTypes": [
+        "exchangeActiveSync",
+        "other"
+      ],
+      "builtInControls": [
+        "block"
+      ]
+    },
+    "reasonCode": "DETECT_ONLY_EVALUATED",
+    "reasonDetail": "Detect-only evaluation completed."
+  },
+  "reason": "Conditional Access legacy auth block policy evaluated",
+  "reasonCode": "DETECT_ONLY_EVALUATED",
+  "reasonDetail": "Detect-only evaluation completed.",
+  "durationSeconds": 0.927
+}
