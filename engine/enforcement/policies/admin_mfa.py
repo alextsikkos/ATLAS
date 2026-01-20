@@ -1,6 +1,8 @@
 # engine/enforcement/policies/admin_mfa.py
 
-DISPLAY_NAME = "ATLAS - Admin MFA (Report Only)"
+DISPLAY_NAME_REPORT_ONLY = "ATLAS - Admin MFA (Report Only)"
+DISPLAY_NAME_ENFORCE = "ATLAS - Admin MFA"
+
 
 # Keep your role IDs exactly as you already used in the script (v1).
 ADMIN_ROLE_IDS = [
@@ -27,7 +29,7 @@ def build_payload(
     exclude_groups = ([exclude_group_id] if exclude_group_id else [])
 
     return {
-        "displayName": DISPLAY_NAME,
+        "displayName": (DISPLAY_NAME_REPORT_ONLY if mode == "report-only" else DISPLAY_NAME_ENFORCE),
         "state": state,
         "conditions": {
             "clientAppTypes": ["all"],
