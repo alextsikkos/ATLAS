@@ -1,0 +1,40 @@
+{
+  "controlId": "MDOMailboxIntelligenceActionsConfigured",
+  "name": "Defender for Office 365: Mailbox intelligence actions configured (Secure Score)",
+  "category": "Email",
+  "tier": 2,
+  "mode": "report-only",
+  "state": "DRIFTED",
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Evaluated via Exchange Online (AntiPhishPolicy mailbox intelligence protection action)",
+  "details": {
+    "policiesCount": 1,
+    "policies": [
+      {
+        "EnableSpoofIntelligence": true,
+        "EnableTargetedUserProtection": false,
+        "TargetedDomainProtectionAction": "NoAction",
+        "MailboxIntelligenceProtectionAction": "NoAction",
+        "EnableSimilarDomainsSafetyTips": false,
+        "PhishThresholdLevel": 1,
+        "EnableSimilarUsersSafetyTips": false,
+        "EnableUnusualCharactersSafetyTips": false,
+        "identity": "Office365 AntiPhish Default",
+        "EnableMailboxIntelligenceProtection": false,
+        "EnableOrganizationDomainsProtection": false,
+        "EnableTargetedDomainsProtection": false,
+        "EnableFirstContactSafetyTips": false,
+        "EnableMailboxIntelligence": true,
+        "TargetedUserProtectionAction": "NoAction"
+      }
+    ],
+    "cmdletsUsed": [
+      "Get-AntiPhishPolicy"
+    ],
+    "errors": {},
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Evaluated via Exchange Online (AntiPhishPolicy mailbox intelligence protection action)"
+  },
+  "tenant": "example",
+  "durationSeconds": 0.0
+}
