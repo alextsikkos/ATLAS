@@ -1,0 +1,34 @@
+{
+  "controlId": "MDOSpamNotificationsAdminsOnly",
+  "name": "Defender for Office 365: Spam notifications sent only to admins (Secure Score)",
+  "category": "Email",
+  "tier": 1,
+  "mode": "report-only",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "MISSING_DATA",
+  "reasonDetail": "EnableEndUserSpamNotifications is not exposed by Get-HostedContentFilterPolicy in this tenant/module; cannot evaluate without guessing",
+  "details": {
+    "policiesCount": 1,
+    "policies": [
+      {
+        "EndUserSpamNotificationFrequency": null,
+        "EndUserSpamNotificationCustomFromAddress": null,
+        "EnableEndUserSpamNotifications": null,
+        "EnableEndUserSpamNotificationsForSpam": null,
+        "identity": "Default",
+        "EnableEndUserSpamNotificationsForPhish": null
+      }
+    ],
+    "cmdletsUsed": [
+      "Get-HostedContentFilterPolicy"
+    ],
+    "errors": {},
+    "missingKeys": [
+      "EnableEndUserSpamNotifications"
+    ],
+    "reasonCode": "MISSING_DATA",
+    "reasonDetail": "EnableEndUserSpamNotifications is not exposed by Get-HostedContentFilterPolicy in this tenant/module; cannot evaluate without guessing"
+  },
+  "tenant": "example",
+  "durationSeconds": 0.0
+}

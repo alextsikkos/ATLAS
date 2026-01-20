@@ -20,10 +20,18 @@ def get_enforcer(control_id: str) -> Optional[EnforcerFn]:
     return ENFORCER_REGISTRY.get(control_id)
     # Load enforcers that register via import side-effects.
     # Keep this additive and best-effort; enforcement must never fail due to import wiring.
-    try:
-        import engine.enforcement.authorization_policy_bulk  # noqa: F401
-    except Exception:
-        pass
+    def _safe_import(mod: str) -> None:
+        try:
+            __import__(mod)
+        except Exception as e:
+            print(f"[WARN] Failed to import enforcer module {mod}: {type(e).__name__}: {e}")
+
+    # Load enforcers that register via import side-effects.
+    # Keep this additive and best-effort; enforcement must never fail due to import wiring.
+    _safe_import("engine.enforcement.authorization_policy_bulk")
+    _safe_import("engine.enforcement.sspr_enforcer")
+    _safe_import("engine.enforcement.auth_methods_policy_enforcers")
+
     try:
         import engine.enforcement.sspr_enforcer  # noqa: F401
     except Exception:
