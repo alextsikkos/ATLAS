@@ -24,3 +24,12 @@ def get_enforcer(control_id: str) -> Optional[EnforcerFn]:
         import engine.enforcement.authorization_policy_bulk  # noqa: F401
     except Exception:
         pass
+    try:
+        import engine.enforcement.sspr_enforcer  # noqa: F401
+    except Exception:
+        pass
+
+    try:
+        import engine.enforcement.auth_methods_policy_enforcers  # noqa: F401
+    except Exception:
+        pass

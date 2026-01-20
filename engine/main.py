@@ -410,6 +410,8 @@ CAPABILITY_ENFORCERS = {
     "ThirdPartyAppsRestricted",
     "IntegratedAppsRestricted",
     "AdminOwnedAppsRestricted",
+    "AuthMethodsMicrosoftAuthenticatorEnabled",
+    "AuthMethodsFido2Enabled",
     "SharePointDefaultSharingRestricted",
     "SharePointLinkExpirationConfigured",
 

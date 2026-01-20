@@ -54,6 +54,32 @@
     ],
     "group": "Entra ID"
   },
+  { 
+    "id": "AuthMethodsMicrosoftAuthenticatorEnabled", 
+    "name": "Authentication Methods: Microsoft Authenticator enabled", 
+    "tier": 2, "category": "Identity", 
+    "approvalRequired": true, 
+    "default_mode": "report-only", 
+    "detectOnly": false, 
+    "canCauseLockout": false, 
+    "requiresOnboardingDiscussion": false, 
+    "secureScoreControlIds": [], 
+    "group": "Entra ID" 
+  },
+  { 
+    "id": "AuthMethodsFido2Enabled", 
+    "name": "Authentication Methods: FIDO2 security keys enabled", 
+    "tier": 3, 
+    "category": "Identity", 
+    "approvalRequired": true, 
+    "default_mode": "report-only", 
+    "detectOnly": false, 
+    "canCauseLockout": false, 
+    "requiresOnboardingDiscussion": true, 
+    "secureScoreControlIds": [], 
+    "group": "Entra ID" 
+  },
+
   {
     "id": "BlockLegacyAuthenticationPolicy",
     "name": "Block legacy authentication",
