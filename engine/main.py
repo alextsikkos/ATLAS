@@ -383,7 +383,6 @@ CAPABILITY_CUSTOM_DETECTORS = {
     "MDOSafetyTipsEnabled",
     "MDOSpamNotificationsAdminsOnly",
     "MDOAntiPhishingPoliciesTuned",
-    "MDOBlockAutoForwarding",
     "MDOMailboxIntelligenceActionsConfigured",
     "MDOMailboxIntelligenceProtection",
     "MDOPhishThresholdLevel",
@@ -410,7 +409,6 @@ CAPABILITY_ENFORCERS = {
     "ThirdPartyAppsRestricted",
     "IntegratedAppsRestricted",
     "AdminOwnedAppsRestricted",
-    "MDOBlockAutoForwarding",
     "SharePointDefaultSharingRestricted",
     "SharePointLinkExpirationConfigured",
 

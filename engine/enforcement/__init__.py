@@ -1,2 +1,2 @@
-# register MDO enforcers
-import engine.enforcement.mdo_block_auto_forwarding_enforcer  # noqa: F401
+# Enforcer modules that self-register should be imported here.
+# Keep this list limited to enforceable controls only.
