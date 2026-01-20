@@ -1350,7 +1350,7 @@ def main():
                 "tenant": tenant_name,
                 "controlId": control_id,
                 "action": f"ensure_{result['result']}",
-                "displayName": payload['displayName']
+                "displayName": payload['displayName'],
                 "approved": bool(approval),
                 "mode": mode,
                 "status": result["status"],
