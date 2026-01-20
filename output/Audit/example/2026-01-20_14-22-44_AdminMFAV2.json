@@ -1,0 +1,18 @@
+{
+  "tenant": "example",
+  "controlId": "AdminMFAV2",
+  "action": "ensure_created",
+  "displayName": "ATLAS - Admin MFA (Report Only)",
+  "approved": true,
+  "mode": "enforce",
+  "status": 201,
+  "policyId": "f095fff0-d631-430d-94fe-eb6e0342c1cd",
+  "details": {
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforcement executed successfully."
+  },
+  "state": "NOT_EVALUATED",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforcement executed successfully.",
+  "durationSeconds": 1.361
+}

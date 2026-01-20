@@ -1342,9 +1342,7 @@ def main():
 
         elif control_id == "AdminMFAV2":
             mode = (approval.get("mode") if approval else control.get("default_mode", "report-only"))
-            payload = build_am_payload(mode=mode, exclude_group_id=get_break_glass_group_id(tenant))
-
-
+            payload = build_am_payload(mode=mode)
             result = ensure_policy(headers, AM_DISPLAY_NAME, payload, allow_update=True)
             print(f"{result['result'].upper()}: {AM_DISPLAY_NAME} | {result['policyId']} | status={result['status']}")
 
