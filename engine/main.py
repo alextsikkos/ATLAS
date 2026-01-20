@@ -11,7 +11,7 @@ from engine.audit.hardening import harden_audit_event_inplace
 from engine.enforcement.ensure import ensure_policy
 from engine.enforcement.policies.risky_signin_mfa import DISPLAY_NAME as RS_DISPLAY_NAME, build_payload as build_rs_payload
 from engine.enforcement.policies.risky_user_password import DISPLAY_NAME as RUP_DISPLAY_NAME, build_payload as build_rup_payload
-from engine.enforcement.policies.admin_mfa import DISPLAY_NAME as AM_DISPLAY_NAME, build_payload as build_am_payload
+from engine.enforcement.policies.admin_mfa import build_payload as build_am_payload
 from engine.registry.loader import load_controls
 from engine.approvals.reader import is_control_approved
 from engine.enforcement.policies.block_legacy_auth import DISPLAY_NAME as BLA_DISPLAY_NAME, build_payload as build_bla_payload
