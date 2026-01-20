@@ -311,6 +311,7 @@ CAPABILITY_CUSTOM_DETECTORS = {
     "Tier3AuthMethodsReadiness",
     "Tier3BreakGlassReadiness",
     "AdminConsentWorkflowEnabled",
+    "MDOBlockAutoForwarding",
     "CustomBannedPasswords",
     "PasswordProtection",
     "IntegratedAppsRestricted",
