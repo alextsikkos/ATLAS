@@ -1,0 +1,8 @@
+{
+  "approved": true,
+  "approvedBy": "Alex",
+  "approvedOn": "2026-01-03",
+  "mode": "enforce",
+  "acknowledgeLockoutRisk": true,
+  "notes": "Approved for initial rollout in report-only (no policy creation/updates)."
+}

@@ -28,30 +28,43 @@ def _self_service_password_reset(
     url = "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy"
     mode = (mode or "report-only").strip().lower()
 
-    details = {
-        "url": url,
-        "before": {control_id: None},
-        "desired": {control_id: True},
-        "note": "No supported app-only API signal found that exposes/verifies SSPR enablement via this endpoint.",
-        "remediation": "Configure SSPR in Entra admin center (Users > Password reset) and ensure your detector is anchored to a verifiable API signal before enforcing.",
-    }
-
-    if mode == "enforce":
+    # Try to read the policy. If the property isn't present, then we truly can't verify/enforce.
+    g_status, g_body, g_text = graph_get_json(url, headers=headers, timeout=30)
+    if g_status >= 400 or not isinstance(g_body, dict):
         return (
             "NOT_EVALUATED",
-            "UNSUPPORTED_API",
-            "Cannot enforce SelfServicePasswordReset: Graph does not expose a verifiable SSPR property on authenticationMethodsPolicy in this environment.",
-            details,
-            424,
+            "AUTH_FORBIDDEN" if g_status == 403 else "MISSING_SIGNAL",
+            f"Graph GET authenticationMethodsPolicy failed (HTTP {g_status})",
+            {"url": url, "status": g_status, "responseText": (g_text or "")[:2000]},
+            g_status,
         )
 
-    return (
-        "NOT_EVALUATED",
-        "MISSING_SIGNAL",
-        "Report-only: no verifiable app-only API signal available for SelfServicePasswordReset.",
-        details,
-        200,
-    )
+    before_val = (g_body or {}).get("isSelfServicePasswordResetEnabled", None)
+
+    # If Graph doesn't return the property in this environment, we can't verify -> don't enforce.
+    if before_val is None:
+        details = {
+            "url": url,
+            "before": {control_id: None},
+            "desired": {control_id: True},
+            "note": "authenticationMethodsPolicy did not return isSelfServicePasswordResetEnabled; cannot verify/enforce safely.",
+        }
+        if mode == "enforce":
+            return (
+                "NOT_EVALUATED",
+                "UNSUPPORTED_API",
+                "Cannot enforce SelfServicePasswordReset: API did not return a verifiable property.",
+                details,
+                424,
+            )
+        return (
+            "NOT_EVALUATED",
+            "INSUFFICIENT_SIGNAL",
+            "Report-only: API did not return a verifiable property for SelfServicePasswordReset.",
+            details,
+            200,
+        )
+
 
     evidence_key = control_id
 

@@ -1,0 +1,23 @@
+# --- Secrets / tenant-specific ---
+secrets/**
+**/*.pfx
+**/*.p12
+**/*.pem
+**/*.key
+**/*certificate*
+**/*cert*
+**/*thumbprint*
+**/*password*
+tenants/
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# --- OS/IDE ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
