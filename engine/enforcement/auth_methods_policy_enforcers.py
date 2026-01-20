@@ -113,3 +113,5 @@ def _microsoft_authenticator_enabled(
 
 
 register("AuthMethodsMicrosoftAuthenticatorEnabled", _microsoft_authenticator_enabled)
+
+print("[INFO] Loaded auth_methods_policy_enforcers; handlers registered")

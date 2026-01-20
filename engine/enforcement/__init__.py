@@ -1,6 +1,8 @@
 # Enforcer modules that self-register should be imported here.
 # Keep this list limited to enforceable controls only.
 
-# Import the registry so that ENFORCER_REGISTRY is populated via import side-effects.
-# main.py imports engine.enforcement expecting this wiring.
+# Load the registry so ENFORCER_REGISTRY exists.
 import engine.enforcement.registry  # noqa: F401
+
+# Explicitly load new enforcer modules (avoid silent import failures).
+import engine.enforcement.auth_methods_policy_enforcers  # noqa: F401
