@@ -1,0 +1,18 @@
+{
+  "tenant": "example",
+  "controlId": "AuthMethodsMicrosoftAuthenticatorEnabled",
+  "action": "ensure_skipped_no_handler",
+  "displayName": "Authentication Methods: Microsoft Authenticator enabled",
+  "approved": true,
+  "mode": "enforce",
+  "status": 501,
+  "reason": "no handler implemented for this control",
+  "reasonCode": "NO_HANDLER_IMPLEMENTED",
+  "reasonDetail": "no handler implemented for this control",
+  "details": {
+    "reasonCode": "NO_HANDLER_IMPLEMENTED",
+    "reasonDetail": "no handler implemented for this control"
+  },
+  "state": "NOT_EVALUATED",
+  "durationSeconds": 0.007
+}

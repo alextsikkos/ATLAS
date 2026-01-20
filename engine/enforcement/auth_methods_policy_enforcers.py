@@ -19,9 +19,12 @@ def _enforce_auth_method_state(
     Generic enforcer for:
       /v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/{method_id}
 
-    We enforce/verify the top-level "state" property: "enabled" | "disabled".
+    Enforces/verifies the top-level "state" property: "enabled" | "disabled".
     """
-    url = f"https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/{method_id}"
+    url = (
+        "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/"
+        f"authenticationMethodConfigurations/{method_id}"
+    )
     mode_eff = (mode or "report-only").strip().lower()
 
     # 1) GET before
@@ -109,24 +112,4 @@ def _microsoft_authenticator_enabled(
     )
 
 
-def _fido2_enabled(
-    *,
-    tenant: dict,
-    tenant_name: str,
-    control: dict,
-    control_id: str,
-    headers: dict,
-    approval: dict | None,
-    mode: str,
-) -> Tuple[str, str, str, dict, int]:
-    return _enforce_auth_method_state(
-        headers=headers,
-        method_id="fido2",
-        desired_state="enabled",
-        control_id=control_id,
-        mode=mode,
-    )
-
-
 register("AuthMethodsMicrosoftAuthenticatorEnabled", _microsoft_authenticator_enabled)
-register("AuthMethodsFido2Enabled", _fido2_enabled)
