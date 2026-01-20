@@ -1004,7 +1004,8 @@ def main():
         # Determine effective mode (fallback to control default)
         mode = f.get("mode") or control.get("default_mode") or "report-only"
 
-        enforcement_approval_required = bool(control.get("approvalRequired", False) or control.get("tier") in (2, 3))
+        enforcement_approval_required = bool(control.get("approvalRequired", False) or control.get("tier") in (2, 3) or control_id in ("AdminMFAV2",))
+
 
         # Detect-only runs must never require approvals
         detect_only = (str(mode).strip().lower() == "detect-only")
