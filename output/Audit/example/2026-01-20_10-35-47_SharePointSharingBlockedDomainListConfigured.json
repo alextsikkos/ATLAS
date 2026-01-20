@@ -1,0 +1,67 @@
+{
+  "tenant": "example",
+  "controlId": "SharePointSharingBlockedDomainListConfigured",
+  "action": "detect_report_only",
+  "displayName": "SharePoint: Blocked domain list configured (when block-list mode is enabled)",
+  "approved": false,
+  "mode": "detect-only",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "MISSING_SIGNAL",
+  "reasonDetail": "SPO read failed: The remote server returned an error: (503) Server Unavailable.",
+  "details": {
+    "batch": {
+      "adminUrl": "https://6twcdy-admin.sharepoint.com",
+      "ok": false,
+      "before": {
+        "ok": false,
+        "error": "The remote server returned an error: (503) Server Unavailable.",
+        "tenant": null,
+        "adminUrl": "https://6twcdy-admin.sharepoint.com",
+        "exitCode": 0
+      },
+      "after": null,
+      "desired": {
+        "PreventExternalUsersFromResharing": true,
+        "DefaultSharingLinkType": 2,
+        "DefaultLinkPermission": 1,
+        "RequireAnonymousLinksExpireInDays": 30,
+        "SharingDomainRestrictionMode": "AllowList",
+        "SharingAllowedDomainList": "partner.com vendor.com"
+      },
+      "applyResult": null,
+      "verifyAttempts": [],
+      "perControl": {},
+      "error": "SPO read failed: The remote server returned an error: (503) Server Unavailable.",
+      "desiredByControl": {
+        "SharePointPreventExternalUsersFromResharingEnabled": {
+          "PreventExternalUsersFromResharing": true
+        },
+        "SharePointDefaultLinkTypeRestricted": {
+          "DefaultSharingLinkType": 2
+        },
+        "SharePointDefaultSharingRestricted": {
+          "DefaultLinkPermission": 1
+        },
+        "SharePointLinkExpirationConfigured": {
+          "RequireAnonymousLinksExpireInDays": 30
+        },
+        "SharePointDomainRestrictionConfigured": {
+          "SharingDomainRestrictionMode": "AllowList"
+        },
+        "SharePointSharingAllowedDomainListConfigured": {
+          "SharingDomainRestrictionMode": "AllowList",
+          "SharingAllowedDomainList": "partner.com vendor.com"
+        }
+      },
+      "missingDesiredConfigByControl": {
+        "SharePointIdleSessionTimeout": [
+          "UNSUPPORTED: Set-SPOTenant does not support IdleSessionSignOut* parameters"
+        ]
+      }
+    },
+    "reasonCode": "MISSING_SIGNAL",
+    "reasonDetail": "SPO read failed: The remote server returned an error: (503) Server Unavailable."
+  },
+  "status": 424,
+  "durationSeconds": 0.0
+}
