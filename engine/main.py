@@ -1344,13 +1344,13 @@ def main():
             mode = (approval.get("mode") if approval else control.get("default_mode", "report-only"))
             payload = build_am_payload(mode=mode)
             result = ensure_policy(headers, payload["displayName"], payload, allow_update=True)
-            print(f"{result['result'].upper()}: {AM_DISPLAY_NAME} | {result['policyId']} | status={result['status']}")
+            print(f"{result['result'].upper()}: {payload['displayName']} | {result['policyId']} | status={result['status']}")
 
             audit_path = _write_audit_event_timed(tenant_name, {
                 "tenant": tenant_name,
                 "controlId": control_id,
                 "action": f"ensure_{result['result']}",
-                "displayName": AM_DISPLAY_NAME,
+                "displayName": payload['displayName']
                 "approved": bool(approval),
                 "mode": mode,
                 "status": result["status"],
