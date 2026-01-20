@@ -110,8 +110,26 @@ def _microsoft_authenticator_enabled(
         control_id=control_id,
         mode=mode,
     )
+def _fido2_enabled(
+    *,
+    tenant: dict,
+    tenant_name: str,
+    control: dict,
+    control_id: str,
+    headers: dict,
+    approval: dict | None,
+    mode: str,
+) -> Tuple[str, str, str, dict, int]:
+    return _enforce_auth_method_state(
+        headers=headers,
+        method_id="fido2",
+        desired_state="enabled",
+        control_id=control_id,
+        mode=mode,
+    )
 
 
 register("AuthMethodsMicrosoftAuthenticatorEnabled", _microsoft_authenticator_enabled)
+register("AuthMethodsFido2Enabled", _fido2_enabled)
 
 print("[INFO] Loaded auth_methods_policy_enforcers; handlers registered")
