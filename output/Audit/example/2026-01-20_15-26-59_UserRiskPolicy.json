@@ -1,29 +1,31 @@
 {
   "tenant": "example",
-  "controlId": "CAAdminMFAAllApps",
-  "action": "ensure_applied",
-  "displayName": "Conditional Access: Require MFA for admins across all apps (ATLAS-owned)",
-  "approved": true,
-  "mode": "enforce",
-  "state": "COMPLIANT",
-  "reasonCode": "ENFORCER_EXECUTED",
-  "reasonDetail": "Enforcer executed; policy ensured",
+  "controlId": "UserRiskPolicy",
+  "action": "detect_report_only",
+  "displayName": "Risky user -> MFA + password change",
+  "approved": false,
+  "mode": "report-only",
+  "state": "DRIFTED",
+  "reasonCode": "REPORT_ONLY_EVALUATED",
+  "reasonDetail": "Report-only: drift detected (no changes applied)",
   "details": {
     "result": {
-      "result": "created",
-      "status": 201,
-      "policyId": "b9add74e-01f5-4a0e-ad8b-452301ef31f7",
+      "result": "skipped_update_disabled",
+      "status": 200,
+      "policyId": "f4fb7ee7-62f9-4554-9bb2-c85a0306472c",
       "body": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies/$entity",
-        "id": "b9add74e-01f5-4a0e-ad8b-452301ef31f7",
+        "id": "f4fb7ee7-62f9-4554-9bb2-c85a0306472c",
         "templateId": null,
-        "displayName": "ATLAS - Admin MFA",
-        "createdDateTime": "2026-01-20T15:13:35.0437285Z",
+        "displayName": "ATLAS - Risky User Password Change (Report Only)",
+        "createdDateTime": "2026-01-05T19:18:29.4129937Z",
         "modifiedDateTime": null,
-        "state": "enabled",
+        "state": "enabledForReportingButNotEnforced",
         "sessionControls": null,
         "conditions": {
-          "userRiskLevels": [],
+          "userRiskLevels": [
+            "medium",
+            "high"
+          ],
           "signInRiskLevels": [],
           "clientAppTypes": [
             "all"
@@ -50,9 +52,7 @@
             ],
             "excludeUsers": [],
             "includeGroups": [],
-            "excludeGroups": [
-              "b71bc79f-f89b-45ad-b11f-a839cf2e9829"
-            ],
+            "excludeGroups": [],
             "includeRoles": [],
             "excludeRoles": [],
             "includeGuestsOrExternalUsers": null,
@@ -60,21 +60,26 @@
           }
         },
         "grantControls": {
-          "operator": "OR",
+          "operator": "AND",
           "builtInControls": [
-            "mfa"
+            "mfa",
+            "passwordChange"
           ],
           "customAuthenticationFactors": [],
           "termsOfUse": [],
-          "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('b9add74e-01f5-4a0e-ad8b-452301ef31f7')/grantControls/authenticationStrength/$entity",
+          "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('f4fb7ee7-62f9-4554-9bb2-c85a0306472c')/grantControls/authenticationStrength/$entity",
           "authenticationStrength": null
         }
       }
     },
     "desired": {
-      "displayName": "ATLAS - Admin MFA",
-      "state": "enabled",
+      "displayName": "ATLAS - Risky User Password Change (Report Only)",
+      "state": "enabledForReportingButNotEnforced",
       "conditions": {
+        "userRiskLevels": [
+          "medium",
+          "high"
+        ],
         "clientAppTypes": [
           "all"
         ],
@@ -94,15 +99,16 @@
         }
       },
       "grantControls": {
-        "operator": "OR",
+        "operator": "AND",
         "builtInControls": [
-          "mfa"
+          "mfa",
+          "passwordChange"
         ]
       }
     },
-    "reasonCode": "ENFORCER_EXECUTED",
-    "reasonDetail": "Enforcer executed; policy ensured"
+    "reasonCode": "REPORT_ONLY_EVALUATED",
+    "reasonDetail": "Report-only: drift detected (no changes applied)"
   },
-  "status": 201,
-  "durationSeconds": 1.378
+  "status": 200,
+  "durationSeconds": 0.549
 }

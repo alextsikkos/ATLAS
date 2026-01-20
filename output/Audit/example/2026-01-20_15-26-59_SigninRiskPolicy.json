@@ -1,32 +1,34 @@
 {
   "tenant": "example",
-  "controlId": "CAAllUsersBlockLegacyAuth",
-  "action": "ensure_applied",
-  "displayName": "Conditional Access: Block legacy authentication for all users (ATLAS-owned)",
-  "approved": true,
-  "mode": "enforce",
-  "state": "COMPLIANT",
-  "reasonCode": "ENFORCER_EXECUTED",
-  "reasonDetail": "Enforcer executed; no drift",
+  "controlId": "SigninRiskPolicy",
+  "action": "detect_report_only",
+  "displayName": "Risky sign-in -> MFA",
+  "approved": false,
+  "mode": "report-only",
+  "state": "DRIFTED",
+  "reasonCode": "REPORT_ONLY_EVALUATED",
+  "reasonDetail": "Report-only: drift detected (no changes applied)",
   "details": {
     "result": {
-      "result": "skipped_no_drift",
+      "result": "skipped_update_disabled",
       "status": 200,
-      "policyId": "9ee6563f-f87f-4bcf-905f-16cfd622038c",
+      "policyId": "d56c99a6-2fe2-4905-9b97-3552bd8bb0e0",
       "body": {
-        "id": "9ee6563f-f87f-4bcf-905f-16cfd622038c",
+        "id": "d56c99a6-2fe2-4905-9b97-3552bd8bb0e0",
         "templateId": null,
-        "displayName": "ATLAS - Block Legacy Auth (All Users)",
-        "createdDateTime": "2026-01-05T19:19:17.4749613Z",
+        "displayName": "ATLAS - Risky Sign-in MFA (Report Only)",
+        "createdDateTime": "2026-01-05T19:18:27.7535538Z",
         "modifiedDateTime": null,
-        "state": "enabled",
+        "state": "enabledForReportingButNotEnforced",
         "sessionControls": null,
         "conditions": {
           "userRiskLevels": [],
-          "signInRiskLevels": [],
+          "signInRiskLevels": [
+            "medium",
+            "high"
+          ],
           "clientAppTypes": [
-            "exchangeActiveSync",
-            "other"
+            "all"
           ],
           "servicePrincipalRiskLevels": [],
           "insiderRiskLevels": null,
@@ -50,9 +52,7 @@
             ],
             "excludeUsers": [],
             "includeGroups": [],
-            "excludeGroups": [
-              "b71bc79f-f89b-45ad-b11f-a839cf2e9829"
-            ],
+            "excludeGroups": [],
             "includeRoles": [],
             "excludeRoles": [],
             "includeGuestsOrExternalUsers": null,
@@ -62,19 +62,31 @@
         "grantControls": {
           "operator": "OR",
           "builtInControls": [
-            "block"
+            "mfa"
           ],
           "customAuthenticationFactors": [],
           "termsOfUse": [],
-          "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('9ee6563f-f87f-4bcf-905f-16cfd622038c')/grantControls/authenticationStrength/$entity",
+          "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('d56c99a6-2fe2-4905-9b97-3552bd8bb0e0')/grantControls/authenticationStrength/$entity",
           "authenticationStrength": null
         }
       }
     },
     "desired": {
-      "displayName": "ATLAS - Block Legacy Auth (All Users)",
-      "state": "enabled",
+      "displayName": "ATLAS - Risky Sign-in MFA (Report Only)",
+      "state": "enabledForReportingButNotEnforced",
       "conditions": {
+        "signInRiskLevels": [
+          "medium",
+          "high"
+        ],
+        "clientAppTypes": [
+          "all"
+        ],
+        "applications": {
+          "includeApplications": [
+            "All"
+          ]
+        },
         "users": {
           "includeUsers": [
             "All"
@@ -83,28 +95,18 @@
           "excludeGroups": [
             "b71bc79f-f89b-45ad-b11f-a839cf2e9829"
           ]
-        },
-        "applications": {
-          "includeApplications": [
-            "All"
-          ],
-          "excludeApplications": []
-        },
-        "clientAppTypes": [
-          "exchangeActiveSync",
-          "other"
-        ]
+        }
       },
       "grantControls": {
         "operator": "OR",
         "builtInControls": [
-          "block"
+          "mfa"
         ]
       }
     },
-    "reasonCode": "ENFORCER_EXECUTED",
-    "reasonDetail": "Enforcer executed; no drift"
+    "reasonCode": "REPORT_ONLY_EVALUATED",
+    "reasonDetail": "Report-only: drift detected (no changes applied)"
   },
   "status": 200,
-  "durationSeconds": 0.553
+  "durationSeconds": 0.52
 }
