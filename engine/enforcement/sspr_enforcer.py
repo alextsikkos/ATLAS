@@ -4,7 +4,11 @@ from __future__ import annotations
 from typing import Tuple
 
 from engine.enforcement.registry import register
-from engine.enforcement.graph_singleton import graph_get_json, graph_patch_json, verify_with_retries
+from engine.enforcement.graph_singleton import (
+    graph_get_json,
+    graph_patch_json,
+    verify_with_retries,
+)
 
 
 def _self_service_password_reset(
@@ -22,32 +26,40 @@ def _self_service_password_reset(
     Endpoint: /v1.0/policies/authenticationMethodsPolicy
     Property: isSelfServicePasswordResetEnabled
     """
-    # NOTE: In this tenant/API surface, authenticationMethodsPolicy does not expose
-    # isSelfServicePasswordResetEnabled as a readable property (cannot verify).
-    # Therefore we do NOT attempt enforcement. Be explicit and conservative.
     url = "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy"
     mode = (mode or "report-only").strip().lower()
 
-    # Try to read the policy. If the property isn't present, then we truly can't verify/enforce.
+    # 1) GET current state (verifiable signal)
     g_status, g_body, g_text = graph_get_json(url, headers=headers, timeout=30)
     if g_status >= 400 or not isinstance(g_body, dict):
         return (
             "NOT_EVALUATED",
             "AUTH_FORBIDDEN" if g_status == 403 else "MISSING_SIGNAL",
             f"Graph GET authenticationMethodsPolicy failed (HTTP {g_status})",
-            {"url": url, "status": g_status, "responseText": (g_text or "")[:2000]},
+            {
+                "url": url,
+                "status": g_status,
+                "responseText": (g_text or "")[:2000],
+            },
             g_status,
         )
 
     before_val = (g_body or {}).get("isSelfServicePasswordResetEnabled", None)
 
-    # If Graph doesn't return the property in this environment, we can't verify -> don't enforce.
+    # If Graph doesn't return the property, we cannot verify => do not enforce.
     if before_val is None:
         details = {
             "url": url,
             "before": {control_id: None},
             "desired": {control_id: True},
-            "note": "authenticationMethodsPolicy did not return isSelfServicePasswordResetEnabled; cannot verify/enforce safely.",
+            "note": (
+                "authenticationMethodsPolicy did not return "
+                "isSelfServicePasswordResetEnabled; cannot verify/enforce safely."
+            ),
+            "remediation": (
+                "Configure SSPR in Entra admin center (Users > Password reset) "
+                "and anchor the control to a verifiable API signal before enforcing."
+            ),
         }
         if mode == "enforce":
             return (
@@ -65,16 +77,14 @@ def _self_service_password_reset(
             200,
         )
 
-
     evidence_key = control_id
-
     details = {
         "url": url,
         "before": {evidence_key: before_val},
         "desired": {evidence_key: True},
     }
 
-    # Report-only: never write
+    # 2) Report-only: never write
     if mode != "enforce":
         if before_val is True:
             return ("COMPLIANT", "REPORT_ONLY_EVALUATED", "Report-only: already enabled", details, 200)
@@ -82,7 +92,7 @@ def _self_service_password_reset(
             return ("DRIFTED", "REPORT_ONLY_EVALUATED", "Report-only: drift detected", details, 200)
         return ("NOT_EVALUATED", "INSUFFICIENT_SIGNAL", "Report-only: value not returned by API", details, 200)
 
-    # Enforce: idempotent
+    # 3) Enforce: idempotent
     if before_val is True:
         return ("COMPLIANT", "ENFORCER_EXECUTED", "Already in desired state; no changes applied", details, 200)
 
@@ -93,7 +103,6 @@ def _self_service_password_reset(
         "responseText": (a_text or "")[:2000] if a_text else None,
         "applied": desired_payload,
     }
-
     if a_status >= 400:
         return (
             "ERROR",
@@ -103,6 +112,7 @@ def _self_service_password_reset(
             a_status,
         )
 
+    # 4) VERIFY with retries
     def _get():
         return graph_get_json(url, headers=headers, timeout=30)
 
@@ -111,8 +121,11 @@ def _self_service_password_reset(
 
     v_status, v_body, v_text, attempt_used = verify_with_retries(_get, _is_desired, attempts=5, delay_seconds=2.0)
     after_val = (v_body or {}).get("isSelfServicePasswordResetEnabled", None)
-
-    details["verify"] = {"status": v_status, "attempt": attempt_used, "responseText": (v_text or "")[:2000] if v_text else None}
+    details["verify"] = {
+        "status": v_status,
+        "attempt": attempt_used,
+        "responseText": (v_text or "")[:2000] if v_text else None,
+    }
     details["after"] = {evidence_key: after_val}
 
     if after_val is True:
