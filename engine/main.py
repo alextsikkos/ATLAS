@@ -1353,6 +1353,7 @@ def main():
                 "displayName": payload['displayName'],
                 "approved": bool(approval),
                 "mode": mode,
+                "state": ("COMPLIANT" if mode == "enforce" and result.get("status") in (200, 201) else "NOT_EVALUATED"),
                 "status": result["status"],
                 "policyId": result["policyId"],
             })
