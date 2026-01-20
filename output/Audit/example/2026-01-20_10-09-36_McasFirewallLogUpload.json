@@ -1,0 +1,28 @@
+{
+  "tenant": "example",
+  "controlId": "McasFirewallLogUpload",
+  "action": "detect_only",
+  "state": "COMPLIANT",
+  "displayName": "Defender for Cloud Apps: Firewall log upload configured (Secure Score)",
+  "mode": "detect-only",
+  "status": 200,
+  "details": {
+    "endpoint": "https://6twcdy.eu2.portal.cloudappsecurity.com/api/discovery/streams/",
+    "httpStatus": 200,
+    "streamCount": 1,
+    "streamNamesSample": [],
+    "missingKeys": [],
+    "token": {
+      "authority": "https://login.microsoftonline.com/d9ff2399-92ca-4e0c-87d0-5769459f2755",
+      "audience": "05a65629-4c1b-48c1-a78b-804c4abdd4af",
+      "tokenMethod": "msal.acquire_token_for_client",
+      "tokenResult": "ok"
+    },
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Cloud Discovery continuous reports (streams) exist in Defender for Cloud Apps."
+  },
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Cloud Discovery continuous reports (streams) exist in Defender for Cloud Apps.",
+  "reason": "Cloud Discovery continuous reports (streams) exist in Defender for Cloud Apps.",
+  "durationSeconds": 0.879
+}

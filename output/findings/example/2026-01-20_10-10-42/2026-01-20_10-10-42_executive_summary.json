@@ -1,0 +1,295 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-20_10-10-42",
+  "atlas": {
+    "totalRegistryControls": 93,
+    "totalMatchedControls": 93
+  },
+  "secureScore": {
+    "atlasControlsWithSecureScoreMapping": 75,
+    "atlasControlsWithScorePct": 67,
+    "atlasControlsAt100": 12,
+    "atlasControlsBelow100": 55,
+    "atlasControlsNotScoredOrNotExposed": 8,
+    "missingControlIdsReferencedByAtlas": [
+      "mdo_bulkcomplaintlevel",
+      "onedrive_external_sharing_restricted",
+      "onedrive_sync_restricted",
+      "spo_anonymous_link_expiration",
+      "spo_default_link_type",
+      "spo_default_sharing_permissions",
+      "teams_external_access_restricted",
+      "teams_federation_restricted",
+      "teams_file_sharing_restricted"
+    ]
+  },
+  "top10": {
+    "atlasMappedGaps": [
+      {
+        "controlId": "CustomerLockBoxEnabled",
+        "category": "Apps",
+        "scorePct": 0,
+        "title": "Ensure the customer lockbox feature is enabled",
+        "actionUrl": "https://go.microsoft.com/fwlink/?linkid=2095515",
+        "implementationStatus": "Feature in place: false."
+      },
+      {
+        "controlId": "McasFirewallLogUpload",
+        "category": "Apps",
+        "scorePct": 0,
+        "title": "Deploy a log collector to discover shadow IT activity",
+        "actionUrl": "https://security.microsoft.com/cloudapps/settings?tabid=discovery-autoUpload",
+        "implementationStatus": "Feature in place: false."
+      },
+      {
+        "controlId": "aad_admin_accounts_separate_unassigned_cloud_only",
+        "category": "Apps",
+        "scorePct": 0,
+        "title": "Ensure Administrative accounts are separate and cloud-only",
+        "actionUrl": "https://learn.microsoft.com/en-us/microsoft-365/admin/add-users/add-users?view=o365-worldwide",
+        "implementationStatus": "Administrator accounts are separate, unassigned and cloud-only account: false"
+      },
+      {
+        "controlId": "aad_custom_banned_passwords",
+        "category": "Apps",
+        "scorePct": 0,
+        "title": "Ensure custom banned passwords lists are used",
+        "actionUrl": "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-configure-custom-password-protection",
+        "implementationStatus": "Custom banned passwords lists are: disabled"
+      },
+      {
+        "controlId": "aad_limited_administrative_roles",
+        "category": "Apps",
+        "scorePct": 0,
+        "title": "Ensure 'Microsoft Azure Management' is limited to administrative roles",
+        "actionUrl": "https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/concept-conditional-access-cloud-apps",
+        "implementationStatus": "'Microsoft Azure Management' is limited to administrative roles - 'Windows Azure Service Management API' is not yet enabled in the following policies: \"ATLAS - Risky Sign-in MFA (Report Only)\", \"ATLAS - Risky User Password Change (Report Only)\", \"ATLAS - Admin MFA (Report Only)\" and 5 Additional policies. To activate this setting, take the following steps."
+      },
+      {
+        "controlId": "aad_linkedin_connection_disables",
+        "category": "Apps",
+        "scorePct": 0,
+        "title": "Ensure 'LinkedIn account connections' is disabled",
+        "actionUrl": "https://learn.microsoft.com/en-us/azure/active-directory/enterprise-users/linkedin-integration",
+        "implementationStatus": "LinkedIn account connections is - Not disabled"
+      },
+      {
+        "controlId": "aad_password_protection",
+        "category": "Apps",
+        "scorePct": 0,
+        "title": "Ensure password protection is enabled for on-prem Active Directory",
+        "actionUrl": "https://learn.microsoft.com/en-us/azure/active-directory/authentication/howto-password-ban-bad-on-premises-operations",
+        "implementationStatus": "Microsoft Entra ID Password Protection is not configured"
+      },
+      {
+        "controlId": "aad_phishing_MFA_strength",
+        "category": "Apps",
+        "scorePct": 0,
+        "title": "Ensure 'Phishing-resistant MFA strength' is required for Administrators",
+        "actionUrl": "https://learn.microsoft.com/en-us/azure/active-directory/identity-protection/howto-identity-protection-configure-mfa-policy",
+        "implementationStatus": "Phishing-resistant MFA strength is mFA strength is not yet enabled in the following accounts: \"ATLAS - Admin Phishing-resistant MFA Strength\". To activate this setting, take the following steps."
+      },
+      {
+        "controlId": "aad_sign_in_freq_session_timeout",
+        "category": "Apps",
+        "scorePct": 0,
+        "title": "Ensure Sign-in frequency is enabled and browser sessions are not persistent for Administrative users",
+        "actionUrl": "https://aad.portal.azure.com/#view/Microsoft_AAD_ConditionalAccess/PolicyBlade",
+        "implementationStatus": "Setting is: sign in frequency is not yet enabled in the following accounts: \"ATLAS - Risky Sign-in MFA (Report Only)\", \"ATLAS - Risky User Password Change (Report Only)\", \"ATLAS - Admin MFA (Report Only)\" and 5 Additional accounts. To activate this setting, take the following steps."
+      },
+      {
+        "controlId": "admincenter_owned_apps_and_services",
+        "category": "Apps",
+        "scorePct": 0,
+        "title": "Ensure 'User owned apps and services' is restricted",
+        "actionUrl": "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-addins-in-the-admin-center?view=o365-worldwide",
+        "implementationStatus": "'User owned apps and services' is [Not Measured]"
+      }
+    ],
+    "unmappedGaps": [
+      {
+        "controlId": "MFARegistrationV2",
+        "category": "Identity",
+        "scorePct": 5,
+        "title": "Ensure multifactor authentication is enabled for all users",
+        "actionUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/TenantOverview.ReactView",
+        "implementationStatus": "You have 18 out of 19 users that aren\u2019t registered with MFA."
+      }
+    ]
+  },
+  "tier3": {
+    "blockedControls": [
+      {
+        "controlId": "CAAdminSignInFrequencySessionTimeout",
+        "name": "Conditional Access: Admin sign-in frequency set + browser sessions not persistent (Secure Score)",
+        "mode": "enforce",
+        "canCauseLockout": true,
+        "requiresOnboardingDiscussion": true,
+        "outcome": "BLOCKED",
+        "reason": "missing required acknowledgements",
+        "missing": [
+          "acknowledgeBusinessImpact:true",
+          "onboardingReviewed:true"
+        ]
+      },
+      {
+        "controlId": "CAAdminPhishingResistantMFA",
+        "name": "Conditional Access: Require phishing-resistant MFA strength for administrators (Secure Score)",
+        "mode": "enforce",
+        "canCauseLockout": true,
+        "requiresOnboardingDiscussion": true,
+        "outcome": "BLOCKED",
+        "reason": "missing required acknowledgements",
+        "missing": [
+          "acknowledgeBusinessImpact:true",
+          "onboardingReviewed:true"
+        ]
+      }
+    ],
+    "notReadySignals": [
+      {
+        "controlId": "Tier3AuthMethodsReadiness",
+        "name": "Tier 3 Readiness: Phishing-resistant MFA methods available (FIDO2 / WHfB) + TAP bootstrap",
+        "mode": "detect-only",
+        "canCauseLockout": false,
+        "requiresOnboardingDiscussion": true,
+        "outcome": "DRIFTED",
+        "reason": "NOT_READY",
+        "missing": [],
+        "methodsSummary": "FIDO2=disabled, WHfB=unknown, TAP=enabled"
+      },
+      {
+        "controlId": "Tier3BreakGlassReadiness",
+        "name": "Tier 3 Readiness: Break-glass accounts present and safe",
+        "mode": "detect-only",
+        "canCauseLockout": false,
+        "requiresOnboardingDiscussion": true,
+        "outcome": "DRIFTED",
+        "reason": "NOT_READY",
+        "missing": [],
+        "breakGlassSummary": "totalMembers=2, enabledMembers=0",
+        "breakGlassReason": "Break-glass group should contain at least two enabled user accounts"
+      }
+    ],
+    "summary": [
+      {
+        "controlId": "CAAdminSignInFrequencySessionTimeout",
+        "name": "Conditional Access: Admin sign-in frequency set + browser sessions not persistent (Secure Score)",
+        "mode": "enforce",
+        "canCauseLockout": true,
+        "requiresOnboardingDiscussion": true,
+        "outcome": "BLOCKED",
+        "reason": "missing required acknowledgements",
+        "missing": [
+          "acknowledgeBusinessImpact:true",
+          "onboardingReviewed:true"
+        ]
+      },
+      {
+        "controlId": "CAAdminPhishingResistantMFA",
+        "name": "Conditional Access: Require phishing-resistant MFA strength for administrators (Secure Score)",
+        "mode": "enforce",
+        "canCauseLockout": true,
+        "requiresOnboardingDiscussion": true,
+        "outcome": "BLOCKED",
+        "reason": "missing required acknowledgements",
+        "missing": [
+          "acknowledgeBusinessImpact:true",
+          "onboardingReviewed:true"
+        ]
+      },
+      {
+        "controlId": "Tier3AuthMethodsReadiness",
+        "name": "Tier 3 Readiness: Phishing-resistant MFA methods available (FIDO2 / WHfB) + TAP bootstrap",
+        "mode": "detect-only",
+        "canCauseLockout": false,
+        "requiresOnboardingDiscussion": true,
+        "outcome": "DRIFTED",
+        "reason": "NOT_READY",
+        "missing": [],
+        "methodsSummary": "FIDO2=disabled, WHfB=unknown, TAP=enabled"
+      },
+      {
+        "controlId": "Tier3BreakGlassReadiness",
+        "name": "Tier 3 Readiness: Break-glass accounts present and safe",
+        "mode": "detect-only",
+        "canCauseLockout": false,
+        "requiresOnboardingDiscussion": true,
+        "outcome": "DRIFTED",
+        "reason": "NOT_READY",
+        "missing": [],
+        "breakGlassSummary": "totalMembers=2, enabledMembers=0",
+        "breakGlassReason": "Break-glass group should contain at least two enabled user accounts"
+      },
+      {
+        "controlId": "PhishingResistantMfaStrengthGap",
+        "name": "Entra ID: Phishing-resistant MFA strength required for admins (Secure Score gap only)",
+        "mode": "detect-only",
+        "canCauseLockout": false,
+        "requiresOnboardingDiscussion": true,
+        "outcome": "NOT_BLOCKED",
+        "reason": null,
+        "missing": []
+      }
+    ]
+  },
+  "priorities": [
+    {
+      "type": "BUSINESS_APPROVAL",
+      "title": "Complete Tier 3 onboarding acknowledgements (lockout-risk controls)",
+      "why": "Prevents ATLAS from enforcing high-impact controls safely until business impact is acknowledged.",
+      "controls": [
+        "CAAdminSignInFrequencySessionTimeout",
+        "CAAdminPhishingResistantMFA"
+      ],
+      "blastRadius": "BUSINESS / APPROVAL"
+    },
+    {
+      "type": "TECHNICAL_READINESS",
+      "title": "Fix Tier 3 technical readiness (break-glass + phishing-resistant MFA readiness)",
+      "why": "Reduces lockout risk and enables safe enforcement of Tier 3 Conditional Access controls.",
+      "controls": [
+        "Tier3AuthMethodsReadiness",
+        "Tier3BreakGlassReadiness"
+      ],
+      "blastRadius": "TECHNICAL / PREREQUISITE"
+    },
+    {
+      "type": "CONFIGURATION_GAPS",
+      "title": "Address highest-impact Secure Score configuration gaps (ATLAS-mapped)",
+      "why": "These are the largest currently-detected gaps and typically yield fast risk reduction.",
+      "items": [
+        {
+          "secureScoreControlId": "CustomerLockBoxEnabled",
+          "title": "Ensure the customer lockbox feature is enabled",
+          "scorePct": 0,
+          "category": "Apps",
+          "atlasControls": [
+            "CustomerLockboxEnabled"
+          ],
+          "blastRadius": "CONFIG / QUICK WIN"
+        },
+        {
+          "secureScoreControlId": "McasFirewallLogUpload",
+          "title": "Deploy a log collector to discover shadow IT activity",
+          "scorePct": 0,
+          "category": "Apps",
+          "atlasControls": [
+            "McasFirewallLogUpload"
+          ],
+          "blastRadius": "CONFIG / QUICK WIN"
+        },
+        {
+          "secureScoreControlId": "aad_admin_accounts_separate_unassigned_cloud_only",
+          "title": "Ensure Administrative accounts are separate and cloud-only",
+          "scorePct": 0,
+          "category": "Apps",
+          "atlasControls": [
+            "AdminAccountsSeparateCloudOnly"
+          ],
+          "blastRadius": "CONFIG / QUICK WIN"
+        }
+      ]
+    }
+  ]
+}

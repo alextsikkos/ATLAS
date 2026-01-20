@@ -1,0 +1,21 @@
+{
+  "controlId": "MDOThresholdReachedAction",
+  "name": "Defender for Office 365: Block users who reached message limit (Secure Score)",
+  "category": "Apps",
+  "tier": 1,
+  "mode": "detect-only",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "DETECTOR_ERROR",
+  "reasonDetail": "EXO detector failed: EXO PowerShell call failed",
+  "details": {
+    "reason": "EXO PowerShell call failed",
+    "stderr": "Import-Module : The specified module 'ExchangeOnlineManagement' was not loaded because no valid module file was found \nin any module directory.\nAt C:\\Users\\Alex\\desktop\\atlas\\engine\\detectors\\mdo_threshold_reached_action.ps1:4 char:1\n+ Import-Module ExchangeOnlineManagement\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : ResourceUnavailable: (ExchangeOnlineManagement:String) [Import-Module], FileNotFoundExce \n   ption\n    + FullyQualifiedErrorId : Modules_ModuleNotFound,Microsoft.PowerShell.Commands.ImportModuleCommand",
+    "stdout": "",
+    "exitCode": 1,
+    "script": "mdo_threshold_reached_action.ps1",
+    "reasonCode": "DETECTOR_ERROR",
+    "reasonDetail": "EXO detector failed: EXO PowerShell call failed"
+  },
+  "tenant": "example",
+  "durationSeconds": 1.47
+}
