@@ -2,6 +2,8 @@
 
 DISPLAY_NAME_REPORT_ONLY = "ATLAS - Admin MFA (Report Only)"
 DISPLAY_NAME_ENFORCE = "ATLAS - Admin MFA"
+# Backwards-compatible alias (engine.main imports DISPLAY_NAME)
+DISPLAY_NAME = DISPLAY_NAME_REPORT_ONLY
 
 
 # Keep your role IDs exactly as you already used in the script (v1).
