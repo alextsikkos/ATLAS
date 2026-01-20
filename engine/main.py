@@ -410,6 +410,7 @@ CAPABILITY_ENFORCERS = {
     "ThirdPartyAppsRestricted",
     "IntegratedAppsRestricted",
     "AdminOwnedAppsRestricted",
+    "MDOBlockAutoForwarding",
     "SharePointDefaultSharingRestricted",
     "SharePointLinkExpirationConfigured",
 
@@ -419,7 +420,7 @@ CAPABILITY_ENFORCERS = {
     "CAAdminMFAAllApps",
 
     # Graph enforcement
-    # "SelfServicePasswordReset",
+    "SelfServicePasswordReset",
 
     # EXO / MDO enforcement
     "MDOPresetSecurityPolicies",    "SharePointSharingAllowedDomainListConfigured",
