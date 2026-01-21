@@ -1,5 +1,6 @@
 # engine/enforcement/registry.py
 from __future__ import annotations
+from engine.enforcement.authorization_policy_bulk import enforce_authorization_policy_bulk
 
 from typing import Any, Callable, Dict, Optional
 
@@ -41,3 +42,11 @@ def get_enforcer(control_id: str) -> Optional[EnforcerFn]:
         import engine.enforcement.auth_methods_policy_enforcers  # noqa: F401
     except Exception:
         pass
+
+register("GuestInvitesRestrictedToAdminsAndGuestInviters", enforce_authorization_policy_bulk)
+register("EmailVerifiedUsersCannotJoinOrganization", enforce_authorization_policy_bulk)
+register("EmailBasedSubscriptionsDisabled", enforce_authorization_policy_bulk)
+register("BlockMsolPowerShellEnabled", enforce_authorization_policy_bulk)
+register("DefaultUserRoleAppsCreationDisabled", enforce_authorization_policy_bulk)
+register("DefaultUserRoleSecurityGroupsCreationDisabled", enforce_authorization_policy_bulk)
+register("DefaultUserRoleTenantCreationDisabled", enforce_authorization_policy_bulk)
