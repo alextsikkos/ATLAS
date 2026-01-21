@@ -314,6 +314,7 @@ CAPABILITY_CUSTOM_DETECTORS = {
     "MDOBlockAutoForwarding",
     "CustomBannedPasswords",
     "PasswordProtection",
+    "Tier3AuthMethodsProbe",
     "IntegratedAppsRestricted",
     "ThirdPartyAppsRestricted",
     "AdminOwnedAppsRestricted",
@@ -4804,6 +4805,27 @@ def main():
                 if control_id == "Tier3AuthMethodsCatalog":
                     from engine.detectors.auth_methods_catalog import detect_auth_methods_catalog
                     state, details = normalize_detector_result(detect_auth_methods_catalog(headers))
+                    audit_path = _write_audit_event_timed(tenant_name, {
+                        "tenant": tenant_name,
+                        "controlId": control_id,
+                        "action": "detect_only",
+                        "state": state,
+                        "displayName": control.get("name", control_id),
+                        "approved": bool(approval),
+                        "mode": "detect-only",
+                        "status": 200 if state in ("COMPLIANT", "DRIFTED") else 500,
+                        "details": details,
+                        "reasonCode": details.get("reasonCode"),
+                        "reasonDetail": details.get("reasonDetail"),
+                    })
+                    print(f"DETECT-ONLY: {control_id} | state={state}")
+                    print(f"Audit saved: {audit_path}")
+                    continue
+                if control_id == "Tier3AuthMethodsProbe":
+                    from engine.detectors.auth_methods_probe import detect_auth_methods_probe
+
+                    state, details = normalize_detector_result(detect_auth_methods_probe(headers))
+
                     audit_path = _write_audit_event_timed(tenant_name, {
                         "tenant": tenant_name,
                         "controlId": control_id,

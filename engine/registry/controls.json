@@ -153,6 +153,17 @@
     "secureScoreControlIds": [],
     "group": "Entra ID"
   },
+  {
+    "id": "Tier3AuthMethodsProbe",
+    "name": "Tier 3: Auth methods probe",
+    "tier": 3,
+    "category": "Identity",
+    "approvalRequired": false,
+    "default_mode": "report-only",
+    "detectOnly": true,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
 
   {
     "id": "BlockLegacyAuthenticationPolicy",
