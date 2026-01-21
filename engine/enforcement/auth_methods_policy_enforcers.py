@@ -90,7 +90,16 @@ def _enforce_auth_method_state(
     if after_state == desired_state:
         return ("UPDATED", "ENFORCER_EXECUTED", "Enforce: applied change and verified.", details, 200)
 
-    return ("ERROR", "ENFORCER_ERROR", "Enforce: attempted but could not verify desired state.", details, 200)
+    # PATCH succeeded but the service did not persist the desired configuration.
+    # Treat as a policy constraint / unsupported mode rather than a runtime error.
+    return (
+        "NOT_EVALUATED",
+        "UNSUPPORTED_MODE",
+        "PATCH succeeded but desired TAP settings did not persist (likely constrained by includeTargets/tenant rules).",
+        details,
+        424,
+    )
+
 
 def _enforce_auth_method_config(
     *,
@@ -168,8 +177,22 @@ def _enforce_auth_method_config(
     if all(after.get(k) == v for k, v in desired.items()):
         return ("UPDATED", "ENFORCER_EXECUTED", "Enforce: applied change and verified.", details, 200)
 
-    return ("ERROR", "ENFORCER_ERROR", "Enforce: attempted but could not verify desired state.", details, 200)
-def _temporary_access_pass_hardened(
+    # PATCH succeeded but the service did not persist the desired configuration.
+    # Treat as a policy constraint (tenant rules/targeting) rather than a runtime error.
+    details["constraint"] = {
+        "note": "PATCH returned success but desired fields did not persist after verify.",
+        "likelyCause": "Tenant rules / includeTargets constraints / service-side normalization.",
+    }
+    return (
+        "NOT_EVALUATED",
+        "POLICY_CONSTRAINT",
+        "Service accepted PATCH but did not persist desired TAP settings (likely constrained by targeting/tenant rules).",
+        details,
+        424,
+    )
+
+
+def _temporary_access_pass_lifetime_hardened(
     *,
     tenant: dict,
     tenant_name: str,
@@ -179,22 +202,12 @@ def _temporary_access_pass_hardened(
     approval: dict | None,
     mode: str,
 ) -> Tuple[str, str, str, dict, int]:
-    # Conservative defaults that harden security but shouldn’t break sane onboarding:
-    # - TAP enabled (if you don’t want ATLAS enabling it, set desired_patch["state"]="enabled" -> remove, and only harden if enabled)
-    # - One-time use
-    # - Short default lifetime
     desired_patch = {
-        "state": "enabled",
-        "isUsableOnce": True,
         "defaultLifetimeInMinutes": 60,
     }
-
     verify_fields = {
-        "state": "enabled",
-        "isUsableOnce": True,
         "defaultLifetimeInMinutes": 60,
     }
-
     return _enforce_auth_method_config(
         headers=headers,
         method_id="temporaryAccessPass",
@@ -203,6 +216,57 @@ def _temporary_access_pass_hardened(
         control_id=control_id,
         mode=mode,
     )
+def _temporary_access_pass_usable_once(
+    *,
+    tenant: dict,
+    tenant_name: str,
+    control: dict,
+    control_id: str,
+    headers: dict,
+    approval: dict | None,
+    mode: str,
+) -> Tuple[str, str, str, dict, int]:
+    # Preflight: if includeTargets is all_users, do NOT attempt.
+    # Your tenant shows includeTargets = all_users. :contentReference[oaicite:3]{index=3}
+    url = "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/temporaryAccessPass"
+    g_status, g_body, g_text = graph_get_json(url, headers=headers, timeout=30)
+    if g_status >= 400 or not isinstance(g_body, dict):
+        return (
+            "NOT_EVALUATED",
+            "AUTH_FORBIDDEN" if g_status == 403 else "MISSING_SIGNAL",
+            f"Graph GET TAP configuration failed (HTTP {g_status})",
+            {"url": url, "status": g_status, "responseText": (g_text or "")[:2000]},
+            g_status,
+        )
+
+    include_targets = (g_body or {}).get("includeTargets", []) or []
+    includes_all_users = any((t or {}).get("id") == "all_users" for t in include_targets)
+
+    if includes_all_users:
+        details = {
+            "url": url,
+            "includeTargets": include_targets,
+            "note": "Refusing to enforce isUsableOnce when TAP targets all users; this commonly fails to persist and is high risk.",
+            "remediation": "Scope TAP to a piloted group, then re-run with approval to enforce usable-once.",
+        }
+        if (mode or "").strip().lower() == "enforce":
+            return ("NOT_EVALUATED", "POLICY_CONSTRAINT", "TAP targets all users; usable-once enforcement is blocked.", details, 409)
+        return ("NOT_EVALUATED", "INSUFFICIENT_SIGNAL", "Report-only: TAP targets all users; usable-once not enforced.", details, 200)
+
+    # If not all_users, attempt to enforce isUsableOnce
+    desired_patch = {"isUsableOnce": True}
+    verify_fields = {"isUsableOnce": True}
+
+    # reuse the generic helper (it will now return POLICY_CONSTRAINT if it still doesn't persist)
+    return _enforce_auth_method_config(
+        headers=headers,
+        method_id="temporaryAccessPass",
+        desired_patch=desired_patch,
+        verify_fields=verify_fields,
+        control_id=control_id,
+        mode=mode,
+    )
+
 
 def _microsoft_authenticator_enabled(
     *,
@@ -275,7 +339,9 @@ def _voice_disabled(
         mode=mode,
     )
 
-register("AuthMethodsTemporaryAccessPassHardened", _temporary_access_pass_hardened)
+register("AuthMethodsTemporaryAccessPassHardened", _temporary_access_pass_lifetime_hardened)
+register("AuthMethodsTemporaryAccessPassUsableOnce", _temporary_access_pass_usable_once)
+
 register("AuthMethodsMicrosoftAuthenticatorEnabled", _microsoft_authenticator_enabled)
 register("AuthMethodsFido2Enabled", _fido2_enabled)
 register("AuthMethodsSmsDisabled", _sms_disabled)

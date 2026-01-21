@@ -1,0 +1,53 @@
+{
+  "tenant": "example",
+  "controlId": "AuthMethodsTemporaryAccessPassHardened",
+  "action": "ensure_applied",
+  "displayName": "Authentication Methods: Temporary Access Pass hardened",
+  "approved": true,
+  "mode": "enforce",
+  "state": "ERROR",
+  "reasonCode": "ENFORCER_ERROR",
+  "reasonDetail": "Enforce: attempted but could not verify desired state.",
+  "details": {
+    "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/temporaryAccessPass",
+    "before": {
+      "AuthMethodsTemporaryAccessPassHardened": {
+        "state": "enabled",
+        "isUsableOnce": false,
+        "defaultLifetimeInMinutes": 60
+      }
+    },
+    "desired": {
+      "AuthMethodsTemporaryAccessPassHardened": {
+        "state": "enabled",
+        "isUsableOnce": true,
+        "defaultLifetimeInMinutes": 60
+      }
+    },
+    "apply": {
+      "status": 204,
+      "applied": {
+        "state": "enabled",
+        "isUsableOnce": true,
+        "defaultLifetimeInMinutes": 60
+      },
+      "responseText": null
+    },
+    "verify": {
+      "status": 200,
+      "attempt": 5,
+      "responseText": "{\"@odata.context\":\"https://graph.microsoft.com/v1.0/$metadata#authenticationMethodConfigurations/$entity\",\"@odata.type\":\"#microsoft.graph.temporaryAccessPassAuthenticationMethodConfiguration\",\"id\":\"TemporaryAccessPass\",\"state\":\"enabled\",\"defaultLifetimeInMinutes\":60,\"defaultLength\":8,\"minimumLifetimeInMinutes\":60,\"maximumLifetimeInMinutes\":480,\"isUsableOnce\":false,\"excludeTargets\":[],\"includeTargets@odata.context\":\"https://graph.microsoft.com/v1.0/$metadata#policies/authenticationMethodsPolicy/authenticationMethodConfigurations('TemporaryAccessPass')/microsoft.graph.temporaryAccessPassAuthenticationMethodConfiguration/includeTargets\",\"includeTargets\":[{\"targetType\":\"group\",\"id\":\"all_users\",\"isRegistrationRequired\":false}]}"
+    },
+    "after": {
+      "AuthMethodsTemporaryAccessPassHardened": {
+        "state": "enabled",
+        "isUsableOnce": false,
+        "defaultLifetimeInMinutes": 60
+      }
+    },
+    "reasonCode": "ENFORCER_ERROR",
+    "reasonDetail": "Enforce: attempted but could not verify desired state."
+  },
+  "status": 200,
+  "durationSeconds": 12.026
+}

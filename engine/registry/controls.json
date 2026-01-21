@@ -118,6 +118,19 @@
     "secureScoreControlIds": [],
     "group": "Entra ID"
   },
+  {
+    "id": "AuthMethodsTemporaryAccessPassUsableOnce",
+    "name": "Authentication Methods: Temporary Access Pass usable once",
+    "tier": 3,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "canCauseLockout": true,
+    "requiresOnboardingDiscussion": true,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  }
 
   {
     "id": "BlockLegacyAuthenticationPolicy",
