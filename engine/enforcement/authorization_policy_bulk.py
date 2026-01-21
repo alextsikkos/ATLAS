@@ -74,9 +74,11 @@ def _run_bulk_once(tenant: dict, tenant_name: str, headers: dict) -> dict:
         for c in matched
         if isinstance(c, dict)
     }
-    target_ids = [cid for cid in CONTROL_FIELD_MAP.keys() if cid in present_ids]
+    # We are only invoked for authz-policy controls; don’t depend on matched-controls metadata shape.
+    target_ids = list(CONTROL_FIELD_MAP.keys())
     if not target_ids:
         return ctx
+
 
     # Determine which controls are approved for enforce (file-based approvals)
     approved_for_enforce: list[str] = []

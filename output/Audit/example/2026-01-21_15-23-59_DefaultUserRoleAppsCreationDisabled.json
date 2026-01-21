@@ -1,0 +1,17 @@
+{
+  "tenant": "example",
+  "controlId": "DefaultUserRoleAppsCreationDisabled",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Default user role cannot create apps",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "AUTHZPOLICY_NOT_IN_BULKSET",
+  "reasonDetail": "Control not included in AuthorizationPolicy bulk set.",
+  "details": {
+    "reasonCode": "AUTHZPOLICY_NOT_IN_BULKSET",
+    "reasonDetail": "Control not included in AuthorizationPolicy bulk set."
+  },
+  "status": 200,
+  "durationSeconds": 0.002
+}
