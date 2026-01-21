@@ -1,0 +1,1037 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-21_11-49-26",
+  "count": 103,
+  "rows": [
+    {
+      "controlId": "SigninRiskPolicy",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "REPORT_ONLY_EVALUATED",
+      "durationSeconds": 0.557
+    },
+    {
+      "controlId": "UserRiskPolicy",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "REPORT_ONLY_EVALUATED",
+      "durationSeconds": 0.642
+    },
+    {
+      "controlId": "AdminMFAV2",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.611
+    },
+    {
+      "controlId": "DisableUserConsentToApps",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 1.129
+    },
+    {
+      "controlId": "SelfServicePasswordReset",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "UNSUPPORTED_API",
+      "durationSeconds": 0.5
+    },
+    {
+      "controlId": "AuthMethodsMicrosoftAuthenticatorEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.496
+    },
+    {
+      "controlId": "AuthMethodsFido2Enabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.533
+    },
+    {
+      "controlId": "AuthMethodsSmsDisabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.527
+    },
+    {
+      "controlId": "AuthMethodsVoiceDisabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.476
+    },
+    {
+      "controlId": "AuthMethodsTemporaryAccessPassHardened",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.563
+    },
+    {
+      "controlId": "AuthMethodsTemporaryAccessPassUsableOnce",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "POLICY_CONSTRAINT",
+      "durationSeconds": 0.551
+    },
+    {
+      "controlId": "Tier3PerUserMfaReadiness",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 2.039
+    },
+    {
+      "controlId": "Tier3AuthMethodsCatalog",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "UNSUPPORTED_API",
+      "durationSeconds": 0.794
+    },
+    {
+      "controlId": "Tier3AuthMethodsProbe",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 1.935
+    },
+    {
+      "controlId": "AuthMethodsSoftwareOathEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.494
+    },
+    {
+      "controlId": "AuthMethodsHardwareOathEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "UNSUPPORTED_MODE",
+      "durationSeconds": 12.022
+    },
+    {
+      "controlId": "AuthMethodsX509CertificateDisabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.523
+    },
+    {
+      "controlId": "BlockLegacyAuthenticationPolicy",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "REPORT_ONLY_EVALUATED",
+      "durationSeconds": 0.563
+    },
+    {
+      "controlId": "BlockLegacyAuthenticationStatus",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.934
+    },
+    {
+      "controlId": "MDETamperProtectionStatus",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.001
+    },
+    {
+      "controlId": "EXOSPFRecordsAllDomains",
+      "controlName": "Exchange Online: SPF records published for all domains",
+      "category": "Email",
+      "tier": 1,
+      "mode": "report-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.461
+    },
+    {
+      "controlId": "MDOAntiSpam",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOAntiMalware",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOPresetSecurityPolicies",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "BLOCKED",
+      "durationSeconds": 0.001
+    },
+    {
+      "controlId": "EXODKIMEnabledAllDomains",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.768
+    },
+    {
+      "controlId": "EXODMARCAllDomains",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.342
+    },
+    {
+      "controlId": "PasswordProtection",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "CAAdminBlockLegacyAuth",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.554
+    },
+    {
+      "controlId": "CAAllUsersBlockLegacyAuth",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.607
+    },
+    {
+      "controlId": "CAAdminMFAAllApps",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 1.541
+    },
+    {
+      "controlId": "Tier3AuthMethodsReadiness",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "TIER3_EVALUATED",
+      "durationSeconds": 0.582
+    },
+    {
+      "controlId": "Tier3BreakGlassReadiness",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "TIER3_EVALUATED",
+      "durationSeconds": 0.795
+    },
+    {
+      "controlId": "CustomerLockboxEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "McasFirewallLogUpload",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 1.26
+    },
+    {
+      "controlId": "AdminAccountsSeparateCloudOnly",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.711
+    },
+    {
+      "controlId": "AdminConsentWorkflowEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 2.098
+    },
+    {
+      "controlId": "LinkedInConnectionsDisabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "ThirdPartyAppsRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.421
+    },
+    {
+      "controlId": "CustomBannedPasswords",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "LimitedAdminRolesAzureManagement",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.361
+    },
+    {
+      "controlId": "PasswordProtectionOnPremGap",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "PhishingResistantMfaStrengthGap",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "GlobalAdminCountOptimised",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.788
+    },
+    {
+      "controlId": "AuditLogSearchEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MailboxAuditingEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "RoleOverlap",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 1.03
+    },
+    {
+      "controlId": "AdminOwnedAppsRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.353
+    },
+    {
+      "controlId": "IntegratedAppsRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.36
+    },
+    {
+      "controlId": "OneDriveBlockSyncUnmanagedDevices",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SwayBlockExternalSharing",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "AUTH_FORBIDDEN",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "EXOMailTipsEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "EXOOutlookAddinsBlocked",
+      "controlName": "Exchange Online: Ensure users installing Outlook add-ins is not allowed (Secure Score)",
+      "category": "Email",
+      "tier": 1,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "EXOStorageProvidersRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "EXOCalendarExternalSharingDisabled",
+      "controlName": "Exchange Online: Ensure external calendar sharing is not available (Secure Score)",
+      "category": "Email",
+      "tier": 1,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "OneDriveExternalSharingRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "FALLBACK_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "OneDriveSyncRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "report-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "FALLBACK_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "PurviewAutoLabelingPolicies",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "PurviewLabelConsentDataMap",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "DefenderForIdentityDeployed",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "AUTH_FORBIDDEN",
+      "durationSeconds": 0.918
+    },
+    {
+      "controlId": "MDOSafeLinks",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOSafeAttachments",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOAntiPhish",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 6.667
+    },
+    {
+      "controlId": "MDOSafeDocumentsEnabled",
+      "controlName": "Defender for Office 365: Turn on Safe Documents for Office clients (Secure Score)",
+      "category": "Email",
+      "tier": 1,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOTurnOnMDOForSPOODTeams",
+      "controlName": "Defender for Office 365: Turn on MDO for SharePoint, OneDrive, and Teams (Secure Score)",
+      "category": "Apps",
+      "tier": 2,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOHighConfidenceSpamAction",
+      "controlName": "Defender for Office 365: Action for high confidence spam (Secure Score)",
+      "category": "Apps",
+      "tier": 1,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOPhishingAction",
+      "controlName": "Defender for Office 365: Action for phishing detection (Secure Score)",
+      "category": "Apps",
+      "tier": 1,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOBulkSpamAction",
+      "controlName": "Defender for Office 365: Action for bulk spam detection (Secure Score)",
+      "category": "Apps",
+      "tier": 1,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOBulkComplaintLevelThreshold",
+      "controlName": "Defender for Office 365: Set BCL threshold to 6 or lower (Secure Score)",
+      "category": "Apps",
+      "tier": 1,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOThresholdReachedAction",
+      "controlName": "Defender for Office 365: Block users who reached message limit (Secure Score)",
+      "category": "Apps",
+      "tier": 1,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOMailboxIntelligenceProtection",
+      "controlName": "Defender for Office 365: Enable mailbox intelligence for impersonation protection (Secure Score)",
+      "category": "Apps",
+      "tier": 2,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOQuarantineRetentionPeriod",
+      "controlName": "Defender for Office 365: Quarantine retention period configured (Secure Score)",
+      "category": "Email",
+      "tier": 1,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOAllowedSendersRestricted",
+      "controlName": "Defender for Office 365: Allowed senders/domains not overly permissive (Secure Score)",
+      "category": "Email",
+      "tier": 1,
+      "mode": "report-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOSpamNotificationsAdminsOnly",
+      "controlName": "Defender for Office 365: Spam notifications sent only to admins (Secure Score)",
+      "category": "Email",
+      "tier": 1,
+      "mode": "report-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_DATA",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOSafeLinksOfficeApps",
+      "controlName": "Defender for Office 365: Safe Links enabled for Office applications (Secure Score)",
+      "category": "Email",
+      "tier": 1,
+      "mode": "report-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOAntiPhishingPoliciesTuned",
+      "controlName": "Defender for Office 365: Anti-phishing policies tuned beyond defaults (Secure Score)",
+      "category": "Email",
+      "tier": 2,
+      "mode": "report-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_DATA",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOBlockAutoForwarding",
+      "controlName": "Defender for Office 365: Automatic email forwarding blocked (Secure Score)",
+      "category": "Email",
+      "tier": 2,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 6.242
+    },
+    {
+      "controlId": "MDOMailboxIntelligenceActionsConfigured",
+      "controlName": "Defender for Office 365: Mailbox intelligence actions configured (Secure Score)",
+      "category": "Email",
+      "tier": 2,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOTargetedUsersProtection",
+      "controlName": "Defender for Office 365: Targeted user impersonation protection enabled (Secure Score)",
+      "category": "Email",
+      "tier": 2,
+      "mode": "report-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_DATA",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOTargetedDomainProtection",
+      "controlName": "Defender for Office 365: Targeted domain impersonation protection enabled (Secure Score)",
+      "category": "Email",
+      "tier": 2,
+      "mode": "report-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_DATA",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOSafetyTipsEnabled",
+      "controlName": "Defender for Office 365: Impersonation safety tips enabled (Secure Score)",
+      "category": "Email",
+      "tier": 1,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOPhishThresholdLevel",
+      "controlName": "Defender for Office 365: Phishing threshold level set to 2+ (Secure Score)",
+      "category": "Email",
+      "tier": 2,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOTargetedDomainProtectionAction",
+      "controlName": "Defender for Office 365: Targeted domain impersonation action quarantines (Secure Score)",
+      "category": "Email",
+      "tier": 2,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "MDOTargetedUserProtectionAction",
+      "controlName": "Defender for Office 365: Targeted user impersonation action quarantines (Secure Score)",
+      "category": "Email",
+      "tier": 2,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "TeamsExternalAccessRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "FALLBACK_DETECTOR_EVALUATED",
+      "durationSeconds": 5.597
+    },
+    {
+      "controlId": "TeamsFederationRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "SECURE_SCORE_ID_MISSING",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "TeamsFileSharingRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "report-only",
+      "state": "DRIFTED",
+      "reasonCode": "SECURE_SCORE_ID_MISSING",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "TeamsRestrictAnonymousStartMeeting",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "TeamsRestrictAnonymousJoin",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "TeamsAutoAdmitInvitedOnly",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "TeamsDesignatedPresenterConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "TeamsRestrictDialInBypassLobby",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "TeamsLimitExternalControl",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointDefaultSharingRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 10.149
+    },
+    {
+      "controlId": "SharePointLinkExpirationConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointDefaultLinkTypeRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointExternalSharingManaged",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "FALLBACK_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointGuestUsersCannotReshare",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "COMPLIANT",
+      "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointIdleSessionTimeout",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "UNSUPPORTED_MODE",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointModernAuthRequired",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "DRIFTED",
+      "reasonCode": "FALLBACK_DETECTOR_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointDomainRestrictionConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointSharingAllowedDomainListConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointSharingBlockedDomainListConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "DETECT_ONLY_EVALUATED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointPreventExternalUsersFromResharingEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    }
+  ]
+}

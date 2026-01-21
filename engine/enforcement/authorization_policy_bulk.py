@@ -12,10 +12,18 @@ AUTHZ_URL = "https://graph.microsoft.com/v1.0/policies/authorizationPolicy"
 
 # controlId -> (json_path, desired_value)
 CONTROL_FIELD_MAP = {
-    "ThirdPartyAppsRestricted": ("allowInvitesFrom", "adminsAndGuestInviters"),
-    "IntegratedAppsRestricted": ("defaultUserRolePermissions.allowedToCreateApps", False),
-    "AdminOwnedAppsRestricted": ("defaultUserRolePermissions.allowedToCreateTenants", False),
+    # authorizationPolicy root fields
+    "GuestInvitesRestrictedToAdminsAndGuestInviters": ("allowInvitesFrom", "adminsAndGuestInviters"),
+    "EmailVerifiedUsersCannotJoinOrganization": ("allowEmailVerifiedUsersToJoinOrganization", False),
+    "EmailBasedSubscriptionsDisabled": ("allowedToSignUpEmailBasedSubscriptions", False),
+    "BlockMsolPowerShellEnabled": ("blockMsolPowerShell", True),
+
+    # defaultUserRolePermissions fields
+    "DefaultUserRoleAppsCreationDisabled": ("defaultUserRolePermissions.allowedToCreateApps", False),
+    "DefaultUserRoleSecurityGroupsCreationDisabled": ("defaultUserRolePermissions.allowedToCreateSecurityGroups", False),
+    "DefaultUserRoleTenantCreationDisabled": ("defaultUserRolePermissions.allowedToCreateTenants", False),
 }
+
 
 
 def _get_path(obj: dict, path: str):

@@ -203,6 +203,83 @@
     "secureScoreControlIds": [],
     "group": "Entra ID"
   },
+  {
+    "id": "GuestInvitesRestrictedToAdminsAndGuestInviters",
+    "name": "Entra ID: Restrict guest invites to admins and guest inviters",
+    "tier": 2,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
+  {
+    "id": "EmailVerifiedUsersCannotJoinOrganization",
+    "name": "Entra ID: Block email-verified users from joining the organization",
+    "tier": 2,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
+  {
+    "id": "EmailBasedSubscriptionsDisabled",
+    "name": "Entra ID: Disable email-based subscriptions sign-up",
+    "tier": 2,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
+  {
+    "id": "BlockMsolPowerShellEnabled",
+    "name": "Entra ID: Block MSOL PowerShell",
+    "tier": 2,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
+  {
+    "id": "DefaultUserRoleAppsCreationDisabled",
+    "name": "Entra ID: Default user role cannot create apps",
+    "tier": 2,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
+  {
+    "id": "DefaultUserRoleSecurityGroupsCreationDisabled",
+    "name": "Entra ID: Default user role cannot create security groups",
+    "tier": 2,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
+  {
+    "id": "DefaultUserRoleTenantCreationDisabled",
+    "name": "Entra ID: Default user role cannot create tenants",
+    "tier": 2,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
 
   {
     "id": "BlockLegacyAuthenticationPolicy",
