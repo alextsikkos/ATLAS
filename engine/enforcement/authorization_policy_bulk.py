@@ -70,7 +70,7 @@ def _run_bulk_once(tenant: dict, tenant_name: str, headers: dict) -> dict:
     matched = tenant.get("_atlas_matched_controls") or []
     present_ids = {((c.get("atlasControlId") or c.get("controlId") or "")).strip() for c in matched if isinstance(c, dict)}
 
-    target_ids = [cid for cid in CONTROL_FIELD_MAP.keys() if cid in present_ids]
+    target_ids = list(CONTROL_FIELD_MAP.keys())
 
     # Nothing to do
     if not target_ids:
