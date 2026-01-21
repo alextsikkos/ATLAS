@@ -131,6 +131,17 @@
     "secureScoreControlIds": [],
     "group": "Entra ID"
   },
+  {
+    "id": "Tier3PerUserMfaReadiness",
+    "name": "Tier 3: Per-user MFA readiness",
+    "tier": 3,
+    "category": "Identity",
+    "approvalRequired": false,
+    "default_mode": "report-only",
+    "detectOnly": true,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
 
   {
     "id": "BlockLegacyAuthenticationPolicy",

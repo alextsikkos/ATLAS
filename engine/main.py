@@ -411,6 +411,7 @@ CAPABILITY_ENFORCERS = {
     "AuthMethodsSmsDisabled",
     "AuthMethodsVoiceDisabled",
     "AuthMethodsTemporaryAccessPassHardened",
+    "Tier3PerUserMfaReadiness",
     "AuthMethodsTemporaryAccessPassUsableOnce",
     "IntegratedAppsRestricted",
     "AdminOwnedAppsRestricted",
@@ -4800,6 +4801,28 @@ def main():
                     print(f"DETECT-ONLY: {control_id} | state={state}")
                     print(f"Audit saved: {audit_path}")
                     continue
+                if control_id == "Tier3PerUserMfaReadiness":
+                    from engine.detectors.per_user_mfa import detect_per_user_mfa_readiness
+
+                    state, details = normalize_detector_result(detect_per_user_mfa_readiness(headers))
+
+                    audit_path = _write_audit_event_timed(tenant_name, {
+                        "tenant": tenant_name,
+                        "controlId": control_id,
+                        "action": "detect_only",
+                        "state": state,
+                        "displayName": control.get("name", control_id),
+                        "approved": bool(approval),
+                        "mode": "detect-only",
+                        "status": 200 if state in ("COMPLIANT", "DRIFTED") else 500,
+                        "details": details,
+                        "reasonCode": details.get("reasonCode"),
+                        "reasonDetail": details.get("reasonDetail"),
+                    })
+                    print(f"DETECT-ONLY: {control_id} | state={state}")
+                    print(f"Audit saved: {audit_path}")
+                    continue
+
 
                 try:
                     pct = float(scorepct)
