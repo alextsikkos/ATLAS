@@ -1,0 +1,108 @@
+{
+  "tenant": "example",
+  "controlId": "CAAdminMFAAllApps",
+  "action": "ensure_applied",
+  "displayName": "Conditional Access: Require MFA for admins across all apps (ATLAS-owned)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforcer executed; policy ensured",
+  "details": {
+    "result": {
+      "result": "created",
+      "status": 201,
+      "policyId": "d8dc7a76-2fa0-4627-8c8f-f5d12b648962",
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies/$entity",
+        "id": "d8dc7a76-2fa0-4627-8c8f-f5d12b648962",
+        "templateId": null,
+        "displayName": "ATLAS - Admin MFA",
+        "createdDateTime": "2026-01-21T13:06:09.5265838Z",
+        "modifiedDateTime": null,
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+          "userRiskLevels": [],
+          "signInRiskLevels": [],
+          "clientAppTypes": [
+            "all"
+          ],
+          "servicePrincipalRiskLevels": [],
+          "insiderRiskLevels": null,
+          "platforms": null,
+          "locations": null,
+          "devices": null,
+          "clientApplications": null,
+          "authenticationFlows": null,
+          "applications": {
+            "includeApplications": [
+              "All"
+            ],
+            "excludeApplications": [],
+            "includeUserActions": [],
+            "includeAuthenticationContextClassReferences": [],
+            "applicationFilter": null
+          },
+          "users": {
+            "includeUsers": [
+              "All"
+            ],
+            "excludeUsers": [],
+            "includeGroups": [],
+            "excludeGroups": [
+              "b71bc79f-f89b-45ad-b11f-a839cf2e9829"
+            ],
+            "includeRoles": [],
+            "excludeRoles": [],
+            "includeGuestsOrExternalUsers": null,
+            "excludeGuestsOrExternalUsers": null
+          }
+        },
+        "grantControls": {
+          "operator": "OR",
+          "builtInControls": [
+            "mfa"
+          ],
+          "customAuthenticationFactors": [],
+          "termsOfUse": [],
+          "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('d8dc7a76-2fa0-4627-8c8f-f5d12b648962')/grantControls/authenticationStrength/$entity",
+          "authenticationStrength": null
+        }
+      }
+    },
+    "desired": {
+      "displayName": "ATLAS - Admin MFA",
+      "state": "enabled",
+      "conditions": {
+        "clientAppTypes": [
+          "all"
+        ],
+        "applications": {
+          "includeApplications": [
+            "All"
+          ]
+        },
+        "users": {
+          "includeUsers": [
+            "All"
+          ],
+          "excludeUsers": [],
+          "excludeGroups": [
+            "b71bc79f-f89b-45ad-b11f-a839cf2e9829"
+          ]
+        }
+      },
+      "grantControls": {
+        "operator": "OR",
+        "builtInControls": [
+          "mfa"
+        ]
+      }
+    },
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforcer executed; policy ensured"
+  },
+  "status": 201,
+  "durationSeconds": 1.62
+}

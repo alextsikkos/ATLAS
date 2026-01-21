@@ -31,6 +31,8 @@ def get_enforcer(control_id: str) -> Optional[EnforcerFn]:
     _safe_import("engine.enforcement.authorization_policy_bulk")
     _safe_import("engine.enforcement.sspr_enforcer")
     _safe_import("engine.enforcement.auth_methods_policy_enforcers")
+    _safe_import("engine.enforcement.authorization_policy_bulk")
+
 
     try:
         import engine.enforcement.sspr_enforcer  # noqa: F401
