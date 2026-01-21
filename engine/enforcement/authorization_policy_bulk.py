@@ -113,12 +113,15 @@ def _run_bulk_once(tenant: dict, tenant_name: str, headers: dict) -> dict:
 
     # 2) PATCH (only if we have at least one enforce control)
     patch_status = 200
+    patch_text = None
     patch_error = None
     if patch_body:
         r1 = _graph("PATCH", headers, AUTHZ_URL, json_body=patch_body, timeout_s=30)
         patch_status = r1.status_code
+        patch_text = (r1.text or "")[:2000]
         if r1.status_code >= 400:
-            patch_error = {"httpStatus": r1.status_code, "body": (r1.text or "")[:2000]}
+            patch_error = {"httpStatus": r1.status_code, "body": patch_text}
+
 
     # 3) GET after (even if PATCH failed; we want evidence)
     r2 = _graph("GET", headers, AUTHZ_URL, timeout_s=30)
@@ -140,9 +143,13 @@ def _run_bulk_once(tenant: dict, tenant_name: str, headers: dict) -> dict:
             details["after"] = {cid: None}
             details["afterReadError"] = {"httpStatus": r2.status_code, "body": (r2.text or "")[:2000]}
 
+        details["applyStatus"] = patch_status
+        if patch_text is not None:
+            details["applyResponseText"] = patch_text
         if patch_error is not None:
             details["applyError"] = patch_error
-            details["appliedPatchBody"] = patch_body
+        details["appliedPatchBody"] = patch_body
+
 
         # Default to report-only style evaluation; the per-control enforcer will map to mode passed in
         ctx["results"][cid] = (
@@ -199,7 +206,16 @@ def _make_per_control_enforcer(control_id: str):
                 return ("COMPLIANT", "ENFORCER_EXECUTED", "Enforce: already compliant (no change needed).", details, int(status))
             if (not compliant_before) and compliant_after:
                 return ("UPDATED", "ENFORCER_EXECUTED", "Enforce: applied AuthorizationPolicy change and verified.", details, int(status))
-            return ("ERROR", "ENFORCER_ERROR", "Enforce: attempted but could not verify desired state.", details, int(status))
+            # If PATCH failed, classify properly (don’t call it a generic error)
+            apply_status = details.get("applyStatus")
+            if isinstance(apply_status, int) and apply_status == 403:
+                return ("NOT_EVALUATED", "AUTH_FORBIDDEN", "Enforce blocked: Graph returned 403 (insufficient privileges).", details, int(status))
+            if isinstance(apply_status, int) and apply_status >= 400:
+                return ("NOT_EVALUATED", "UNSUPPORTED_MODE", f"Enforce blocked: Graph PATCH failed (HTTP {apply_status}).", details, int(status))
+
+            # PATCH succeeded but after-state didn't match -> treat as constrained/not-persisted
+            return ("NOT_EVALUATED", "UNSUPPORTED_MODE", "Enforce attempted but setting did not persist (tenant constraint or policy restriction).", details, int(status))
+
 
         return ("NOT_EVALUATED", "UNSUPPORTED_MODE", f"Unsupported mode for enforcer: {mode}", details, int(status))
 

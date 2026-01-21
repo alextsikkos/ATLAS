@@ -1,0 +1,26 @@
+{
+  "tenant": "example",
+  "controlId": "DefaultUserRoleSecurityGroupsCreationDisabled",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Default user role cannot create security groups",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforce: already compliant (no change needed).",
+  "details": {
+    "before": {
+      "DefaultUserRoleSecurityGroupsCreationDisabled": false
+    },
+    "desired": {
+      "DefaultUserRoleSecurityGroupsCreationDisabled": false
+    },
+    "after": {
+      "DefaultUserRoleSecurityGroupsCreationDisabled": false
+    },
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforce: already compliant (no change needed)."
+  },
+  "status": 200,
+  "durationSeconds": 0.0
+}

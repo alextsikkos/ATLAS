@@ -1,0 +1,26 @@
+{
+  "tenant": "example",
+  "controlId": "GuestInvitesRestrictedToAdminsAndGuestInviters",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Restrict guest invites to admins and guest inviters",
+  "approved": true,
+  "mode": "enforce",
+  "state": "ERROR",
+  "reasonCode": "ENFORCER_ERROR",
+  "reasonDetail": "Enforce: attempted but could not verify desired state.",
+  "details": {
+    "before": {
+      "GuestInvitesRestrictedToAdminsAndGuestInviters": "everyone"
+    },
+    "desired": {
+      "GuestInvitesRestrictedToAdminsAndGuestInviters": "adminsAndGuestInviters"
+    },
+    "after": {
+      "GuestInvitesRestrictedToAdminsAndGuestInviters": "everyone"
+    },
+    "reasonCode": "ENFORCER_ERROR",
+    "reasonDetail": "Enforce: attempted but could not verify desired state."
+  },
+  "status": 200,
+  "durationSeconds": 2.001
+}
