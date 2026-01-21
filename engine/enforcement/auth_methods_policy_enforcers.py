@@ -338,9 +338,67 @@ def _voice_disabled(
         control_id=control_id,
         mode=mode,
     )
+def _software_oath_enabled(
+    *,
+    tenant: dict,
+    tenant_name: str,
+    control: dict,
+    control_id: str,
+    headers: dict,
+    approval: dict | None,
+    mode: str,
+) -> Tuple[str, str, str, dict, int]:
+    return _enforce_auth_method_state(
+        headers=headers,
+        method_id="softwareOath",
+        desired_state="enabled",
+        control_id=control_id,
+        mode=mode,
+    )
+
+
+def _hardware_oath_enabled(
+    *,
+    tenant: dict,
+    tenant_name: str,
+    control: dict,
+    control_id: str,
+    headers: dict,
+    approval: dict | None,
+    mode: str,
+) -> Tuple[str, str, str, dict, int]:
+    return _enforce_auth_method_state(
+        headers=headers,
+        method_id="hardwareOath",
+        desired_state="enabled",
+        control_id=control_id,
+        mode=mode,
+    )
+
+
+def _x509_certificate_disabled(
+    *,
+    tenant: dict,
+    tenant_name: str,
+    control: dict,
+    control_id: str,
+    headers: dict,
+    approval: dict | None,
+    mode: str,
+) -> Tuple[str, str, str, dict, int]:
+    return _enforce_auth_method_state(
+        headers=headers,
+        method_id="x509Certificate",
+        desired_state="disabled",
+        control_id=control_id,
+        mode=mode,
+    )
 
 register("AuthMethodsTemporaryAccessPassHardened", _temporary_access_pass_lifetime_hardened)
 register("AuthMethodsTemporaryAccessPassUsableOnce", _temporary_access_pass_usable_once)
+register("AuthMethodsSoftwareOathEnabled", _software_oath_enabled)
+register("AuthMethodsHardwareOathEnabled", _hardware_oath_enabled)
+register("AuthMethodsX509CertificateDisabled", _x509_certificate_disabled)
 
 register("AuthMethodsMicrosoftAuthenticatorEnabled", _microsoft_authenticator_enabled)
 register("AuthMethodsFido2Enabled", _fido2_enabled)

@@ -164,6 +164,45 @@
     "secureScoreControlIds": [],
     "group": "Entra ID"
   },
+  {
+    "id": "AuthMethodsSoftwareOathEnabled",
+    "name": "Authentication Methods: Software OATH enabled",
+    "tier": 3,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "canCauseLockout": true,
+    "requiresOnboardingDiscussion": true,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
+  {
+    "id": "AuthMethodsHardwareOathEnabled",
+    "name": "Authentication Methods: Hardware OATH enabled",
+    "tier": 3,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "canCauseLockout": true,
+    "requiresOnboardingDiscussion": true,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
+  {
+    "id": "AuthMethodsX509CertificateDisabled",
+    "name": "Authentication Methods: X.509 certificate auth disabled",
+    "tier": 3,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "canCauseLockout": true,
+    "requiresOnboardingDiscussion": true,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
+  },
 
   {
     "id": "BlockLegacyAuthenticationPolicy",
