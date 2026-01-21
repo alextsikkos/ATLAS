@@ -130,7 +130,7 @@
     "requiresOnboardingDiscussion": true,
     "secureScoreControlIds": [],
     "group": "Entra ID"
-  }
+  },
 
   {
     "id": "BlockLegacyAuthenticationPolicy",
