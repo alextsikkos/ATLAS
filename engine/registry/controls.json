@@ -90,7 +90,8 @@
     "canCauseLockout": true, 
     "requiresOnboardingDiscussion": true, 
     "secureScoreControlIds": [], 
-    "group": "Entra ID" },
+    "group": "Entra ID" 
+  },
   { 
     "id": "AuthMethodsVoiceDisabled", 
     "name": "Authentication Methods: Voice call disabled", 
@@ -103,6 +104,19 @@
     "requiresOnboardingDiscussion": true, 
     "secureScoreControlIds": [], 
     "group": "Entra ID" 
+  },
+  {
+    "id": "AuthMethodsTemporaryAccessPassHardened",
+    "name": "Authentication Methods: Temporary Access Pass hardened",
+    "tier": 3,
+    "category": "Identity",
+    "approvalRequired": true,
+    "default_mode": "report-only",
+    "detectOnly": false,
+    "canCauseLockout": true,
+    "requiresOnboardingDiscussion": true,
+    "secureScoreControlIds": [],
+    "group": "Entra ID"
   },
 
   {
