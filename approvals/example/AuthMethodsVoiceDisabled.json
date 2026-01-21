@@ -1,0 +1,7 @@
+{
+  "approved": true,
+  "mode": "enforce",
+  "acknowledgeLockoutRisk": true,
+  "acknowledgeBusinessImpact": true,
+  "onboardingReviewed": true
+}

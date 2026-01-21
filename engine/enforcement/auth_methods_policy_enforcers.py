@@ -127,9 +127,47 @@ def _fido2_enabled(
         control_id=control_id,
         mode=mode,
     )
+def _sms_disabled(
+    *,
+    tenant: dict,
+    tenant_name: str,
+    control: dict,
+    control_id: str,
+    headers: dict,
+    approval: dict | None,
+    mode: str,
+) -> Tuple[str, str, str, dict, int]:
+    return _enforce_auth_method_state(
+        headers=headers,
+        method_id="sms",
+        desired_state="disabled",
+        control_id=control_id,
+        mode=mode,
+    )
+
+
+def _voice_disabled(
+    *,
+    tenant: dict,
+    tenant_name: str,
+    control: dict,
+    control_id: str,
+    headers: dict,
+    approval: dict | None,
+    mode: str,
+) -> Tuple[str, str, str, dict, int]:
+    return _enforce_auth_method_state(
+        headers=headers,
+        method_id="voice",
+        desired_state="disabled",
+        control_id=control_id,
+        mode=mode,
+    )
 
 
 register("AuthMethodsMicrosoftAuthenticatorEnabled", _microsoft_authenticator_enabled)
 register("AuthMethodsFido2Enabled", _fido2_enabled)
+register("AuthMethodsSmsDisabled", _sms_disabled)
+register("AuthMethodsVoiceDisabled", _voice_disabled)
 
 print("[INFO] Loaded auth_methods_policy_enforcers; handlers registered")
