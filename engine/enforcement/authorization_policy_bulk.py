@@ -58,7 +58,8 @@ def _graph(method: str, headers: dict, url: str, json_body: dict | None = None, 
 def _run_bulk_once(tenant: dict, tenant_name: str, headers: dict) -> dict:
     """
     Runs at most once per tenant per run.
-    Stores per-control outcomes in tenant["_authz_bulk"].
+    Stores base (GET-before) evidence in tenant["_authz_bulk"].
+    Per-control PATCH/verify happens in the per-control enforcer (isolated payloads).
     """
     ctx = tenant.setdefault("_authz_bulk", {})
     if ctx.get("ran"):
@@ -68,15 +69,16 @@ def _run_bulk_once(tenant: dict, tenant_name: str, headers: dict) -> dict:
     ctx["results"] = {}  # controlId -> tuple(state, reasonCode, reasonDetail, details, status)
 
     matched = tenant.get("_atlas_matched_controls") or []
-    present_ids = {((c.get("atlasControlId") or c.get("controlId") or "")).strip() for c in matched if isinstance(c, dict)}
-
-    target_ids = list(CONTROL_FIELD_MAP.keys())
-
-    # Nothing to do
+    present_ids = {
+        ((c.get("atlasControlId") or c.get("controlId") or "")).strip()
+        for c in matched
+        if isinstance(c, dict)
+    }
+    target_ids = [cid for cid in CONTROL_FIELD_MAP.keys() if cid in present_ids]
     if not target_ids:
         return ctx
 
-    # Resolve which controls are approved for enforce (file-based approvals)
+    # Determine which controls are approved for enforce (file-based approvals)
     approved_for_enforce: list[str] = []
     approval_payloads: dict[str, dict] = {}
 
@@ -102,70 +104,28 @@ def _run_bulk_once(tenant: dict, tenant_name: str, headers: dict) -> dict:
 
     before = r0.json() or {}
 
-    # Build PATCH payload ONLY for approved enforce controls
-    patch_body: dict[str, Any] = {}
-    desired_by_cid: dict[str, Any] = {}
-
-    for cid in approved_for_enforce:
-        path, desired = CONTROL_FIELD_MAP[cid]
-        _set_path(patch_body, path, desired)
-        desired_by_cid[cid] = desired
-
-    # 2) PATCH (only if we have at least one enforce control)
-    patch_status = 200
-    patch_text = None
-    patch_error = None
-    if patch_body:
-        r1 = _graph("PATCH", headers, AUTHZ_URL, json_body=patch_body, timeout_s=30)
-        patch_status = r1.status_code
-        patch_text = (r1.text or "")[:2000]
-        if r1.status_code >= 400:
-            patch_error = {"httpStatus": r1.status_code, "body": patch_text}
-
-
-    # 3) GET after (even if PATCH failed; we want evidence)
-    r2 = _graph("GET", headers, AUTHZ_URL, timeout_s=30)
-    after = r2.json() if r2.status_code < 400 else None
-
-    # Populate per-control results (report-only or enforce outcomes are decided per-control at call time)
+    # Prepare per-control base evidence (before + desired). No PATCH here.
     for cid in target_ids:
         path, desired = CONTROL_FIELD_MAP[cid]
         cur_before = _get_path(before, path)
-
         details = {
             "before": {cid: cur_before},
             "desired": {cid: desired},
+            "approvedForEnforce": cid in approved_for_enforce,
         }
 
-        if isinstance(after, dict):
-            details["after"] = {cid: _get_path(after, path)}
-        else:
-            details["after"] = {cid: None}
-            details["afterReadError"] = {"httpStatus": r2.status_code, "body": (r2.text or "")[:2000]}
-
-        details["applyStatus"] = patch_status
-        if patch_text is not None:
-            details["applyResponseText"] = patch_text
-        if patch_error is not None:
-            details["applyError"] = patch_error
-        details["appliedPatchBody"] = patch_body
-
-
-        # Default to report-only style evaluation; the per-control enforcer will map to mode passed in
         ctx["results"][cid] = (
             "NOT_EVALUATED",
             "AUTHZPOLICY_BULK_READY",
-            "AuthorizationPolicy bulk context prepared.",
+            "AuthorizationPolicy base context prepared (GET-before cached).",
             details,
-            200 if r2.status_code < 400 else int(r2.status_code),
+            200,
         )
 
     ctx["beforeRaw"] = before
-    ctx["afterRaw"] = after
     ctx["approvedForEnforce"] = approved_for_enforce
-    ctx["patchAttempted"] = bool(patch_body)
-    ctx["patchStatus"] = patch_status
     return ctx
+
 
 
 def _make_per_control_enforcer(control_id: str):
@@ -201,23 +161,47 @@ def _make_per_control_enforcer(control_id: str):
             return ("DRIFTED", "REPORT_ONLY_EVALUATED", "Report-only: drift detected (no changes applied).", details, int(status))
 
         if mode_eff == "enforce":
-            # approval gating is already enforced by main.py before calling registry enforcers :contentReference[oaicite:3]{index=3}
-            if compliant_before and compliant_after:
+            # approval gating is enforced by main.py before calling registry enforcers
+
+            if compliant_before:
                 return ("COMPLIANT", "ENFORCER_EXECUTED", "Enforce: already compliant (no change needed).", details, int(status))
-            if (not compliant_before) and compliant_after:
-                return ("UPDATED", "ENFORCER_EXECUTED", "Enforce: applied AuthorizationPolicy change and verified.", details, int(status))
-            # If PATCH failed, classify properly (don’t call it a generic error)
-            apply_status = details.get("applyStatus")
-            if isinstance(apply_status, int) and apply_status == 403:
-                return ("NOT_EVALUATED", "AUTH_FORBIDDEN", "Enforce blocked: Graph returned 403 (insufficient privileges).", details, int(status))
-            if isinstance(apply_status, int) and apply_status >= 400:
-                return ("NOT_EVALUATED", "UNSUPPORTED_MODE", f"Enforce blocked: Graph PATCH failed (HTTP {apply_status}).", details, int(status))
 
-            # PATCH succeeded but after-state didn't match -> treat as constrained/not-persisted
-            return ("NOT_EVALUATED", "UNSUPPORTED_MODE", "Enforce attempted but setting did not persist (tenant constraint or policy restriction).", details, int(status))
+            # PATCH ONLY THIS CONTROL'S FIELD
+            path, desired = CONTROL_FIELD_MAP[control_id]
+            patch_body: dict[str, Any] = {}
+            _set_path(patch_body, path, desired)
 
+            r1 = _graph("PATCH", headers, AUTHZ_URL, json_body=patch_body, timeout_s=30)
+            details["applyStatus"] = int(r1.status_code)
+            details["applyResponseText"] = (r1.text or "")[:2000]
+            details["appliedPatchBody"] = patch_body
 
-        return ("NOT_EVALUATED", "UNSUPPORTED_MODE", f"Unsupported mode for enforcer: {mode}", details, int(status))
+            if r1.status_code == 403:
+                return ("NOT_EVALUATED", "AUTH_FORBIDDEN", "Enforce blocked: Graph returned 403 (insufficient privileges).", details, 403)
+
+            if r1.status_code >= 400:
+                details["applyError"] = {"httpStatus": r1.status_code, "body": (r1.text or "")[:2000]}
+                return ("NOT_EVALUATED", "UNSUPPORTED_MODE", f"Enforce blocked: Graph PATCH failed (HTTP {r1.status_code}).", details, int(r1.status_code))
+
+            # GET after (verify)
+            r2 = _graph("GET", headers, AUTHZ_URL, timeout_s=30)
+            details["afterReadStatus"] = int(r2.status_code)
+
+            after = r2.json() if r2.status_code < 400 else None
+            if isinstance(after, dict):
+                after_val = _get_path(after, path)
+                details["after"] = {control_id: after_val}
+            else:
+                details["after"] = {control_id: None}
+                details["afterReadError"] = {"httpStatus": r2.status_code, "body": (r2.text or "")[:2000]}
+
+            compliant_after = (details.get("after") or {}).get(control_id) == desired
+
+            if compliant_after:
+                return ("UPDATED", "ENFORCER_EXECUTED", "Enforce: applied AuthorizationPolicy change and verified.", details, int(r2.status_code) if r2.status_code else int(status))
+
+            # PATCH succeeded but after-state didn't match -> tenant constraint / not persisted
+            return ("NOT_EVALUATED", "UNSUPPORTED_MODE", "Enforce attempted but setting did not persist (tenant constraint or policy restriction).", details, int(r2.status_code) if r2.status_code else int(status))
 
     return _enforcer
 

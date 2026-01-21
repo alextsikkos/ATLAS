@@ -1,0 +1,39 @@
+{
+  "tenant": "example",
+  "controlId": "DefaultUserRoleAppsCreationDisabled",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Default user role cannot create apps",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforce: already compliant (no change needed).",
+  "details": {
+    "before": {
+      "DefaultUserRoleAppsCreationDisabled": false
+    },
+    "desired": {
+      "DefaultUserRoleAppsCreationDisabled": false
+    },
+    "after": {
+      "DefaultUserRoleAppsCreationDisabled": false
+    },
+    "applyStatus": 204,
+    "applyResponseText": "",
+    "appliedPatchBody": {
+      "allowInvitesFrom": "adminsAndGuestInviters",
+      "allowEmailVerifiedUsersToJoinOrganization": false,
+      "allowedToSignUpEmailBasedSubscriptions": false,
+      "blockMsolPowerShell": true,
+      "defaultUserRolePermissions": {
+        "allowedToCreateApps": false,
+        "allowedToCreateSecurityGroups": false,
+        "allowedToCreateTenants": false
+      }
+    },
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforce: already compliant (no change needed)."
+  },
+  "status": 200,
+  "durationSeconds": 0.0
+}

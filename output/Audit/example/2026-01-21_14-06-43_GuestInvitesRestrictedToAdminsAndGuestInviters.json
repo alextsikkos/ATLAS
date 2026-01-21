@@ -1,0 +1,39 @@
+{
+  "tenant": "example",
+  "controlId": "GuestInvitesRestrictedToAdminsAndGuestInviters",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Restrict guest invites to admins and guest inviters",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "UNSUPPORTED_MODE",
+  "reasonDetail": "Enforce attempted but setting did not persist (tenant constraint or policy restriction).",
+  "details": {
+    "before": {
+      "GuestInvitesRestrictedToAdminsAndGuestInviters": "everyone"
+    },
+    "desired": {
+      "GuestInvitesRestrictedToAdminsAndGuestInviters": "adminsAndGuestInviters"
+    },
+    "after": {
+      "GuestInvitesRestrictedToAdminsAndGuestInviters": "everyone"
+    },
+    "applyStatus": 204,
+    "applyResponseText": "",
+    "appliedPatchBody": {
+      "allowInvitesFrom": "adminsAndGuestInviters",
+      "allowEmailVerifiedUsersToJoinOrganization": false,
+      "allowedToSignUpEmailBasedSubscriptions": false,
+      "blockMsolPowerShell": true,
+      "defaultUserRolePermissions": {
+        "allowedToCreateApps": false,
+        "allowedToCreateSecurityGroups": false,
+        "allowedToCreateTenants": false
+      }
+    },
+    "reasonCode": "UNSUPPORTED_MODE",
+    "reasonDetail": "Enforce attempted but setting did not persist (tenant constraint or policy restriction)."
+  },
+  "status": 200,
+  "durationSeconds": 1.354
+}

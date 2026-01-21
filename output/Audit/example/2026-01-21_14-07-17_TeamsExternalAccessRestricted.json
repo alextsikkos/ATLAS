@@ -1,0 +1,110 @@
+{
+  "tenant": "example",
+  "controlId": "TeamsExternalAccessRestricted",
+  "action": "detect_only",
+  "state": "DRIFTED",
+  "displayName": "Teams: External access restricted (Secure Score)",
+  "mode": "report-only",
+  "status": 200,
+  "scorePct": null,
+  "missingSecureScoreControlIds": [
+    "teams_external_access_restricted"
+  ],
+  "secureScoreControlId": "TeamsExternalAccessRestricted",
+  "title": "Teams: External access restricted (Secure Score)",
+  "implementationStatus": "",
+  "actionUrl": "",
+  "details": {
+    "reasonCode": "FALLBACK_DETECTOR_EVALUATED",
+    "reasonDetail": "Secure Score not exposed; evaluated via Teams tenant settings (Teams PowerShell)"
+  },
+  "fallbackDetector": {
+    "name": "teams_tenant_settings",
+    "result": {
+      "ok": true,
+      "tenant": {
+        "Federation": {
+          "AllowedDomains": {},
+          "BlockedDomains": [],
+          "AllowedTrialTenantDomains": [],
+          "AllowFederatedUsers": true,
+          "AllowTeamsSms": true,
+          "AllowTeamsConsumer": true,
+          "AllowTeamsConsumerInbound": true,
+          "TreatDiscoveredPartnersAsUnverified": false,
+          "SharedSipAddressSpace": false,
+          "RestrictTeamsConsumerToExternalUserProfiles": false,
+          "BlockAllSubdomains": false,
+          "ExternalAccessWithTrialTenants": "Blocked",
+          "DomainBlockingForMDOAdminsInTeams": "Disabled",
+          "SecurityTeamAllowBlockListDelegation": "Disabled",
+          "Key": {
+            "ScopeClass": "Global",
+            "SchemaId": {
+              "XName": {
+                "name": "{urn:schema:Microsoft.Rtc.Management.Settings.Edge.2008}TenantFederationSettings"
+              }
+            },
+            "AuthorityId": {
+              "Class": "Tenant",
+              "InstanceId": "d9ff2399-92ca-4e0c-87d0-5769459f2755",
+              "XmlRoot": {
+                "name": "{urn:schema:Microsoft.Rtc.Management.ScopeFramework.2008}AuthorityId"
+              }
+            },
+            "DefaultXml": {
+              "SchemaId": {
+                "XName": {
+                  "name": "{urn:schema:Microsoft.Rtc.Management.Settings.Edge.2008}TenantFederationSettings"
+                }
+              },
+              "Data": {
+                "TenantFederationSettings": {
+                  "@xmlns": "urn:schema:Microsoft.Rtc.Management.Settings.Edge.2008",
+                  "AllowedDomains": {
+                    "AllowAllKnownDomains": null
+                  },
+                  "BlockedDomains": null,
+                  "AllowedTrialTenantDomains": null
+                }
+              },
+              "ConfigObject": null,
+              "Signature": "00000000-0000-0000-0000-000000000000",
+              "IsModified": true
+            },
+            "XmlRoot": {
+              "name": "{urn:schema:Microsoft.Rtc.Management.ScopeFramework.2008}AnchoredXmlKey"
+            }
+          },
+          "Identity": "Global",
+          "ConfigMetadata": {
+            "Authority": "Tenant"
+          },
+          "ConfigId": "Global"
+        },
+        "ExternalAccessPolicy": {
+          "Identity": "Global",
+          "AllowedExternalDomains": [],
+          "BlockedExternalDomains": [],
+          "Description": null,
+          "EnableFederationAccess": true,
+          "EnableXmppAccess": false,
+          "EnablePublicCloudAudioVideoAccess": true,
+          "EnableTeamsSmsAccess": true,
+          "EnableOutsideAccess": true,
+          "EnableAcsFederationAccess": true,
+          "EnableTeamsConsumerAccess": true,
+          "EnableTeamsConsumerInbound": true,
+          "RestrictTeamsConsumerAccessToExternalUserProfiles": false,
+          "FederatedBilateralChats": false,
+          "CommunicationWithExternalOrgs": 0
+        },
+        "ExternalAccessPolicyError": null
+      }
+    }
+  },
+  "reason": "detect-only registry control (no enforcement implemented)",
+  "reasonCode": "FALLBACK_DETECTOR_EVALUATED",
+  "reasonDetail": "Secure Score not exposed; evaluated via Teams tenant settings (Teams PowerShell)",
+  "durationSeconds": 5.522
+}
