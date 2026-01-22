@@ -3462,8 +3462,11 @@ def main():
                             except Exception:
                                 pass
                         else:
-                            # Profile exists but no finding returned — treat as 0 (conservative)
-                            scores.append(0.0)
+                            # No finding returned for this Secure Score controlId in this tenant.
+                            # This is missing signal, not drift.
+                            missing_ids.append(key)
+                            continue
+
 
 
                     # If *all* linked IDs are missing, we cannot evaluate this control in this tenant
