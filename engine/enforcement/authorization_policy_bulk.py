@@ -22,8 +22,8 @@ CONTROL_FIELD_MAP = {
     "DefaultUserRoleAppsCreationDisabled": ("defaultUserRolePermissions.allowedToCreateApps", False),
     "DefaultUserRoleSecurityGroupsCreationDisabled": ("defaultUserRolePermissions.allowedToCreateSecurityGroups", False),
     "DefaultUserRoleTenantCreationDisabled": ("defaultUserRolePermissions.allowedToCreateTenants", False),
-    "DefaultUserRoleReadOtherUsersDisabled": ("defaultUserRolePermissions.allowedToReadOtherUsers", True),
-    "DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled": ("defaultUserRolePermissions.allowedToReadBitlockerKeysForOwnedDevice", True),
+    "DefaultUserRoleReadOtherUsersDisabled": ("defaultUserRolePermissions.allowedToReadOtherUsers", False),
+    "DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled": ("defaultUserRolePermissions.allowedToReadBitlockerKeysForOwnedDevice", False),
 
 }
 
