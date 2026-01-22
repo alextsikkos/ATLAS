@@ -318,6 +318,7 @@ CAPABILITY_CUSTOM_DETECTORS = {
     "IntegratedAppsRestricted",
     "ThirdPartyAppsRestricted",
     "AuthMethodsSoftwareOathEnabled",
+    "Tier3AuthorizationPolicyProbe",
     "AuthMethodsHardwareOathEnabled",
     "AuthMethodsX509CertificateDisabled",
     "AdminOwnedAppsRestricted",
@@ -2309,7 +2310,52 @@ def main():
                 print(f"ENFORCER: {control_id} | state={state} | {reason_code}")
                 print(f"Audit saved: {audit_path}")
                 continue
+        elif control_id == "Tier3AuthorizationPolicyProbe":
+            import requests
+            mode_eff = (approval.get("mode") if approval else control.get("default_mode", "detect-only"))
+            url = "https://graph.microsoft.com/v1.0/policies/authorizationPolicy"
 
+            r = requests.get(url, headers=headers, timeout=30)
+            if r.status_code >= 400:
+                return_not_evaluated(
+                    write_audit_event=write_audit_event,
+                    tenant_name=tenant_name,
+                    control_id=control_id,
+                    control=control,
+                    mode=mode_eff,
+                    approval=approval,
+                    reason=f"Graph read failed: {r.status_code}",
+                    details={"url": url, "errorText": r.text[:500]},
+                )
+                continue
+
+            body = r.json() or {}
+            details = {
+                "authorizationPolicy": {
+                    "allowEmailVerifiedUsersToJoinOrganization": body.get("allowEmailVerifiedUsersToJoinOrganization"),
+                    "allowInvitesFrom": body.get("allowInvitesFrom"),
+                    "allowedToSignUpEmailBasedSubscriptions": body.get("allowedToSignUpEmailBasedSubscriptions"),
+                    "defaultUserRolePermissions": body.get("defaultUserRolePermissions"),
+                }
+            }
+
+            audit_path = _write_audit_event_timed(tenant_name, {
+                "tenant": tenant_name,
+                "controlId": control_id,
+                "action": "detect",
+                "displayName": control.get("name", control_id),
+                "approved": bool(approval),
+                "mode": mode_eff,
+                "state": "COMPLIANT",
+                "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+                "reasonDetail": "Authorization policy probe (read-only)",
+                "details": details,
+                "status": 200,
+            })
+            print(f"DETECT-ONLY: {control_id} | state=COMPLIANT")
+            print(f"Audit saved: {audit_path}")
+            continue
+            
         elif control_id == "CAAllUsersBlockLegacyAuth":
             from engine.enforcement.policies.ca_all_users_block_legacy_auth import (
                 DISPLAY_NAME as DISPLAY,

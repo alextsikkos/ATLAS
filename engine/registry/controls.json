@@ -1347,5 +1347,15 @@
   "detectOnly": false,
   "gapOnly": false,
   "secureScoreControlIds": []
+},
+{
+  "id": "Tier3AuthorizationPolicyProbe",
+  "name": "Tier3 - Authorization Policy Probe",
+  "tier": 3,
+  "service": "Entra",
+  "implementation_mode": "CUSTOM_DETECTOR_IMPLEMENTED",
+  "default_mode": "detect-only",
+  "description": "Probe Entra authorizationPolicy (read-only) and record key tenant-wide authorization settings."
 }
+
 ]
