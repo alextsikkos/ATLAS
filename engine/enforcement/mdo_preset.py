@@ -4,7 +4,6 @@ import json
 import subprocess
 from typing import Any, Dict, Tuple
 from engine.detectors import mdo as mdo_det
-from engine.enforcement.registry import register
 from engine.approvals.reader import is_control_approved
 
 
@@ -279,41 +278,3 @@ Disconnect-ExchangeOnline -Confirm:$false
         return "UPDATED", result
 
     return "COMPLIANT", result
-CONTROL_ID = "MDOPresetSecurityPolicies"
-
-@register(CONTROL_ID)
-def enforce_mdo_preset_security_policies(ctx: dict, tenant_name: str, approvals_cache: dict):
-    approval = is_control_approved(tenant_name, CONTROL_ID, approvals_cache) or {}
-    mode = (approval.get("mode") or "report-only").lower()
-
-    # Hard gate: never enforce without explicit approval + enforce mode
-    if not approval.get("approved") or mode != "enforce":
-        return (
-            "NOT_EVALUATED",
-            "APPROVAL_REQUIRED",
-            f"{CONTROL_ID} requires an approval file with approved=true and mode=enforce.",
-            {"approved": bool(approval.get("approved")), "mode": mode},
-            0,
-        )
-
-    # Optional: allow approval JSON to specify preset name (defaults inside your existing code)
-    preset_name = approval.get("preset") or approval.get("presetName") or "Standard"
-
-    try:
-        # This should call your existing implementation (adjust the function name if yours differs)
-        result = apply_mdo_preset(ctx, preset_name=preset_name)
-
-        # Expecting result like {"state": "...", "details": {...}} or similar
-        if isinstance(result, dict):
-            state = result.get("state") or "NOT_EVALUATED"
-            details = result.get("details") or {}
-            return (state, "", "", details, 0)
-
-        # Fallback if your function returns a tuple
-        if isinstance(result, tuple) and len(result) == 2:
-            return (result[0], "", "", result[1] or {}, 0)
-
-        return ("NOT_EVALUATED", "UNEXPECTED_RETURN", "mdo_preset returned an unexpected type.", {"raw": str(result)}, 0)
-
-    except Exception as e:
-        return ("NOT_EVALUATED", "ERROR", f"Failed to enforce {CONTROL_ID}: {e}", {"exception": str(e)}, 0)
