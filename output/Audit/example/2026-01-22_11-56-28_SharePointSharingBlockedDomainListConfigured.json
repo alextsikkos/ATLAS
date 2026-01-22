@@ -1,0 +1,59 @@
+{
+  "tenant": "example",
+  "controlId": "SharePointSharingBlockedDomainListConfigured",
+  "action": "detect_report_only",
+  "displayName": "SharePoint: Blocked domain list configured (when block-list mode is enabled)",
+  "approved": false,
+  "mode": "detect-only",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "DETECT_ONLY_EVALUATED",
+  "reasonDetail": "Evaluated via SharePoint tenant settings (SPO PowerShell)",
+  "details": {
+    "adminUrl": "https://6twcdy-admin.sharepoint.com",
+    "batchDesiredAll": {
+      "PreventExternalUsersFromResharing": true,
+      "DefaultSharingLinkType": 2,
+      "DefaultLinkPermission": 1,
+      "RequireAnonymousLinksExpireInDays": 30,
+      "SharingDomainRestrictionMode": "AllowList",
+      "SharingAllowedDomainList": "partner.com vendor.com"
+    },
+    "missingDesiredConfigByControl": {
+      "SharePointIdleSessionTimeout": [
+        "UNSUPPORTED: Set-SPOTenant does not support IdleSessionSignOut* parameters"
+      ]
+    },
+    "before": {
+      "SharePointSharingBlockedDomainListConfigured": {
+        "SharingDomainRestrictionMode": 1,
+        "SharingBlockedDomainList": null
+      }
+    },
+    "desired": {
+      "SharePointSharingBlockedDomainListConfigured": {
+        "SharingDomainRestrictionMode": "AllowList",
+        "SharingBlockedDomainList": null
+      }
+    },
+    "after": {
+      "SharePointSharingBlockedDomainListConfigured": {
+        "SharingDomainRestrictionMode": 1,
+        "SharingBlockedDomainList": null
+      }
+    },
+    "evaluate": {
+      "SharingDomainRestrictionMode": 1,
+      "SharingBlockedDomainList": null,
+      "missingKeys": [
+        "SharingBlockedDomainList"
+      ],
+      "missingDesiredConfig": [
+        "tenant.spoDomainRestriction.SharingBlockedDomainList"
+      ]
+    },
+    "reasonCode": "DETECT_ONLY_EVALUATED",
+    "reasonDetail": "Evaluated via SharePoint tenant settings (SPO PowerShell)"
+  },
+  "status": 200,
+  "durationSeconds": 0.0
+}
