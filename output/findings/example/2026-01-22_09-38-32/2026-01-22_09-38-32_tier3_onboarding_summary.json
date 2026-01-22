@@ -1,0 +1,185 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-22_09-38-32",
+  "tier3Summary": [
+    {
+      "controlId": "AuthMethodsFido2Enabled",
+      "name": "Authentication Methods: FIDO2 security keys enabled",
+      "mode": "enforce",
+      "canCauseLockout": false,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "AuthMethodsSmsDisabled",
+      "name": "Authentication Methods: SMS disabled",
+      "mode": "enforce",
+      "canCauseLockout": true,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "AuthMethodsVoiceDisabled",
+      "name": "Authentication Methods: Voice call disabled",
+      "mode": "enforce",
+      "canCauseLockout": true,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "AuthMethodsTemporaryAccessPassHardened",
+      "name": "Authentication Methods: Temporary Access Pass hardened",
+      "mode": "enforce",
+      "canCauseLockout": true,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "AuthMethodsTemporaryAccessPassUsableOnce",
+      "name": "Authentication Methods: Temporary Access Pass usable once",
+      "mode": "enforce",
+      "canCauseLockout": true,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "Tier3PerUserMfaReadiness",
+      "name": "Tier 3: Per-user MFA readiness",
+      "mode": "report-only",
+      "canCauseLockout": false,
+      "requiresOnboardingDiscussion": false,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "Tier3AuthMethodsCatalog",
+      "name": "Tier 3: Auth methods catalog",
+      "mode": "report-only",
+      "canCauseLockout": false,
+      "requiresOnboardingDiscussion": false,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "Tier3AuthMethodsProbe",
+      "name": "Tier 3: Auth methods probe",
+      "mode": "report-only",
+      "canCauseLockout": false,
+      "requiresOnboardingDiscussion": false,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "AuthMethodsSoftwareOathEnabled",
+      "name": "Authentication Methods: Software OATH enabled",
+      "mode": "enforce",
+      "canCauseLockout": true,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "AuthMethodsHardwareOathEnabled",
+      "name": "Authentication Methods: Hardware OATH enabled",
+      "mode": "enforce",
+      "canCauseLockout": true,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "AuthMethodsX509CertificateDisabled",
+      "name": "Authentication Methods: X.509 certificate auth disabled",
+      "mode": "enforce",
+      "canCauseLockout": true,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "CAAdminSignInFrequencySessionTimeout",
+      "name": "Conditional Access: Admin sign-in frequency set + browser sessions not persistent (Secure Score)",
+      "mode": "enforce",
+      "canCauseLockout": true,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "BLOCKED",
+      "reason": "missing required acknowledgements",
+      "missing": [
+        "acknowledgeBusinessImpact:true",
+        "onboardingReviewed:true"
+      ]
+    },
+    {
+      "controlId": "CAAdminPhishingResistantMFA",
+      "name": "Conditional Access: Require phishing-resistant MFA strength for administrators (Secure Score)",
+      "mode": "enforce",
+      "canCauseLockout": true,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "BLOCKED",
+      "reason": "missing required acknowledgements",
+      "missing": [
+        "acknowledgeBusinessImpact:true",
+        "onboardingReviewed:true"
+      ]
+    },
+    {
+      "controlId": "Tier3AuthMethodsReadiness",
+      "name": "Tier 3 Readiness: Phishing-resistant MFA methods available (FIDO2 / WHfB) + TAP bootstrap",
+      "mode": "detect-only",
+      "canCauseLockout": false,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "COMPLIANT",
+      "reason": "READY",
+      "missing": [],
+      "methodsSummary": "FIDO2=enabled, WHfB=unknown, TAP=enabled"
+    },
+    {
+      "controlId": "Tier3BreakGlassReadiness",
+      "name": "Tier 3 Readiness: Break-glass accounts present and safe",
+      "mode": "detect-only",
+      "canCauseLockout": false,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "DRIFTED",
+      "reason": "NOT_READY",
+      "missing": [],
+      "breakGlassSummary": "totalMembers=2, enabledMembers=0",
+      "breakGlassReason": "Break-glass group should contain at least two enabled user accounts"
+    },
+    {
+      "controlId": "PhishingResistantMfaStrengthGap",
+      "name": "Entra ID: Phishing-resistant MFA strength required for admins (Secure Score gap only)",
+      "mode": "detect-only",
+      "canCauseLockout": false,
+      "requiresOnboardingDiscussion": true,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    },
+    {
+      "controlId": "Tier3AuthorizationPolicyProbe",
+      "name": "Tier3 - Authorization Policy Probe",
+      "mode": "detect-only",
+      "canCauseLockout": false,
+      "requiresOnboardingDiscussion": false,
+      "outcome": "NOT_BLOCKED",
+      "reason": null,
+      "missing": []
+    }
+  ]
+}
