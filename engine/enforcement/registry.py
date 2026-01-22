@@ -34,6 +34,7 @@ def get_enforcer(control_id: str) -> Optional[EnforcerFn]:
     _safe_import("engine.enforcement.sspr_enforcer")
     _safe_import("engine.enforcement.auth_methods_policy_enforcers")
     _safe_import("engine.enforcement.ca_enforcers")
+    _safe_import("engine.enforcement.exo_remote_domain_enforcers")
 
     # (keep any other existing _safe_import lines you already have)
 
