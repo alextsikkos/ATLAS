@@ -1225,15 +1225,20 @@ def main():
                     if bg_ready != "READY":
                         next_steps.append("Fix break-glass readiness: ensure the break-glass group contains at least two enabled user accounts before enforcing sign-in frequency/session controls for admins.")
                 return_not_evaluated(
-                    tenant_name, control_id, control, mode, approval,
-                    "Tier 3 control not enforced: readiness prerequisites not met",
-                    {
+                    write_audit_event=_write_audit_event_timed,
+                    tenant_name=tenant_name,
+                    control_id=control_id,
+                    control=control,
+                    mode=mode,
+                    approval=approval,
+                    reason="Tier 3 control not enforced: readiness prerequisites not met",
+                    details={
                         "missingReadiness": missing_ready,
                         "readiness": tier3_readiness,
                         "nextSteps": next_steps
-                    }
-
+                    },
                 )
+
                 continue
 
         if detect_only:
@@ -1268,10 +1273,16 @@ def main():
             # Enforce gating remains the same: if mode is enforce but no approval, block.
             if mode_eff == "enforce" and not approval:
                 return_not_evaluated(
-                    tenant_name, control_id, control, mode_eff, approval,
-                    "Enforcement blocked: missing approval file",
-                    {"reasonCode": "APPROVAL_REQUIRED", "reasonDetail": "No approvals/<tenant>/<control>.json present"}
+                    write_audit_event=_write_audit_event_timed,
+                    tenant_name=tenant_name,
+                    control_id=control_id,
+                    control=control,
+                    mode=mode_eff,
+                    approval=approval,
+                    reason="Enforcement blocked: missing approval file",
+                    details={"reasonCode": "APPROVAL_REQUIRED", "reasonDetail": "No approvals/<tenant>/<control>.json present"},
                 )
+
                 continue
             print(f"[DEBUG] registry approval resolved: control={control_id} approved={bool(approval)} mode_eff={mode_eff}")
 
