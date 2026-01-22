@@ -1,0 +1,35 @@
+{
+  "tenant": "example",
+  "controlId": "DefaultUserRoleReadOtherUsersDisabled",
+  "action": "ensure_applied",
+  "displayName": "Default user role cannot read other users",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "UNSUPPORTED_MODE",
+  "reasonDetail": "Enforce attempted but setting did not persist (tenant constraint or policy restriction).",
+  "details": {
+    "before": {
+      "DefaultUserRoleReadOtherUsersDisabled": true
+    },
+    "desired": {
+      "DefaultUserRoleReadOtherUsersDisabled": false
+    },
+    "approvedForEnforce": true,
+    "applyStatus": 204,
+    "applyResponseText": "",
+    "appliedPatchBody": {
+      "defaultUserRolePermissions": {
+        "allowedToReadOtherUsers": false
+      }
+    },
+    "afterReadStatus": 200,
+    "after": {
+      "DefaultUserRoleReadOtherUsersDisabled": true
+    },
+    "reasonCode": "UNSUPPORTED_MODE",
+    "reasonDetail": "Enforce attempted but setting did not persist (tenant constraint or policy restriction)."
+  },
+  "status": 200,
+  "durationSeconds": 0.929
+}

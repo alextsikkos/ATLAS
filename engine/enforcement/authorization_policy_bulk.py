@@ -24,6 +24,10 @@ CONTROL_FIELD_MAP = {
     "DefaultUserRoleTenantCreationDisabled": ("defaultUserRolePermissions.allowedToCreateTenants", False),
     "DefaultUserRoleReadOtherUsersDisabled": ("defaultUserRolePermissions.allowedToReadOtherUsers", False),
     "DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled": ("defaultUserRolePermissions.allowedToReadBitlockerKeysForOwnedDevice", False),
+    "DisableUserConsentToApps": (
+        "defaultUserRolePermissions.permissionGrantPoliciesAssigned",
+        ["ManagePermissionGrantsForSelf.microsoft-user-default-recommended"],
+    ),
 
 }
 
