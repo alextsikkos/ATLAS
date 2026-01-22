@@ -105,10 +105,31 @@ def tier3_requires_acknowledgements(control: dict) -> bool:
 def missing_tier3_ack_fields(approval: dict | None) -> list[str]:
     """
     Keep this aligned with your current expected ack fields.
+
+    Backwards-compatible:
+    - Accepts top-level keys (current format)
+    - Also accepts nested approval["acknowledgements"][key] (common alternate format)
     """
-    missing = []
-    if not approval or approval.get("acknowledgeBusinessImpact") is not True:
+    missing: list[str] = []
+
+    acks = {}
+    if isinstance(approval, dict):
+        acks = approval.get("acknowledgements") or {}
+        if not isinstance(acks, dict):
+            acks = {}
+
+    def _ack_true(key: str) -> bool:
+        if not isinstance(approval, dict):
+            return False
+        if approval.get(key) is True:
+            return True
+        if acks.get(key) is True:
+            return True
+        return False
+
+    if not _ack_true("acknowledgeBusinessImpact"):
         missing.append("acknowledgeBusinessImpact:true")
-    if not approval or approval.get("onboardingReviewed") is not True:
+    if not _ack_true("onboardingReviewed"):
         missing.append("onboardingReviewed:true")
+
     return missing

@@ -181,7 +181,7 @@ def detect_tier3_break_glass_readiness(tenant: dict):
         }
 
     # Get group members
-    members_url = f"https://graph.microsoft.com/v1.0/groups/{group_id}/members"
+    members_url = f"https://graph.microsoft.com/v1.0/groups/{group_id}/members/microsoft.graph.user?$select=id,displayName,userPrincipalName,accountEnabled"
     m = requests.get(members_url, headers=headers, timeout=30)
     if m.status_code >= 300:
         return "ERROR", {
