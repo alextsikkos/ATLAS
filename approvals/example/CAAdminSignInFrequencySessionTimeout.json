@@ -4,5 +4,7 @@
   "approvedOn": "2026-01-03",
   "mode": "enforce",
   "acknowledgeLockoutRisk": true,
+  "acknowledgeBusinessImpact": true,
+  "onboardingReviewed": true,
   "notes": "Approved for initial rollout in report-only (no policy creation/updates)."
 }
