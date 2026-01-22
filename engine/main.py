@@ -5869,6 +5869,19 @@ def main():
                 # Detect-only must route to evaluation/reporting path and must not require a handler
                 detect_only = (mode == "detect-only")
 
+                # If Secure Score is missing for this control, that's missing signal, not drift.
+                if (details or {}).get("reasonCode") == "SECURE_SCORE_ID_MISSING":
+                    return_not_evaluated(
+                        write_audit_event=_write_audit_event_timed,
+                        tenant_name=tenant_name,
+                        control_id=control_id,
+                        control=control,
+                        mode=mode,
+                        approval=approval,
+                        reason="Secure Score controlId referenced by ATLAS but missing from this tenant's controlProfiles",
+                        details=details,
+                    )
+                    continue
 
                 audit_path = _write_audit_event_timed(
                     tenant_name,
