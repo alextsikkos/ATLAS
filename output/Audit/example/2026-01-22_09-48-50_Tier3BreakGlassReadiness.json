@@ -1,0 +1,21 @@
+{
+  "tenant": "example",
+  "controlId": "Tier3BreakGlassReadiness",
+  "action": "detect_only",
+  "state": "DRIFTED",
+  "displayName": "Tier 3 Readiness: Break-glass accounts present and safe",
+  "mode": "detect-only",
+  "status": 200,
+  "details": {
+    "groupId": "b71bc79f-f89b-45ad-b11f-a839cf2e9829",
+    "totalMembers": 2,
+    "enabledMembers": [],
+    "reason": "Break-glass group should contain at least two enabled user accounts",
+    "reasonCode": "TIER3_EVALUATED",
+    "reasonDetail": "Tier3 (additive) evaluation completed."
+  },
+  "reason": "Tier 3 break-glass readiness detector",
+  "reasonCode": "TIER3_EVALUATED",
+  "reasonDetail": "Tier3 (additive) evaluation completed.",
+  "durationSeconds": 0.744
+}
