@@ -1,0 +1,28 @@
+{
+  "tenant": "example",
+  "controlId": "CAAdminSignInFrequencySessionTimeout",
+  "action": "tier3_gate_blocked",
+  "state": "NOT_EVALUATED",
+  "displayName": "Conditional Access: Admin sign-in frequency set + browser sessions not persistent (Secure Score)",
+  "approved": true,
+  "mode": "enforce",
+  "status": 409,
+  "reason": "Tier 3 control not enforced: readiness prerequisites not met",
+  "details": {
+    "missingReadiness": [
+      "BreakGlass:NOT_READY"
+    ],
+    "readiness": {
+      "authMethods": null,
+      "breakGlass": "NOT_READY"
+    },
+    "nextSteps": [
+      "Fix break-glass readiness: ensure the break-glass group contains at least two enabled user accounts before enforcing sign-in frequency/session controls for admins."
+    ],
+    "reasonCode": "TIER3_BLOCKED",
+    "reasonDetail": "Tier 3 control not enforced: readiness prerequisites not met"
+  },
+  "reasonCode": "TIER3_BLOCKED",
+  "reasonDetail": "Tier 3 control not enforced: readiness prerequisites not met",
+  "durationSeconds": 0.72
+}

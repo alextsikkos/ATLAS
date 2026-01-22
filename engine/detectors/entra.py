@@ -194,13 +194,13 @@ def detect_tier3_break_glass_readiness(tenant: dict):
 
     enabled_members = []
     for user in members:
-        if user.get("@odata.type") == "#microsoft.graph.user":
-            if user.get("accountEnabled") is True:
-                enabled_members.append({
-                    "id": user.get("id"),
-                    "displayName": user.get("displayName"),
-                    "userPrincipalName": user.get("userPrincipalName"),
-                })
+        if user.get("accountEnabled") is True:
+            enabled_members.append({
+                "id": user.get("id"),
+                "displayName": user.get("displayName"),
+                "userPrincipalName": user.get("userPrincipalName"),
+            })
+
 
     details = {
         "groupId": group_id,
