@@ -5904,6 +5904,24 @@ def main():
                         "reason": "detect-only registry control (no enforcement implemented)",
                     }, reason_code, reason_detail)
                 )
+                # If Secure Score is missing for this control, that's missing signal, not drift.
+                if reason_code == "SECURE_SCORE_ID_MISSING":
+                    return_not_evaluated(
+                        write_audit_event=_write_audit_event_timed,
+                        tenant_name=tenant_name,
+                        control_id=control_id,
+                        control=control,
+                        mode=mode,
+                        approval=approval,
+                        reason=reason_detail or "Secure Score controlId referenced by ATLAS but missing from this tenant's controlProfiles",
+                        details={
+                            "reasonCode": reason_code,
+                            "reasonDetail": reason_detail,
+                            "missingSecureScoreControlIds": (f or {}).get("missingSecureScoreControlIds"),
+                            "secureScoreControlId": (f or {}).get("secureScoreControlId"),
+                        },
+                    )
+                    continue
 
                 print(f"DETECT-ONLY: {control_id} | state={state} | scorePct={pct}")
                 print(f"Audit saved: {audit_path}")
