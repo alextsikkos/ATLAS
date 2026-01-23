@@ -1,0 +1,19 @@
+{
+  "tenant": "example",
+  "controlId": "MDOAntiPhish",
+  "action": "ensure_applied",
+  "displayName": "Defender for Office 365: Anti-phish configured (status check)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "ERROR",
+  "reasonCode": "ENFORCER_ERROR",
+  "reasonDetail": "PowerShell execution failed for MDOAntiPhish",
+  "details": {
+    "stderr": "Write-ErrorMessage : ||Cannot create rule without conditions. Please specify at least one condition.\nAt C:\\Users\\Alex\\AppData\\Local\\Temp\\tmpEXO_w1otkclo.m1p\\tmpEXO_w1otkclo.m1p.psm1:1191 char:13\n+             Write-ErrorMessage $ErrorObject\n+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (ATLAS Baseline AntiPhish:String) [New-AntiPhishRule], ArgumentExceptio \n   n\n    + FullyQualifiedErrorId : [Server=GVUPR02MB11781,RequestId=e6e83c05-b7c1-165b-8c96-46f7571f229a,TimeStamp=Fri, 23  \n   Jan 2026 13:32:05 GMT],Write-ErrorMessage",
+    "stdout": "",
+    "reasonCode": "ENFORCER_ERROR",
+    "reasonDetail": "PowerShell execution failed for MDOAntiPhish"
+  },
+  "status": 500,
+  "durationSeconds": 8.834
+}

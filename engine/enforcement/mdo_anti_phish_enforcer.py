@@ -137,7 +137,13 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         exit 0
         }}
 
-        New-AntiPhishRule -Name $baselineRuleName -AntiPhishPolicy $targetPolicy -Priority 0 -ErrorAction Stop | Out-Null
+        New-AntiPhishRule `
+            -Name $baselineRuleName `
+            -AntiPhishPolicy $targetPolicy `
+            -RecipientDomainIs @("*") `
+            -Priority 0 `
+            -ErrorAction Stop | Out-Null
+
 
 
         try {{
