@@ -188,14 +188,15 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
     }}
 
     $policyName = $r.AntiPhishPolicy
-    if ($policyName) {{
-        try {{
-            $polObj = Get-AntiPhishPolicy -Identity $policyName -ErrorAction Stop
-            if ($polObj -and $polObj.Identity) {{
+    if ($policyName) {
+        try {
+            $polObj = Get-AntiPhishPolicy | Where-Object { $_.Name -eq $policyName } | Select-Object -First 1
+            if ($polObj -and $polObj.Identity) {
                 Set-AntiPhishPolicy -Identity $polObj.Identity -Enabled $true -ErrorAction Stop | Out-Null
-            }}
-        }} catch {{}}
-    }}
+            }
+        } catch {}
+    }
+
 
 
     $after = Snapshot
