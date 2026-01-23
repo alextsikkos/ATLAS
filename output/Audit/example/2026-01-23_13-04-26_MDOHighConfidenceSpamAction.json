@@ -1,0 +1,34 @@
+{
+  "controlId": "MDOHighConfidenceSpamAction",
+  "name": "Defender for Office 365: Action for high confidence spam (Secure Score)",
+  "category": "Apps",
+  "tier": 1,
+  "mode": "detect-only",
+  "state": "DRIFTED",
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Evaluated via Exchange Online (Get-HostedContentFilterPolicy.HighConfidenceSpamAction)",
+  "details": {
+    "policiesCount": 1,
+    "policies": [
+      {
+        "HighConfidenceSpamAction": "MoveToJmf",
+        "identity": "Default",
+        "BulkSpamAction": "MoveToJmf",
+        "PhishingAction": null,
+        "PhishSpamAction": "MoveToJmf",
+        "EnableEndUserSpamNotifications": null
+      }
+    ],
+    "cmdletsUsed": [
+      "Get-OrganizationConfig",
+      "Get-EXOMailbox",
+      "Get-MailboxAuditBypassAssociation",
+      "Get-HostedContentFilterPolicy"
+    ],
+    "errors": {},
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Evaluated via Exchange Online (Get-HostedContentFilterPolicy.HighConfidenceSpamAction)"
+  },
+  "tenant": "example",
+  "durationSeconds": 0.0
+}
