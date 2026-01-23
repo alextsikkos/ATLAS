@@ -1,0 +1,38 @@
+{
+  "tenant": "example",
+  "controlId": "MDOAntiPhish",
+  "action": "ensure_applied",
+  "displayName": "Defender for Office 365: Anti-phish configured (status check)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "MISSING_SIGNAL",
+  "reasonDetail": "No usable AntiPhish policy identity available for baseline enforcement.",
+  "details": {
+    "result": {
+      "mode": "enforce",
+      "compliant": false,
+      "action": "blocked_no_rules",
+      "reasonCode": "MISSING_SIGNAL",
+      "reasonDetail": "No usable AntiPhish policy identity available for baseline enforcement.",
+      "before": {
+        "policyCount": 1,
+        "ruleCount": 0,
+        "policies": [
+          {
+            "Name": "Office365 AntiPhish Default",
+            "Enabled": true,
+            "IsBuiltInProtection": null,
+            "IsValid": true,
+            "Identity": "Office365 AntiPhish Default"
+          }
+        ],
+        "rules": []
+      }
+    },
+    "reasonCode": "MISSING_SIGNAL",
+    "reasonDetail": "No usable AntiPhish policy identity available for baseline enforcement."
+  },
+  "status": 409,
+  "durationSeconds": 8.846
+}
