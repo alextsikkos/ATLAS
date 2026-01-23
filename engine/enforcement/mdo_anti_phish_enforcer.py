@@ -118,7 +118,11 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         # Determine target policy (never use built-in)
         $targetPolicy = $null
 
-        $custom = @($before.policies | Where-Object {{ $_.IsBuiltInProtection -ne $true }} | Select-Object -First 1)
+        $custom = @($before.policies | Where-Object {{ $_.IsBuiltInProtection -eq $false }} | Select-Object -First 1)
+        if ($targetPolicy -and $targetPolicy.IsBuiltInProtection -ne $false) {{
+            $targetPolicy = $null
+        }}
+
         if ($custom.Count -ge 1) {{
             $targetPolicy = $custom[0]
         }} else {{

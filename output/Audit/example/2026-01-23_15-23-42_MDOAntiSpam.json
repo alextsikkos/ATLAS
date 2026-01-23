@@ -1,0 +1,23 @@
+{
+  "tenant": "example",
+  "controlId": "MDOAntiSpam",
+  "action": "detect_only",
+  "state": "COMPLIANT",
+  "displayName": "Defender for Office 365: Anti-spam configured",
+  "mode": "detect-only",
+  "status": 200,
+  "details": {
+    "policyCount": 1,
+    "ruleCount": 1,
+    "policies": [
+      "Default"
+    ],
+    "note": "Anti-spam policy detected (Hosted Content Filter)",
+    "reasonCode": "DETECT_ONLY_EVALUATED",
+    "reasonDetail": "Detect-only evaluation completed."
+  },
+  "reason": "standalone detect-only detector",
+  "reasonCode": "DETECT_ONLY_EVALUATED",
+  "reasonDetail": "Detect-only evaluation completed.",
+  "durationSeconds": 0.0
+}
