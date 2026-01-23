@@ -315,6 +315,7 @@ CAPABILITY_CUSTOM_DETECTORS = {
     "CustomBannedPasswords",
     "PasswordProtection",
     "Tier3AuthMethodsProbe",
+    "Tier3AuthMethodsCatalog",
     "IntegratedAppsRestricted",
     "ThirdPartyAppsRestricted",
     "AuthMethodsSoftwareOathEnabled",
