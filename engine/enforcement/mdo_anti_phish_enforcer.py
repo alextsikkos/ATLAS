@@ -66,104 +66,104 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         )
 
     ps = r"""
-$ErrorActionPreference = "Stop"
-Import-Module ExchangeOnlineManagement
+    $ErrorActionPreference = "Stop"
+    Import-Module ExchangeOnlineManagement
 
-$AppId = "{app_id}"
-$Thumb = "{thumb}"
-$Org = "{org}"
-$Mode = "{mode}"
+    $AppId = "{app_id}"
+    $Thumb = "{thumb}"
+    $Org = "{org}"
+    $Mode = "{mode}"
 
-Connect-ExchangeOnline -AppId $AppId -CertificateThumbprint $Thumb -Organization $Org -ShowBanner:$false | Out-Null
+    Connect-ExchangeOnline -AppId $AppId -CertificateThumbprint $Thumb -Organization $Org -ShowBanner:$false | Out-Null
 
-function Snapshot() {{
-  $pol = @(Get-AntiPhishPolicy -ErrorAction Stop | Select-Object Name,Enabled,IsBuiltInProtection,IsValid,Identity)
-  $rules = @(Get-AntiPhishRule -ErrorAction Stop | Select-Object Name,State,AntiPhishPolicy,Priority,Identity)
-  return [PSCustomObject]@{{
-    policyCount = $pol.Count
-    ruleCount = $rules.Count
-    policies = $pol
-    rules = $rules
-  }}
-}}
-
-try {{
-  $before = Snapshot
-  $enabled = @($before.rules | Where-Object {{ $_.State -eq "Enabled" }})
-
-  if ($enabled.Count -ge 1) {{
-    $out = [PSCustomObject]@{{
-      mode = $Mode
-      compliant = $true
-      action = "no_change"
-      before = $before
+    function Snapshot() {{
+    $pol = @(Get-AntiPhishPolicy -ErrorAction Stop | Select-Object Name,Enabled,IsBuiltInProtection,IsValid,Identity)
+    $rules = @(Get-AntiPhishRule -ErrorAction Stop | Select-Object Name,State,AntiPhishPolicy,Priority,Identity)
+    return [PSCustomObject]@{{
+        policyCount = $pol.Count
+        ruleCount = $rules.Count
+        policies = $pol
+        rules = $rules
     }}
-    $out | ConvertTo-Json -Depth 10
-    exit 0
-  }}
-
-  # Report-only: drift detected, no changes
-  if ($Mode -ne "enforce") {{
-    $out = [PSCustomObject]@{{
-      mode = $Mode
-      compliant = $false
-      action = "report_only_drift"
-      before = $before
     }}
-    $out | ConvertTo-Json -Depth 10
-    exit 0
-  }}
 
-  # Enforce mode: choose only if exactly one rule exists
-  if ($before.ruleCount -eq 0) {
-  # Create exactly one baseline rule (idempotent-by-name)
-  $baselineRuleName = "ATLAS Baseline AntiPhish"
-  $targetPolicy = $null
+    try {{
+    $before = Snapshot
+    $enabled = @($before.rules | Where-Object {{ $_.State -eq "Enabled" }})
 
-  # Prefer the built-in default policy if present, otherwise pick the first policy.
-  $default = @($before.policies | Where-Object { $_.Name -eq "Office365 AntiPhish Default" } | Select-Object -First 1)
-  if ($default.Count -ge 1) {
-    $targetPolicy = $default[0].Name
-  } elseif ($before.policyCount -ge 1) {
-    $targetPolicy = ($before.policies | Select-Object -First 1).Name
-  }
+    if ($enabled.Count -ge 1) {{
+        $out = [PSCustomObject]@{{
+        mode = $Mode
+        compliant = $true
+        action = "no_change"
+        before = $before
+        }}
+        $out | ConvertTo-Json -Depth 10
+        exit 0
+    }}
 
-  if (-not $targetPolicy) {
+    # Report-only: drift detected, no changes
+    if ($Mode -ne "enforce") {{
+        $out = [PSCustomObject]@{{
+        mode = $Mode
+        compliant = $false
+        action = "report_only_drift"
+        before = $before
+        }}
+        $out | ConvertTo-Json -Depth 10
+        exit 0
+    }}
+
+    # Enforce mode: choose only if exactly one rule exists
+    if ($before.ruleCount -eq 0) {
+    # Create exactly one baseline rule (idempotent-by-name)
+    $baselineRuleName = "ATLAS Baseline AntiPhish"
+    $targetPolicy = $null
+
+    # Prefer the built-in default policy if present, otherwise pick the first policy.
+    $default = @($before.policies | Where-Object { $_.Name -eq "Office365 AntiPhish Default" } | Select-Object -First 1)
+    if ($default.Count -ge 1) {
+        $targetPolicy = $default[0].Name
+    } elseif ($before.policyCount -ge 1) {
+        $targetPolicy = ($before.policies | Select-Object -First 1).Name
+    }
+
+    if (-not $targetPolicy) {
+        $out = [PSCustomObject]@{
+        mode = $Mode
+        compliant = $false
+        action = "blocked_no_policies"
+        reasonCode = "MISSING_SIGNAL"
+        reasonDetail = "No AntiPhish policies found to attach a baseline rule to."
+        before = $before
+        }
+        $out | ConvertTo-Json -Depth 10
+        exit 0
+    }
+
+    # Create the rule (all users scope by default when no conditions are specified)
+    New-AntiPhishRule -Name $baselineRuleName -AntiPhishPolicy $targetPolicy -Priority 0 -State Enabled -ErrorAction Stop | Out-Null
+
+    # Ensure policy is enabled (best-effort; ignore if not applicable)
+    try {
+        Set-AntiPhishPolicy -Identity $targetPolicy -Enabled $true -ErrorAction Stop | Out-Null
+    } catch {}
+
+    $after = Snapshot
+    $enabledAfter = @($after.rules | Where-Object { $_.State -eq "Enabled" })
+
     $out = [PSCustomObject]@{
-      mode = $Mode
-      compliant = $false
-      action = "blocked_no_policies"
-      reasonCode = "MISSING_SIGNAL"
-      reasonDetail = "No AntiPhish policies found to attach a baseline rule to."
-      before = $before
+        mode = $Mode
+        action = "created_baseline_rule"
+        compliant = ($enabledAfter.Count -ge 1)
+        createdRuleName = $baselineRuleName
+        targetPolicy = $targetPolicy
+        before = $before
+        after = $after
     }
     $out | ConvertTo-Json -Depth 10
     exit 0
-  }
-
-  # Create the rule (all users scope by default when no conditions are specified)
-  New-AntiPhishRule -Name $baselineRuleName -AntiPhishPolicy $targetPolicy -Priority 0 -State Enabled -ErrorAction Stop | Out-Null
-
-  # Ensure policy is enabled (best-effort; ignore if not applicable)
-  try {
-    Set-AntiPhishPolicy -Identity $targetPolicy -Enabled $true -ErrorAction Stop | Out-Null
-  } catch {}
-
-  $after = Snapshot
-  $enabledAfter = @($after.rules | Where-Object { $_.State -eq "Enabled" })
-
-  $out = [PSCustomObject]@{
-    mode = $Mode
-    action = "created_baseline_rule"
-    compliant = ($enabledAfter.Count -ge 1)
-    createdRuleName = $baselineRuleName
-    targetPolicy = $targetPolicy
-    before = $before
-    after = $after
-  }
-  $out | ConvertTo-Json -Depth 10
-  exit 0
-}
+    }
 
 
   if ($before.ruleCount -gt 1) {{
