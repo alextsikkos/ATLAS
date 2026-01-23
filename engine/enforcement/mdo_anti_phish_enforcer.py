@@ -142,16 +142,7 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         }}
 
 
-        New-AntiPhishRule `
-            action = "blocked_no_rules"
-            -Name $baselineRuleName `
-            -AntiPhishPolicy $targetPolicy.Identity `
-            -RecipientDomainIs @("*") `
-            -Priority 0 `
-            -ErrorAction Stop | Out-Null
-
-
-
+        New-AntiPhishRule -Name $baselineRuleName -AntiPhishPolicy $targetPolicy.Identity -RecipientDomainIs @("*") -Priority 0 -ErrorAction Stop | Out-Null
 
         try {{
         Set-AntiPhishPolicy -Identity $targetPolicy.Identity -Enabled $true -ErrorAction Stop | Out-Null
