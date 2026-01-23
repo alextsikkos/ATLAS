@@ -128,19 +128,18 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
             }} catch {{}}
             $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
         }}
-
-        # If only built-in exists, create ATLAS policy
-        if (-not $targetPolicy) {{
-            $atlasPolicyName = "ATLAS AntiPhish Policy"
-            try {{
-                New-AntiPhishPolicy -Name $atlasPolicyName -Enabled $true -ErrorAction Stop | Out-Null
-            }} catch {{
-                # policy may already exist
+        if (-not $targetPolicy -or -not $targetPolicy.Identity) {{
+            $out = [PSCustomObject]@{{
+                mode = $Mode
+                compliant = $false
+                action = "blocked_no_rules"
+                reasonCode = "MISSING_SIGNAL"
+                reasonDetail = "No usable AntiPhish policy identity available for baseline enforcement."
+                before = $before
             }}
-
-            $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
+            $out | ConvertTo-Json -Depth 10
+            exit 0
         }}
-
 
         New-AntiPhishRule -Name $baselineRuleName -AntiPhishPolicy $targetPolicy.Identity -RecipientDomainIs @("*") -Priority 0 -ErrorAction Stop | Out-Null
 
@@ -191,9 +190,13 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
     $policyName = $r.AntiPhishPolicy
     if ($policyName) {{
         try {{
-        Set-AntiPhishPolicy -Identity $policyName -Enabled $true -ErrorAction Stop | Out-Null
+            $polObj = Get-AntiPhishPolicy -Identity $policyName -ErrorAction Stop
+            if ($polObj -and $polObj.Identity) {{
+                Set-AntiPhishPolicy -Identity $polObj.Identity -Enabled $true -ErrorAction Stop | Out-Null
+            }}
         }} catch {{}}
     }}
+
 
     $after = Snapshot
     $enabledAfter = @($after.rules | Where-Object {{ $_.State -eq "Enabled" }})
