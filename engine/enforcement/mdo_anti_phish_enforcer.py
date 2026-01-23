@@ -115,12 +115,18 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
 
     if ($before.ruleCount -eq 0) {{
         $baselineRuleName = "ATLAS Baseline AntiPhish"
+        # Determine target policy (never use built-in)
         $targetPolicy = $null
 
-        # Prefer non-built-in policy
         $custom = @($before.policies | Where-Object {{ $_.IsBuiltInProtection -ne $true }} | Select-Object -First 1)
         if ($custom.Count -ge 1) {{
             $targetPolicy = $custom[0]
+        }} else {{
+            $atlasPolicyName = "ATLAS AntiPhish Policy"
+            try {{
+                New-AntiPhishPolicy -Name $atlasPolicyName -Enabled $true -ErrorAction Stop | Out-Null
+            }} catch {{}}
+            $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
         }}
 
         # If only built-in exists, create ATLAS policy
@@ -137,6 +143,7 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
 
 
         New-AntiPhishRule `
+            action = "blocked_no_rules"
             -Name $baselineRuleName `
             -AntiPhishPolicy $targetPolicy.Identity `
             -RecipientDomainIs @("*") `
