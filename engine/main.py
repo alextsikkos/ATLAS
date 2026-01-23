@@ -5879,7 +5879,13 @@ def main():
                         mode=mode,
                         approval=approval,
                         reason="Secure Score controlId referenced by ATLAS but missing from this tenant's controlProfiles",
-                        details=details,
+                        details={
+                            "reasonCode": "SECURE_SCORE_ID_MISSING",
+                            "reasonDetail": "Secure Score controlId referenced by ATLAS but missing from this tenant's controlProfiles",
+                            "missingSecureScoreControlIds": (f or {}).get("missingSecureScoreControlIds"),
+                            "secureScoreControlId": (f or {}).get("secureScoreControlId"),
+                        },
+
                     )
                     continue
 
