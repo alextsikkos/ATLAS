@@ -416,6 +416,8 @@ CAPABILITY_ENFORCERS = {
     "GuestInvitesRestrictedToAdminsAndGuestInviters",
     "EmailVerifiedUsersCannotJoinOrganization",
     "EmailBasedSubscriptionsDisabled",
+    "DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled",
+    "DefaultUserRoleReadOtherUsersDisabled",
     "BlockMsolPowerShellEnabled",
     "DefaultUserRoleAppsCreationDisabled",
     "DefaultUserRoleSecurityGroupsCreationDisabled",
