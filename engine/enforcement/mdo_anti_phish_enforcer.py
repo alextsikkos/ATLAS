@@ -145,6 +145,18 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         }}
 
         if (-not $targetPolicy -or -not $targetPolicy.Identity) {{
+            if ($Mode -eq "enforce") {{
+                # Explicitly create ATLAS AntiPhish policy
+                $atlasPolicyName = "ATLAS AntiPhish Policy"
+                try {{
+                    New-AntiPhishPolicy -Name $atlasPolicyName -Enabled $true -ErrorAction Stop | Out-Null
+                }} catch {{}}
+
+                $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
+            }}
+        }}
+
+        if (-not $targetPolicy -or -not $targetPolicy.Identity) {{
             $out = [PSCustomObject]@{{
                 mode = $Mode
                 compliant = $false
@@ -156,6 +168,7 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
             $out | ConvertTo-Json -Depth 10
             exit 0
         }}
+
 
 
         New-AntiPhishRule -Name $baselineRuleName -AntiPhishPolicy $targetPolicy.Identity -RecipientDomainIs @("*") -Priority 0 -ErrorAction Stop | Out-Null
