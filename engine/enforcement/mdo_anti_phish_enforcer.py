@@ -132,9 +132,9 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
             }} catch {{}}
             $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
         }}
+        # If no usable policy exists, enforce-mode may create one
         if (-not $targetPolicy -or -not $targetPolicy.Identity) {{
             if ($Mode -eq "enforce") {{
-                # Create ATLAS AntiPhish policy explicitly
                 $atlasPolicyName = "ATLAS AntiPhish Policy"
                 try {{
                     New-AntiPhishPolicy -Name $atlasPolicyName -Enabled $true -ErrorAction Stop | Out-Null
@@ -143,6 +143,21 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
                 $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
             }}
         }}
+
+        # If we STILL have no usable policy, then block
+        if (-not $targetPolicy -or -not $targetPolicy.Identity) {{
+            $out = [PSCustomObject]@{{
+                mode = $Mode
+                compliant = $false
+                action = "blocked_no_rules"
+                reasonCode = "MISSING_SIGNAL"
+                reasonDetail = "No usable AntiPhish policy identity available for baseline enforcement."
+                before = $before
+            }}
+            $out | ConvertTo-Json -Depth 10
+            exit 0
+        }}
+
 
         if (-not $targetPolicy -or -not $targetPolicy.Identity) {{
             if ($Mode -eq "enforce") {{
