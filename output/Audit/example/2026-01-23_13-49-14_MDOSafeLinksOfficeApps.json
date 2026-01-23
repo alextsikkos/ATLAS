@@ -1,0 +1,35 @@
+{
+  "controlId": "MDOSafeLinksOfficeApps",
+  "name": "Defender for Office 365: Safe Links enabled for Office applications (Secure Score)",
+  "category": "Email",
+  "tier": 1,
+  "mode": "report-only",
+  "state": "COMPLIANT",
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Evaluated via Exchange Online (Safe Links for Office apps policy flags)",
+  "details": {
+    "policiesCount": 1,
+    "policies": [
+      {
+        "AllowClickThrough": true,
+        "TrackClicks": true,
+        "EnableSafeLinksForOffice": true,
+        "ScanUrls": true,
+        "identity": "Built-In Protection Policy"
+      }
+    ],
+    "cmdletsUsed": [
+      "Get-OrganizationConfig",
+      "Get-EXOMailbox",
+      "Get-MailboxAuditBypassAssociation",
+      "Get-HostedContentFilterPolicy",
+      "Get-AntiPhishPolicy",
+      "Get-SafeLinksPolicy"
+    ],
+    "errors": {},
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Evaluated via Exchange Online (Safe Links for Office apps policy flags)"
+  },
+  "tenant": "example",
+  "durationSeconds": 0.0
+}

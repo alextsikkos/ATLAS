@@ -117,27 +117,24 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         $baselineRuleName = "ATLAS Baseline AntiPhish"
         $targetPolicy = $null
 
-        $default = @($before.policies | Where-Object {{ $_.Name -eq "Office365 AntiPhish Default" }} | Select-Object -First 1)
-        if ($default.Count -ge 1) {{
-            $targetPolicy = $default[0]
-        }} elseif ($before.policyCount -ge 1) {{
-            $targetPolicy = ($before.policies | Select-Object -First 1)
+        # Prefer non-built-in policy
+        $custom = @($before.policies | Where-Object {{ $_.IsBuiltInProtection -ne $true }} | Select-Object -First 1)
+        if ($custom.Count -ge 1) {{
+            $targetPolicy = $custom[0]
         }}
 
-
-
+        # If only built-in exists, create ATLAS policy
         if (-not $targetPolicy) {{
-        $out = [PSCustomObject]@{{
-            mode = $Mode
-            compliant = $false
-            action = "blocked_no_rules"
-            reasonCode = "MISSING_SIGNAL"
-            reasonDetail = "No AntiPhish policies found to attach a baseline rule to."
-            before = $before
+            $atlasPolicyName = "ATLAS AntiPhish Policy"
+            try {{
+                New-AntiPhishPolicy -Name $atlasPolicyName -Enabled $true -ErrorAction Stop | Out-Null
+            }} catch {{
+                # policy may already exist
+            }}
+
+            $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
         }}
-        $out | ConvertTo-Json -Depth 10
-        exit 0
-        }}
+
 
         New-AntiPhishRule `
             -Name $baselineRuleName `
