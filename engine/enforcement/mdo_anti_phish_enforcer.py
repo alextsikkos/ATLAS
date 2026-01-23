@@ -118,11 +118,12 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         $targetPolicy = $null
 
         $default = @($before.policies | Where-Object {{ $_.Name -eq "Office365 AntiPhish Default" }} | Select-Object -First 1)
-        if ($default.Count -ge 1) {{
-        $targetPolicy = $default[0].Name
-        }} elseif ($before.policyCount -ge 1) {{
-        $targetPolicy = ($before.policies | Select-Object -First 1).Name
+        if ($default.Count -ge 1) {
+            $targetPolicy = $default[0]
+        } elseif ($before.policyCount -ge 1) {
+            $targetPolicy = ($before.policies | Select-Object -First 1)
         }}
+
 
         if (-not $targetPolicy) {{
         $out = [PSCustomObject]@{{
@@ -139,10 +140,11 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
 
         New-AntiPhishRule `
             -Name $baselineRuleName `
-            -AntiPhishPolicy $targetPolicy `
+            -AntiPhishPolicy $targetPolicy.Identity `
             -RecipientDomainIs @("*") `
             -Priority 0 `
             -ErrorAction Stop | Out-Null
+
 
 
 
@@ -158,7 +160,7 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         action = "created_baseline_rule"
         compliant = ($enabledAfter.Count -ge 1)
         createdRuleName = $baselineRuleName
-        targetPolicy = $targetPolicy
+        targetPolicy = $targetPolicy.Name
         before = $before
         after = $after
         }}

@@ -1,0 +1,24 @@
+{
+  "tenant": "example",
+  "controlId": "DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled",
+  "action": "ensure_applied",
+  "displayName": "Default user role cannot read BitLocker keys for owned devices",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforce: already compliant (no change needed).",
+  "details": {
+    "before": {
+      "DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled": false
+    },
+    "desired": {
+      "DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled": false
+    },
+    "approvedForEnforce": true,
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforce: already compliant (no change needed)."
+  },
+  "status": 200,
+  "durationSeconds": 0.0
+}
