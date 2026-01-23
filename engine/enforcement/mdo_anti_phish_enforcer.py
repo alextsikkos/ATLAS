@@ -118,18 +118,19 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         $targetPolicy = $null
 
         $default = @($before.policies | Where-Object {{ $_.Name -eq "Office365 AntiPhish Default" }} | Select-Object -First 1)
-        if ($default.Count -ge 1) {
+        if ($default.Count -ge 1) {{
             $targetPolicy = $default[0]
-        } elseif ($before.policyCount -ge 1) {
+        }} elseif ($before.policyCount -ge 1) {{
             $targetPolicy = ($before.policies | Select-Object -First 1)
         }}
+
 
 
         if (-not $targetPolicy) {{
         $out = [PSCustomObject]@{{
             mode = $Mode
             compliant = $false
-            action = "blocked_no_policies"
+            action = "blocked_no_rules"
             reasonCode = "MISSING_SIGNAL"
             reasonDetail = "No AntiPhish policies found to attach a baseline rule to."
             before = $before
@@ -149,7 +150,7 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
 
 
         try {{
-        Set-AntiPhishPolicy -Identity $targetPolicy -Enabled $true -ErrorAction Stop | Out-Null
+        Set-AntiPhishPolicy -Identity $targetPolicy.Identity -Enabled $true -ErrorAction Stop | Out-Null
         }} catch {{}}
 
         $after = Snapshot
