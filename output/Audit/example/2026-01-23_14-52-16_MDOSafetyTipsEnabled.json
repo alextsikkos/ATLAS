@@ -1,0 +1,40 @@
+{
+  "controlId": "MDOSafetyTipsEnabled",
+  "name": "Defender for Office 365: Impersonation safety tips enabled (Secure Score)",
+  "category": "Email",
+  "tier": 1,
+  "mode": "report-only",
+  "state": "DRIFTED",
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Evaluated via Exchange Online (Get-AntiPhishPolicy safety tips flags: similar users/domains/unusual characters)",
+  "details": {
+    "policiesCount": 1,
+    "policies": [
+      {
+        "EnableSpoofIntelligence": true,
+        "EnableTargetedUserProtection": false,
+        "TargetedDomainProtectionAction": "NoAction",
+        "MailboxIntelligenceProtectionAction": "NoAction",
+        "EnableSimilarDomainsSafetyTips": false,
+        "PhishThresholdLevel": 1,
+        "EnableSimilarUsersSafetyTips": false,
+        "EnableUnusualCharactersSafetyTips": false,
+        "identity": "Office365 AntiPhish Default",
+        "EnableMailboxIntelligenceProtection": false,
+        "EnableOrganizationDomainsProtection": false,
+        "EnableTargetedDomainsProtection": false,
+        "EnableFirstContactSafetyTips": false,
+        "EnableMailboxIntelligence": true,
+        "TargetedUserProtectionAction": "NoAction"
+      }
+    ],
+    "cmdletsUsed": [
+      "Get-AntiPhishPolicy"
+    ],
+    "errors": {},
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Evaluated via Exchange Online (Get-AntiPhishPolicy safety tips flags: similar users/domains/unusual characters)"
+  },
+  "tenant": "example",
+  "durationSeconds": 0.001
+}

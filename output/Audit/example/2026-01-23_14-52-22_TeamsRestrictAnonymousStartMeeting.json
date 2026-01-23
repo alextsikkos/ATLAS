@@ -1,0 +1,28 @@
+{
+  "tenant": "example",
+  "controlId": "TeamsRestrictAnonymousStartMeeting",
+  "action": "detect_only",
+  "state": "COMPLIANT",
+  "displayName": "Teams: Restrict anonymous users from starting meetings (Secure Score)",
+  "mode": "detect-only",
+  "status": 200,
+  "scorePct": 100.0,
+  "missingSecureScoreControlIds": null,
+  "secureScoreControlId": "meeting_anonymousstartmeeting_v1",
+  "title": "Restrict anonymous users from starting Teams meetings",
+  "implementationStatus": "",
+  "actionUrl": "https://admin.teams.microsoft.com/policies/meetings",
+  "details": {
+    "policyIdentity": "Global",
+    "setting": "AllowAnonymousUsersToStartMeeting",
+    "expected": false,
+    "actual": false,
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Evaluated via Teams meeting policies (Get-CsTeamsMeetingPolicy)."
+  },
+  "fallbackDetector": null,
+  "reason": "detect-only registry control (no enforcement implemented)",
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Evaluated via Teams meeting policies (Get-CsTeamsMeetingPolicy).",
+  "durationSeconds": 0.001
+}

@@ -1,1 +1,4 @@
-{ "approved": true, "mode": "enforce" }
+{
+  "approved": true,
+  "mode": "enforce"
+}

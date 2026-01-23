@@ -1,0 +1,28 @@
+{
+  "controlId": "MDOThresholdReachedAction",
+  "name": "Defender for Office 365: Block users who reached message limit (Secure Score)",
+  "category": "Apps",
+  "tier": 1,
+  "mode": "detect-only",
+  "state": "COMPLIANT",
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Evaluated via Exchange Online (HostedOutboundSpamFilterPolicy action when threshold reached)",
+  "details": {
+    "policiesCount": 1,
+    "policies": [
+      {
+        "ActionWhenThresholdReached": "BlockUserForToday",
+        "ThresholdReachedAction": null,
+        "identity": "Default"
+      }
+    ],
+    "cmdletsUsed": [
+      "Get-HostedOutboundSpamFilterPolicy"
+    ],
+    "errors": {},
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Evaluated via Exchange Online (HostedOutboundSpamFilterPolicy action when threshold reached)"
+  },
+  "tenant": "example",
+  "durationSeconds": 0.001
+}
