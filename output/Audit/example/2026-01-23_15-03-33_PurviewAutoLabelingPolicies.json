@@ -1,0 +1,36 @@
+{
+  "tenant": "example",
+  "controlId": "PurviewAutoLabelingPolicies",
+  "action": "detect_only",
+  "state": "NOT_EVALUATED",
+  "displayName": "Purview: Auto-labeling policies configured (Secure Score)",
+  "mode": "detect-only",
+  "status": 424,
+  "details": {
+    "connected": false,
+    "reason": "IPP cmdlet missing in installed ExchangeOnlineManagement module",
+    "missingCmdlet": "Get-AutoSensitivityLabelPolicy",
+    "raw": {
+      "autoLabeling": {
+        "missingCmdlet": "Get-AutoSensitivityLabelPolicy",
+        "ok": false,
+        "connected": false,
+        "reason": "Cmdlet missing in installed ExchangeOnlineManagement module"
+      },
+      "ok": true,
+      "dataMapScope": {
+        "missingCmdlet": "Get-Label",
+        "ok": false,
+        "connected": false,
+        "reason": "Cmdlet missing in installed ExchangeOnlineManagement module"
+      },
+      "connected": false
+    },
+    "reasonCode": "MISSING_SIGNAL",
+    "reasonDetail": "IPP cmdlet missing in installed ExchangeOnlineManagement module"
+  },
+  "reasonCode": "MISSING_SIGNAL",
+  "reasonDetail": "IPP cmdlet missing in installed ExchangeOnlineManagement module",
+  "reason": "IPP cmdlet missing in installed ExchangeOnlineManagement module",
+  "durationSeconds": 0.002
+}

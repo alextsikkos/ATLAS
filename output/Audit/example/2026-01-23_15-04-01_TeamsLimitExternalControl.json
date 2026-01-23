@@ -1,0 +1,28 @@
+{
+  "tenant": "example",
+  "controlId": "TeamsLimitExternalControl",
+  "action": "detect_only",
+  "state": "COMPLIANT",
+  "displayName": "Teams: Limit external participants from having control (Secure Score)",
+  "mode": "detect-only",
+  "status": 200,
+  "scorePct": 100.0,
+  "missingSecureScoreControlIds": null,
+  "secureScoreControlId": "meeting_externalrequestcontrol_v1",
+  "title": "Limit external participants from having control in a Teams meeting",
+  "implementationStatus": "",
+  "actionUrl": "https://admin.teams.microsoft.com/policies/meetings",
+  "details": {
+    "policyIdentity": "Global",
+    "setting": "AllowExternalParticipantGiveRequestControl",
+    "expected": false,
+    "actual": false,
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Evaluated via Teams meeting policies (Get-CsTeamsMeetingPolicy)."
+  },
+  "fallbackDetector": null,
+  "reason": "detect-only registry control (no enforcement implemented)",
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Evaluated via Teams meeting policies (Get-CsTeamsMeetingPolicy).",
+  "durationSeconds": 0.001
+}

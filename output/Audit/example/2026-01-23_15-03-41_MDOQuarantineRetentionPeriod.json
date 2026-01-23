@@ -1,0 +1,43 @@
+{
+  "controlId": "MDOQuarantineRetentionPeriod",
+  "name": "Defender for Office 365: Quarantine retention period configured (Secure Score)",
+  "category": "Email",
+  "tier": 1,
+  "mode": "report-only",
+  "state": "DRIFTED",
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Evaluated via Exchange Online (HostedContentFilterPolicy.QuarantineRetentionDays; compliant when >= 30)",
+  "details": {
+    "policiesCount": 3,
+    "policies": [
+      {
+        "QuarantineRetentionDays": 15,
+        "EndUserQuarantinePermissions": "[PermissionToBlockSender: False\r\nPermissionToDelete: True\r\nPermissionToDownload: True\r\nPermissionToPreview: True\r\nPermissionToRelease: True\r\nPermissionToRequestRelease: False\r\nPermissionToViewHeader: False\r\nPermissionToAllowSender: True]",
+        "ESNEnabled": false,
+        "identity": "6twcdy.onmicrosoft.com\\DefaultFullAccessPolicy"
+      },
+      {
+        "QuarantineRetentionDays": 15,
+        "EndUserQuarantinePermissions": "[PermissionToBlockSender: False\r\nPermissionToDelete: False\r\nPermissionToDownload: False\r\nPermissionToPreview: False\r\nPermissionToRelease: False\r\nPermissionToRequestRelease: False\r\nPermissionToViewHeader: False\r\nPermissionToAllowSender: False]",
+        "ESNEnabled": false,
+        "identity": "6twcdy.onmicrosoft.com\\AdminOnlyAccessPolicy"
+      },
+      {
+        "QuarantineRetentionDays": 15,
+        "EndUserQuarantinePermissions": "[PermissionToBlockSender: False\r\nPermissionToDelete: True\r\nPermissionToDownload: True\r\nPermissionToPreview: True\r\nPermissionToRelease: True\r\nPermissionToRequestRelease: False\r\nPermissionToViewHeader: False\r\nPermissionToAllowSender: True]",
+        "ESNEnabled": true,
+        "identity": "6twcdy.onmicrosoft.com\\DefaultFullAccessWithNotificationPolicy"
+      }
+    ],
+    "cmdletsUsed": [
+      "Get-AntiPhishPolicy",
+      "Get-AtpPolicyForO365",
+      "Get-QuarantinePolicy"
+    ],
+    "errors": {},
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Evaluated via Exchange Online (HostedContentFilterPolicy.QuarantineRetentionDays; compliant when >= 30)"
+  },
+  "tenant": "example",
+  "durationSeconds": 0.002
+}
