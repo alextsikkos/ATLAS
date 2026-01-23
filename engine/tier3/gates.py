@@ -29,6 +29,11 @@ def return_not_evaluated(
     reason: str,
     details: dict | None = None,
 ) -> str:
+    # Allow caller to override reasonCode/reasonDetail via details for non-tier3 missing-signal cases
+    d = details or {}
+    code = d.get("reasonCode") or "TIER3_BLOCKED"
+    detail = d.get("reasonDetail") or reason
+
     audit_path = write_audit_event(
         tenant_name,
         attach_reason(
@@ -42,12 +47,13 @@ def return_not_evaluated(
                 "mode": mode,
                 "status": 409,
                 "reason": reason,
-                "details": details or {},
+                "details": d,
             },
-            "TIER3_BLOCKED",
-            reason,
+            code,
+            detail,
         ),
     )
+
 
     detail_suffix = ""
     if isinstance(details, dict):
