@@ -119,32 +119,21 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         $targetPolicy = $null
 
         $custom = @($before.policies | Where-Object {{ $_.IsBuiltInProtection -eq $false }} | Select-Object -First 1)
-        if ($targetPolicy -and $targetPolicy.IsBuiltInProtection -ne $false) {{
-            $targetPolicy = $null
-        }}
-
         if ($custom.Count -ge 1) {{
             $targetPolicy = $custom[0]
-        }} else {{
+        }}
+
+        # Enforce-mode: create ATLAS policy if none exists
+        if (-not $targetPolicy -and $Mode -eq "enforce") {{
             $atlasPolicyName = "ATLAS AntiPhish Policy"
             try {{
                 New-AntiPhishPolicy -Name $atlasPolicyName -Enabled $true -ErrorAction Stop | Out-Null
             }} catch {{}}
+
             $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
         }}
-        # If no usable policy exists, enforce-mode may create one
-        if (-not $targetPolicy -or -not $targetPolicy.Identity) {{
-            if ($Mode -eq "enforce") {{
-                $atlasPolicyName = "ATLAS AntiPhish Policy"
-                try {{
-                    New-AntiPhishPolicy -Name $atlasPolicyName -Enabled $true -ErrorAction Stop | Out-Null
-                }} catch {{}}
 
-                $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
-            }}
-        }}
-
-        # If we STILL have no usable policy, then block
+        # Final safety guard (single exit point)
         if (-not $targetPolicy -or -not $targetPolicy.Identity) {{
             $out = [PSCustomObject]@{{
                 mode = $Mode
@@ -157,34 +146,6 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
             $out | ConvertTo-Json -Depth 10
             exit 0
         }}
-
-
-        if (-not $targetPolicy -or -not $targetPolicy.Identity) {{
-            if ($Mode -eq "enforce") {{
-                # Explicitly create ATLAS AntiPhish policy
-                $atlasPolicyName = "ATLAS AntiPhish Policy"
-                try {{
-                    New-AntiPhishPolicy -Name $atlasPolicyName -Enabled $true -ErrorAction Stop | Out-Null
-                }} catch {{}}
-
-                $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
-            }}
-        }}
-
-        if (-not $targetPolicy -or -not $targetPolicy.Identity) {{
-            $out = [PSCustomObject]@{{
-                mode = $Mode
-                compliant = $false
-                action = "blocked_no_rules"
-                reasonCode = "MISSING_SIGNAL"
-                reasonDetail = "No usable AntiPhish policy identity available for baseline enforcement."
-                before = $before
-            }}
-            $out | ConvertTo-Json -Depth 10
-            exit 0
-        }}
-
-
 
         New-AntiPhishRule -Name $baselineRuleName -AntiPhishPolicy $targetPolicy.Identity -RecipientDomainIs @("*") -Priority 0 -ErrorAction Stop | Out-Null
 
