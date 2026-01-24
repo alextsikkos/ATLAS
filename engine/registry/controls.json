@@ -1003,7 +1003,9 @@
   "name": "Defender for Office 365: Safe Links enabled for Office applications (Secure Score)",
   "tier": 1,
   "category": "Email",
-  "detectOnly": true,
+  "default_mode": "audit",
+  "detectOnly": false,
+  "approvalRequired": true,
   "secureScoreControlIds": [
     "mdo_safelinksforOfficeApps"
   ],
