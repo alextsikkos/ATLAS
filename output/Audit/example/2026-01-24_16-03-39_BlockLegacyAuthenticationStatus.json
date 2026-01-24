@@ -1,0 +1,23 @@
+{
+  "tenant": "example",
+  "controlId": "BlockLegacyAuthenticationStatus",
+  "action": "detect",
+  "state": "NOT_EVALUATED",
+  "displayName": "Legacy authentication blocked (status check)",
+  "approved": false,
+  "mode": "detect-only",
+  "status": 424,
+  "details": {
+    "missingKeys": [
+      "conditionalAccessPolicyBlockingLegacyAuth"
+    ],
+    "securityDefaultsEnabled": false,
+    "note": "No CA policy found with grantControls=block and clientAppTypes including exchangeActiveSync/other.",
+    "reasonCode": "DETECT_ONLY_EVALUATED",
+    "reasonDetail": "Detect-only evaluation completed."
+  },
+  "reason": "Missing CA policy that blocks legacy authentication",
+  "reasonCode": "DETECT_ONLY_EVALUATED",
+  "reasonDetail": "Detect-only evaluation completed.",
+  "durationSeconds": 0.773
+}
