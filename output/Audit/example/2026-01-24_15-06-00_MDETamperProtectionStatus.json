@@ -1,0 +1,20 @@
+{
+  "tenant": "example",
+  "controlId": "MDETamperProtectionStatus",
+  "action": "detect_only",
+  "state": "DRIFTED",
+  "displayName": "Defender for Endpoint tamper protection enabled (status check)",
+  "mode": "detect-only",
+  "status": 200,
+  "details": {
+    "signal": "not_implemented",
+    "reason": "MDE tamper protection API not wired yet (detect-only placeholder)",
+    "nextStep": "Add MDE API token + query device configuration / security settings",
+    "reasonCode": "DETECT_ONLY_EVALUATED",
+    "reasonDetail": "Detect-only evaluation completed."
+  },
+  "reason": "standalone detect-only detector",
+  "reasonCode": "DETECT_ONLY_EVALUATED",
+  "reasonDetail": "Detect-only evaluation completed.",
+  "durationSeconds": 0.003
+}

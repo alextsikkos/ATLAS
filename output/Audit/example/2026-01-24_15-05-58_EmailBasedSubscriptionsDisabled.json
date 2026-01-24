@@ -1,0 +1,24 @@
+{
+  "tenant": "example",
+  "controlId": "EmailBasedSubscriptionsDisabled",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Disable email-based subscriptions sign-up",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforce: already compliant (no change needed).",
+  "details": {
+    "before": {
+      "EmailBasedSubscriptionsDisabled": false
+    },
+    "desired": {
+      "EmailBasedSubscriptionsDisabled": false
+    },
+    "approvedForEnforce": true,
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforce: already compliant (no change needed)."
+  },
+  "status": 200,
+  "durationSeconds": 0.001
+}
