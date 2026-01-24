@@ -26,6 +26,117 @@ def _run_powershell(script: str) -> Tuple[int, str, str]:
             continue
     raise RuntimeError("Neither pwsh nor powershell is available on this system")
 
+def _mdo_safe_attachments_block_action(**kwargs):
+    tenant = kwargs["tenant"]
+    approval = kwargs.get("approval") or {}
+    mode = (kwargs.get("mode") or "report-only").lower()
+
+    if mode == "enforce" and approval.get("approved") is not True:
+        return (
+            "NOT_EVALUATED",
+            "APPROVAL_REQUIRED",
+            "Approval required to change Safe Attachments action to Block",
+            {},
+            409,
+        )
+
+    exo = tenant.get("exoPowershell") or {}
+    if not (exo.get("appId") and exo.get("certificateThumbprint") and exo.get("organization")):
+        return (
+            "ERROR",
+            "MISSING_PREREQUISITE",
+            "Missing Exchange Online PowerShell configuration",
+            {},
+            424,
+        )
+
+    ps = f'''
+Connect-ExchangeOnline -AppId "{exo["appId"]}" `
+  -CertificateThumbprint "{exo["certificateThumbprint"]}" `
+  -Organization "{exo["organization"]}" `
+  -ShowBanner:$false
+
+$policy = Get-SafeAttachmentPolicy |
+  Where-Object {{ $_.Name -eq "ATLAS Safe Attachments Policy" }} |
+  Select-Object -First 1
+
+if (-not $policy) {{
+  @{{
+    action = "missing_atlas_policy"
+    compliant = $false
+  }} | ConvertTo-Json
+  exit
+}}
+
+if ($policy.Action -eq "Block") {{
+  @{{
+    action = "no_change"
+    compliant = $true
+  }} | ConvertTo-Json
+  exit
+}}
+
+if ("{mode}" -ne "enforce") {{
+  @{{
+    action = "report_only_drift"
+    compliant = $false
+    currentAction = $policy.Action
+    desiredAction = "Block"
+  }} | ConvertTo-Json
+  exit
+}}
+
+Set-SafeAttachmentPolicy -Identity $policy.Identity -Action Block
+
+$after = Get-SafeAttachmentPolicy -Identity $policy.Identity
+
+@{{
+  action = "set_policy_properties"
+  compliant = ($after.Action -eq "Block")
+  beforeAction = $policy.Action
+  afterAction = $after.Action
+}} | ConvertTo-Json
+'''
+
+    from subprocess import run
+
+    result = run(
+        ["powershell", "-NoProfile", "-NonInteractive", "-Command", ps],
+        capture_output=True,
+        text=True,
+    )
+
+    if result.returncode != 0:
+        return (
+            "ERROR",
+            "ENFORCER_ERROR",
+            "PowerShell execution failed",
+            {"stderr": result.stderr},
+            500,
+        )
+
+    import json
+    data = json.loads(result.stdout)
+
+    action = data.get("action")
+    compliant = data.get("compliant", False)
+
+    if mode != "enforce":
+        return (
+            ("COMPLIANT" if compliant else "DRIFTED"),
+            "REPORT_ONLY_EVALUATED",
+            "Safe Attachments action evaluated",
+            data,
+            200,
+        )
+
+    return (
+        ("COMPLIANT" if compliant else "DRIFTED"),
+        "ENFORCER_EXECUTED",
+        "Safe Attachments action enforced",
+        data,
+        200,
+    )
 
 def _enforce_mdo_safe_attachments(**kwargs) -> tuple[str, str, str, dict, int]:
     tenant = kwargs["tenant"]
@@ -280,3 +391,4 @@ finally {{
 
 
 register("MDOSafeAttachments", _enforce_mdo_safe_attachments)
+register("MDOSafeAttachmentsBlockAction", _mdo_safe_attachments_block_action)

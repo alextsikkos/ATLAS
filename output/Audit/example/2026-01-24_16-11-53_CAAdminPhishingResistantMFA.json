@@ -1,0 +1,121 @@
+{
+  "tenant": "example",
+  "controlId": "CAAdminPhishingResistantMFA",
+  "action": "ensure_applied",
+  "displayName": "Conditional Access: Require phishing-resistant MFA strength for administrators (Secure Score)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforcer executed; policy ensured",
+  "details": {
+    "result": {
+      "result": "created",
+      "status": 201,
+      "policyId": "6347ca38-f065-4011-9e88-4fb63aaa7046",
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies/$entity",
+        "id": "6347ca38-f065-4011-9e88-4fb63aaa7046",
+        "templateId": null,
+        "displayName": "ATLAS - Admin Phishing-resistant MFA Strength",
+        "createdDateTime": "2026-01-24T16:11:52.6988189Z",
+        "modifiedDateTime": null,
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+          "userRiskLevels": [],
+          "signInRiskLevels": [],
+          "clientAppTypes": [
+            "all"
+          ],
+          "servicePrincipalRiskLevels": [],
+          "insiderRiskLevels": null,
+          "platforms": null,
+          "locations": null,
+          "devices": null,
+          "clientApplications": null,
+          "authenticationFlows": null,
+          "applications": {
+            "includeApplications": [
+              "All"
+            ],
+            "excludeApplications": [],
+            "includeUserActions": [],
+            "includeAuthenticationContextClassReferences": [],
+            "applicationFilter": null
+          },
+          "users": {
+            "includeUsers": [
+              "All"
+            ],
+            "excludeUsers": [],
+            "includeGroups": [],
+            "excludeGroups": [
+              "b71bc79f-f89b-45ad-b11f-a839cf2e9829"
+            ],
+            "includeRoles": [],
+            "excludeRoles": [],
+            "includeGuestsOrExternalUsers": null,
+            "excludeGuestsOrExternalUsers": null
+          }
+        },
+        "grantControls": {
+          "operator": "OR",
+          "builtInControls": [],
+          "customAuthenticationFactors": [],
+          "termsOfUse": [],
+          "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('6347ca38-f065-4011-9e88-4fb63aaa7046')/grantControls/authenticationStrength/$entity",
+          "authenticationStrength": {
+            "id": "00000000-0000-0000-0000-000000000004",
+            "createdDateTime": "2021-12-01T08:00:00Z",
+            "modifiedDateTime": "2021-12-01T08:00:00Z",
+            "displayName": "Phishing-resistant MFA",
+            "description": "Phishing-resistant, Passwordless methods for the strongest authentication, such as a FIDO2 security key",
+            "policyType": "builtIn",
+            "requirementsSatisfied": "mfa",
+            "allowedCombinations": [
+              "windowsHelloForBusiness",
+              "fido2",
+              "x509CertificateMultiFactor"
+            ],
+            "combinationConfigurations@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('6347ca38-f065-4011-9e88-4fb63aaa7046')/grantControls/authenticationStrength/combinationConfigurations",
+            "combinationConfigurations": []
+          }
+        }
+      }
+    },
+    "desired": {
+      "displayName": "ATLAS - Admin Phishing-resistant MFA Strength",
+      "state": "enabled",
+      "conditions": {
+        "users": {
+          "includeUsers": [
+            "All"
+          ],
+          "excludeUsers": [],
+          "excludeGroups": [
+            "b71bc79f-f89b-45ad-b11f-a839cf2e9829"
+          ]
+        },
+        "applications": {
+          "includeApplications": [
+            "All"
+          ]
+        },
+        "clientAppTypes": [
+          "all"
+        ]
+      },
+      "grantControls": {
+        "operator": "AND",
+        "authenticationStrength": {
+          "id": "00000000-0000-0000-0000-000000000004"
+        }
+      }
+    },
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforcer executed; policy ensured"
+  },
+  "status": 201,
+  "durationSeconds": 2.237
+}

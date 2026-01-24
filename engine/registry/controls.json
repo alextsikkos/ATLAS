@@ -830,10 +830,24 @@
   "name": "Defender for Office 365: Safe Attachments enabled (status check)",
   "tier": 2,
   "category": "Email",
-  "detectOnly": true,
-  "approvalRequired": false,
+  "default_mode": "audit",
+  "detectOnly": false,
+  "approvalRequired": true,
   "dataSource": "mdo",
   "description": "Detect-only: checks whether Safe Attachments is configured (placeholder until MDO API wiring exists).",
+  "group": "Defender for Office 365"
+},
+{
+  "id": "MDOSafeAttachmentsBlockAction",
+  "name": "Defender for Office 365: Safe Attachments action is Block (ATLAS policy)",
+  "tier": 2,
+  "category": "Apps",
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": true,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": true,
+  "secureScoreControlIds": [],
   "group": "Defender for Office 365"
 },
 {
