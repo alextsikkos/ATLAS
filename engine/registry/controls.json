@@ -925,9 +925,9 @@
   "name": "Defender for Office 365: Set BCL threshold to 6 or lower (Secure Score)",
   "tier": 1,
   "category": "Apps",
-  "default_mode": "audit",
-  "detectOnly": false,
-  "approvalRequired": true,
+  "default_mode": "detect-only",
+  "detectOnly": true,
+  "approvalRequired": false,
   "canCauseLockout": false,
   "requiresOnboardingDiscussion": false,
   "secureScoreControlIds": [
