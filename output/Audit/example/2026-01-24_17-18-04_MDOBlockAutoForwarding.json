@@ -1,0 +1,28 @@
+{
+  "tenant": "example",
+  "controlId": "MDOBlockAutoForwarding",
+  "action": "ensure_applied",
+  "displayName": "Defender for Office 365: Automatic email forwarding blocked (Secure Score)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforcer executed; auto-forwarding disabled on all Remote Domains",
+  "details": {
+    "changed": [],
+    "policies": [
+      {
+        "identity": "Default",
+        "AutoForwardEnabled": false,
+        "AutoForwardEnabled_normalized": false,
+        "AllowedOOFType": "External",
+        "TNEFEnabled": null
+      }
+    ],
+    "policiesCount": 1,
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforcer executed; auto-forwarding disabled on all Remote Domains"
+  },
+  "status": 200,
+  "durationSeconds": 12.325
+}

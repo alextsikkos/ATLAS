@@ -1,0 +1,21 @@
+{
+  "tenant": "example",
+  "controlId": "MDOQuarantineRetentionPeriod",
+  "action": "ensure_applied",
+  "displayName": "Defender for Office 365: Quarantine retention period configured (Secure Score)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Quarantine retention enforced",
+  "details": {
+    "compliant": true,
+    "before": 15,
+    "action": "set_policy_properties",
+    "after": 30,
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Quarantine retention enforced"
+  },
+  "status": 200,
+  "durationSeconds": 7.625
+}
