@@ -301,3 +301,4 @@ def _phishing_action(**kwargs):
 register("MDOBulkSpamAction", _bulk_spam_action)
 register("MDOHighConfidenceSpamAction", _high_conf_spam_action)
 register("MDOPhishingAction", _phishing_action)
+register("MDOBulkComplaintLevelThreshold", _bulk_complaint_level_threshold)
