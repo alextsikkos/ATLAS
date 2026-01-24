@@ -139,7 +139,14 @@ try {{
       $atlasPolicyName = "ATLAS AntiSpam Policy"
       $createPolicyError = $null
       try {{
-        New-HostedContentFilterPolicy -Name $atlasPolicyName -ErrorAction Stop | Out-Null
+        New-HostedContentFilterPolicy `
+            -Name $atlasPolicyName `
+            -SpamAction MoveToJmf `
+            -BulkSpamAction MoveToJmf `
+            -HighConfidenceSpamAction MoveToJmf `
+            -PhishSpamAction Quarantine `
+            -ErrorAction Stop | Out-Null
+
       }} catch {{
         $createPolicyError = ($_ | Out-String)
       }}
