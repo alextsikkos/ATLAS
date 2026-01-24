@@ -282,10 +282,11 @@ def _bulk_complaint_level_threshold(**kwargs):
         tenant=kwargs["tenant"],
         approval=kwargs.get("approval") or {},
         mode=kwargs.get("mode") or "report-only",
-        control_id="MDOBulkSpamAction",
-        property_name="BulkSpamAction",
-        desired_value="MoveToJmf",
+        control_id="MDOBulkComplaintLevelThreshold",
+        property_name="BulkComplaintLevelThreshold",
+        desired_value=6,
     )
+
 def _high_conf_spam_action(**kwargs):
     return _enforce_hcf_property(
         tenant=kwargs["tenant"],
