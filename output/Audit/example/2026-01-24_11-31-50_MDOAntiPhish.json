@@ -1,0 +1,38 @@
+{
+  "tenant": "example",
+  "controlId": "MDOAntiPhish",
+  "action": "ensure_applied",
+  "displayName": "Defender for Office 365: Anti-phish configured (status check)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "CREATION_FAILED",
+  "reasonDetail": "Failed to create ATLAS AntiPhish policy: Write-ErrorMessage : ||The command you tried to run isn't currently allowed in your organization. To run this command, \r\nyou first need to run the command: Enable-OrganizationCustomization.\r\nAt C:\\Users\\Alex\\AppData\\Local\\Temp\\tmpEXO_0l53ptao.ve3\\tmpEXO_0l53ptao.ve3.psm1:1191 char:13\r\n+             Write-ErrorMessage $ErrorObject\r\n+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (Microsoft.Excha...AntiPhishPolicy:String) [New-AntiPhishPolicy], InvalidO \r\n   peratio...ontextException\r\n    + FullyQualifiedErrorId : [Server=GVUPR02MB11781,RequestId=f8da3f4c-23f0-2fcf-9430-3244bdb2aa1a,TimeStamp=Sat, 24  \r\n   Jan 2026 11:31:45 GMT],Write-ErrorMessage\r\n \r\n",
+  "details": {
+    "result": {
+      "mode": "enforce",
+      "compliant": false,
+      "action": "blocked_no_rules",
+      "reasonCode": "CREATION_FAILED",
+      "reasonDetail": "Failed to create ATLAS AntiPhish policy: Write-ErrorMessage : ||The command you tried to run isn't currently allowed in your organization. To run this command, \r\nyou first need to run the command: Enable-OrganizationCustomization.\r\nAt C:\\Users\\Alex\\AppData\\Local\\Temp\\tmpEXO_0l53ptao.ve3\\tmpEXO_0l53ptao.ve3.psm1:1191 char:13\r\n+             Write-ErrorMessage $ErrorObject\r\n+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (Microsoft.Excha...AntiPhishPolicy:String) [New-AntiPhishPolicy], InvalidO \r\n   peratio...ontextException\r\n    + FullyQualifiedErrorId : [Server=GVUPR02MB11781,RequestId=f8da3f4c-23f0-2fcf-9430-3244bdb2aa1a,TimeStamp=Sat, 24  \r\n   Jan 2026 11:31:45 GMT],Write-ErrorMessage\r\n \r\n",
+      "before": {
+        "policyCount": 1,
+        "ruleCount": 0,
+        "policies": [
+          {
+            "Name": "Office365 AntiPhish Default",
+            "Enabled": true,
+            "IsBuiltInProtection": null,
+            "IsValid": true,
+            "Identity": "Office365 AntiPhish Default"
+          }
+        ],
+        "rules": []
+      }
+    },
+    "reasonCode": "CREATION_FAILED",
+    "reasonDetail": "Failed to create ATLAS AntiPhish policy: Write-ErrorMessage : ||The command you tried to run isn't currently allowed in your organization. To run this command, \r\nyou first need to run the command: Enable-OrganizationCustomization.\r\nAt C:\\Users\\Alex\\AppData\\Local\\Temp\\tmpEXO_0l53ptao.ve3\\tmpEXO_0l53ptao.ve3.psm1:1191 char:13\r\n+             Write-ErrorMessage $ErrorObject\r\n+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (Microsoft.Excha...AntiPhishPolicy:String) [New-AntiPhishPolicy], InvalidO \r\n   peratio...ontextException\r\n    + FullyQualifiedErrorId : [Server=GVUPR02MB11781,RequestId=f8da3f4c-23f0-2fcf-9430-3244bdb2aa1a,TimeStamp=Sat, 24  \r\n   Jan 2026 11:31:45 GMT],Write-ErrorMessage\r\n \r\n"
+  },
+  "status": 409,
+  "durationSeconds": 9.174
+}
