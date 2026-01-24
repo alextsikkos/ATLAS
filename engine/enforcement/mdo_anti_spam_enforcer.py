@@ -81,7 +81,12 @@ Connect-ExchangeOnline -AppId $AppId -CertificateThumbprint $Thumb -Organization
 function Snapshot() {{
   $pol = @(
     Get-HostedContentFilterPolicy -ErrorAction Stop |
-      Select-Object Name,IsDefault,Identity
+      Select-Object Name,IsDefault,Identity,
+        SpamAction,
+        BulkSpamAction,
+        HighConfidenceSpamAction,
+        PhishSpamAction
+
   )
   $rules = @(
     Get-HostedContentFilterRule -ErrorAction Stop |
