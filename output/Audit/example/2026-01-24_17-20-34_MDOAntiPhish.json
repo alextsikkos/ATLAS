@@ -1,0 +1,51 @@
+{
+  "tenant": "example",
+  "controlId": "MDOAntiPhish",
+  "action": "ensure_applied",
+  "displayName": "Defender for Office 365: Anti-phish configured (status check)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforcer executed; anti-phish rule enabled/verified",
+  "details": {
+    "result": {
+      "mode": "enforce",
+      "compliant": true,
+      "action": "no_change",
+      "before": {
+        "policyCount": 2,
+        "ruleCount": 1,
+        "policies": [
+          {
+            "Name": "ATLAS AntiPhish Policy",
+            "Enabled": true,
+            "IsBuiltInProtection": null,
+            "IsValid": true,
+            "Identity": "ATLAS AntiPhish Policy"
+          },
+          {
+            "Name": "Office365 AntiPhish Default",
+            "Enabled": true,
+            "IsBuiltInProtection": null,
+            "IsValid": true,
+            "Identity": "Office365 AntiPhish Default"
+          }
+        ],
+        "rules": [
+          {
+            "Name": "ATLAS Baseline AntiPhish",
+            "State": "Enabled",
+            "AntiPhishPolicy": "ATLAS AntiPhish Policy",
+            "Priority": 0,
+            "Identity": "ATLAS Baseline AntiPhish"
+          }
+        ]
+      }
+    },
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforcer executed; anti-phish rule enabled/verified"
+  },
+  "status": 200,
+  "durationSeconds": 8.271
+}

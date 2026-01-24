@@ -291,56 +291,66 @@ def _mdo_quarantine_retention_period(**kwargs):
     desired_days = 30
 
     ps = f'''
-Connect-ExchangeOnline -AppId "{exo["appId"]}" `
-  -CertificateThumbprint "{exo["certificateThumbprint"]}" `
-  -Organization "{exo["organization"]}" `
-  -ShowBanner:$false
+    $ErrorActionPreference = "Stop"
+    $WarningPreference = "SilentlyContinue"
+    Import-Module ExchangeOnlineManagement
 
-$policy = Get-HostedContentFilterPolicy |
-  Where-Object {{ $_.Name -eq "ATLAS AntiSpam Policy" }} |
-  Select-Object -First 1
+    try {{
+      Connect-ExchangeOnline -AppId "{exo["appId"]}" `
+        -CertificateThumbprint "{exo["certificateThumbprint"]}" `
+        -Organization "{exo["organization"]}" `
+        -ShowBanner:$false | Out-Null
 
-if (-not $policy) {{
-  @{{
-    action = "missing_atlas_policy"
-    compliant = $false
-  }} | ConvertTo-Json
-  exit
-}}
+      $policy = Get-HostedContentFilterPolicy |
+        Where-Object {{ $_.Name -eq "ATLAS AntiSpam Policy" }} |
+        Select-Object -First 1
 
-$current = $policy.QuarantineRetentionPeriod
+      if (-not $policy) {{
+        @{{
+          action = "missing_atlas_policy"
+          compliant = $false
+        }} | ConvertTo-Json
+        return
+      }}
 
-if ($current -ge {desired_days}) {{
-  @{{
-    action = "no_change"
-    compliant = $true
-    current = $current
-  }} | ConvertTo-Json
-  exit
-}}
+      $current = $policy.QuarantineRetentionPeriod
 
-if ("{mode}" -ne "enforce") {{
-  @{{
-    action = "report_only_drift"
-    compliant = $false
-    current = $current
-    desired = {desired_days}
-  }} | ConvertTo-Json
-  exit
-}}
+      if ($current -ge {desired_days}) {{
+        @{{
+          action = "no_change"
+          compliant = $true
+          current = $current
+        }} | ConvertTo-Json
+        return
+      }}
 
-Set-HostedContentFilterPolicy -Identity $policy.Identity `
-  -QuarantineRetentionPeriod {desired_days}
+      if ("{mode}" -ne "enforce") {{
+        @{{
+          action = "report_only_drift"
+          compliant = $false
+          current = $current
+          desired = {desired_days}
+        }} | ConvertTo-Json
+        return
+      }}
 
-$after = Get-HostedContentFilterPolicy -Identity $policy.Identity
+      Set-HostedContentFilterPolicy -Identity $policy.Identity `
+        -QuarantineRetentionPeriod {desired_days} | Out-Null
 
-@{{
-  action = "set_policy_properties"
-  compliant = ($after.QuarantineRetentionPeriod -ge {desired_days})
-  before = $current
-  after = $after.QuarantineRetentionPeriod
-}} | ConvertTo-Json
-'''
+      $after = Get-HostedContentFilterPolicy -Identity $policy.Identity
+
+      @{{
+        action = "set_policy_properties"
+        compliant = ($after.QuarantineRetentionPeriod -ge {desired_days})
+        before = $current
+        after = $after.QuarantineRetentionPeriod
+      }} | ConvertTo-Json
+    }}
+    finally {{
+      try {{ Disconnect-ExchangeOnline -Confirm:$false | Out-Null }} catch {{}}
+    }}
+    '''
+
 
     from subprocess import run
     import json
