@@ -293,6 +293,7 @@ def _mdo_quarantine_retention_period(**kwargs):
     ps = f'''
     $ErrorActionPreference = "Stop"
     $WarningPreference = "SilentlyContinue"
+
     Import-Module ExchangeOnlineManagement
 
     try {{
@@ -350,6 +351,7 @@ def _mdo_quarantine_retention_period(**kwargs):
       try {{ Disconnect-ExchangeOnline -Confirm:$false | Out-Null }} catch {{}}
     }}
     '''
+
 
 
     from subprocess import run

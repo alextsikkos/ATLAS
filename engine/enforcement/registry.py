@@ -43,6 +43,7 @@ def get_enforcer(control_id: str) -> Optional[EnforcerFn]:
     _safe_import("engine.enforcement.mdo_safe_links_enforcer")
     _safe_import("engine.enforcement.mdo_hosted_content_filter_enforcers")
     _safe_import("engine.enforcement.mdo_safe_links_office_apps_enforcer")
+    _safe_import("engine.enforcement.mdo_hosted_content_filter_enforcers")
 
     # (keep any other existing _safe_import lines you already have)
 
