@@ -264,6 +264,121 @@ finally {{
         200,
     )
 
+def _mdo_quarantine_retention_period(**kwargs):
+    tenant = kwargs["tenant"]
+    approval = kwargs.get("approval") or {}
+    mode = (kwargs.get("mode") or "report-only").lower()
+
+    if mode == "enforce" and approval.get("approved") is not True:
+        return (
+            "NOT_EVALUATED",
+            "APPROVAL_REQUIRED",
+            "Approval required to enforce quarantine retention period",
+            {},
+            409,
+        )
+
+    exo = tenant.get("exoPowershell") or {}
+    if not (exo.get("appId") and exo.get("certificateThumbprint") and exo.get("organization")):
+        return (
+            "ERROR",
+            "MISSING_PREREQUISITE",
+            "Missing Exchange Online PowerShell configuration",
+            {},
+            424,
+        )
+
+    desired_days = 30
+
+    ps = f'''
+Connect-ExchangeOnline -AppId "{exo["appId"]}" `
+  -CertificateThumbprint "{exo["certificateThumbprint"]}" `
+  -Organization "{exo["organization"]}" `
+  -ShowBanner:$false
+
+$policy = Get-HostedContentFilterPolicy |
+  Where-Object {{ $_.Name -eq "ATLAS AntiSpam Policy" }} |
+  Select-Object -First 1
+
+if (-not $policy) {{
+  @{{
+    action = "missing_atlas_policy"
+    compliant = $false
+  }} | ConvertTo-Json
+  exit
+}}
+
+$current = $policy.QuarantineRetentionPeriod
+
+if ($current -ge {desired_days}) {{
+  @{{
+    action = "no_change"
+    compliant = $true
+    current = $current
+  }} | ConvertTo-Json
+  exit
+}}
+
+if ("{mode}" -ne "enforce") {{
+  @{{
+    action = "report_only_drift"
+    compliant = $false
+    current = $current
+    desired = {desired_days}
+  }} | ConvertTo-Json
+  exit
+}}
+
+Set-HostedContentFilterPolicy -Identity $policy.Identity `
+  -QuarantineRetentionPeriod {desired_days}
+
+$after = Get-HostedContentFilterPolicy -Identity $policy.Identity
+
+@{{
+  action = "set_policy_properties"
+  compliant = ($after.QuarantineRetentionPeriod -ge {desired_days})
+  before = $current
+  after = $after.QuarantineRetentionPeriod
+}} | ConvertTo-Json
+'''
+
+    from subprocess import run
+    import json
+
+    r = run(
+        ["powershell", "-NoProfile", "-NonInteractive", "-Command", ps],
+        capture_output=True,
+        text=True,
+    )
+
+    if r.returncode != 0:
+        return (
+            "ERROR",
+            "ENFORCER_ERROR",
+            "PowerShell execution failed",
+            {"stderr": r.stderr},
+            500,
+        )
+
+    data = json.loads(r.stdout)
+    compliant = data.get("compliant", False)
+
+    if mode != "enforce":
+        return (
+            ("COMPLIANT" if compliant else "DRIFTED"),
+            "REPORT_ONLY_EVALUATED",
+            "Quarantine retention evaluated",
+            data,
+            200,
+        )
+
+    return (
+        ("COMPLIANT" if compliant else "DRIFTED"),
+        "ENFORCER_EXECUTED",
+        "Quarantine retention enforced",
+        data,
+        200,
+    )
 
 # ---- register concrete controls ----
 
@@ -311,3 +426,4 @@ def _phishing_action(**kwargs):
 register("MDOBulkSpamAction", _bulk_spam_action)
 register("MDOHighConfidenceSpamAction", _high_conf_spam_action)
 register("MDOPhishingAction", _phishing_action)
+register("MDOQuarantineRetentionPeriod", _mdo_quarantine_retention_period)

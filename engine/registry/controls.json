@@ -984,7 +984,11 @@
   "name": "Defender for Office 365: Quarantine retention period configured (Secure Score)",
   "tier": 1,
   "category": "Email",
-  "detectOnly": true,
+  "default_mode": "audit",
+  "detectOnly": false,
+  "approvalRequired": true,
+  "canCauseLockout": false,
+  "requiresOnboardingDiscussion": false,
   "secureScoreControlIds": [
     "mdo_quarantineretentionperiod"
   ],

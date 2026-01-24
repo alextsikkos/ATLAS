@@ -1,0 +1,24 @@
+{
+  "tenant": "example",
+  "controlId": "EmailVerifiedUsersCannotJoinOrganization",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Block email-verified users from joining the organization",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforce: already compliant (no change needed).",
+  "details": {
+    "before": {
+      "EmailVerifiedUsersCannotJoinOrganization": false
+    },
+    "desired": {
+      "EmailVerifiedUsersCannotJoinOrganization": false
+    },
+    "approvedForEnforce": true,
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforce: already compliant (no change needed)."
+  },
+  "status": 200,
+  "durationSeconds": 0.0
+}

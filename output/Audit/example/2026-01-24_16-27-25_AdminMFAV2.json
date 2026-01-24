@@ -1,0 +1,18 @@
+{
+  "tenant": "example",
+  "controlId": "AdminMFAV2",
+  "action": "ensure_skipped_no_drift",
+  "displayName": "ATLAS - Admin MFA",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "status": 200,
+  "policyId": "24f1f541-a443-4ef5-bb07-1ee1ad3ff6b1",
+  "details": {
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforcement executed successfully."
+  },
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforcement executed successfully.",
+  "durationSeconds": 0.383
+}
