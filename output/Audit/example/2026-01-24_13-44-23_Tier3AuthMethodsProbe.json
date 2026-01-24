@@ -1,0 +1,92 @@
+{
+  "tenant": "example",
+  "controlId": "Tier3AuthMethodsProbe",
+  "action": "detect_only",
+  "state": "COMPLIANT",
+  "displayName": "Tier 3: Auth methods probe",
+  "approved": false,
+  "mode": "detect-only",
+  "status": 200,
+  "details": {
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Probed known auth method configuration IDs individually (catalog endpoint not available).",
+    "candidates": [
+      "microsoftAuthenticator",
+      "fido2",
+      "sms",
+      "voice",
+      "temporaryAccessPass",
+      "emailAuthenticationMethod",
+      "softwareOath",
+      "hardwareOath",
+      "windowsHelloForBusiness",
+      "passwordlessMicrosoftAuthenticator",
+      "x509Certificate"
+    ],
+    "supportedCount": 8,
+    "forbiddenCount": 0,
+    "unsupportedCount": 3,
+    "otherCount": 0,
+    "supported": [
+      {
+        "id": "microsoftAuthenticator",
+        "state": "enabled",
+        "odataType": "#microsoft.graph.microsoftAuthenticatorAuthenticationMethodConfiguration"
+      },
+      {
+        "id": "voice",
+        "state": "disabled",
+        "odataType": "#microsoft.graph.voiceAuthenticationMethodConfiguration"
+      },
+      {
+        "id": "sms",
+        "state": "disabled",
+        "odataType": "#microsoft.graph.smsAuthenticationMethodConfiguration"
+      },
+      {
+        "id": "temporaryAccessPass",
+        "state": "enabled",
+        "odataType": "#microsoft.graph.temporaryAccessPassAuthenticationMethodConfiguration"
+      },
+      {
+        "id": "softwareOath",
+        "state": "enabled",
+        "odataType": "#microsoft.graph.softwareOathAuthenticationMethodConfiguration"
+      },
+      {
+        "id": "fido2",
+        "state": "enabled",
+        "odataType": "#microsoft.graph.fido2AuthenticationMethodConfiguration"
+      },
+      {
+        "id": "hardwareOath",
+        "state": null,
+        "odataType": null
+      },
+      {
+        "id": "x509Certificate",
+        "state": "disabled",
+        "odataType": "#microsoft.graph.x509CertificateAuthenticationMethodConfiguration"
+      }
+    ],
+    "forbidden": [],
+    "unsupported": [
+      {
+        "id": "emailAuthenticationMethod",
+        "status": 404
+      },
+      {
+        "id": "windowsHelloForBusiness",
+        "status": 404
+      },
+      {
+        "id": "passwordlessMicrosoftAuthenticator",
+        "status": 404
+      }
+    ],
+    "other": []
+  },
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Probed known auth method configuration IDs individually (catalog endpoint not available).",
+  "durationSeconds": 1.53
+}
