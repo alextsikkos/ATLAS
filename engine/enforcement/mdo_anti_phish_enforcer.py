@@ -73,6 +73,7 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
     $Thumb = "{thumb}"
     $Org = "{org}"
     $Mode = "{mode}"
+    try {{ Import-Module ExchangeOnlineManagement -ErrorAction Stop }} catch {{}}
 
     Connect-ExchangeOnline -AppId $AppId -CertificateThumbprint $Thumb -Organization $Org -ShowBanner:$false | Out-Null
 
@@ -126,11 +127,28 @@ def _enforce_mdo_anti_phish(**kwargs) -> tuple[str, str, str, dict, int]:
         # Enforce-mode: create ATLAS policy if none exists
         if (-not $targetPolicy -and $Mode -eq "enforce") {{
             $atlasPolicyName = "ATLAS AntiPhish Policy"
+            $createPolicyError = $null
             try {{
                 New-AntiPhishPolicy -Name $atlasPolicyName -Enabled $true -ErrorAction Stop | Out-Null
-            }} catch {{}}
+            }} catch {{
+                $createPolicyError = ($_ | Out-String)
+            }}
 
             $targetPolicy = Get-AntiPhishPolicy | Where-Object {{ $_.Name -eq $atlasPolicyName }} | Select-Object -First 1
+
+            if (-not $targetPolicy -and $createPolicyError) {{
+                $out = [PSCustomObject]@{{
+                    mode = $Mode
+                    compliant = $false
+                    action = "blocked_no_rules"
+                    reasonCode = "CREATION_FAILED"
+                    reasonDetail = "Failed to create ATLAS AntiPhish policy: $createPolicyError"
+                    before = $before
+                }}
+                $out | ConvertTo-Json -Depth 10
+                exit 0
+            }}
+
         }}
 
         # Final safety guard (single exit point)
