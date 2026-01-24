@@ -1,0 +1,19 @@
+{
+  "tenant": "example",
+  "controlId": "MDOSafeAttachments",
+  "action": "ensure_applied",
+  "displayName": "Defender for Office 365: Safe Attachments enabled (status check)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "ERROR",
+  "reasonCode": "ENFORCER_ERROR",
+  "reasonDetail": "Failed to parse PowerShell JSON output",
+  "details": {
+    "raw_stdout": "WARNING: Dynamic Email Delivery is for O365 hosted mailboxes only. If this action is chosen for a recipient with a \nnon-hosted mailbox, then a Replace action will be taken for that recipient.\n{\n    \"mode\":  \"enforce\",\n    \"action\":  \"created_baseline_rule\",\n    \"compliant\":  true,\n    \"createdRuleName\":  \"ATLAS Baseline SafeAttachments\",\n    \"targetPolicy\":  \"ATLAS Safe Attachments Policy\",\n    \"before\":  {\n                   \"policyCount\":  1,\n                   \"ruleCount\":  0,\n                   \"policies\":  [\n                                    {\n                                        \"Name\":  \"Built-In Protection Policy\",\n                                        \"Enable\":  true,\n                                        \"Action\":  \"Block\",\n                                        \"IsBuiltInProtection\":  true,\n                                        \"IsValid\":  true,\n                                        \"Identity\":  \"Built-In Protection Policy\"\n                                    }\n                                ],\n                   \"rules\":  [\n\n                             ]\n               },\n    \"after\":  {\n                  \"policyCount\":  2,\n                  \"ruleCount\":  1,\n                  \"policies\":  [\n                                   {\n                                       \"Name\":  \"Built-In Protection Policy\",\n                                       \"Enable\":  true,\n                                       \"Action\":  \"Block\",\n                                       \"IsBuiltInProtection\":  true,\n                                       \"IsValid\":  true,\n                                       \"Identity\":  \"Built-In Protection Policy\"\n                                   },\n                                   {\n                                       \"Name\":  \"ATLAS Safe Attachments Policy\",\n                                       \"Enable\":  true,\n                                       \"Action\":  \"DynamicDelivery\",\n                                       \"IsBuiltInProtection\":  false,\n                                       \"IsValid\":  true,\n                                       \"Identity\":  \"ATLAS Safe Attachments Policy\"\n                                   }\n                               ],\n                  \"rules\":  [\n                                {\n                                    \"Name\":  \"ATLAS Baseline SafeAttachments\",\n                                    \"State\":  \"Enabled\",\n                                    \"SafeAttachmentPolicy\":  \"ATLAS Safe Attachments Policy\",\n                                    \"Priority\":  0,\n                                    \"Identity\":  \"ATLAS Baseline SafeAttachments\"\n                                }\n                            ]\n              }\n}",
+    "raw_stderr": "",
+    "reasonCode": "ENFORCER_ERROR",
+    "reasonDetail": "Failed to parse PowerShell JSON output"
+  },
+  "status": 500,
+  "durationSeconds": 8.441
+}

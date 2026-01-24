@@ -66,6 +66,7 @@ def _enforce_mdo_safe_attachments(**kwargs) -> tuple[str, str, str, dict, int]:
 
     ps = fr"""
 $ErrorActionPreference = "Stop"
+$WarningPreference = "SilentlyContinue"
 
 Import-Module ExchangeOnlineManagement
 
