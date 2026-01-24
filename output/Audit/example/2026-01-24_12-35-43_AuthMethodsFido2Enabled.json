@@ -1,0 +1,24 @@
+{
+  "tenant": "example",
+  "controlId": "AuthMethodsFido2Enabled",
+  "action": "ensure_applied",
+  "displayName": "Authentication Methods: FIDO2 security keys enabled",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforce: already compliant (no change needed).",
+  "details": {
+    "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/fido2",
+    "before": {
+      "AuthMethodsFido2Enabled": "enabled"
+    },
+    "desired": {
+      "AuthMethodsFido2Enabled": "enabled"
+    },
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforce: already compliant (no change needed)."
+  },
+  "status": 200,
+  "durationSeconds": 0.473
+}
