@@ -1,0 +1,76 @@
+{
+  "tenant": "example",
+  "controlId": "MDOSafeLinks",
+  "action": "ensure_applied",
+  "displayName": "Defender for Office 365: Safe Links enabled (status check)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforcer executed; safe links rule enabled/verified",
+  "details": {
+    "result": {
+      "mode": "enforce",
+      "action": "created_baseline_rule",
+      "compliant": true,
+      "createdRuleName": "ATLAS Baseline SafeLinks",
+      "targetPolicy": "ATLAS Safe Links Policy",
+      "before": {
+        "policyCount": 1,
+        "ruleCount": 0,
+        "policies": [
+          {
+            "Name": "Built-In Protection Policy",
+            "EnableSafeLinksForEmail": true,
+            "EnableSafeLinksForOffice": true,
+            "EnableSafeLinksForTeams": true,
+            "IsBuiltInProtection": true,
+            "RecommendedPolicyType": "Custom",
+            "IsValid": true,
+            "Identity": "Built-In Protection Policy"
+          }
+        ],
+        "rules": []
+      },
+      "after": {
+        "policyCount": 2,
+        "ruleCount": 1,
+        "policies": [
+          {
+            "Name": "Built-In Protection Policy",
+            "EnableSafeLinksForEmail": true,
+            "EnableSafeLinksForOffice": true,
+            "EnableSafeLinksForTeams": true,
+            "IsBuiltInProtection": true,
+            "RecommendedPolicyType": "Custom",
+            "IsValid": true,
+            "Identity": "Built-In Protection Policy"
+          },
+          {
+            "Name": "ATLAS Safe Links Policy",
+            "EnableSafeLinksForEmail": true,
+            "EnableSafeLinksForOffice": true,
+            "EnableSafeLinksForTeams": true,
+            "IsBuiltInProtection": false,
+            "RecommendedPolicyType": "Custom",
+            "IsValid": true,
+            "Identity": "ATLAS Safe Links Policy"
+          }
+        ],
+        "rules": [
+          {
+            "Name": "ATLAS Baseline SafeLinks",
+            "State": "Enabled",
+            "SafeLinksPolicy": "ATLAS Safe Links Policy",
+            "Priority": 0,
+            "Identity": "ATLAS Baseline SafeLinks"
+          }
+        ]
+      }
+    },
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforcer executed; safe links rule enabled/verified"
+  },
+  "status": 200,
+  "durationSeconds": 10.016
+}
