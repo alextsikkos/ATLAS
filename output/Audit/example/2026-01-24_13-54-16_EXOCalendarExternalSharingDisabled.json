@@ -1,0 +1,27 @@
+{
+  "controlId": "EXOCalendarExternalSharingDisabled",
+  "name": "Exchange Online: Ensure external calendar sharing is not available (Secure Score)",
+  "category": "Email",
+  "tier": 1,
+  "mode": "detect-only",
+  "state": "DRIFTED",
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Evaluated via Exchange Online (Get-SharingPolicy.Domains); 1 policy(s) appear to allow external/anonymous sharing",
+  "details": {
+    "policyCount": 1,
+    "enabledPolicyCount": 1,
+    "enabledPolicies": [
+      "Default Sharing Policy"
+    ],
+    "missingDomainsPropertyCount": 0,
+    "missingDomainsPropertyPolicies": [],
+    "cmdletsUsed": [
+      "Get-SharingPolicy"
+    ],
+    "errors": {},
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Evaluated via Exchange Online (Get-SharingPolicy.Domains); 1 policy(s) appear to allow external/anonymous sharing"
+  },
+  "tenant": "example",
+  "durationSeconds": 0.0
+}
