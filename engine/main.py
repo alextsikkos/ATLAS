@@ -650,6 +650,8 @@ def main():
     except Exception:
         # Never break the run if bulk fails; fallback to per-control path (worst case: no speedup)
         pass
+    print(f"[DEBUG] HCF bulk results: {len((ctx.get('results') or {}))} keys")
+    print(f"[DEBUG] HCF bulk has MDOBulkSpamAction? {('MDOBulkSpamAction' in (ctx.get('results') or {}))}")
 
     print(f"\nMatched {len(matched)} Atlas controls:")
     # --- Auth Preflight Summary (additive, Windows-safe) ---
