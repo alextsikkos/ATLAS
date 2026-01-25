@@ -73,6 +73,10 @@ def _run_bulk_once(tenant: dict, tenant_name: str, ctx: dict) -> dict:
     if not target_ids:
         return ctx
 
+    modes = {}
+    approvals = {}
+
+
     exo_cfg = _get_exo_config(tenant)
     if not exo_cfg:
         # mark all as missing prerequisite
@@ -90,6 +94,10 @@ def _run_bulk_once(tenant: dict, tenant_name: str, ctx: dict) -> dict:
         approval = _read_approval(tenant_name, cid)
         mode = (approval.get("mode") or "report-only").strip().lower()
         approved = approval.get("approved") is True
+        effective_mode = "enforce" if (approved and mode == "enforce") else "report-only"
+        modes[cid] = effective_mode
+        approvals[cid] = (effective_mode == "enforce")
+
         prop, desired = CONTROL_FIELD_MAP[cid]
         control_specs.append(
             {

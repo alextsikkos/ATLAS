@@ -1,0 +1,60 @@
+{
+  "controlId": "MDOAntiPhishingPoliciesTuned",
+  "name": "Defender for Office 365: Anti-phishing policies tuned beyond defaults (Secure Score)",
+  "category": "Email",
+  "tier": 2,
+  "mode": "report-only",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "MISSING_DATA",
+  "reasonDetail": "Anti-phishing protection signals missing from one or more policies",
+  "details": {
+    "policiesCount": 2,
+    "policies": [
+      {
+        "EnableSpoofIntelligence": true,
+        "EnableTargetedUserProtection": false,
+        "TargetedDomainProtectionAction": "NoAction",
+        "MailboxIntelligenceProtectionAction": "NoAction",
+        "EnableSimilarDomainsSafetyTips": false,
+        "PhishThresholdLevel": 1,
+        "EnableSimilarUsersSafetyTips": false,
+        "EnableUnusualCharactersSafetyTips": false,
+        "identity": "ATLAS AntiPhish Policy",
+        "EnableMailboxIntelligenceProtection": false,
+        "EnableOrganizationDomainsProtection": false,
+        "EnableTargetedDomainsProtection": false,
+        "EnableFirstContactSafetyTips": false,
+        "EnableMailboxIntelligence": true,
+        "TargetedUserProtectionAction": "NoAction"
+      },
+      {
+        "EnableSpoofIntelligence": true,
+        "EnableTargetedUserProtection": false,
+        "TargetedDomainProtectionAction": "NoAction",
+        "MailboxIntelligenceProtectionAction": "NoAction",
+        "EnableSimilarDomainsSafetyTips": false,
+        "PhishThresholdLevel": 1,
+        "EnableSimilarUsersSafetyTips": false,
+        "EnableUnusualCharactersSafetyTips": false,
+        "identity": "Office365 AntiPhish Default",
+        "EnableMailboxIntelligenceProtection": false,
+        "EnableOrganizationDomainsProtection": false,
+        "EnableTargetedDomainsProtection": false,
+        "EnableFirstContactSafetyTips": false,
+        "EnableMailboxIntelligence": true,
+        "TargetedUserProtectionAction": "NoAction"
+      }
+    ],
+    "cmdletsUsed": [
+      "Get-AntiPhishPolicy"
+    ],
+    "errors": {},
+    "missingKeys": [
+      "EnableTargetedUsersProtection"
+    ],
+    "reasonCode": "MISSING_DATA",
+    "reasonDetail": "Anti-phishing protection signals missing from one or more policies"
+  },
+  "tenant": "example",
+  "durationSeconds": 0.0
+}

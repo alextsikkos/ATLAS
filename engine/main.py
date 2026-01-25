@@ -654,8 +654,9 @@ def main():
     try:
         from engine.enforcement import mdo_policy_rule_bulk as pr_bulk
         ctx = pr_bulk._run_bulk_once(tenant, tenant_name, ctx)
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[WARN] mdo_policy_rule_bulk failed; falling back to per-control: {e}")
+
 
 
 
