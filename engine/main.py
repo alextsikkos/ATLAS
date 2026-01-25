@@ -661,6 +661,12 @@ def main():
 
     except Exception as e:
         print(f"[WARN] mdo_policy_rule_bulk failed; falling back to per-control: {e}")
+    # --- Bulk EXO enforcement (MDO Safe Links policy controls) ---
+    try:
+        from engine.enforcement import mdo_safe_links_bulk as sl_bulk
+        ctx = sl_bulk._run_bulk_once(tenant, tenant_name, ctx)
+    except Exception:
+        pass
 
 
 

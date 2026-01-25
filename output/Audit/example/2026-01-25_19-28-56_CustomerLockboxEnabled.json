@@ -1,0 +1,21 @@
+{
+  "tenant": "example",
+  "controlId": "CustomerLockboxEnabled",
+  "action": "detect_only",
+  "state": "DRIFTED",
+  "displayName": "Microsoft 365: Customer Lockbox enabled (Secure Score)",
+  "mode": "detect-only",
+  "status": 200,
+  "details": {
+    "CustomerLockBoxEnabled": false,
+    "enabled_normalized": false,
+    "cmdletsUsed": [],
+    "errors": {},
+    "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+    "reasonDetail": "Evaluated via EXO OrganizationConfig (CustomerLockBoxEnabled)."
+  },
+  "reasonCode": "CUSTOM_DETECTOR_EVALUATED",
+  "reasonDetail": "Evaluated via EXO OrganizationConfig (CustomerLockBoxEnabled).",
+  "reason": "Evaluated via EXO OrganizationConfig (CustomerLockBoxEnabled).",
+  "durationSeconds": 0.0
+}
