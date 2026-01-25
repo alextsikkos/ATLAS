@@ -1,0 +1,116 @@
+{
+  "tenant": "example",
+  "controlId": "UserRiskPolicy",
+  "action": "detect_report_only",
+  "displayName": "Risky user -> MFA + password change",
+  "approved": false,
+  "mode": "report-only",
+  "state": "COMPLIANT",
+  "reasonCode": "REPORT_ONLY_EVALUATED",
+  "reasonDetail": "Report-only: policy matches desired",
+  "details": {
+    "result": {
+      "result": "skipped_no_drift",
+      "status": 200,
+      "policyId": "9f9cb8e2-578d-4278-88d4-1b93219b7a28",
+      "body": {
+        "id": "9f9cb8e2-578d-4278-88d4-1b93219b7a28",
+        "templateId": null,
+        "displayName": "ATLAS - Risky User Password Change (Report Only)",
+        "createdDateTime": "2026-01-24T16:11:06.9050841Z",
+        "modifiedDateTime": null,
+        "state": "enabledForReportingButNotEnforced",
+        "sessionControls": null,
+        "conditions": {
+          "userRiskLevels": [
+            "medium",
+            "high"
+          ],
+          "signInRiskLevels": [],
+          "clientAppTypes": [
+            "all"
+          ],
+          "servicePrincipalRiskLevels": [],
+          "insiderRiskLevels": null,
+          "platforms": null,
+          "locations": null,
+          "devices": null,
+          "clientApplications": null,
+          "authenticationFlows": null,
+          "applications": {
+            "includeApplications": [
+              "All"
+            ],
+            "excludeApplications": [],
+            "includeUserActions": [],
+            "includeAuthenticationContextClassReferences": [],
+            "applicationFilter": null
+          },
+          "users": {
+            "includeUsers": [
+              "All"
+            ],
+            "excludeUsers": [],
+            "includeGroups": [],
+            "excludeGroups": [
+              "b71bc79f-f89b-45ad-b11f-a839cf2e9829"
+            ],
+            "includeRoles": [],
+            "excludeRoles": [],
+            "includeGuestsOrExternalUsers": null,
+            "excludeGuestsOrExternalUsers": null
+          }
+        },
+        "grantControls": {
+          "operator": "AND",
+          "builtInControls": [
+            "mfa",
+            "passwordChange"
+          ],
+          "customAuthenticationFactors": [],
+          "termsOfUse": [],
+          "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('9f9cb8e2-578d-4278-88d4-1b93219b7a28')/grantControls/authenticationStrength/$entity",
+          "authenticationStrength": null
+        }
+      }
+    },
+    "desired": {
+      "displayName": "ATLAS - Risky User Password Change (Report Only)",
+      "state": "enabledForReportingButNotEnforced",
+      "conditions": {
+        "userRiskLevels": [
+          "medium",
+          "high"
+        ],
+        "clientAppTypes": [
+          "all"
+        ],
+        "applications": {
+          "includeApplications": [
+            "All"
+          ]
+        },
+        "users": {
+          "includeUsers": [
+            "All"
+          ],
+          "excludeUsers": [],
+          "excludeGroups": [
+            "b71bc79f-f89b-45ad-b11f-a839cf2e9829"
+          ]
+        }
+      },
+      "grantControls": {
+        "operator": "AND",
+        "builtInControls": [
+          "mfa",
+          "passwordChange"
+        ]
+      }
+    },
+    "reasonCode": "REPORT_ONLY_EVALUATED",
+    "reasonDetail": "Report-only: policy matches desired"
+  },
+  "status": 200,
+  "durationSeconds": 0.48
+}

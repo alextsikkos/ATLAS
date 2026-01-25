@@ -13,6 +13,9 @@ CONTROL_FIELD_MAP: Dict[str, Tuple[str, Any]] = {
     "MDOHighConfidenceSpamAction": ("HighConfidenceSpamAction", "Quarantine"),
     "MDOPhishingAction": ("PhishSpamAction", "Quarantine"),
     "MDOQuarantineRetentionPeriod": ("QuarantineRetentionPeriod", 30),
+    "MDOBlockAutoForwarding": ("AutoForwardingMode", "Off"),
+    "MDOAntiSpam": ("BulkSpamAction", "Quarantine"),  # if your AntiSpam control is driven by hosted content filter settings
+    "MDOBulkComplaintLevelThreshold": ("BulkComplaintLevelThreshold", 6),
 
     # Add these later when you implement them:
     # "MDOBulkComplaintLevelThreshold": ("BulkComplaintLevelThreshold", 6),

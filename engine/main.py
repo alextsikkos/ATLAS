@@ -654,6 +654,11 @@ def main():
     try:
         from engine.enforcement import mdo_policy_rule_bulk as pr_bulk
         ctx = pr_bulk._run_bulk_once(tenant, tenant_name, ctx)
+        print(f"[DEBUG] BULK ctx results keys count: {len((ctx.get('results') or {}))}")
+        print(f"[DEBUG] BULK has MDOAntiSpam? {('MDOAntiSpam' in (ctx.get('results') or {}))}")
+        print(f"[DEBUG] BULK has MDOSafeLinks? {('MDOSafeLinks' in (ctx.get('results') or {}))}")
+        print(f"[DEBUG] BULK has MDOBlockAutoForwarding? {('MDOBlockAutoForwarding' in (ctx.get('results') or {}))}")
+
     except Exception as e:
         print(f"[WARN] mdo_policy_rule_bulk failed; falling back to per-control: {e}")
 
