@@ -4,10 +4,17 @@ import subprocess
 from typing import Any, Dict, Tuple
 
 # ControlId -> (PolicyPropertyName, DesiredValue)
-CONTROL_FIELD_MAP: Dict[str, Tuple[str, Any]] = {
-    "MDOSafeLinks": ("EnableSafeLinksForEmail", True),
-    "MDOSafeLinksOfficeApps": ("EnableSafeLinksForOffice", True),
+CONTROL_FIELD_MAP = {
+    "MDOSafeLinks": {
+        "policyType": "SafeLinks",
+        "scope": "Email"
+    },
+    "MDOSafeLinksOfficeApps": {
+        "policyType": "SafeLinks",
+        "scope": "OfficeApps"
+    }
 }
+
 
 def _run_powershell(script: str) -> Tuple[int, str, str]:
     p = subprocess.run(
