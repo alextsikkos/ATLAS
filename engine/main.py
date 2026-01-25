@@ -516,13 +516,6 @@ def main():
         # Never crash the run for env wiring; detectors will surface missingKeys if misconfigured.
         pass
     # --- end SPO env ---
-    # --- Bulk EXO enforcement (Hosted Content Filter) ---
-    try:
-        from engine.enforcement import mdo_hosted_content_filter_bulk as hcf_bulk
-        ctx = hcf_bulk._run_bulk_once(tenant, tenant_name, ctx)
-    except Exception:
-        # Never break the run if bulk fails; fallback to per-control path (worst case: no speedup)
-        pass
 
     graph = GraphClient(tenant)
     headers = graph.headers
@@ -647,6 +640,16 @@ def main():
         dedup[m["atlasControlId"]] = m
     matched = list(dedup.values())
     tenant["_atlas_matched_controls"] = matched
+    # --- Bulk runner context (must exist even if bulk runners fail) ---
+    ctx = {"results": {}}
+
+    # --- Bulk EXO enforcement (Hosted Content Filter) ---
+    try:
+        from engine.enforcement import mdo_hosted_content_filter_bulk as hcf_bulk
+        ctx = hcf_bulk._run_bulk_once(tenant, tenant_name, ctx)
+    except Exception:
+        # Never break the run if bulk fails; fallback to per-control path (worst case: no speedup)
+        pass
 
     print(f"\nMatched {len(matched)} Atlas controls:")
     # --- Auth Preflight Summary (additive, Windows-safe) ---
