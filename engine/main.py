@@ -658,6 +658,7 @@ def main():
         print(f"[DEBUG] BULK has MDOAntiSpam? {('MDOAntiSpam' in (ctx.get('results') or {}))}")
         print(f"[DEBUG] BULK has MDOSafeLinks? {('MDOSafeLinks' in (ctx.get('results') or {}))}")
         print(f"[DEBUG] BULK has MDOBlockAutoForwarding? {('MDOBlockAutoForwarding' in (ctx.get('results') or {}))}")
+        print(f"[DEBUG] BULK has MDOSafeLinksOfficeApps? {('MDOSafeLinksOfficeApps' in (ctx.get('results') or {}))}")
 
     except Exception as e:
         print(f"[WARN] mdo_policy_rule_bulk failed; falling back to per-control: {e}")
