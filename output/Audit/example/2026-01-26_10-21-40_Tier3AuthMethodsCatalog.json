@@ -1,0 +1,29 @@
+{
+  "tenant": "example",
+  "controlId": "Tier3AuthMethodsCatalog",
+  "action": "detect_only",
+  "state": "NOT_EVALUATED",
+  "displayName": "Tier 3: Auth methods catalog",
+  "approved": false,
+  "mode": "detect-only",
+  "status": 500,
+  "details": {
+    "reasonCode": "UNSUPPORTED_API",
+    "reasonDetail": "authenticationMethodConfigurations catalog endpoint not available in this tenant/API shape (v1.0 and beta failed).",
+    "attempts": [
+      {
+        "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations",
+        "status": 400,
+        "responseText": "{\"error\":{\"code\":\"badRequest\",\"message\":\"Resource not found for segment 'authenticationMethodsPolicy/authenticationMethodConfigurations'.\",\"innerError\":{\"date\":\"2026-01-26T10:21:39\",\"request-id\":\"55665e81-1e1c-4ede-97fc-0593a383fb00\",\"client-request-id\":\"55665e81-1e1c-4ede-97fc-0593a383fb00\"}}}"
+      },
+      {
+        "url": "https://graph.microsoft.com/beta/policies/authenticationMethodsPolicy/authenticationMethodConfigurations",
+        "status": 400,
+        "responseText": "{\"error\":{\"code\":\"badRequest\",\"message\":\"Resource not found for segment 'authenticationMethodsPolicy/authenticationMethodConfigurations'.\",\"innerError\":{\"date\":\"2026-01-26T10:21:39\",\"request-id\":\"bbc53729-35cd-4e3a-b333-99c433ec8197\",\"client-request-id\":\"bbc53729-35cd-4e3a-b333-99c433ec8197\"}}}"
+      }
+    ]
+  },
+  "reasonCode": "UNSUPPORTED_API",
+  "reasonDetail": "authenticationMethodConfigurations catalog endpoint not available in this tenant/API shape (v1.0 and beta failed).",
+  "durationSeconds": 0.758
+}
