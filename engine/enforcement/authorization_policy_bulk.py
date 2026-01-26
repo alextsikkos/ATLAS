@@ -219,6 +219,21 @@ def _make_per_control_enforcer(control_id: str):
                 compliant_after = (sorted(after_val) == sorted(desired))
             else:
                 after_v = (details.get("after") or {}).get(control_id)
+                # Verify persistence (normalize Graph quirks: empty list may come back as null)
+                desired_norm = desired
+                after_norm = after_val
+
+                if isinstance(desired_norm, list) and desired_norm == [] and after_norm is None:
+                    after_norm = []
+
+                if after_norm != desired_norm:
+                    return (
+                        "NOT_EVALUATED",
+                        "UNSUPPORTED_MODE",
+                        "Enforce attempted but setting did not persist (read-back mismatch).",
+                        details,
+                        200,
+                    )
 
                 # Graph may omit list properties when empty -> treat None as [] when desired is []
                 if desired == [] and after_v is None:
