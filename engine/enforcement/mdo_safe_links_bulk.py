@@ -5,15 +5,10 @@ from typing import Any, Dict, Tuple
 
 # ControlId -> (PolicyPropertyName, DesiredValue)
 CONTROL_FIELD_MAP = {
-    "MDOSafeLinks": {
-        "policyType": "SafeLinks",
-        "scope": "Email"
-    },
-    "MDOSafeLinksOfficeApps": {
-        "policyType": "SafeLinks",
-        "scope": "OfficeApps"
-    }
+    "MDOSafeLinks": ("EnableSafeLinksForEmail", True),
+    "MDOSafeLinksOfficeApps": ("EnableSafeLinksForOffice", True),
 }
+
 
 
 def _run_powershell(script: str) -> Tuple[int, str, str]:

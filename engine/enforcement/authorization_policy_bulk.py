@@ -12,24 +12,30 @@ AUTHZ_URL = "https://graph.microsoft.com/v1.0/policies/authorizationPolicy"
 
 # controlId -> (json_path, desired_value)
 CONTROL_FIELD_MAP = {
-    # authorizationPolicy root fields
+    # User consent / apps
+    "DisableUserConsentToApps": ("allowUserConsentForApps", False),
+    "ThirdPartyAppsRestricted": ("allowUserConsentForRiskyApps", False),
+
+    # Guest / external
     "GuestInvitesRestrictedToAdminsAndGuestInviters": ("allowInvitesFrom", "adminsAndGuestInviters"),
     "EmailVerifiedUsersCannotJoinOrganization": ("allowEmailVerifiedUsersToJoinOrganization", False),
-    "EmailBasedSubscriptionsDisabled": ("allowedToSignUpEmailBasedSubscriptions", False),
+    "EmailBasedSubscriptionsDisabled": ("allowEmailBasedSubscriptions", False),
+
+    # Legacy / PowerShell
     "BlockMsolPowerShellEnabled": ("blockMsolPowerShell", True),
 
-    # defaultUserRolePermissions fields
+    # Default user role permissions
     "DefaultUserRoleAppsCreationDisabled": ("defaultUserRolePermissions.allowedToCreateApps", False),
     "DefaultUserRoleSecurityGroupsCreationDisabled": ("defaultUserRolePermissions.allowedToCreateSecurityGroups", False),
     "DefaultUserRoleTenantCreationDisabled": ("defaultUserRolePermissions.allowedToCreateTenants", False),
     "DefaultUserRoleReadOtherUsersDisabled": ("defaultUserRolePermissions.allowedToReadOtherUsers", False),
     "DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled": ("defaultUserRolePermissions.allowedToReadBitlockerKeysForOwnedDevice", False),
-    "DisableUserConsentToApps": (
-        "defaultUserRolePermissions.permissionGrantPoliciesAssigned",
-        ["ManagePermissionGrantsForSelf.microsoft-user-default-recommended"],
-    ),
 
+    # App ownership
+    "AdminOwnedAppsRestricted": ("defaultUserRolePermissions.allowedToCreateApps", False),
+    "IntegratedAppsRestricted": ("defaultUserRolePermissions.allowedToCreateSecurityGroups", False),
 }
+
 
 
 
