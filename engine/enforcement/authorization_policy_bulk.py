@@ -218,7 +218,14 @@ def _make_per_control_enforcer(control_id: str):
                     after_val = []
                 compliant_after = (sorted(after_val) == sorted(desired))
             else:
-                compliant_after = (after_val == desired)
+                after_v = (details.get("after") or {}).get(control_id)
+
+                # Graph may omit list properties when empty -> treat None as [] when desired is []
+                if desired == [] and after_v is None:
+                    after_v = []
+
+                compliant_after = (after_v == desired)
+
 
 
             if compliant_after:
