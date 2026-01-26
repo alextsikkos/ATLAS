@@ -1,0 +1,37 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-26_17-01-03",
+  "count": 3,
+  "rows": [
+    {
+      "controlId": "DisableUserConsentToApps",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "UNSUPPORTED_MODE",
+      "durationSeconds": 0.907
+    },
+    {
+      "controlId": "GuestInvitesRestrictedToAdminsAndGuestInviters",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "UNSUPPORTED_MODE",
+      "durationSeconds": 0.339
+    },
+    {
+      "controlId": "EmailVerifiedUsersCannotJoinOrganization",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "UNSUPPORTED_MODE",
+      "durationSeconds": 0.384
+    }
+  ]
+}

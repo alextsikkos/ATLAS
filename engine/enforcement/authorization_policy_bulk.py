@@ -8,14 +8,14 @@ from engine.enforcement.registry import register
 from engine.approvals.reader import is_control_approved
 
 
-AUTHZ_URL = "https://graph.microsoft.com/beta/policies/authorizationPolicy"
-
+AUTHZ_URL = "https://graph.microsoft.com/v1.0/policies/authorizationPolicy"
 
 # controlId -> (json_path, desired_value)
 CONTROL_FIELD_MAP = {
     # User consent / apps
-    "DisableUserConsentToApps": ("permissionGrantPolicyIdsAssignedToDefaultUserRole", []),
-
+    "DisableUserConsentToApps": {
+    "permissionGrantPolicyIdsAssignedToDefaultUserRole": []
+},
 
     "ThirdPartyAppsRestricted": ("allowUserConsentForRiskyApps", False),
 
@@ -40,14 +40,6 @@ CONTROL_FIELD_MAP = {
 }
 
 
-def _set_dot_path(obj: dict, path: str, value):
-    cur = obj
-    parts = path.split(".")
-    for p in parts[:-1]:
-        if p not in cur or not isinstance(cur[p], dict):
-            cur[p] = {}
-        cur = cur[p]
-    cur[parts[-1]] = value
 
 
 def _get_path(obj: dict, path: str):
@@ -194,9 +186,8 @@ def _make_per_control_enforcer(control_id: str):
 
             # PATCH ONLY THIS CONTROL'S FIELD
             path, desired = CONTROL_FIELD_MAP[control_id]
-            patch_body = {}
-            _set_dot_path(patch_body, path, desired)
-
+            patch_body: dict[str, Any] = {}
+            _set_path(patch_body, path, desired)
 
             r1 = _graph("PATCH", headers, AUTHZ_URL, json_body=patch_body, timeout_s=30)
             details["applyStatus"] = int(r1.status_code)

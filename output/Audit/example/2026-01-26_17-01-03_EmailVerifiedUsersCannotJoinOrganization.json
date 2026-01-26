@@ -1,0 +1,33 @@
+{
+  "tenant": "example",
+  "controlId": "EmailVerifiedUsersCannotJoinOrganization",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Block email-verified users from joining the organization",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "UNSUPPORTED_MODE",
+  "reasonDetail": "Enforce blocked: Graph PATCH failed (HTTP 405).",
+  "details": {
+    "before": {
+      "EmailVerifiedUsersCannotJoinOrganization": null
+    },
+    "desired": {
+      "EmailVerifiedUsersCannotJoinOrganization": false
+    },
+    "approvedForEnforce": true,
+    "applyStatus": 405,
+    "applyResponseText": "{\"error\":{\"code\":\"Request_BadRequest\",\"message\":\"Specified HTTP method is not allowed for the request target.\",\"innerError\":{\"date\":\"2026-01-26T17:01:02\",\"request-id\":\"e58d5bcd-7cc4-4821-b1cf-f447f5b5e2c4\",\"client-request-id\":\"e58d5bcd-7cc4-4821-b1cf-f447f5b5e2c4\"}}}",
+    "appliedPatchBody": {
+      "allowEmailVerifiedUsersToJoinOrganization": false
+    },
+    "applyError": {
+      "httpStatus": 405,
+      "body": "{\"error\":{\"code\":\"Request_BadRequest\",\"message\":\"Specified HTTP method is not allowed for the request target.\",\"innerError\":{\"date\":\"2026-01-26T17:01:02\",\"request-id\":\"e58d5bcd-7cc4-4821-b1cf-f447f5b5e2c4\",\"client-request-id\":\"e58d5bcd-7cc4-4821-b1cf-f447f5b5e2c4\"}}}"
+    },
+    "reasonCode": "UNSUPPORTED_MODE",
+    "reasonDetail": "Enforce blocked: Graph PATCH failed (HTTP 405)."
+  },
+  "status": 405,
+  "durationSeconds": 0.384
+}
