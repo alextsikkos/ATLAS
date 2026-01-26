@@ -14,9 +14,8 @@ AUTHZ_URL = "https://graph.microsoft.com/beta/policies/authorizationPolicy"
 # controlId -> (json_path, desired_value)
 CONTROL_FIELD_MAP = {
     # User consent / apps
-    "DisableUserConsentToApps": {
-    "permissionGrantPolicyIdsAssignedToDefaultUserRole": []
-},
+    "DisableUserConsentToApps": ("permissionGrantPolicyIdsAssignedToDefaultUserRole", []),
+
 
     "ThirdPartyAppsRestricted": ("allowUserConsentForRiskyApps", False),
 
