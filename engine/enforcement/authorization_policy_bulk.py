@@ -8,7 +8,7 @@ from engine.enforcement.registry import register
 from engine.approvals.reader import is_control_approved
 
 
-AUTHZ_URL = "https://graph.microsoft.com/beta/policies/authorizationPolicy"
+AUTHZ_URL = "https://graph.microsoft.com/v1.0/policies/authorizationPolicy/authorizationPolicy"
 
 # controlId -> (json_path, desired_value)
 CONTROL_FIELD_MAP = {
