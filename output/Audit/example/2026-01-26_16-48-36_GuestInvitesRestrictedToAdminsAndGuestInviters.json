@@ -1,0 +1,33 @@
+{
+  "tenant": "example",
+  "controlId": "GuestInvitesRestrictedToAdminsAndGuestInviters",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Restrict guest invites to admins and guest inviters",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "UNSUPPORTED_MODE",
+  "reasonDetail": "Enforce blocked: Graph PATCH failed (HTTP 405).",
+  "details": {
+    "before": {
+      "GuestInvitesRestrictedToAdminsAndGuestInviters": null
+    },
+    "desired": {
+      "GuestInvitesRestrictedToAdminsAndGuestInviters": "adminsAndGuestInviters"
+    },
+    "approvedForEnforce": true,
+    "applyStatus": 405,
+    "applyResponseText": "{\"error\":{\"code\":\"Request_BadRequest\",\"message\":\"Specified HTTP method is not allowed for the request target.\",\"innerError\":{\"date\":\"2026-01-26T16:48:35\",\"request-id\":\"bbaf0480-5939-4709-9f0b-b968d0fc6d28\",\"client-request-id\":\"bbaf0480-5939-4709-9f0b-b968d0fc6d28\"}}}",
+    "appliedPatchBody": {
+      "allowInvitesFrom": "adminsAndGuestInviters"
+    },
+    "applyError": {
+      "httpStatus": 405,
+      "body": "{\"error\":{\"code\":\"Request_BadRequest\",\"message\":\"Specified HTTP method is not allowed for the request target.\",\"innerError\":{\"date\":\"2026-01-26T16:48:35\",\"request-id\":\"bbaf0480-5939-4709-9f0b-b968d0fc6d28\",\"client-request-id\":\"bbaf0480-5939-4709-9f0b-b968d0fc6d28\"}}}"
+    },
+    "reasonCode": "UNSUPPORTED_MODE",
+    "reasonDetail": "Enforce blocked: Graph PATCH failed (HTTP 405)."
+  },
+  "status": 405,
+  "durationSeconds": 0.347
+}
