@@ -1,0 +1,19 @@
+{
+  "tenant": "example",
+  "controlId": "MDOSafeAttachmentsBlockAction",
+  "action": "ensure_applied",
+  "displayName": "Defender for Office 365: Safe Attachments action is Block (ATLAS policy)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Safe Attachments action enforced",
+  "details": {
+    "compliant": true,
+    "action": "no_change",
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Safe Attachments action enforced"
+  },
+  "status": 200,
+  "durationSeconds": 6.044
+}

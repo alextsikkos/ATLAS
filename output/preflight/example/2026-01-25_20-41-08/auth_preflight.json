@@ -1,0 +1,38 @@
+{
+  "tenant": {
+    "name": "example",
+    "domain": "6twcdy.onmicrosoft.com"
+  },
+  "generatedAt": "2026-01-25_20-41-08",
+  "authPaths": {
+    "graph": {
+      "status": "READY",
+      "detail": "App-only Graph auth present",
+      "missing": []
+    },
+    "exoIpps": {
+      "status": "CONFIGURED",
+      "detail": "App-only EXO/IPPSSession auth configured",
+      "missing": []
+    },
+    "teamsPs": {
+      "status": "CONFIGURED",
+      "detail": "App-only Teams PowerShell auth configured",
+      "missing": []
+    },
+    "spoPs": {
+      "status": "CONFIGURED",
+      "detail": "App-only SPO auth configured",
+      "missing": []
+    },
+    "mcas": {
+      "status": "CONFIGURED",
+      "detail": "MCAS API configured",
+      "missing": [],
+      "tokenTest": "OK",
+      "apiUrl": "https://6twcdy.eu2.portal.cloudappsecurity.com"
+    }
+  },
+  "blockedByMissingAuth": {},
+  "matchedControlsCount": 116
+}
