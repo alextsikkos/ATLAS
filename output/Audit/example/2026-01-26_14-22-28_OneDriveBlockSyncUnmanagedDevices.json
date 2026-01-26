@@ -1,0 +1,25 @@
+{
+  "tenant": "example",
+  "controlId": "OneDriveBlockSyncUnmanagedDevices",
+  "action": "detect_only",
+  "state": "NOT_EVALUATED",
+  "displayName": "OneDrive: Block sync from unmanaged devices (Secure Score)",
+  "mode": "detect-only",
+  "status": 200,
+  "details": {
+    "error": "Interactive SPO auth is disabled. Configure spoAppAuth (clientId/tenantId/certificateThumbprint) in the tenant JSON.",
+    "raw": {
+      "ok": false,
+      "error": "Interactive SPO auth is disabled. Configure spoAppAuth (clientId/tenantId/certificateThumbprint) in the tenant JSON.",
+      "tenant": null,
+      "adminUrl": "https://6twcdy-admin.sharepoint.com",
+      "exitCode": 0
+    },
+    "reasonCode": "CUSTOM_DETECTOR_ERROR",
+    "reasonDetail": "Control not evaluated (blocked, missing data, or error)."
+  },
+  "reason": "SPO tenant settings detector failed (SPO PowerShell).",
+  "reasonCode": "CUSTOM_DETECTOR_ERROR",
+  "reasonDetail": "Control not evaluated (blocked, missing data, or error).",
+  "durationSeconds": 0.0
+}

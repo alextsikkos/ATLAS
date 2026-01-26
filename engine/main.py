@@ -1,6 +1,7 @@
 # engine/main.py
 import argparse, json, os, time
 import sys
+import os
 from .auth.token import graph_headers
 from .audit.logger import write_json, utc_stamp
 from .detection.secure_score import fetch_secure_score, fetch_control_profiles, build_findings
@@ -640,6 +641,26 @@ def main():
         dedup[m["atlasControlId"]] = m
     matched = list(dedup.values())
     tenant["_atlas_matched_controls"] = matched
+    # ============================
+    # DEV SPEED: limit controls
+    # ============================
+    import os
+
+    only_raw = os.getenv("ATLAS_ONLY_CONTROLS", "").strip()
+    if only_raw:
+        only_set = {c.strip() for c in only_raw.split(",") if c.strip()}
+
+        before = len(tenant.get("_atlas_matched_controls", []))
+
+        tenant["_atlas_matched_controls"] = [
+            c for c in tenant.get("_atlas_matched_controls", [])
+            if (c.get("atlasControlId") or "").strip() in only_set
+        ]
+
+        after = len(tenant.get("_atlas_matched_controls", []))
+        print(f"=== ATLAS_ONLY_CONTROLS applied: {after}/{before} controls selected ===")
+    # ============================
+
     import os
 
     only_raw = (os.getenv("ATLAS_ONLY_CONTROLS") or "").strip()
@@ -658,6 +679,7 @@ def main():
             c for c in tenant.get("_atlas_matched_controls", [])
             if (c.get("atlasControlId") or "").strip().lower() not in skip_set
         ]
+    matched = tenant.get("_atlas_matched_controls", matched)
 
     # --- Bulk runner context (must exist even if bulk runners fail) ---
     ctx = {"results": {}}
