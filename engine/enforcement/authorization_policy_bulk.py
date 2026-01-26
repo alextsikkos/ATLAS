@@ -210,7 +210,16 @@ def _make_per_control_enforcer(control_id: str):
                 details["after"] = {control_id: None}
                 details["afterReadError"] = {"httpStatus": r2.status_code, "body": (r2.text or "")[:2000]}
 
-            compliant_after = (details.get("after") or {}).get(control_id) == desired
+            after_val = (details.get("after") or {}).get(control_id)
+
+            # Graph omits empty arrays on read-back; treat None as [] when desired is a list
+            if isinstance(desired, list):
+                if after_val is None:
+                    after_val = []
+                compliant_after = (sorted(after_val) == sorted(desired))
+            else:
+                compliant_after = (after_val == desired)
+
 
             if compliant_after:
                 return ("UPDATED", "ENFORCER_EXECUTED", "Enforce: applied AuthorizationPolicy change and verified.", details, int(r2.status_code) if r2.status_code else int(status))
