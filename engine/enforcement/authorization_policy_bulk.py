@@ -13,10 +13,7 @@ AUTHZ_URL = "https://graph.microsoft.com/v1.0/policies/authorizationPolicy"
 # controlId -> (json_path, desired_value)
 CONTROL_FIELD_MAP = {
     # User consent / apps
-    "DisableUserConsentToApps": {
-    "permissionGrantPolicyIdsAssignedToDefaultUserRole": []
-},
-
+    "DisableUserConsentToApps": ("allowUserConsentForApps", False),
     "ThirdPartyAppsRestricted": ("allowUserConsentForRiskyApps", False),
 
     # Guest / external
