@@ -640,6 +640,25 @@ def main():
         dedup[m["atlasControlId"]] = m
     matched = list(dedup.values())
     tenant["_atlas_matched_controls"] = matched
+    import os
+
+    only_raw = (os.getenv("ATLAS_ONLY_CONTROLS") or "").strip()
+    skip_raw = (os.getenv("ATLAS_SKIP_CONTROLS") or "").strip()
+
+    if only_raw:
+        only_set = {c.strip().lower() for c in only_raw.split(",") if c.strip()}
+        tenant["_atlas_matched_controls"] = [
+            c for c in tenant.get("_atlas_matched_controls", [])
+            if (c.get("atlasControlId") or "").strip().lower() in only_set
+        ]
+
+    if skip_raw:
+        skip_set = {c.strip().lower() for c in skip_raw.split(",") if c.strip()}
+        tenant["_atlas_matched_controls"] = [
+            c for c in tenant.get("_atlas_matched_controls", [])
+            if (c.get("atlasControlId") or "").strip().lower() not in skip_set
+        ]
+
     # --- Bulk runner context (must exist even if bulk runners fail) ---
     ctx = {"results": {}}
 

@@ -149,25 +149,22 @@ def _admin_owned_apps_restricted(**kwargs):
     def _cur(ap: dict):
         return (ap.get("defaultUserRolePermissions") or {}).get("allowedToCreateApps", None)
 
-    # Preserve the whole object to avoid partial PATCH semantics resetting other fields
+    # Preserve whole object so PATCH doesn't accidentally wipe other perms
     def _payload_from(ap: dict) -> dict:
         durp = (ap.get("defaultUserRolePermissions") or {}).copy()
         durp["allowedToCreateApps"] = False
         return {"defaultUserRolePermissions": durp}
 
-
     return _enforce_authz_bool(
         tenant=tenant,
-        control_id="ThirdPartyAppsRestricted",
+        control_id="AdminOwnedAppsRestricted",
         approval=approval,
         mode=mode,
         get_current_value_fn=_cur,
-        desired_payload={"allowUserConsentForRiskyApps": False},
+        desired_payload=None,              # <-- computed from current object
         desired_value=False,
+        build_payload_fn=_payload_from,    # <-- ensures safe patch semantics
     )
-
-
-
 
 # =========================
 # IntegratedAppsRestricted
@@ -180,20 +177,21 @@ def _integrated_apps_restricted(**kwargs):
     def _cur(ap: dict):
         return (ap.get("defaultUserRolePermissions") or {}).get("allowedToCreateSecurityGroups", None)
 
-    payload = {"defaultUserRolePermissions": {"allowedToCreateSecurityGroups": False}}
+    def _payload_from(ap: dict) -> dict:
+        durp = (ap.get("defaultUserRolePermissions") or {}).copy()
+        durp["allowedToCreateSecurityGroups"] = False
+        return {"defaultUserRolePermissions": durp}
 
     return _enforce_authz_bool(
         tenant=tenant,
-        control_id="ThirdPartyAppsRestricted",
+        control_id="IntegratedAppsRestricted",
         approval=approval,
         mode=mode,
         get_current_value_fn=_cur,
-        desired_payload={"allowUserConsentForRiskyApps": False},
+        desired_payload=None,
         desired_value=False,
+        build_payload_fn=_payload_from,
     )
-
-
-
 
 # =========================
 # ThirdPartyAppsRestricted
@@ -214,10 +212,9 @@ def _third_party_apps_restricted(**kwargs):
         approval=approval,
         mode=mode,
         get_current_value_fn=_cur,
-        desired_payload={"allowUserConsentForRiskyApps": False},
+        desired_payload=payload,
         desired_value=False,
     )
-
 
 
 # Register (batch)
