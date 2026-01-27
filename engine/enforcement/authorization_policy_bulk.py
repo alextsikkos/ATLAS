@@ -206,6 +206,22 @@ def _make_per_control_enforcer(control_id: str):
             if isinstance(after, dict):
                 after_val = _get_path(after, path)
                 details["after"] = {control_id: after_val}
+                # Verify persistence (normalize Graph quirks: empty list may come back as null)
+                desired_norm = desired
+                after_norm = after_val
+
+                if isinstance(desired_norm, list) and desired_norm == [] and after_norm is None:
+                    after_norm = []
+
+                if after_norm != desired_norm:
+                    return (
+                        "NOT_EVALUATED",
+                        "UNSUPPORTED_MODE",
+                        "Enforce attempted but setting did not persist (read-back mismatch).",
+                        details,
+                        200,
+                    )
+
             else:
                 details["after"] = {control_id: None}
                 details["afterReadError"] = {"httpStatus": r2.status_code, "body": (r2.text or "")[:2000]}

@@ -1,0 +1,37 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-26_19-21-59",
+  "count": 3,
+  "rows": [
+    {
+      "controlId": "DisableUserConsentToApps",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "UPDATED",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 1.059
+    },
+    {
+      "controlId": "GuestInvitesRestrictedToAdminsAndGuestInviters",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "EmailVerifiedUsersCannotJoinOrganization",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    }
+  ]
+}
