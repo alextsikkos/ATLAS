@@ -61,15 +61,15 @@ try {
       args += ["-CertificatePath", cert_path, "-CertificatePassword", cert_password]
   else:
       # leave it to the script to throw the "Interactive SPO auth is disabled" error
-      
+      pass
+
+  run_powershell_script("spo_tenant_settings.ps1", args=args, env=env)
 
   }
   else {
     throw "Interactive SPO auth is disabled. Configure spoAppAuth (clientId/tenantId/certificateThumbprint) in the tenant JSON."
   }
-  pass
 
-  run_powershell_script("spo_tenant_settings.ps1", args=args, env=env)
   # --- end connect ---
 
   $t = Get-SPOTenant

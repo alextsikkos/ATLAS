@@ -1,0 +1,67 @@
+{
+  "tenant": "example",
+  "controlId": "SharePointIdleSessionTimeout",
+  "action": "ensure_applied",
+  "displayName": "Sign out inactive users in SharePoint Online",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "MISSING_SIGNAL",
+  "reasonDetail": "SPO read failed: No JSON object found in SPO output",
+  "details": {
+    "batch": {
+      "adminUrl": "https://6twcdy-admin.sharepoint.com",
+      "ok": false,
+      "before": {
+        "ok": false,
+        "error": "No JSON object found in SPO output",
+        "raw": "",
+        "stderr": "At C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\spo_tenant_settings.ps1:54 char:17\n+     \"-ClientId\", client_id,\n+                 ~\nMissing expression after ','.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\spo_tenant_settings.ps1:54 char:18\n+     \"-ClientId\", client_id,\n+                  ~~~~~~~~~\nUnexpected token 'client_id' in expression or statement.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\spo_tenant_settings.ps1:54 char:27\n+     \"-ClientId\", client_id,\n+                           ~\nMissing argument in parameter list.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\spo_tenant_settings.ps1:58 char:5\n+   if cert_thumbprint:\n+     ~\nMissing '(' after 'if' in if statement.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\spo_tenant_settings.ps1:72 char:51\n+   run_powershell_script(\"spo_tenant_settings.ps1\", args=args, env=env ...\n+                                                   ~\nMissing expression after ','.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\spo_tenant_settings.ps1:72 char:52\n+   run_powershell_script(\"spo_tenant_settings.ps1\", args=args, env=env ...\n+                                                    ~~~~~~~~~\nUnexpected token 'args=args' in expression or statement.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\spo_tenant_settings.ps1:72 char:51\n+   run_powershell_script(\"spo_tenant_settings.ps1\", args=args, env=env ...\n+                                                   ~\nMissing closing ')' in expression.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\spo_tenant_settings.ps1:19 char:5\n+ try {\n+     ~\nMissing closing '}' in statement block or type definition.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\spo_tenant_settings.ps1:72 char:70\n+ ...  run_powershell_script(\"spo_tenant_settings.ps1\", args=args, env=env)\n+                                                                         ~\nThe Try statement is missing its Catch or Finally block.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\detectors\\spo_tenant_settings.ps1:72 char:70\n+ ...  run_powershell_script(\"spo_tenant_settings.ps1\", args=args, env=env)\n+                                                                         ~\nUnexpected token ')' in expression or statement.\nNot all parse errors were reported.  Correct the reported errors and try again.\n    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException\n    + FullyQualifiedErrorId : MissingExpressionAfterToken\n \n",
+        "exitCode": 1
+      },
+      "after": null,
+      "desired": {
+        "PreventExternalUsersFromResharing": true,
+        "DefaultSharingLinkType": 2,
+        "DefaultLinkPermission": 1,
+        "RequireAnonymousLinksExpireInDays": 30,
+        "SharingDomainRestrictionMode": "AllowList",
+        "SharingAllowedDomainList": "partner.com vendor.com"
+      },
+      "applyResult": null,
+      "verifyAttempts": [],
+      "perControl": {},
+      "error": "SPO read failed: No JSON object found in SPO output",
+      "desiredByControl": {
+        "SharePointPreventExternalUsersFromResharingEnabled": {
+          "PreventExternalUsersFromResharing": true
+        },
+        "SharePointDefaultLinkTypeRestricted": {
+          "DefaultSharingLinkType": 2
+        },
+        "SharePointDefaultSharingRestricted": {
+          "DefaultLinkPermission": 1
+        },
+        "SharePointLinkExpirationConfigured": {
+          "RequireAnonymousLinksExpireInDays": 30
+        },
+        "SharePointDomainRestrictionConfigured": {
+          "SharingDomainRestrictionMode": "AllowList"
+        },
+        "SharePointSharingAllowedDomainListConfigured": {
+          "SharingDomainRestrictionMode": "AllowList",
+          "SharingAllowedDomainList": "partner.com vendor.com"
+        }
+      },
+      "missingDesiredConfigByControl": {
+        "SharePointIdleSessionTimeout": [
+          "UNSUPPORTED: Set-SPOTenant does not support IdleSessionSignOut* parameters"
+        ]
+      }
+    },
+    "reasonCode": "MISSING_SIGNAL",
+    "reasonDetail": "SPO read failed: No JSON object found in SPO output"
+  },
+  "status": 424,
+  "durationSeconds": 0.0
+}
