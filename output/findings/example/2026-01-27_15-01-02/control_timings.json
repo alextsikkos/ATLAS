@@ -1,0 +1,17 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-27_15-01-02",
+  "count": 1,
+  "rows": [
+    {
+      "controlId": "TeamsExternalAccessRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "ERROR",
+      "reasonCode": "MISSING_PREREQUISITE",
+      "durationSeconds": 0.057
+    }
+  ]
+}
