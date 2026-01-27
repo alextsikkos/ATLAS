@@ -1,0 +1,17 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-27_17-21-39",
+  "count": 1,
+  "rows": [
+    {
+      "controlId": "TeamsExternalAccessRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 5.381
+    }
+  ]
+}

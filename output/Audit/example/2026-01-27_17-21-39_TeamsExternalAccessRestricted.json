@@ -1,0 +1,47 @@
+{
+  "tenant": "example",
+  "controlId": "TeamsExternalAccessRestricted",
+  "action": "ensure_applied",
+  "displayName": "Teams: External access restricted (Secure Score)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforcer executed; Teams external access restricted as required",
+  "details": {
+    "applied": false,
+    "verify": {
+      "expected": {
+        "EnableFederationAccess": false,
+        "EnableTeamsConsumerInbound": false,
+        "EnableTeamsConsumerAccess": false
+      },
+      "ok": true,
+      "actual": {
+        "EnableFederationAccess": false,
+        "EnableTeamsConsumerInbound": false,
+        "EnableTeamsConsumerAccess": false,
+        "Identity": "Global"
+      }
+    },
+    "after": {
+      "EnableFederationAccess": false,
+      "EnableTeamsConsumerInbound": false,
+      "EnableTeamsConsumerAccess": false,
+      "Identity": "Global"
+    },
+    "before": {
+      "EnableFederationAccess": false,
+      "EnableTeamsConsumerInbound": false,
+      "EnableTeamsConsumerAccess": false,
+      "Identity": "Global"
+    },
+    "ok": true,
+    "error": null,
+    "changed": [],
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforcer executed; Teams external access restricted as required"
+  },
+  "status": 200,
+  "durationSeconds": 5.381
+}

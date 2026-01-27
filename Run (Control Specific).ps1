@@ -1,3 +1,2 @@
 ﻿cd C:\Users\Alex\Desktop\Atlas
-
-.\scripts\run-atlas.ps1 -TenantPath ".\tenants\example_tenant.json" -OnlyControls "TeamsExternalAccessRestricted"
+.\scripts\run-atlas.ps1 -TenantPath ".\tenants\example_tenant.json" -OnlyControls "SharePointDefaultSharingRestricted,SharePointLinkExpirationConfigured,SharePointDefaultLinkTypeRestricted,SharePointIdleSessionTimeout,SharePointDomainRestrictionConfigured,SharePointSharingAllowedDomainListConfigured,SharePointPreventExternalUsersFromResharingEnabled"
