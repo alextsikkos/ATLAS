@@ -1,8 +1,8 @@
 {
   "tenant": "example",
-  "controlId": "DisableUserConsentToApps",
+  "controlId": "EmailBasedSubscriptionsDisabled",
   "action": "ensure_applied",
-  "displayName": "Disable user consent to apps",
+  "displayName": "Entra ID: Disable email-based subscriptions sign-up",
   "approved": true,
   "mode": "enforce",
   "state": "COMPLIANT",
@@ -10,15 +10,15 @@
   "reasonDetail": "Enforce: already compliant (no change needed).",
   "details": {
     "before": {
-      "DisableUserConsentToApps": []
+      "EmailBasedSubscriptionsDisabled": false
     },
     "desired": {
-      "DisableUserConsentToApps": []
+      "EmailBasedSubscriptionsDisabled": false
     },
     "approvedForEnforce": true,
     "reasonCode": "ENFORCER_EXECUTED",
     "reasonDetail": "Enforce: already compliant (no change needed)."
   },
   "status": 200,
-  "durationSeconds": 0.425
+  "durationSeconds": 0.0
 }
