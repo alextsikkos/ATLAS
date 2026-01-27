@@ -51,46 +51,31 @@ try {
     if ($pol.EnableTeamsConsumerAccess -ne $false) { $result.changed += "EnableTeamsConsumerAccess" }
     if ($pol.EnableTeamsConsumerInbound -ne $false) { $result.changed += "EnableTeamsConsumerInbound" }
 
-    # --- APPLY (parameter-aware, works across module versions) ---
-    $cmd = Get-Command Set-CsExternalAccessPolicy -ErrorAction Stop
+    if ($result.changed.Count -gt 0) {
+      $cmd = Get-Command Set-CsExternalAccessPolicy
+      $ps = @{ Identity = $PolicyIdentity }
 
-    $ps = @{
-      Identity = "Global"
-    }
+      if ($cmd.Parameters.ContainsKey("EnableFederationAccess"))     { $ps.EnableFederationAccess     = $false }
+      if ($cmd.Parameters.ContainsKey("EnableTeamsConsumerAccess"))  { $ps.EnableTeamsConsumerAccess  = $false }
+      if ($cmd.Parameters.ContainsKey("EnableTeamsConsumerInbound")) { $ps.EnableTeamsConsumerInbound = $false }
 
-    if ($cmd.Parameters.ContainsKey("EnableFederationAccess")) {
-      $ps.EnableFederationAccess = $false
-    }
-    if ($cmd.Parameters.ContainsKey("EnableTeamsConsumerAccess")) {
-      $ps.EnableTeamsConsumerAccess = $false
-    }
-    if ($cmd.Parameters.ContainsKey("EnableTeamsConsumerInbound")) {
-      $ps.EnableTeamsConsumerInbound = $false
-    }
+      # Only set if the module supports it (this is the one breaking your run)
+      if ($cmd.Parameters.ContainsKey("EnablePublicCloudAccess"))    { $ps.EnablePublicCloudAccess    = $false }
 
-    # Only set if the installed module supports it (your error indicates it doesn't)
-    if ($cmd.Parameters.ContainsKey("EnablePublicCloudAccess")) {
-      $ps.EnablePublicCloudAccess = $false
+      Set-CsExternalAccessPolicy @ps
+
     }
-
-    Set-CsExternalAccessPolicy @ps
-    # --- END APPLY ---
-
   }
 
   # verify
-  $after = Get-CsExternalAccessPolicy -Identity Global
-
-  $out = @{
-    Identity                  = $after.Identity
-    EnableFederationAccess    = $after.PSObject.Properties.Match('EnableFederationAccess').Count    ? $after.EnableFederationAccess    : $null
-    EnableTeamsConsumerAccess = $after.PSObject.Properties.Match('EnableTeamsConsumerAccess').Count ? $after.EnableTeamsConsumerAccess : $null
-    EnableTeamsConsumerInbound= $after.PSObject.Properties.Match('EnableTeamsConsumerInbound').Count? $after.EnableTeamsConsumerInbound: $null
-    EnablePublicCloudAccess   = $after.PSObject.Properties.Match('EnablePublicCloudAccess').Count   ? $after.EnablePublicCloudAccess   : $null
+  $after = Get-CsExternalAccessPolicy -Identity Global -ErrorAction Stop
+  $result.after = @{
+    Identity = "$($after.Identity)"
+    EnableFederationAccess = $after.EnableFederationAccess
+    EnablePublicCloudAccess = $after.EnablePublicCloudAccess
+    EnableTeamsConsumerAccess = $after.EnableTeamsConsumerAccess
+    EnableTeamsConsumerInbound = $after.EnableTeamsConsumerInbound
   }
-
-  $out | ConvertTo-Json -Depth 10
-
 
   $result.verify.expected = $expected
   $result.verify.actual = $result.after

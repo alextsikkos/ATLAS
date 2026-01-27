@@ -1,0 +1,20 @@
+{
+  "tenant": "example",
+  "controlId": "TeamsExternalAccessRestricted",
+  "action": "ensure_applied",
+  "displayName": "Teams: External access restricted (Secure Score)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "ENFORCER_ERROR",
+  "reasonDetail": "Teams external access enforcer failed",
+  "details": {
+    "powershellExitCode": 1,
+    "stderr": "At C:\\Users\\Alex\\Desktop\\Atlas\\engine\\enforcement\\teams_set_external_access_restricted.ps1:86 char:101\n+ ... SObject.Properties.Match('EnableFederationAccess').Count    ? $after. ...\n+                                                                 ~\nUnexpected token '?' in expression or statement.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\enforcement\\teams_set_external_access_restricted.ps1:86 char:97\n+ ... ter.PSObject.Properties.Match('EnableFederationAccess').Count    ? $a ...\n+                                                                  ~\nThe hash literal was incomplete.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\enforcement\\teams_set_external_access_restricted.ps1:90 char:4\n+   }\n+    ~\nThe Try statement is missing its Catch or Finally block.\nAt C:\\Users\\Alex\\Desktop\\Atlas\\engine\\enforcement\\teams_set_external_access_restricted.ps1:105 char:1\n+ }\n+ ~\nUnexpected token '}' in expression or statement.\n    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException\n    + FullyQualifiedErrorId : UnexpectedToken",
+    "result": {},
+    "reasonCode": "ENFORCER_ERROR",
+    "reasonDetail": "Teams external access enforcer failed"
+  },
+  "status": 502,
+  "durationSeconds": 0.207
+}
