@@ -32,5 +32,5 @@
   "reasonCode": "MISSING_SIGNAL",
   "reasonDetail": "IPP cmdlet missing in installed ExchangeOnlineManagement module",
   "reason": "IPP cmdlet missing in installed ExchangeOnlineManagement module",
-  "durationSeconds": 0.003
+  "durationSeconds": 0.0
 }

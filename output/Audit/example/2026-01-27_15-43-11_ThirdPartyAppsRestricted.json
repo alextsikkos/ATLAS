@@ -1,0 +1,24 @@
+{
+  "tenant": "example",
+  "controlId": "ThirdPartyAppsRestricted",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Third party integrated applications restricted (Secure Score)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "COMPLIANT",
+  "reasonCode": "ENFORCER_EXECUTED",
+  "reasonDetail": "Enforce: already compliant (no change needed).",
+  "details": {
+    "before": {
+      "ThirdPartyAppsRestricted": false
+    },
+    "desired": {
+      "ThirdPartyAppsRestricted": false
+    },
+    "approvedForEnforce": true,
+    "reasonCode": "ENFORCER_EXECUTED",
+    "reasonDetail": "Enforce: already compliant (no change needed)."
+  },
+  "status": 200,
+  "durationSeconds": 0.001
+}

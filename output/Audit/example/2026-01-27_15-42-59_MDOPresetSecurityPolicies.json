@@ -1,0 +1,24 @@
+{
+  "tenant": "example",
+  "controlId": "MDOPresetSecurityPolicies",
+  "action": "ensure_not_evaluated",
+  "state": "NOT_EVALUATED",
+  "displayName": "Defender for Office 365: Preset security policies (Standard/Strict) enabled",
+  "approved": true,
+  "mode": "enforce",
+  "status": 500,
+  "details": {
+    "mode": "enforce",
+    "level": "standard",
+    "fastPath": true,
+    "reasonCode": "BLOCKED",
+    "reasonDetail": "Skipped enforcement because control action is ensure_not_evaluated.",
+    "details": {
+      "skipped": true
+    }
+  },
+  "reason": "EXO PowerShell enforcement: preset security policies",
+  "reasonCode": "BLOCKED",
+  "reasonDetail": "Skipped enforcement because control action is ensure_not_evaluated.",
+  "durationSeconds": 0.008
+}

@@ -16,5 +16,5 @@
     "reasonDetail": "teamsAppAuth missing required keys: appId"
   },
   "status": 400,
-  "durationSeconds": 0.057
+  "durationSeconds": 0.0
 }

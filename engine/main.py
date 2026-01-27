@@ -507,8 +507,16 @@ def main():
                     os.environ.pop(k, None)
 
         _set_env("ATLAS_SPO_CLIENT_ID", spo_auth.get("clientId"))
+        _set_env("ATLAS_SPO_APP_ID", spo_auth.get("appId") or spo_auth.get("clientId"))  # <-- add this
         _set_env("ATLAS_SPO_TENANT_ID", spo_auth.get("tenantId"))
         _set_env("ATLAS_SPO_CERT_THUMBPRINT", spo_auth.get("certificateThumbprint"))
+        
+        teams_auth = tenant.get("teamsAppAuth") or {}
+        _set_env("ATLAS_TEAMS_CLIENT_ID", teams_auth.get("clientId"))
+        _set_env("ATLAS_TEAMS_APP_ID", teams_auth.get("appId") or teams_auth.get("clientId"))  # <-- add this
+        _set_env("ATLAS_TEAMS_TENANT_ID", teams_auth.get("tenantId"))
+        _set_env("ATLAS_TEAMS_CERT_THUMBPRINT", teams_auth.get("certificateThumbprint"))
+
 
         # Optional (only if you later support PFX-path auth)
         _set_env("ATLAS_SPO_CERT_PATH", spo_auth.get("certificatePath"))
