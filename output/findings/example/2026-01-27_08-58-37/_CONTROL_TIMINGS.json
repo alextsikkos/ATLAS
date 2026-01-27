@@ -1,0 +1,17 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-27_08-58-37",
+  "count": 1,
+  "rows": [
+    {
+      "controlId": "DisableUserConsentToApps",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "UPDATED",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 1.269
+    }
+  ]
+}
