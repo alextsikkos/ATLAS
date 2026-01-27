@@ -3,120 +3,53 @@ import os
 import subprocess
 
 
-def _spo_auth_ps_args() -> tuple[list[str], list[str]]:
-    """Return (ps_args, missing_keys).
-
-    Auth is provided via environment variables set by engine/main.py.
-
-    If any SPO app-only auth value is present, we treat it as 'configured' and require all required fields.
-    This prevents silent fallbacks to interactive auth (which would create popups).
+def _spo_auth_ps_args(tenant_conf: Dict[str, Any]) -> Tuple[List[str], List[str]]:
     """
-    client_id = (os.getenv("ATLAS_SPO_CLIENT_ID") or "").strip()
-    tenant_id = (os.getenv("ATLAS_SPO_TENANT_ID") or "").strip()
-    thumbprint = (os.getenv("ATLAS_SPO_CERT_THUMBPRINT") or "").strip()
-    cert_path = (os.getenv("ATLAS_SPO_CERT_PATH") or "").strip()
-    cert_password = os.getenv("ATLAS_SPO_CERT_PASSWORD")  # may be empty
+    Build PS args for SPO auth from the tenant JSON (NOT env vars).
 
-    configured = any([client_id, tenant_id, thumbprint, cert_path, (cert_password or "").strip()])
-    if not configured:
-        return [], []
+    Supported tenant keys:
+      - tenant_conf["spoAppAuth"] or tenant_conf["spoAppOnlyAuth"]
+        with:
+          - clientId (or appId)
+          - tenantId
+          - certificateThumbprint   OR
+          - certificatePath + certificatePassword
+    """
+    spo_auth = tenant_conf.get("spoAppAuth") or tenant_conf.get("spoAppOnlyAuth") or {}
 
-    missing = []
+    client_id = spo_auth.get("clientId") or spo_auth.get("appId")
+    tenant_id = spo_auth.get("tenantId")
+    thumbprint = spo_auth.get("certificateThumbprint")
+    cert_path = spo_auth.get("certificatePath")
+    cert_password = spo_auth.get("certificatePassword")
+
+    missing: List[str] = []
     if not client_id:
-        missing.append("tenant.spoAppAuth.clientId")
+        missing.append("spoAppAuth.clientId")
     if not tenant_id:
-        missing.append("tenant.spoAppAuth.tenantId")
-    if not thumbprint and not cert_path:
-        missing.append("tenant.spoAppAuth.certificateThumbprint OR tenant.spoAppAuth.certificatePath")
+        missing.append("spoAppAuth.tenantId")
 
-    ps_args = []
+    has_thumbprint = bool(thumbprint and str(thumbprint).strip())
+    has_path_mode = bool(cert_path and str(cert_path).strip())
+
+    if not has_thumbprint and not has_path_mode:
+        missing.append("spoAppAuth.certificateThumbprint OR spoAppAuth.certificatePath")
+
+    if has_path_mode and not (cert_password and str(cert_password).strip()):
+        missing.append("spoAppAuth.certificatePassword (required when using certificatePath)")
+
     if missing:
-        return ps_args, missing
+        return [], missing
 
-    ps_args += ["-ClientId", client_id, "-TenantId", tenant_id]
+    args: List[str] = ["-ClientId", str(client_id), "-TenantId", str(tenant_id)]
 
-    # Prefer CertificatePath auth when provided (more reliable than store lookup).
-    if cert_path and (cert_password is not None and str(cert_password).strip()):
-        ps_args += ["-CertificatePath", cert_path, "-CertificatePassword", str(cert_password)]
-    elif cert_path:
-        # Path provided but no password; still pass path (script may handle no-password cases)
-        ps_args += ["-CertificatePath", cert_path]
-    elif thumbprint:
-        ps_args += ["-CertificateThumbprint", thumbprint]
+    if has_thumbprint:
+        args += ["-CertificateThumbprint", str(thumbprint)]
+    else:
+        args += ["-CertificatePath", str(cert_path), "-CertificatePassword", str(cert_password)]
 
-    return ps_args, []
+    return args, []
 
-
-
-def run_spo_tenant_settings(admin_url: str) -> dict:
-
-    if not admin_url or not str(admin_url).strip():
-        return {
-            "ok": False,
-            "error": "AdminUrl is required (e.g. https://contoso-admin.sharepoint.com)",
-            "tenant": None,
-            "adminUrl": admin_url,
-        }
-
-    ps1_path = os.path.join(os.path.dirname(__file__), "spo_tenant_settings.ps1")
-
-    auth_args, missing_keys = _spo_auth_ps_args()
-    if missing_keys:
-        return {
-            "ok": False,
-            "error": "SPO app-only auth is configured but missing required keys; refusing to fall back to interactive auth",
-            "missingKeys": missing_keys,
-            "tenant": None,
-            "adminUrl": admin_url,
-        }
-
-    cmd = [
-
-        "powershell.exe",
-        "-NoProfile",
-        "-ExecutionPolicy", "Bypass",
-        "-File", ps1_path,
-        "-AdminUrl", str(admin_url).strip(),
-    ] + auth_args
-    try:
-        proc = subprocess.run(cmd, capture_output=True, text=True)
-    except Exception as e:
-        return {"ok": False, "error": f"Failed to execute PowerShell: {e}", "cmd": cmd}
-
-    out = proc.stdout or ""
-    err = proc.stderr or ""
-    raw = out.strip()
-
-    # PowerShell can emit warnings before JSON; extract the JSON object.
-    start = raw.find("{")
-    end = raw.rfind("}")
-    if start == -1 or end == -1 or end <= start:
-        return {
-            "ok": False,
-            "error": "No JSON object found in SPO output",
-            "raw": raw,
-            "stderr": err,
-            "exitCode": proc.returncode,
-        }
-
-    json_text = raw[start:end + 1]
-
-    try:
-        data = json.loads(json_text)
-    except Exception as e:
-        return {
-            "ok": False,
-            "error": f"Failed to parse SPO detector JSON: {e}",
-            "raw": raw,
-            "stderr": err,
-            "exitCode": proc.returncode,
-        }
-
-    if err:
-        data["stderr"] = err
-    data.setdefault("exitCode", proc.returncode)
-
-    return data
 def set_spo_prevent_external_users_from_resharing(admin_url: str, enabled: bool) -> dict:
     """
     Applies: Set-SPOTenant -PreventExternalUsersFromResharing $true/$false
@@ -191,7 +124,10 @@ def set_spo_domain_restriction(admin_url: str, mode: str, allowed_domains: str |
 
     ps1_path = os.path.join(os.path.dirname(__file__), "spo_set_domain_restriction.ps1")
 
-    auth_args, missing_keys = _spo_auth_ps_args()
+    auth_args, missing_keys = _spo_auth_ps_args(tenant_conf)
+    result["authMode"] = "app-only" if auth_args else "interactive-disabled"
+    result["authArgsPresent"] = bool(auth_args)
+
     if missing_keys:
         return {"ok": False, "error": "SPO app-only auth is configured but missing required keys; refusing to fall back to interactive auth", "missingKeys": missing_keys, "adminUrl": admin_url}
 
