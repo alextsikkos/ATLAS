@@ -494,17 +494,20 @@ def main():
     # --- end EXO prewarm ---
     # --- SPO app-only auth env (required to prevent interactive auth popups) ---
     try:
-        spo_auth = (tenant or {}).get("spoAppAuth") or {}
+        # SharePoint Online app-only auth
+        spo_auth = (tenant_conf or {}).get("spoAppAuth") or {}
+        if spo_auth:
+            # NEW: the SPO runner reads ATLAS_SPO_CLIENT_ID
+            os.environ["ATLAS_SPO_CLIENT_ID"] = spo_auth.get("clientId", "")
 
-        def _set_env(k: str, v):
-            if v is None:
-                os.environ.pop(k, None)
-            else:
-                s = str(v).strip()
-                if s:
-                    os.environ[k] = s
-                else:
-                    os.environ.pop(k, None)
+            # Keep legacy/back-compat if anything else still reads APP_ID
+            os.environ["ATLAS_SPO_APP_ID"] = spo_auth.get("clientId", "")
+
+            os.environ["ATLAS_SPO_TENANT_ID"] = spo_auth.get("tenantId", "")
+            os.environ["ATLAS_SPO_CERT_THUMBPRINT"] = spo_auth.get("certificateThumbprint", "")
+            os.environ["ATLAS_SPO_CERT_PATH"] = spo_auth.get("certificatePath", "")
+            os.environ["ATLAS_SPO_CERT_PASSWORD"] = spo_auth.get("certificatePassword", "")
+
 
         _set_env("ATLAS_SPO_CLIENT_ID", spo_auth.get("clientId"))
         _set_env("ATLAS_SPO_APP_ID", spo_auth.get("appId") or spo_auth.get("clientId"))  # <-- add this
