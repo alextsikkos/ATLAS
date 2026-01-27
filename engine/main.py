@@ -517,6 +517,11 @@ def main():
         _set_env("ATLAS_TEAMS_TENANT_ID", teams_auth.get("tenantId"))
         _set_env("ATLAS_TEAMS_CERT_THUMBPRINT", teams_auth.get("certificateThumbprint"))
 
+        # Aliases for modules/scripts that expect different env var names
+        _set_env("ATLAS_SPO_APP_ID", spo_auth.get("clientId"))
+        _set_env("ATLAS_SPO_TENANT", spo_auth.get("tenantId"))
+        _set_env("ATLAS_SPO_TENANTID", spo_auth.get("tenantId"))
+        _set_env("ATLAS_SPO_THUMBPRINT", spo_auth.get("certificateThumbprint"))
 
         # Optional (only if you later support PFX-path auth)
         _set_env("ATLAS_SPO_CERT_PATH", spo_auth.get("certificatePath"))

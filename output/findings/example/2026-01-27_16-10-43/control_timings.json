@@ -1,0 +1,27 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-27_16-10-43",
+  "count": 2,
+  "rows": [
+    {
+      "controlId": "TeamsExternalAccessRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "ENFORCER_ERROR",
+      "durationSeconds": 4.941
+    },
+    {
+      "controlId": "SharePointDefaultSharingRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.285
+    }
+  ]
+}
