@@ -19,7 +19,7 @@ CONTROL_FIELD_MAP = {
     # Guest / external
     "GuestInvitesRestrictedToAdminsAndGuestInviters": ("allowInvitesFrom", "adminsAndGuestInviters"),
     "EmailVerifiedUsersCannotJoinOrganization": ("allowEmailVerifiedUsersToJoinOrganization", False),
-    "EmailBasedSubscriptionsDisabled": ("allowEmailBasedSubscriptions", False),
+    "EmailBasedSubscriptionsDisabled": ("allowedToSignUpEmailBasedSubscriptions", False),
 
     # Legacy / PowerShell
     "BlockMsolPowerShellEnabled": ("blockMsolPowerShell", True),

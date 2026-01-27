@@ -1,0 +1,33 @@
+{
+  "tenant": "example",
+  "controlId": "EmailBasedSubscriptionsDisabled",
+  "action": "ensure_applied",
+  "displayName": "Entra ID: Disable email-based subscriptions sign-up",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "UNSUPPORTED_MODE",
+  "reasonDetail": "Enforce attempted but setting did not persist (read-back mismatch).",
+  "details": {
+    "before": {
+      "EmailBasedSubscriptionsDisabled": null
+    },
+    "desired": {
+      "EmailBasedSubscriptionsDisabled": false
+    },
+    "approvedForEnforce": true,
+    "applyStatus": 204,
+    "applyResponseText": "",
+    "appliedPatchBody": {
+      "allowEmailBasedSubscriptions": false
+    },
+    "afterReadStatus": 200,
+    "after": {
+      "EmailBasedSubscriptionsDisabled": null
+    },
+    "reasonCode": "UNSUPPORTED_MODE",
+    "reasonDetail": "Enforce attempted but setting did not persist (read-back mismatch)."
+  },
+  "status": 200,
+  "durationSeconds": 0.697
+}
