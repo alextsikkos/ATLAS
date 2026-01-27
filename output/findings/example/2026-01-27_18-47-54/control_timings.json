@@ -1,0 +1,77 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-27_18-47-54",
+  "count": 7,
+  "rows": [
+    {
+      "controlId": "SharePointDefaultSharingRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.249
+    },
+    {
+      "controlId": "SharePointLinkExpirationConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointDefaultLinkTypeRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointIdleSessionTimeout",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointDomainRestrictionConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointSharingAllowedDomainListConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointPreventExternalUsersFromResharingEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.0
+    }
+  ]
+}

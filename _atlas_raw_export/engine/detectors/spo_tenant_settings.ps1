@@ -42,13 +42,20 @@ try {
 
       $secPwd = ConvertTo-SecureString $CertificatePassword -AsPlainText -Force
 
-      Connect-SPOService `
-        -Url $AdminUrl `
-        -ClientId $ClientId `
-        -Tenant $TenantId `
-        -CertificatePath $CertificatePath `
-        -CertificatePassword $secPwd `
-        -ErrorAction Stop
+      spo = tenant.get("spoAppAuth") or {}
+      cmd = [
+        "pwsh", "-NoProfile", "-NonInteractive",
+        "-File", SPO_SCRIPT_PATH,
+        "-AdminUrl", admin_url,
+      ]
+
+      if spo.get("clientId") and spo.get("tenantId") and spo.get("certificateThumbprint"):
+          cmd += ["-ClientId", spo["clientId"], "-TenantId", spo["tenantId"], "-CertificateThumbprint", spo["certificateThumbprint"]]
+      elif spo.get("clientId") and spo.get("tenantId") and spo.get("certificatePath") and spo.get("certificatePassword"):
+          cmd += ["-ClientId", spo["clientId"], "-TenantId", spo["tenantId"], "-CertificatePath", spo["certificatePath"], "-CertificatePassword", spo["certificatePassword"]]
+      else:
+          raise RuntimeError("spoAppAuth missing required fields for app-only auth")
+
     }
 
   }

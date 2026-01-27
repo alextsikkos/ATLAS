@@ -50,20 +50,6 @@ try {
         -CertificatePassword $secPwd `
         -ErrorAction Stop
     }
-  args = [
-    "-ClientId", client_id,
-    "-TenantId", tenant_id,
-  ]
-
-  if cert_thumbprint:
-      args += ["-CertificateThumbprint", cert_thumbprint]
-  elif cert_path and cert_password:
-      args += ["-CertificatePath", cert_path, "-CertificatePassword", cert_password]
-  else:
-      # leave it to the script to throw the "Interactive SPO auth is disabled" error
-      pass
-
-  run_powershell_script("spo_tenant_settings.ps1", args=args, env=env)
 
   }
   else {
