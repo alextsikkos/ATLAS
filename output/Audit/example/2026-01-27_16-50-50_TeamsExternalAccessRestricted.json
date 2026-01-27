@@ -1,0 +1,43 @@
+{
+  "tenant": "example",
+  "controlId": "TeamsExternalAccessRestricted",
+  "action": "ensure_applied",
+  "displayName": "Teams: External access restricted (Secure Score)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "ENFORCER_ERROR",
+  "reasonDetail": "Teams external access enforcer failed",
+  "details": {
+    "powershellExitCode": 0,
+    "stderr": "",
+    "result": {
+      "applied": false,
+      "verify": {
+        "expected": {},
+        "ok": false,
+        "actual": {}
+      },
+      "after": null,
+      "before": {
+        "EnableFederationAccess": true,
+        "EnableTeamsConsumerInbound": true,
+        "EnablePublicCloudAccess": null,
+        "EnableTeamsConsumerAccess": true,
+        "Identity": "Global"
+      },
+      "ok": false,
+      "error": "Cannot validate argument on parameter 'Identity'. The argument is null or empty. Provide an argument that is not null or empty, and then try the command again.",
+      "changed": [
+        "EnableFederationAccess",
+        "EnablePublicCloudAccess",
+        "EnableTeamsConsumerAccess",
+        "EnableTeamsConsumerInbound"
+      ]
+    },
+    "reasonCode": "ENFORCER_ERROR",
+    "reasonDetail": "Teams external access enforcer failed"
+  },
+  "status": 502,
+  "durationSeconds": 5.314
+}

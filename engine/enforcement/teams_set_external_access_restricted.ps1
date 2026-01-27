@@ -53,7 +53,7 @@ try {
 
     if ($result.changed.Count -gt 0) {
       $cmd = Get-Command Set-CsExternalAccessPolicy
-      $ps = @{ Identity = $PolicyIdentity }
+      $ps = @{ Identity = "Global" }
 
       if ($cmd.Parameters.ContainsKey("EnableFederationAccess"))     { $ps.EnableFederationAccess     = $false }
       if ($cmd.Parameters.ContainsKey("EnableTeamsConsumerAccess"))  { $ps.EnableTeamsConsumerAccess  = $false }
@@ -63,6 +63,7 @@ try {
       if ($cmd.Parameters.ContainsKey("EnablePublicCloudAccess"))    { $ps.EnablePublicCloudAccess    = $false }
 
       Set-CsExternalAccessPolicy @ps
+      $result.applied = ($result.changed.Count -gt 0)
 
     }
   }
