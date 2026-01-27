@@ -1,0 +1,27 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-27_15-02-41",
+  "count": 2,
+  "rows": [
+    {
+      "controlId": "PurviewAutoLabelingPolicies",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.003
+    },
+    {
+      "controlId": "PurviewLabelConsentDataMap",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "detect-only",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "MISSING_SIGNAL",
+      "durationSeconds": 0.0
+    }
+  ]
+}
