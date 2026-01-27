@@ -32,24 +32,33 @@ try {
   $result.before = @{
     Identity = "$($pol.Identity)"
     EnableFederationAccess = $pol.EnableFederationAccess
-    EnablePublicCloudAccess = $pol.EnablePublicCloudAccess
     EnableTeamsConsumerAccess = $pol.EnableTeamsConsumerAccess
     EnableTeamsConsumerInbound = $pol.EnableTeamsConsumerInbound
   }
+  if ($null -ne $pol.EnablePublicCloudAccess) {
+    $result.before.EnablePublicCloudAccess = $pol.EnablePublicCloudAccess
+  }
+
 
   $expected = @{
     EnableFederationAccess = $false
-    EnablePublicCloudAccess = $false
     EnableTeamsConsumerAccess = $false
     EnableTeamsConsumerInbound = $false
   }
+  if ($null -ne $pol.EnablePublicCloudAccess) {
+    $expected.EnablePublicCloudAccess = $false
+  }
+
 
   if ($Mode -in @("report-only","detect-only")) {
     # no changes
   } else {
     # apply only if needed
     if ($pol.EnableFederationAccess -ne $false) { $result.changed += "EnableFederationAccess" }
-    if ($pol.EnablePublicCloudAccess -ne $false) { $result.changed += "EnablePublicCloudAccess" }
+    if ($null -ne $pol.EnablePublicCloudAccess -and $pol.EnablePublicCloudAccess -ne $false) {
+      $result.changed += "EnablePublicCloudAccess"
+    }
+
     if ($pol.EnableTeamsConsumerAccess -ne $false) { $result.changed += "EnableTeamsConsumerAccess" }
     if ($pol.EnableTeamsConsumerInbound -ne $false) { $result.changed += "EnableTeamsConsumerInbound" }
 
@@ -75,19 +84,28 @@ try {
   $result.after = @{
     Identity = "$($after.Identity)"
     EnableFederationAccess = $after.EnableFederationAccess
-    EnablePublicCloudAccess = $after.EnablePublicCloudAccess
     EnableTeamsConsumerAccess = $after.EnableTeamsConsumerAccess
     EnableTeamsConsumerInbound = $after.EnableTeamsConsumerInbound
   }
+  if ($null -ne $after.EnablePublicCloudAccess) {
+    $result.after.EnablePublicCloudAccess = $after.EnablePublicCloudAccess
+  }
+
 
   $result.verify.expected = $expected
   $result.verify.actual = $result.after
+  $publicOk = $true
+  if ($null -ne $after.EnablePublicCloudAccess) {
+    $publicOk = ($after.EnablePublicCloudAccess -eq $false)
+  }
+
   $result.verify.ok = (
     $after.EnableFederationAccess -eq $false -and
-    $after.EnablePublicCloudAccess -eq $false -and
+    $publicOk -and
     $after.EnableTeamsConsumerAccess -eq $false -and
     $after.EnableTeamsConsumerInbound -eq $false
   )
+
 
   $result.ok = $true
 }
