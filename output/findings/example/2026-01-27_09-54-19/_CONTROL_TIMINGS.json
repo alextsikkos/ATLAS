@@ -1,0 +1,117 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-27_09-54-19",
+  "count": 11,
+  "rows": [
+    {
+      "controlId": "DisableUserConsentToApps",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.377
+    },
+    {
+      "controlId": "GuestInvitesRestrictedToAdminsAndGuestInviters",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "EmailVerifiedUsersCannotJoinOrganization",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "EmailBasedSubscriptionsDisabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "BlockMsolPowerShellEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "DefaultUserRoleAppsCreationDisabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "DefaultUserRoleSecurityGroupsCreationDisabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "DefaultUserRoleTenantCreationDisabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "ThirdPartyAppsRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "DefaultUserRoleReadOtherUsersDisabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    }
+  ]
+}
