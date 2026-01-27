@@ -1,3 +1,4 @@
 ﻿cd C:\Users\Alex\Desktop\Atlas
 
-.\scripts\run-atlas.ps1 -TenantPath ".\tenants\example_tenant.json" -OnlyControls "DefaultUserRoleReadOtherUsersDisabled,DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled"
+.\scripts\run-atlas.ps1 -TenantPath ".\tenants\example_tenant.json" -OnlyControls "DisableUserConsentToApps,BlockMsolPowerShellEnabled,EmailBasedSubscriptionsDisabled,GuestInvitesRestrictedToAdminsAndGuestInviters,EmailVerifiedUsersCannotJoinOrganization,DefaultUserRoleAppsCreationDisabled,DefaultUserRoleSecurityGroupsCreationDisabled,DefaultUserRoleTenantCreationDisabled,DefaultUserRoleReadOtherUsersDisabled,DefaultUserRoleReadBitlockerKeysForOwnedDeviceDisabled"
+

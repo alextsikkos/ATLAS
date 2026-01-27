@@ -123,6 +123,9 @@ def _run_bulk_once(tenant: dict, tenant_name: str, headers: dict) -> dict:
     for cid in target_ids:
         path, desired = CONTROL_FIELD_MAP[cid]
         cur_before = _get_path(before, path)
+        if isinstance(desired, list) and cur_before is None:
+            cur_before = []
+
         details = {
             "before": {cid: cur_before},
             "desired": {cid: desired},
@@ -164,6 +167,17 @@ def _make_per_control_enforcer(control_id: str):
         before_val = (details.get("before") or {}).get(control_id)
         desired_val = (details.get("desired") or {}).get(control_id)
         after_val = (details.get("after") or {}).get(control_id)
+        # Normalise "missing list" fields: Graph can return null/None instead of [] when empty
+        if isinstance(desired_val, list):
+            if before_val is None:
+                before_val = []
+            if after_val is None:
+                after_val = []
+            # Keep details consistent too
+            if "before" in details and isinstance(details["before"], dict):
+                details["before"][control_id] = before_val
+            if "after" in details and isinstance(details["after"], dict):
+                details["after"][control_id] = after_val
 
         compliant_before = (before_val == desired_val)
         compliant_after = (after_val == desired_val)
