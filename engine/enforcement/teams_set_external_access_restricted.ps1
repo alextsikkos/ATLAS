@@ -1,4 +1,3 @@
-$WarningPreference = "SilentlyContinue"
 param(
   [Parameter(Mandatory=$true)] [string]$TenantId,
   [Parameter(Mandatory=$true)] [string]$AppId,
@@ -7,6 +6,8 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
+$WarningPreference = "SilentlyContinue"
 
 $result = @{
   ok = $false
