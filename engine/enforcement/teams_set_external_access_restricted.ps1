@@ -1,3 +1,4 @@
+$WarningPreference = "SilentlyContinue"
 param(
   [Parameter(Mandatory=$true)] [string]$TenantId,
   [Parameter(Mandatory=$true)] [string]$AppId,
@@ -62,7 +63,7 @@ try {
       # Only set if the module supports it (this is the one breaking your run)
       if ($cmd.Parameters.ContainsKey("EnablePublicCloudAccess"))    { $ps.EnablePublicCloudAccess    = $false }
 
-      Set-CsExternalAccessPolicy @ps
+      Set-CsExternalAccessPolicy @ps 3>$null
       $result.applied = ($result.changed.Count -gt 0)
 
     }

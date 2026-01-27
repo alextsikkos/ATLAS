@@ -1,0 +1,24 @@
+{
+  "tenant": "example",
+  "controlId": "TeamsExternalAccessRestricted",
+  "action": "ensure_applied",
+  "displayName": "Teams: External access restricted (Secure Score)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "ENFORCER_ERROR",
+  "reasonDetail": "Teams external access enforcer failed",
+  "details": {
+    "powershellExitCode": 0,
+    "stderr": "",
+    "result": {
+      "ok": false,
+      "error": "Failed to parse JSON: Expecting value: line 1 column 1 (char 0)",
+      "raw": "WARNING: CommunicationWithExternalOrgs will only be effective when EnableFederationAccess is set to true.\n{\n    \"applied\":  true,\n    \"verify\":  {\n                   \"expected\":  {\n                                    \"EnableFederationAccess\":  false,\n                                    \"EnableTeamsConsumerInbound\":  false,\n                                    \"EnablePublicCloudAccess\":  false,\n                                    \"EnableTeamsConsumerAccess\":  false\n                                },\n                   \"ok\":  false,\n                   \"actual\":  {\n                                  \"EnableFederationAccess\":  false,\n                                  \"EnableTeamsConsumerInbound\":  false,\n                                  \"EnablePublicCloudAccess\":  null,\n                                  \"EnableTeamsConsumerAccess\":  false,\n                                  \"Identity\":  \"Global\"\n                              }\n               },\n    \"after\":  {\n                  \"EnableFederationAccess\":  false,\n                  \"EnableTeamsConsumerInbound\":  false,\n                  \"EnablePublicCloudAccess\":  null,\n                  \"EnableTeamsConsumerAccess\":  false,\n                  \"Identity\":  \"Global\"\n              },\n    \"before\":  {\n                   \"EnableFederationAccess\":  true,\n                   \"EnableTeamsConsumerInbound\":  true,\n                   \"EnablePublicCloudAccess\":  null,\n                   \"EnableTeamsConsumerAccess\":  true,\n                   \"Identity\":  \"Global\"\n               },\n    \"ok\":  true,\n    \"error\":  null,\n    \"changed\":  [\n                    \"EnableFederationAccess\",\n                    \"EnablePublicCloudAccess\",\n                    \"EnableTeamsConsumerAccess\",\n                    \"EnableTeamsConsumerInbound\"\n                ]\n}"
+    },
+    "reasonCode": "ENFORCER_ERROR",
+    "reasonDetail": "Teams external access enforcer failed"
+  },
+  "status": 502,
+  "durationSeconds": 6.171
+}
