@@ -132,7 +132,8 @@ def _subset(d: dict | None, keys: list[str]) -> dict:
 
 def _spo_get_tenant_settings(admin_url: str) -> dict:
     from engine.detectors.spo import run_spo_tenant_settings
-    return run_spo_tenant_settings(admin_url)
+    return run_spo_tenant_settings(admin_url, tenant_conf)
+
 
 
 def _spo_set_tenant_settings_bulk(admin_url: str, desired: dict) -> dict:

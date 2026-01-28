@@ -29,8 +29,14 @@ Import-Module Microsoft.Online.SharePoint.PowerShell -ErrorAction SilentlyContin
 if ($ClientId -and $TenantId -and (($CertificateThumbprint -and $CertificateThumbprint.Trim().Length -gt 0) -or ($CertificatePath -and $CertificatePath.Trim().Length -gt 0))) {
 
   if ($CertificateThumbprint -and $CertificateThumbprint.Trim().Length -gt 0) {
-    Connect-SPOService -Url $AdminUrl -ClientId $ClientId -Tenant $TenantId -CertificateThumbprint $CertificateThumbprint -ErrorAction Stop
+    $tp = $CertificateThumbprint -replace "\s",""
+    $certPath = "Cert:\CurrentUser\My\$tp"
+    $cert = Get-ChildItem $certPath -ErrorAction Stop
+    if (-not $cert.HasPrivateKey) { throw "Certificate found but has no private key: $certPath" }
+
+    Connect-SPOService -Url $AdminUrl -ClientId $ClientId -Tenant $TenantId -Certificate $cert -ErrorAction Stop
   }
+
   elseif ($CertificatePath -and $CertificatePath.Trim().Length -gt 0) {
     if ($CertificatePassword -and $CertificatePassword.Trim().Length -gt 0) {
       $sec = ConvertTo-SecureString -String $CertificatePassword -AsPlainText -Force

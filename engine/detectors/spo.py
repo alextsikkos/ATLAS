@@ -3,23 +3,22 @@ import os
 import subprocess
 
 
-def _spo_auth_ps_args() -> tuple[list[str], list[str]]:
-    """Return (ps_args, missing_keys).
+def _spo_auth_ps_args(tenant_conf: dict | None = None) -> tuple[list[str], list[str]]:
+    tenant_conf = tenant_conf or {}
 
-    Auth is provided via environment variables set by engine/main.py.
+    # Prefer tenant JSON
+    spo_auth = (
+        tenant_conf.get("spoAppAuth")
+        or tenant_conf.get("spoAppOnlyAuth")
+        or {}
+    )
 
-    If any SPO app-only auth value is present, we treat it as 'configured' and require all required fields.
-    This prevents silent fallbacks to interactive auth (which would create popups).
-    """
-    client_id = (os.getenv("ATLAS_SPO_CLIENT_ID") or "").strip()
-    tenant_id = (os.getenv("ATLAS_SPO_TENANT_ID") or "").strip()
-    thumbprint = (os.getenv("ATLAS_SPO_CERT_THUMBPRINT") or "").strip()
-    cert_path = (os.getenv("ATLAS_SPO_CERT_PATH") or "").strip()
-    cert_password = os.getenv("ATLAS_SPO_CERT_PASSWORD")  # may be empty
-
-    configured = any([client_id, tenant_id, thumbprint, cert_path, (cert_password or "").strip()])
-    if not configured:
-        return [], []
+    # Back-compat / fallback to env if tenant JSON not present
+    client_id = (spo_auth.get("clientId") or spo_auth.get("appId") or os.getenv("ATLAS_SPO_CLIENT_ID") or os.getenv("ATLAS_SPO_APP_ID") or "").strip()
+    tenant_id = (spo_auth.get("tenantId") or os.getenv("ATLAS_SPO_TENANT_ID") or os.getenv("ATLAS_SPO_TENANT") or os.getenv("ATLAS_SPO_TENANTID") or "").strip()
+    thumbprint = (spo_auth.get("certificateThumbprint") or os.getenv("ATLAS_SPO_CERT_THUMBPRINT") or os.getenv("ATLAS_SPO_THUMBPRINT") or "").strip()
+    cert_path = (spo_auth.get("certificatePath") or os.getenv("ATLAS_SPO_CERT_PATH") or "").strip()
+    cert_password = (spo_auth.get("certificatePassword") or os.getenv("ATLAS_SPO_CERT_PASSWORD") or "")
 
     missing = []
     if not client_id:
@@ -27,28 +26,24 @@ def _spo_auth_ps_args() -> tuple[list[str], list[str]]:
     if not tenant_id:
         missing.append("tenant.spoAppAuth.tenantId")
     if not thumbprint and not cert_path:
-        missing.append("tenant.spoAppAuth.certificateThumbprint OR tenant.spoAppAuth.certificatePath")
+        missing.append("tenant.spoAppAuth.certificateThumbprint OR certificatePath")
+    if cert_path and not str(cert_password).strip():
+        missing.append("tenant.spoAppAuth.certificatePassword")
 
-    ps_args = []
     if missing:
-        return ps_args, missing
+        return [], missing
 
-    ps_args += ["-ClientId", client_id, "-TenantId", tenant_id]
+    ps_args = ["-ClientId", client_id, "-TenantId", tenant_id]
 
-    # Prefer CertificatePath auth when provided (more reliable than store lookup).
-    if cert_path and (cert_password is not None and str(cert_password).strip()):
-        ps_args += ["-CertificatePath", cert_path, "-CertificatePassword", str(cert_password)]
-    elif cert_path:
-        # Path provided but no password; still pass path (script may handle no-password cases)
-        ps_args += ["-CertificatePath", cert_path]
-    elif thumbprint:
+    if thumbprint:
         ps_args += ["-CertificateThumbprint", thumbprint]
+    else:
+        ps_args += ["-CertificatePath", cert_path, "-CertificatePassword", str(cert_password)]
 
     return ps_args, []
 
 
-
-def run_spo_tenant_settings(admin_url: str) -> dict:
+def run_spo_tenant_settings(admin_url: str, tenant_conf: dict | None = None) -> dict:
 
     if not admin_url or not str(admin_url).strip():
         return {
@@ -131,7 +126,8 @@ def set_spo_prevent_external_users_from_resharing(admin_url: str, enabled: bool)
 
     ps1_path = os.path.join(os.path.dirname(__file__), "spo_set_prevent_resharing.ps1")
 
-    auth_args, missing_keys = _spo_auth_ps_args()
+    auth_args, missing_keys = _spo_auth_ps_args(tenant_conf)
+
     if missing_keys:
         return {
             "ok": False,
