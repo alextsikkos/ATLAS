@@ -1,8 +1,8 @@
 {
   "tenant": "example",
-  "controlId": "SharePointLinkExpirationConfigured",
+  "controlId": "SharePointDefaultSharingRestricted",
   "action": "ensure_applied",
-  "displayName": "SharePoint: Anonymous link expiration configured (Secure Score)",
+  "displayName": "SharePoint: Default sharing permissions restricted (Secure Score)",
   "approved": true,
   "mode": "enforce",
   "state": "NOT_EVALUATED",
@@ -63,5 +63,5 @@
     "reasonDetail": "SPO read failed: Interactive SPO auth is disabled. Configure spoAppAuth (clientId/tenantId/certificateThumbprint) in the tenant JSON."
   },
   "status": 424,
-  "durationSeconds": 0.0
+  "durationSeconds": 1.007
 }

@@ -3,18 +3,22 @@ import os
 import subprocess
 
 
-def _spo_auth_ps_args(tenant_conf: dict) -> tuple[list[str], list[str]]:
-    spo_auth = (
-        (tenant_conf or {}).get("spoAppAuth")
-        or (tenant_conf or {}).get("spoAppOnlyAuth")
-        or {}
-    )
+def _spo_auth_ps_args() -> tuple[list[str], list[str]]:
+    spo_auth = {
+        "clientId": (os.getenv("ATLAS_SPO_CLIENT_ID") or "").strip(),
+        "tenantId": (os.getenv("ATLAS_SPO_TENANT_ID") or "").strip(),
+        "certificateThumbprint": (os.getenv("ATLAS_SPO_CERT_THUMBPRINT") or "").strip(),
+        "certificatePath": (os.getenv("ATLAS_SPO_CERT_PATH") or "").strip(),
+        "certificatePassword": (os.getenv("ATLAS_SPO_CERT_PASSWORD") or "").strip(),
+    }
 
-    client_id = (spo_auth.get("clientId") or spo_auth.get("appId") or "").strip()
-    tenant_id = (spo_auth.get("tenantId") or "").strip()
-    thumbprint = (spo_auth.get("certificateThumbprint") or "").strip()
-    cert_path = (spo_auth.get("certificatePath") or "").strip()
-    cert_password = spo_auth.get("certificatePassword")
+
+    client_id = spo_auth["clientId"]
+    tenant_id = spo_auth["tenantId"]
+    thumbprint = spo_auth["certificateThumbprint"]
+    cert_path = spo_auth["certificatePath"]
+    cert_password = spo_auth["certificatePassword"]
+
 
     missing = []
     if not client_id:
@@ -51,9 +55,8 @@ def set_spo_domain_restriction(admin_url: str, mode: str, allowed_domains: str |
 
     ps1_path = os.path.join(os.path.dirname(__file__), "spo_set_domain_restriction.ps1")
 
-    auth_args, missing_keys = _spo_auth_ps_args(tenant_conf)
-    result["authMode"] = "app-only" if auth_args else "interactive-disabled"
-    result["authArgsPresent"] = bool(auth_args)
+    auth_args, missing_keys = _spo_auth_ps_args()
+
 
     if missing_keys:
         return {"ok": False, "error": "SPO app-only auth is configured but missing required keys; refusing to fall back to interactive auth", "missingKeys": missing_keys, "adminUrl": admin_url}
@@ -111,9 +114,7 @@ def set_spo_tenant_settings_bulk(admin_url: str, settings: dict) -> dict:
 
     ps1_path = os.path.join(os.path.dirname(__file__), "spo_set_tenant_settings_bulk.ps1")
 
-    auth_args, missing_keys = _spo_auth_ps_args(tenant_conf)
-    result["authMode"] = "app-only" if auth_args else "interactive-disabled"
-    result["authArgsPresent"] = bool(auth_args)
+    auth_args, missing_keys = _spo_auth_ps_args()
 
     if missing_keys:
         return {
