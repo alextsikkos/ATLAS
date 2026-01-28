@@ -1,0 +1,71 @@
+{
+  "tenant": "example",
+  "controlId": "SharePointDefaultLinkTypeRestricted",
+  "action": "ensure_applied",
+  "displayName": "SharePoint: Default link type restricted (Secure Score)",
+  "approved": true,
+  "mode": "enforce",
+  "state": "NOT_EVALUATED",
+  "reasonCode": "MISSING_SIGNAL",
+  "reasonDetail": "SPO read failed: SPO app-only auth is configured but missing required keys; refusing to fall back to interactive auth",
+  "details": {
+    "batch": {
+      "adminUrl": "https://6twcdy-admin.sharepoint.com",
+      "ok": false,
+      "before": {
+        "ok": false,
+        "error": "SPO app-only auth is configured but missing required keys; refusing to fall back to interactive auth",
+        "missingKeys": [
+          "tenant.spoAppAuth.clientId",
+          "tenant.spoAppAuth.tenantId",
+          "tenant.spoAppAuth.certificateThumbprint OR certificatePath"
+        ],
+        "tenant": null,
+        "adminUrl": "https://6twcdy-admin.sharepoint.com"
+      },
+      "after": null,
+      "desired": {
+        "PreventExternalUsersFromResharing": true,
+        "DefaultSharingLinkType": 2,
+        "DefaultLinkPermission": 1,
+        "RequireAnonymousLinksExpireInDays": 30,
+        "SharingDomainRestrictionMode": "AllowList",
+        "SharingAllowedDomainList": "partner.com vendor.com"
+      },
+      "applyResult": null,
+      "verifyAttempts": [],
+      "perControl": {},
+      "error": "SPO read failed: SPO app-only auth is configured but missing required keys; refusing to fall back to interactive auth",
+      "desiredByControl": {
+        "SharePointPreventExternalUsersFromResharingEnabled": {
+          "PreventExternalUsersFromResharing": true
+        },
+        "SharePointDefaultLinkTypeRestricted": {
+          "DefaultSharingLinkType": 2
+        },
+        "SharePointDefaultSharingRestricted": {
+          "DefaultLinkPermission": 1
+        },
+        "SharePointLinkExpirationConfigured": {
+          "RequireAnonymousLinksExpireInDays": 30
+        },
+        "SharePointDomainRestrictionConfigured": {
+          "SharingDomainRestrictionMode": "AllowList"
+        },
+        "SharePointSharingAllowedDomainListConfigured": {
+          "SharingDomainRestrictionMode": "AllowList",
+          "SharingAllowedDomainList": "partner.com vendor.com"
+        }
+      },
+      "missingDesiredConfigByControl": {
+        "SharePointIdleSessionTimeout": [
+          "UNSUPPORTED: Set-SPOTenant does not support IdleSessionSignOut* parameters"
+        ]
+      }
+    },
+    "reasonCode": "MISSING_SIGNAL",
+    "reasonDetail": "SPO read failed: SPO app-only auth is configured but missing required keys; refusing to fall back to interactive auth"
+  },
+  "status": 424,
+  "durationSeconds": 0.0
+}

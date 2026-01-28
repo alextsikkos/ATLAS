@@ -33,7 +33,8 @@ def _spo_auth_ps_args() -> tuple[list[str], list[str]]:
     return ps_args, []
 
 
-def run_spo_tenant_settings(admin_url: str, tenant_conf: dict | None = None) -> dict:
+def run_spo_tenant_settings(admin_url: str) -> dict:
+
 
     if not admin_url or not str(admin_url).strip():
         return {
