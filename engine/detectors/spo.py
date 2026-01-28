@@ -3,22 +3,12 @@ import os
 import subprocess
 
 
-def _spo_auth_ps_args(tenant_conf: dict | None = None) -> tuple[list[str], list[str]]:
-    tenant_conf = tenant_conf or {}
-
-    # Prefer tenant JSON
-    spo_auth = (
-        tenant_conf.get("spoAppAuth")
-        or tenant_conf.get("spoAppOnlyAuth")
-        or {}
-    )
-
-    # Back-compat / fallback to env if tenant JSON not present
-    client_id = (spo_auth.get("clientId") or spo_auth.get("appId") or os.getenv("ATLAS_SPO_CLIENT_ID") or os.getenv("ATLAS_SPO_APP_ID") or "").strip()
-    tenant_id = (spo_auth.get("tenantId") or os.getenv("ATLAS_SPO_TENANT_ID") or os.getenv("ATLAS_SPO_TENANT") or os.getenv("ATLAS_SPO_TENANTID") or "").strip()
-    thumbprint = (spo_auth.get("certificateThumbprint") or os.getenv("ATLAS_SPO_CERT_THUMBPRINT") or os.getenv("ATLAS_SPO_THUMBPRINT") or "").strip()
-    cert_path = (spo_auth.get("certificatePath") or os.getenv("ATLAS_SPO_CERT_PATH") or "").strip()
-    cert_password = (spo_auth.get("certificatePassword") or os.getenv("ATLAS_SPO_CERT_PASSWORD") or "")
+def _spo_auth_ps_args() -> tuple[list[str], list[str]]:
+    client_id = (os.getenv("ATLAS_SPO_CLIENT_ID") or "").strip()
+    tenant_id = (os.getenv("ATLAS_SPO_TENANT_ID") or "").strip()
+    thumbprint = (os.getenv("ATLAS_SPO_CERT_THUMBPRINT") or "").strip()
+    cert_path = (os.getenv("ATLAS_SPO_CERT_PATH") or "").strip()
+    cert_password = os.getenv("ATLAS_SPO_CERT_PASSWORD")
 
     missing = []
     if not client_id:
