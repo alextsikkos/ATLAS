@@ -60,14 +60,26 @@ def run_spo_tenant_settings(admin_url: str) -> dict:
 
         "powershell.exe",
         "-NoProfile",
+        "-NonInteractive",
+        "-NoLogo",
         "-ExecutionPolicy", "Bypass",
         "-File", ps1_path,
         "-AdminUrl", str(admin_url).strip(),
     ] + auth_args
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True)
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+    except subprocess.TimeoutExpired as e:
+        return {
+            "ok": False,
+            "error": "PowerShell timed out (SPO runner hung)",
+            "cmd": cmd,
+            "stdout": (e.stdout or "").strip() if hasattr(e, "stdout") else None,
+            "stderr": (e.stderr or "").strip() if hasattr(e, "stderr") else None,
+            "timeoutSeconds": 180,
+        }
     except Exception as e:
         return {"ok": False, "error": f"Failed to execute PowerShell: {e}", "cmd": cmd}
+
 
     out = proc.stdout or ""
     err = proc.stderr or ""
@@ -133,6 +145,8 @@ def set_spo_prevent_external_users_from_resharing(admin_url: str, enabled: bool)
     cmd = [
         "powershell.exe",
         "-NoProfile",
+        "-NonInteractive",
+        "-NoLogo",
         "-ExecutionPolicy", "Bypass",
         "-File", ps1_path,
         "-AdminUrl", str(admin_url).strip(),
@@ -140,9 +154,19 @@ def set_spo_prevent_external_users_from_resharing(admin_url: str, enabled: bool)
     ] + auth_args
 
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True)
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+    except subprocess.TimeoutExpired as e:
+        return {
+            "ok": False,
+            "error": "PowerShell timed out (SPO runner hung)",
+            "cmd": cmd,
+            "stdout": (e.stdout or "").strip() if hasattr(e, "stdout") else None,
+            "stderr": (e.stderr or "").strip() if hasattr(e, "stderr") else None,
+            "timeoutSeconds": 180,
+        }
     except Exception as e:
         return {"ok": False, "error": f"Failed to execute PowerShell: {e}", "cmd": cmd}
+
 
     out = (proc.stdout or "").strip()
     err = (proc.stderr or "").strip()
@@ -185,6 +209,8 @@ def set_spo_domain_restriction(admin_url: str, mode: str, allowed_domains: str |
     cmd = [
         "powershell.exe",
         "-NoProfile",
+        "-NonInteractive",
+        "-NoLogo",
         "-ExecutionPolicy", "Bypass",
         "-File", ps1_path,
         "-AdminUrl", str(admin_url).strip(),
@@ -194,9 +220,19 @@ def set_spo_domain_restriction(admin_url: str, mode: str, allowed_domains: str |
     ] + auth_args
 
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True)
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+    except subprocess.TimeoutExpired as e:
+        return {
+            "ok": False,
+            "error": "PowerShell timed out (SPO runner hung)",
+            "cmd": cmd,
+            "stdout": (e.stdout or "").strip() if hasattr(e, "stdout") else None,
+            "stderr": (e.stderr or "").strip() if hasattr(e, "stderr") else None,
+            "timeoutSeconds": 180,
+        }
     except Exception as e:
         return {"ok": False, "error": f"Failed to execute PowerShell: {e}", "cmd": cmd}
+
 
     out = (proc.stdout or "").strip()
     err = (proc.stderr or "").strip()
@@ -252,6 +288,8 @@ def set_spo_tenant_settings_bulk(admin_url: str, settings: dict) -> dict:
     cmd = [
         "powershell.exe",
         "-NoProfile",
+        "-NonInteractive",
+        "-NoLogo",
         "-ExecutionPolicy", "Bypass",
         "-File", ps1_path,
         "-AdminUrl", str(admin_url).strip(),
@@ -259,9 +297,19 @@ def set_spo_tenant_settings_bulk(admin_url: str, settings: dict) -> dict:
     ] + auth_args
 
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True)
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+    except subprocess.TimeoutExpired as e:
+        return {
+            "ok": False,
+            "error": "PowerShell timed out (SPO runner hung)",
+            "cmd": cmd,
+            "stdout": (e.stdout or "").strip() if hasattr(e, "stdout") else None,
+            "stderr": (e.stderr or "").strip() if hasattr(e, "stderr") else None,
+            "timeoutSeconds": 180,
+        }
     except Exception as e:
         return {"ok": False, "error": f"Failed to execute PowerShell: {e}", "cmd": cmd}
+
 
     out = (proc.stdout or "").strip()
     err = (proc.stderr or "").strip()
