@@ -513,6 +513,9 @@ def main():
         _set_env("ATLAS_SPO_APP_ID", spo_auth.get("appId") or spo_auth.get("clientId"))  # <-- add this
         _set_env("ATLAS_SPO_TENANT_ID", spo_auth.get("tenantId"))
         _set_env("ATLAS_SPO_CERT_THUMBPRINT", spo_auth.get("certificateThumbprint"))
+        _set_env("ATLAS_SPO_CERT_PATH", spo_auth.get("certificatePath"))
+        _set_env("ATLAS_SPO_CERT_PASSWORD", spo_auth.get("certificatePassword"))
+
         
         teams_auth = tenant.get("teamsAppAuth") or {}
         _set_env("ATLAS_TEAMS_CLIENT_ID", teams_auth.get("clientId"))
