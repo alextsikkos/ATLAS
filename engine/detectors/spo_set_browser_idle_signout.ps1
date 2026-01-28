@@ -1,22 +1,27 @@
 param(
   [Parameter(Mandatory=$true)]
-  [string] $AdminUrl,
+  [string]$AdminUrl,
 
   [Parameter(Mandatory=$true)]
-  [string] $Enabled,
+  [bool]$Enabled,
 
   [Parameter(Mandatory=$true)]
-  [int] $WarnAfterSeconds,
+  [int]$WarnAfterSeconds,
 
   [Parameter(Mandatory=$true)]
-  [int] $SignOutAfterSeconds,
+  [int]$SignOutAfterSeconds,
 
-  [string] $ClientId,
-  [string] $TenantId,
-  [string] $CertificateThumbprint,
-  [string] $CertificatePath,
-  [string] $CertificatePassword
+  [Parameter(Mandatory=$true)]
+  [string]$ClientId,
+
+  [Parameter(Mandatory=$true)]
+  [string]$TenantId,
+
+  [string]$CertificateThumbprint,
+  [string]$CertificatePath,
+  [string]$CertificatePassword
 )
+
 try {
   $EnabledBool = [System.Convert]::ToBoolean($Enabled)
 }

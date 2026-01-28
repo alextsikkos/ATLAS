@@ -1,0 +1,29 @@
+{
+  "tenant": "example",
+  "controlId": "SharePointIdleSessionTimeout",
+  "action": "ensure_applied",
+  "displayName": "Sign out inactive users in SharePoint Online",
+  "approved": true,
+  "mode": "enforce",
+  "state": "ERROR",
+  "reasonCode": "ENFORCER_ERROR",
+  "reasonDetail": "Failed to apply SPO idle session sign-out",
+  "details": {
+    "adminUrl": "https://6twcdy-admin.sharepoint.com",
+    "requested": {
+      "enabled": true,
+      "warnAfterSeconds": 840,
+      "signOutAfterSeconds": 900
+    },
+    "applyResult": {
+      "ok": false,
+      "error": "No certificate was found matching the specified parameters. Check the thumbprint or path, and then try again.",
+      "idle": null,
+      "adminUrl": "https://6twcdy-admin.sharepoint.com"
+    },
+    "reasonCode": "ENFORCER_ERROR",
+    "reasonDetail": "Failed to apply SPO idle session sign-out"
+  },
+  "status": 500,
+  "durationSeconds": 15.406
+}
