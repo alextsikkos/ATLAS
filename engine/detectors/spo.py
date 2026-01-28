@@ -51,14 +51,15 @@ def set_spo_browser_idle_signout(
             "missingKeys": missing_keys,
             "adminUrl": admin_url,
         }
-
+    enabled_ps = "$true" if bool(enabled) else "$false"
+    
     cmd = [
         "powershell.exe",
         "-NoProfile",
         "-ExecutionPolicy", "Bypass",
         "-File", ps1_path,
         "-AdminUrl", str(admin_url).strip(),
-        "-Enabled", str(bool(enabled)).lower(),
+        "-Enabled", enabled_ps,
         "-WarnAfterSeconds", str(int(warn_after_seconds)),
         "-SignOutAfterSeconds", str(int(signout_after_seconds)),
     ] + auth_args
