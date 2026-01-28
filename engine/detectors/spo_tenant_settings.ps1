@@ -30,15 +30,33 @@ try {
   # --- Connect: app-only if configured; interactive only if no app-only args passed ---
   $hasAppOnlyArgs = ($ClientId -and $TenantId -and ( $CertificateThumbprint -or $CertificatePath ))
 
-  if ($hasAppOnlyArgs) {
-    if ($CertificateThumbprint) {
-      $tp = $CertificateThumbprint -replace "\s",""
-      $certPath = "Cert:\CurrentUser\My\$tp"
-      $cert = Get-ChildItem $certPath -ErrorAction Stop
-      if (-not $cert.HasPrivateKey) { throw "Certificate found but has no private key: $certPath" }
+  if ($CertificateThumbprint) {
+    $tp = $CertificateThumbprint -replace "\s",""
 
-      Connect-SPOService -Url $AdminUrl -ClientId $ClientId -Tenant $TenantId -Certificate $cert -ErrorAction Stop
+    $cert = $null
+    $pathsTried = @()
+
+    $p1 = "Cert:\CurrentUser\My\$tp"
+    $pathsTried += $p1
+    try { $cert = Get-ChildItem $p1 -ErrorAction Stop } catch { $cert = $null }
+
+    if (-not $cert) {
+      $p2 = "Cert:\LocalMachine\My\$tp"
+      $pathsTried += $p2
+      try { $cert = Get-ChildItem $p2 -ErrorAction Stop } catch { $cert = $null }
     }
+
+    if (-not $cert) {
+      throw "Certificate thumbprint not found in certificate stores. Tried: $($pathsTried -join ', ')"
+    }
+
+    if (-not $cert.HasPrivateKey) {
+      throw "Certificate found but has no private key. Thumbprint=$tp"
+    }
+
+    Connect-SPOService -Url $AdminUrl -ClientId $ClientId -Tenant $TenantId -Certificate $cert -ErrorAction Stop
+  }
+
     else {
       # CertificatePath mode
       if (-not $CertificatePath) { throw "CertificatePath is required when using CertificatePath auth" }
