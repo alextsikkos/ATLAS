@@ -1,0 +1,976 @@
+{
+  "id": "d9ff2399-92ca-4e0c-87d0-5769459f2755_2026-01-28",
+  "azureTenantId": "d9ff2399-92ca-4e0c-87d0-5769459f2755",
+  "activeUserCount": 19,
+  "createdDateTime": "2026-01-28T00:00:00Z",
+  "currentScore": 164.78,
+  "enabledServices": [
+    "HasAADP1",
+    "HasAADP2",
+    "HasOCAS",
+    "HasMCAS",
+    "HasAATP",
+    "HasCLB",
+    "HasMDOP1",
+    "HasMDOP2",
+    "HasEXOP2",
+    "HasAIPP1",
+    "HasAIPP2",
+    "HasSPOP2"
+  ],
+  "licensedUserCount": 0,
+  "maxScore": 354.0,
+  "vendorInformation": {
+    "provider": "SecureScore",
+    "providerVersion": null,
+    "subProvider": null,
+    "vendor": "Microsoft"
+  },
+  "averageComparativeScores": [
+    {
+      "basis": "AllTenants",
+      "averageScore": 50.91,
+      "appsScore": 47.95,
+      "appsScoreMax": 125.84,
+      "dataScore": 0.33,
+      "dataScoreMax": 5.23,
+      "deviceScore": 18.91,
+      "deviceScoreMax": 33.34,
+      "identityScore": 38.44,
+      "identityScoreMax": 61.41,
+      "infrastructureScore": 0.0,
+      "infrastructureScoreMax": 0.0
+    },
+    {
+      "basis": "TotalSeats",
+      "averageScore": 45.79,
+      "SeatSizeRangeLowerValue": "1",
+      "SeatSizeRangeUpperValue": "100",
+      "appsScore": 53.85,
+      "appsScoreMax": 146.72,
+      "dataScore": 0.28,
+      "dataScoreMax": 6.17,
+      "deviceScore": 13.27,
+      "deviceScoreMax": 23.68,
+      "identityScore": 36.9,
+      "identityScoreMax": 60.57,
+      "infrastructureScore": 0.0,
+      "infrastructureScoreMax": 0.0
+    }
+  ],
+  "controlScores": [
+    {
+      "controlCategory": "Apps",
+      "controlName": "meeting_restrictanonymousjoin_v1",
+      "description": "By restricting anonymous users from joining Microsoft Teams meetings, you have full control over meeting access. Anonymous users may not be from your organization and could have joined for malicious purposes, such as gaining information about your organization through conversations.",
+      "score": 0.0,
+      "lastSynced": "2026-01-10T03:36:51Z",
+      "implementationStatus": "current status: On",
+      "on": "false",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "meeting_pstnusersbypasslobby_v1",
+      "description": "Dial-in users aren\u2019t authenticated though the Teams app. Increase the security of your meetings by preventing these unknown users from bypassing the lobby and immediately joining the meeting.",
+      "score": 1.0,
+      "lastSynced": "2026-01-10T03:36:51Z",
+      "implementationStatus": "",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "meeting_externalrequestcontrol_v1",
+      "description": "External participants are users that are outside your organization. Limiting their permission to share content, add new users, and more protects your organization\u2019s information from data leaks, inappropriate content being shared, or malicious actors joining the meeting.",
+      "score": 1.0,
+      "lastSynced": "2026-01-10T03:36:51Z",
+      "implementationStatus": "",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "meeting_anonymousstartmeeting_v1",
+      "description": "If anonymous users are allowed to start meetings, they can admit any users from the lobbies, authenticated or otherwise. Anonymous users haven\u2019t been authenticated, which can increase the risk of data leakage.",
+      "score": 1.0,
+      "lastSynced": "2026-01-10T03:36:51Z",
+      "implementationStatus": "",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "meeting_autoadmitusers_v1",
+      "description": "Users who aren\u2019t invited to a meeting shouldn\u2019t be let in automatically, because it increases the risk of data leaks, inappropriate content being shared, or malicious actors joining. If only invited users are automatically admitted, then users who weren\u2019t invited will be sent to a meeting lobby. The host can then decide whether or not to let them in.",
+      "score": 0.0,
+      "lastSynced": "2026-01-10T03:36:51Z",
+      "implementationStatus": "",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "meeting_designatedpresenter_v1",
+      "description": "Only allow users with presenter rights to share content during meetings. Restricting who can present limits meeting disruptions and reduces the risk of unwanted or inappropriate content being shared.  ",
+      "score": 0.0,
+      "lastSynced": "2026-01-10T03:36:51Z",
+      "implementationStatus": "",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "IntegratedApps",
+      "description": "To reduce the risk of malicious applications attempting to trick users into granting them access to your organization's data, we recommend that you allow user consent only for applications that have been published by a verified publisher.",
+      "score": 4.0,
+      "lastSynced": "2026-01-26T03:44:51Z",
+      "implementationStatus": "You have a user consent policy in place.",
+      "on": "true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "PWAgePolicyNew",
+      "description": "Research has found that when periodic password resets are enforced, passwords become less secure. Users tend to pick a weaker password and vary it slightly for each reset. If a user creates a strong password (long, complex and without any pragmatic words present) it should remain just as strong in the future as it is today. It is Microsoft's official security position to not expire passwords periodically without a specific reason, and recommends that cloud-only tenants set the password policy to never expire.",
+      "score": 8.0,
+      "lastSynced": "2026-01-26T03:44:51Z",
+      "implementationStatus": "Your current policy is set to never let passwords expire.",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "SelfServicePasswordReset",
+      "description": "With self-service password reset in Microsoft Entra ID, users no longer need to engage help desk to reset passwords. This feature works well with Microsoft Entra ID dynamically banned passwords, which prevents easily guessable passwords from being used.",
+      "score": 0.16,
+      "lastSynced": "2026-01-26T03:44:51Z",
+      "implementationStatus": "You have 16 of 19 users who don't have self-service password reset enabled.",
+      "count": "3",
+      "total": "19",
+      "scoreInPercentage": 16.0
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "BlockLegacyAuthentication",
+      "description": "Today, most compromising sign-in attempts come from legacy authentication. Older office clients such as Office 2010 don\u2019t support modern authentication and use legacy protocols such as IMAP, SMTP, and POP3. Legacy authentication does not support multifactor authentication (MFA). Even if an MFA policy is configured in your environment, bad actors can bypass these enforcements through legacy protocols.",
+      "score": 8.0,
+      "lastSynced": "2026-01-26T03:44:51Z",
+      "implementationStatus": "You have 0 of 19 users that don't have legacy authentication blocked.",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "MFARegistrationV2",
+      "description": "Multifactor authentication (MFA) helps protect devices and data that are accessible to these users. Adding more authentication methods, such as the Microsoft Authenticator app or a phone number, increases the level of protection if one factor is compromised.",
+      "score": 0.95,
+      "lastSynced": "2026-01-26T03:44:51Z",
+      "implementationStatus": "You have 17 out of 19 users that aren\u2019t registered with MFA.",
+      "count": "2",
+      "total": "19",
+      "scoreInPercentage": 10.56
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "AdminMFAV2",
+      "description": "<p>Requiring multifactor authentication (MFA) for administrative roles makes it harder for attackers to access accounts. Administrative roles have higher permissions than typical users. If any of those accounts are compromised, your entire organization is exposed. At a minimum, protect the following roles:&nbsp;</p><ul><li>Global administrator&nbsp;</li><li>Authentication administrator&nbsp;</li><li>Billing administrator&nbsp;</li><li>Conditional Access administrator&nbsp;</li><li>Exchange administrator&nbsp;</li><li>Helpdesk administrator&nbsp;</li><li>Security administrator&nbsp;</li><li>SharePoint administrator&nbsp;</li><li>User administrator&nbsp;</li></ul>",
+      "score": 6.67,
+      "lastSynced": "2026-01-26T03:44:51Z",
+      "implementationStatus": "You have 1 out of 3 users with administrative roles that aren\u2019t registered and protected with MFA.",
+      "count": "2",
+      "total": "3",
+      "scoreInPercentage": 66.7
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "SigninRiskPolicy",
+      "description": "Turning on the sign-in risk policy ensures that suspicious sign-ins are challenged for multifactor authentication (MFA).",
+      "score": 0.0,
+      "lastSynced": "2026-01-26T03:44:51Z",
+      "implementationStatus": "You have 19 of 19 users that don't have the sign-in risky policy turned on.",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "UserRiskPolicy",
+      "description": "With the user risk policy turned on, Microsoft Entra ID detects the probability that a user account has been compromised. As an administrator, you can configure a user risk Conditional Access policy to automatically respond to a specific user risk level. For example, you can block access to your resources or require a password change to get a user account back into a clean state.",
+      "score": 0.0,
+      "lastSynced": "2026-01-26T03:44:51Z",
+      "implementationStatus": "You have 19 users out of 19 that do not have user risk policy enabled.",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "OneAdmin",
+      "description": "<p>Having more than one global administrator helps if you are unable to fulfill the needs or obligations of your organization. It's important to have a delegate or an emergency account someone from your team can access if necessary. It also allows admins the ability to monitor each other for signs of a breach.</p> <p><strong>Note</strong>:</p> <p>According to CIS O365 Benchmark 2.0.0, the suggestion is to have between two to four global admins. Currently, the condition to comply is to have more than one global administrator - This security recommendation will be updated accordingly to CIS benchmark in the future.</p> <p><h4>Rationale:</h4></p> <p>If there is only one global tenant administrator, he or she can perform malicious activity without the possibility of being discovered by another admin. If there are numerous global tenant administrators, the more likely it is that one of their accounts will be successfully breached by an external attacker.</p>",
+      "score": 1.0,
+      "lastSynced": "2026-01-26T03:44:51Z",
+      "implementationStatus": "You currently have 3 global admins.",
+      "count": "3",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "RoleOverlap",
+      "description": "Ensure that your administrators can accomplish their work with the least amount of privilege assigned to their account. Assigning users roles like Password Administrator or Exchange Online Administrator, instead of Global Administrator, reduces the likelihood of a global administrative privileged account being breached.",
+      "score": 0.0,
+      "lastSynced": "2026-01-26T03:44:51Z",
+      "implementationStatus": "You have 0 users with least privileged administrative roles.",
+      "count": "0",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "McasFirewallLogUpload",
+      "description": "Log collectors provide visibility into cloud app usage so you can identify if there are any apps that run without official approval, or if there is anomalous behavior. Log collectors automatically upload reports and parse the firewall/ proxy traffic logs to see if there is a match with your services in the Cloud App Catalog.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T08:14:15Z",
+      "implementationStatus": "Feature in place: false.",
+      "on": "false",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "spo_idle_session_timeout",
+      "description": "\r\n\t\t\tIdle session sign-out lets you specify a time at which users are warned and are later signed out of Microsoft 365 after a period of browser inactivity in SharePoint and OneDrive.\r\n            <br/>\r\n\t\t\tThis policy is one of several you can use with SharePoint and OneDrive to balance security and user productivity and help keep your data safe, regardless  of where users access the data from, what device they're working on, and how secure their network connection is.\r\n\t\t",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T12:55:58Z",
+      "implementationStatus": "The setting is not compliant.",
+      "on": "false",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "spo_legacy_auth",
+      "description": "\r\n\t\t\tModern authentication in Microsoft 365 enables authentication features like multifactor authentication (MFA) using smart cards, certificate-based authentication (CBA), and third-party SAML identity providers.\r\n\t\t\t<br/>\r\n\t\t\tStrong authentication controls, such as the use of multifactor authentication, may be circumvented if basic authentication is used by SharePoint applications. Requiring modern authentication for SharePoint applications ensures strong authentication mechanisms are used when establishing sessions between these applications, SharePoint, and connecting users.\r\n\t\t\t<br/>\r\n\t\t\t<i>This information was taken from Center for Internet Security (CIS).</i>\r\n\t\t",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T12:55:58Z",
+      "implementationStatus": "The setting is not compliant.",
+      "on": "false",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "AATP_DefenderForIdentityIsNotInstalled",
+      "description": "Installing Microsoft Defender for Identity sensors provides you with the ability to detect advanced threats in your entire identity infrastructure. Actionable security alerts are generated through the analysis of network traffic and security events.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T11:55:15Z",
+      "implementationStatus": "",
+      "on": "false",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "forms_phishing_protection",
+      "description": "<p>Microsoft Forms can be used for phishing attacks by asking personal or sensitive information and collecting the results. Microsoft 365 has built-in protection that will proactively scan for phishing attempt in forms such personal information request.</p> <p><h4>Rationale:</h4><br />Enabling internal phishing protection for Microsoft Forms will prevent attackers using forms for phishing attacks by asking personal or other sensitive information and URLs.</p>",
+      "score": 6.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Internal phishing protection for Forms is: enabled",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "spo_block_onedrive_sync_unmanaged_devices",
+      "description": "Microsoft OneDrive allows users to sign in their cloud tenant account, and begin syncing select folders or the entire contents of OneDrive to a local computer. By default this includes any computer with OneDrive already installed, whether or not it is Azure Domain Joined or Active Directory Domain joined. Unmanaged devices pose a risk, since their security cannot be verified through existing security policies, brokers or endpoint protection. Allowing users to sync data to these devices takes that data out of the control of the organization. This increases the risk of the data either being intentionally or accidentally leaked. Note: This setting is only applicable to Active Directory domains when operating in a hybrid configuration. It does not apply to Microsoft Entra ID domains. If you have devices which are only Microsoft Entra ID joined, consider using a Conditional Access Policy instead.",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Blocking OneDrive for Business sync from unmanaged devices is: disabled",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "spo_external_sharing_managed",
+      "description": "Control sharing of documents to external domains by either blocking domains or only allowing sharing with specific named domains. Note - this control's mandatory compliance requirement is to set allow list domains.",
+      "score": 3.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Document sharing is being controlled by domains setting is enabled",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "spo_external_users_sharing",
+      "description": "SharePoint gives users the ability to share files, folder, and site collections. Internal users can share with external collaborators, who with the right permissions, could share those to another external party. Sharing and collaboration are key; however, file, folder, or site collection owners should have the authority over what external users get shared with to prevent unauthorized disclosures of information.",
+      "score": 3.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Prevent external users from sharing files, folders, and sites that they don\u2019t own is: enabled",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "admincenter_owned_apps_and_services",
+      "description": "<p>By default, users can install add-ins in their Microsoft Word, Excel, and PowerPoint applications, allowing data access within the application.<br />Do not allow users to install add-ins in Word, Excel, or PowerPoint.</p> <p><h4>Rationale:</h4><br />Attackers commonly use vulnerable and custom-built add-ins to access data in user applications.<br />While allowing users to install add-ins by themselves does allow them to easily acquire useful add-ins that integrate with Microsoft applications, it can represent a risk if not used and monitored carefully.<br />Disable future user's ability to install add-ins in Microsoft Word, Excel, or PowerPoint helps reduce your threat-surface and mitigate this risk.</p> <p><strong>Impact</strong>:</p> <p>Implementation of this change will impact both end users and administrators. End users <br />will not be able to install add-ins that they may want to install.</p>",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "'User owned apps and services' is [Not Measured]",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mip_DLP_policies_Teams",
+      "description": "Enabling Data Loss Prevention (DLP) policies for Microsoft Teams, blocks sensitive content when shared in teams or channels. Content to be scanned for specific types of data like social security numbers, credit card numbers, or passwords. Enabling DLP policies alerts users and administrators that specific types of data should not be exposed, helping to protect the data from accidental exposure.",
+      "score": 3.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "DLP policies in Teams are: true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "aad_third_party_apps",
+      "description": "Do not allow third party integrated applications to connect to your services. You should not allow third party integrated applications to connect to your services unless there is a very clear value and you have robust security controls in place. While there are legitimate uses, attackers can grant access from breached accounts to third party applications to exfiltrate data from your tenancy without having to maintain the breached account",
+      "score": 5.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Third party applications integration is: true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "aad_sign_in_freq_session_timeout",
+      "description": "Forcing a time out for MFA will help ensure that sessions are not kept alive for an indefinite period of time, ensuring that browser sessions are not persistent will help in prevention of drive-by attacks in web browsers, this also prevents creation and saving of session cookies leaving nothing for an attacker to take.",
+      "score": 5.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Setting is: sign in frequency is enabled.",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "aad_phishing_MFA_strength",
+      "description": "<p>Authentication strength is a Conditional Access control that allows administrators to specify which combination of authentication methods can be used to access a resource. For example, they can make only phishing-resistant authentication methods available to access a sensitive resource.&nbsp; But to access a non-sensitive resource, they can allow less secure multifactor authentication (MFA) combinations, such as password + SMS.</p> <p>Microsoft has 3 built-in authentication strengths. MFA strength, Passwordless MFA strength, and Phishing-resistant MFA strength. Ensure administrator roles are using a CA policy with <strong>Phishing-resistant MFA strength</strong>.<br />Administrators can then enroll using one of 3 methods:</p> <ul> <li>FIDO2 Security Key</li> <li>Windows Hello for Business</li> <li>Certificate-based authentication (Multi-Factor)</li> </ul> <p><br /><strong>NOTE</strong>: Additional steps to configure methods such as FIDO2 keys are not covered here but can be found in related MS articles in the references section. The Conditional Access policy only ensures 1 of the 3 methods is used.</p> <p><strong>WARNING</strong>: <strong>Administrators must be pre-registered for a strong authentication mechanism before this Conditional Access Policy is enforced</strong>. Additionally, as stated elsewhere in the CIS Benchmark a break-glass administrator account should be excluded from this policy to ensure unfettered access in the case of an emergency.</p> <p><h4>Rationale:</h4></p> <p>Sophisticated attacks targeting MFA are more prevalent as the use of it becomes more widespread. These 3 methods are considered phishing-resistant as they remove passwords from the login workflow. It also ensures that public/private key exchange can only happen between the devices and a registered provider which prevents login to fake or phishing websites.</p> <p><h4>References:</h4></p> <ol> <li><a href=\"https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-authentication-passwordless#fido2-security-keys\" target=\"_blank\">FIDO2 security keys</a></li> <li><a href=\"https://learn.microsoft.com/en-us/azure/active-directory/authentication/howto-authentication-passwordless-security-key\" target=\"_blank\">Enable passwordless security key sign-in</a></li> <li><a href=\"https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-authentication-strengths\" target=\"_blank\">Conditional Access authentication strength</a></li> <li><a href=\"https://learn.microsoft.com/en-us/azure/active-directory/identity-protection/howto-identity-protection-configure-mfa-policy\" target=\"_blank\">How To: Configure the Microsoft Entra ID multifactor authentication registration policy</a></li> </ol>",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Phishing-resistant MFA strength is mFA strength is not yet enabled in the following accounts: \"ATLAS - Admin Phishing-resistant MFA Strength\". To activate this setting, take the following steps.",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "aad_limited_administrative_roles",
+      "description": "<p>The Microsoft Azure Management application governs various Azure services and can be secured through the implementation of a Conditional Access policy. This policy can restrict specific user accounts from accessing the related portals and applications.</p> <p>When Conditional Access policy is targeted to the Microsoft Azure Management application, within the Conditional Access policy app picker the policy will be enforced for tokens issued to application IDs of a set of services closely bound to the portal.</p> <ul> <li>Azure Resource Manager</li> <li>Azure portal, which also covers the Microsoft Entra ID admin center</li> <li>Azure Data Lake</li> <li>Application Insights API</li> <li>Log Analytics API</li> </ul> <p><em>Microsoft Azure Management</em> should be restricted to specific pre-determined administrative roles.</p> <p><strong>NOTE:</strong> Blocking Microsoft Azure Management will prevent non-privileged users from signing into most portals other than Microsoft 365 Defender and Microsoft Purview.</p> <p><h4>Rationale:</h4><br />Blocking sign-in to Azure Management applications and portals enhances security of sensitive data by restricting access to privileged users. This mitigates potential exposure due to administrative errors or software vulnerabilities, as well as acting as a defense in depth measure against security breaches.</p>",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "'Microsoft Azure Management' is limited to administrative roles - 'Windows Azure Service Management API' is not yet enabled in the following policies: \"ATLAS - Risky Sign-in MFA (Report Only)\", \"ATLAS - Risky User Password Change (Report Only)\", \"ATLAS - Admin MFA\" and 25 Additional policies. To activate this setting, take the following steps.",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "aad_admin_consent_workflow",
+      "description": "Without an admin consent workflow (Preview), a user in a tenant where user consent is disabled will be blocked when they try to access any app that requires permissions to access organizational data. The user sees a generic error message that says they're unauthorized to access the app and they should ask their admin for help. The admin consent workflow (Preview) gives admins a secure way to grant access to applications that require admin approval. When a user tries to access an application but is unable to provide consent, they can send a request for admin approval. The request is sent via email to admins who have been designated as reviewers. A reviewer acts on the request, and the user is notified of the action.",
+      "score": 5.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Admin consent workflow is: true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "aad_admin_accounts_separate_unassigned_cloud_only",
+      "description": "Administrative accounts are special privileged accounts that could have varying levels of access to data, users, and settings. Regular user accounts should never be utilized for Administrative tasks and care should be taken, in the case of a hybrid environment, to keep Administrative accounts separated from on-prem accounts. Administrative accounts should not have applications assigned so that they have no access to potentially vulnerable services (EX. email, Teams, SharePoint, etc.) and only access to perform tasks as needed for Administrative purposes.",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Administrator accounts are separate, unassigned and cloud-only account: false",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "aad_password_protection",
+      "description": "Enable Microsoft Entra ID Password Protection to Active Directory to protect against the use of common passwords.<P> Note: This recommendation applies to Hybrid deployments only, and will have no impact unless working with on-premises Active Directory.",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Microsoft Entra ID Password Protection is not configured",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "aad_custom_banned_passwords",
+      "description": "<p>With Microsoft Entra ID Password Protection, default global banned password lists are automatically applied to all users in an Microsoft Entra ID tenant. To support business and security needs, custom banned password lists can be defined. When users change or <br />reset their passwords, these banned password lists are checked to enforce the use of strong passwords.</p> <p>A custom banned password list should include some of the&nbsp; following examples:</p> <ul> <li>Brand names</li> <li>Product names</li> <li>Locations, such as company headquarters</li> <li>Company-specific internal terms</li> <li>Abbreviations that have specific company meaning</li> </ul> <p><h4>Rationale:</h4><br />Creating a new password can be difficult regardless of one's technical background. It is common to look around one's environment for suggestions when building a password, however, this may include picking words specific to the&nbsp; organization as inspiration for a password. An adversary may employ what is called a 'mangler' to create permutations of these specific words in an attempt to crack passwords or hashes making it easier to reach their goal.</p>",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Custom banned passwords lists are: disabled",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "aad_linkedin_connection_disables",
+      "description": "LinkedIn account connections allow users to connect their Microsoft work or school account with LinkedIn. Once a user connects their accounts, information and highlights from LinkedIn become available in some Microsoft apps and services. Disabling LinkedIn integration can prevent potential phishing attacks and risk scenarios where an external party could accidentally disclose sensitive information.",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "LinkedIn account connections is - Not disabled",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "sway_block_sharing_with_outside_users",
+      "description": "<p>Sway is a new app from Microsoft Office that allows users to create and share interactive reports, personal stories, presentations, and more.<br />This setting controls user Sway sharing capability, both within and outside of the organization. By default, Sway is enabled for everyone in the organization.</p> <p><h4>Rationale:</h4><br />Disable external sharing of Sway documents that can contain sensitive information to prevent accidental or arbitrary data leak.</p>",
+      "score": 0.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Sharing SWAY outside the organization is enabled",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mcas_mda_enabled",
+      "description": "Ensure Defender for Cloud Apps is enabled to get protection for your cloud apps.",
+      "score": 5.0,
+      "lastSynced": "2026-01-28T08:34:43Z",
+      "implementationStatus": "Defender for Cloud Apps is: true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "exo_SPF_records_for_all_domains",
+      "description": "For each domain that is configured in Exchange, a corresponding Sender Policy Framework (SPF) record should be created. SPF records allow Exchange Online Protection and other mail systems know where messages from your domains are allowed to originate. This information can be used to by that system to determine how to treat the message based on if it is being spoofed or is valid.",
+      "score": 5.0,
+      "lastSynced": "2026-01-28T08:34:44Z",
+      "implementationStatus": "SPF is: true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_atpprotection",
+      "description": "Microsoft Defender for Office 365 for SharePoint, OneDrive, and Microsoft Teams protects your organization from inadvertently sharing malicious files.",
+      "score": 5.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "",
+      "on": "true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Data",
+      "controlName": "dlp_datalossprevention",
+      "description": "Data Loss Prevention (DLP) policies allows content in multiple locations, such as, devices, Exchange online and Teams chats to be scanned for specific types of data like social security numbers, credit card numbers, or passwords.",
+      "score": 5.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "",
+      "on": "true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "exo_individualsharing",
+      "description": "Users should not be allowed to share the full details of their calendars with external users.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "",
+      "on": "false",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_safedocuments",
+      "description": "Safe Documents uses Microsoft Defender for Endpoint to scan documents and files for malicious content. To keep you protected, Safe Documents sends files to the Defender for Endpoint cloud for analysis. Files sent by Safe Documents are not retained in Defender for Endpoint beyond the time needed for analysis (typically, less than 24 hours).",
+      "score": 5.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "",
+      "on": "true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_connectionfilter",
+      "description": "<p>If you're a Microsoft 365 customer with mailboxes in Exchange Online or a standalone Exchange Online Protection (EOP) customer without Exchange Online mailboxes, EOP offers multiple ways of ensuring that users will receive email from trusted senders. These options include Exchange mail flow rules (also known as transport rules), Outlook Safe Senders, the IP Allow List (connection filtering), and allowed sender lists or allowed domain lists in anti-spam policies. Collectively, you can think of these options as safe sender lists. <br> <br> The available safe sender lists are described in the following list in order from most recommended to least recommended: <br> 1. Mail flow rules <br> 2. Outlook Safe Senders <br> 3. IP Allow List (connection filtering) <br> 4. Allowed sender lists or allowed domain lists (anti-spam policies)</p> <p>Without additional verification like mail flow rules, email from sources in the IP Allow List skips spam filtering and sender authentication (SPF, DKIM, DMARC) checks. Since the IP Allow List doesn't prevent malware or high confidence phishing messages from being filtered, this creates a high risk of attackers successfully delivering email to an inbox that would otherwise be filtered.</p>",
+      "score": 1.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "The allowed IP addresses list in the connection filter policy is empty ",
+      "on": "true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Data",
+      "controlName": "mip_purviewlabelconsent",
+      "description": "\r\n        To get work done, people in your organization collaborate with others both inside and outside the organization. Data doesn't always stay in your cloud, and often roams everywhere\u2014across  devices, apps, and services. When your data roams, you still want it to be secure in a way that meets your organization's business and compliance policies.\r\n        <br/>\r\n        <br/>\r\n        Applying sensitivity labels to your content helps you keep your data secure by stating how sensitive certain data is in your organization. It also abstracts the data itself, letting you track the type of data without exposing sensitive data on other platforms.\r\n        <br/>\r\n        <br/>\r\n        For example, applying the sensitivity label \u2018highly confidential\u2019 to a document that contains social security numbers and credit card numbers helps you identify the sensitivity of the document without knowing the actual data in the document.\r\n        <br/>\r\n        <br/>\r\n        The sensitivity labels created in Microsoft Purview Information Protection can also be extended to the Microsoft Purview data map. When you apply a label on an office document and then scan it into the Microsoft Purview data map, the label will be applied to the data asset.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "The setting was not enabled.",
+      "on": "false",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "CustomerLockBoxEnabled",
+      "description": "Turning on the customer lockbox feature requires that approval is obtained for datacenter operations that grants a Microsoft employee direct access to your content. Access may be needed by Microsoft support engineers if an issue arises. There's an expiration time on the request and content access is removed after the support engineer has fixed the issue.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "Feature in place: false.",
+      "on": "false",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "exo_oauth2clientprofileenabled",
+      "description": "Modern authentication in Microsoft 365 enables authentication features like multifactor authentication (MFA) using smart cards, certificate-based authentication (CBA), and third-party SAML identity providers. When you enable modern authentication in Exchange Online, Outlook 2016 and Outlook 2013 use modern authentication to log in 'to Microsoft 365 mailboxes. When you disable modern authentication in Exchange Online, Outlook 2016 and Outlook 2013 use basic authentication to log in to Microsoft 365 mailboxes. <p>When users initially configure certain email clients, like Outlook 2013 and Outlook 2016, they may be required to authenticate using enhanced authentication mechanisms, such as multifactor authentication. Other Outlook clients that are available in Microsoft 365 (for example, Outlook Mobile and Outlook for Mac 2016) always use modern uthentication to log in to Microsoft 365 mailboxes",
+      "score": 3.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "Modern authentication for Exchange Online is enabled",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "exo_mailtipsenabled",
+      "description": "MailTips assist end users with identifying strange patterns to emails they send.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "MailTips for end users are disabled.",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "exo_transportrulesallowlistdomains",
+      "description": "You should set Spam confidence level (SCL) in your Exchange Online mail transport rules with specific domains. Allow-listing domains in transport rules bypasses regular malware and phishing scanning, which can enable an attacker to launch attacks against your users from a safe haven domain.\r\n\t<p><strong>Note: In order to get a score for this security control, <span style=\"text-decoration: underline;\">all</span> the active transport rule that applies to specific domains must have a Spam Confidence Level (SCL) of 0 or higher.</strong></p>",
+      "score": 3.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "Spam confidence level (SCL) is not configured in mail transport rules with specific domain",
+      "on": "true",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mip_search_auditlog",
+      "description": "When audit log search in the Microsoft Purview compliance portal is enabled, user and admin activity from your organization is recorded in the audit log and retained for 90 days. However, your organization might be using a third-party security information and event management (SIEM) application to access your auditing data. In that case, a global admin can turn off audit log search in Microsoft 365.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "Microsoft 365 audit log search is enabled disabled",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "exo_mailboxaudit",
+      "description": "<p>By turning on mailbox auditing, Microsoft 365 back office teams can track logons to a mailbox as well as what actions are taken while the user is logged on. After you turn on mailbox audit logging for a mailbox, you can search the audit log for mailbox activity. Additionally, when mailbox audit logging is turned on, some actions performed by administrators, delegates, and owners are logged by default.</p> <p><h4>Rationale:</h4></p> <p>Starting in January 2019, Microsoft is turning on mailbox audit logging by default for all organizations.</p> <p>This means that certain actions performed by mailbox owners, delegates, and admins are automatically logged, and the corresponding mailbox audit records will be available when you search for them in the mailbox audit log. When mailbox auditing on by default is turned on for the organization, the AuditEnabled property for affected mailboxes won't be changed from False to True. In other words, mailbox auditing on by default ignores the AuditEnabled property on mailboxes.</p> <p>However, only certain mailbox types support default auditing setting 'On': User Mailboxes, Shared Mailboxes, and Microsoft 365 Group Mailboxes. The remaining mailbox types require auditing to be turned on at the mailbox level: Resource Mailboxes, Public Folder Mailboxes, and DiscoverySearch Mailbox.</p> <p>Whether it is for regulatory compliance or for tracking unauthorized configuration changes in Microsoft 365, enabling mailbox auditing allows for Microsoft 365 back office teams to run security operations, forensics or general investigations on mailbox activities.</p> <p>NOTE: Without advanced auditing (E5 function) the logs are limited to 90 days.</p>",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "Mailbox auditing for all users is disabled",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "exo_storageproviderrestricted",
+      "description": "<p>This setting allows users to open certain external files while working in Outlook on the <br />web. If allowed, keep in mind that Microsoft doesn't control the use terms or privacy <br />policies of those third-party services.</p> <p>Ensure <em>AdditionalStorageProvidersAvailable</em> is restricted.</p> <p><h4>Rationale:</h4></p> <p>By default additional storage providers are allowed in Office on the Web (such as Box, <br />Dropbox, Facebook, Google Drive, OneDrive Personal, etc.). This could lead to <br />information leakage and additional risk of infection from organizational non-trusted <br />storage providers. Restricting this will inherently reduce risk as it will narrow <br />opportunities for infection and data leakage.</p>",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "Additional storage providers are restricted in Outlook on the web is not configured correctly. Please follow next steps to correctly configure the control.",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "exo_outlookaddins",
+      "description": "<p>Specify the administrators and users who can install and manage add-ins for Outlook in Exchange Online By default, users can install add-ins in their Microsoft Outlook Desktop client, allowing data access within the client application.</p> <p><h4>Rationale:</h4><br />Attackers exploit vulnerable or custom add-ins to access user data. Disabling user installed add-ins in Microsoft Outlook reduces this threat surface.</p> <p><strong>",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "Installing Outlook add-ins configuration is disabled",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_zapspam",
+      "description": "<p>For&nbsp;<strong>unread messages</strong>&nbsp;that are identified as spam after delivery, the ZAP outcome depends on the action that's configured for the Spam filtering verdict in the applicable anti-spam policy.</p>\r\n<p>For additional information, see&nbsp;<a href=\"https://docs.microsoft.com/microsoft-365/security/office-365-security/zero-hour-auto-purge\">Zero-hour auto purge (ZAP) in Exchange Online</a>.</p>",
+      "score": 1.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_zapphish",
+      "description": "<p>For&nbsp;<strong>read or unread messages</strong>&nbsp;that are identified as phishing after delivery, the ZAP outcome depends on the action that's configured for a Phishing email filtering verdict in the applicable anti-phishing policy.</p>\r\n<p>For additional information, see&nbsp;<a href=\"https://docs.microsoft.com/microsoft-365/security/office-365-security/zero-hour-auto-purge\">Zero-hour auto purge (ZAP) in Exchange Online</a>.</p>",
+      "score": 3.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_zapmalware",
+      "description": "<p>Zero-hour auto purge (ZAP) quarantines the message that contains malware attachment for both&nbsp;<strong>read, as well as unread, messages</strong>&nbsp;that are found to contain malware after delivery. Only admins can view and manage messages that have been quarantined.</p>\r\n<p>For additional information, see&nbsp;<a href=\"https://docs.microsoft.com/microsoft-365/security/office-365-security/zero-hour-auto-purge\">Zero-hour auto purge (ZAP) in Exchange Online</a>.</p>",
+      "score": 6.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_safeattachments",
+      "description": "Safe Attachments in block mode prevents messages with detected malware attachments from being delivered. These messages are quarantined and only admins (not regular users) can review, release, or delete them. This will also automatically block future malware attachments.\r\n\t<br/><br/>\r\n\tMDO Built-in protection policy provides safe attachments protection for everyone by default. You could also create additional Safe Attachment policies for customized Safe Attachment operations.\r\n    ",
+      "score": 8.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Built-In Protection Policy - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_safelinksforemail",
+      "description": "MDO Built-in protection policy will provide base level safe links protection for everyone by default. You could also create additional Safe Links policies for enhanced or customized Safe Links operations.",
+      "score": 9.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Built-In Protection Policy - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_commonattachmentsfilter",
+      "description": "There are certain types of files that are risker to send and receive via email due to the likelihood that they contain malware (for example, executable files). To make sure these file types don't get through, enable the common attachment filter. You can use the default list of file types or customize it. The default file types are: .ace, .ani, .app, .docm, .exe, .jar, .reg, .scr, .vbe, .vbs. Messages with the specified attachments types are treated as malware and are automatically quarantined.",
+      "score": 5.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Data",
+      "controlName": "mip_sensitivitylabelspolicies",
+      "description": "Set up and use data classification policies on data stored in your users' Office apps (like Outlook and Word), SharePoint sites, and Office 365 groups.\r\n<br/>\r\n<br/>\r\nThe policies will help categorize your most important data so you can effectively protect it from illicit access and will help make it easier to investigate discovered breaches.\r\n<br/>\r\n<br/>\r\nCreation of data classification policies will not cause a significant impact to an organization. However, ensuring long term adherence with policies can potentially be a significant training and ongoing compliance effort across an organization. Organizations should ensure that training and compliance planning is part of the classification policy creation process.\r\n<br/>\r\n<br/>\r\n<i>This information was taken from Center for Internet Security (CIS).</i>\r\n    ",
+      "score": 2.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "Policies were published on 19 of the 19 users",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Data",
+      "controlName": "mip_autosensitivitylabelspolicies",
+      "description": "\r\n        Create auto-labeling policies to automatically apply sensitivity labels to email messages or OneDrive and SharePoint files that contain sensitive info.\r\n        <br/>\r\n        This ability to apply sensitivity labels to content automatically is important because:\r\n        <br/>\r\n        You don't need to train your users on the appropriate way to use each of your classifications.\r\n        <br/>\r\n        You don't need to rely on users to classify all content correctly.\r\n        <br/>\r\n        Users no longer need to know about your policies\u2014they can instead focus on their work.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "Policies were published on 0 of the 19 users",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_highconfidencespamaction",
+      "description": "Set the action that will be taken on high confidence spam detection.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_phisspamacation",
+      "description": "Set the action that will be taken on phishing detection.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_highconfidencephishaction",
+      "description": "Set the action that will be taken on high confidence phishing detection.",
+      "score": 5.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_bulkspamaction",
+      "description": "Set the action that will be taken on bulk spam detection.",
+      "score": 3.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_quarantineretentionperiod",
+      "description": "Specifies how long to keep the message in quarantine if you selected &ldquo;Quarantine message&rdquo; as the action for a spam filtering verdict. After the time period expires, the message is deleted, and is not recoverable.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_allowedsenderscombined",
+      "description": "Never add your own accepted domains or common domains (for example, microsoft.com or office.com) to the allowed domains list. If these domains are allowed to bypass spam filtering, attackers can easily send messages that spoof these trusted domains to your organization. In addition, avoid adding specific senders that can bypass spam filtering.",
+      "score": 2.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_bulkthreshold",
+      "description": "Specifies the bulk complaint level (BCL) of a message that triggers the specified action for the bulk spam filtering verdict that you configure on the next page. A higher value indicates that the message is less desirable (more likely to resemble spam). While the default value is 7, 6 or lower is the recommended value.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_spamaction",
+      "description": "Set the action that will be taken on spam detection.",
+      "score": 5.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_autoforwardingmode",
+      "description": "",
+      "score": 1.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_recipientexternallimitperhour",
+      "description": "Configure the maximum number of external recipients that a user can email per hour. After an account is compromised, attackers commonly use the account to generate spam and phish. Configuring <a href=\"https://docs.microsoft.com/en-us/microsoft-365/security/office-365-security/recommended-settings-for-eop-and-office365?view=o365-worldwide#eop-outbound-spam-policy-settings\">recommended values</a> can reduce the amount of spam and phishing emails, while also allowing you to be notified when these thresholds have been reached.",
+      "score": 1.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_recipientinternallimitperhour",
+      "description": "Configure the maximum number of recipients that a user can send to per hour for internal recipients. After an account is compromised, attackers commonly use the account to generate spam and phish. Configuring <a href=\"https://docs.microsoft.com/en-us/microsoft-365/security/office-365-security/recommended-settings-for-eop-and-office365?view=o365-worldwide#eop-outbound-spam-policy-settings\">recommended values</a> can reduce the amount of spam and phishing emails, while also allowing you to be notified when these thresholds have been reached.",
+      "score": 1.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_recipientlimitperday",
+      "description": "Configure the maximum number of recipients that a user can send to within a day. After an account is compromised, attackers commonly use the account to generate spam and phish. Configuring <a href=\"https://docs.microsoft.com/en-us/microsoft-365/security/office-365-security/recommended-settings-for-eop-and-office365?view=o365-worldwide#eop-outbound-spam-policy-settings\">recommended values</a> can reduce the amount of spam and phishing emails, while also allowing you to be notified when these thresholds have been reached.",
+      "score": 1.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_thresholdreachedaction",
+      "description": "Configure action to take when any of the limits specified in the outbound anti-spam policy are reached. It is common, after an account compromise incident, for an attacker to use the account to generate spam and phish. Configuring the <a href=\"https://docs.microsoft.com/en-us/microsoft-365/security/office-365-security/recommended-settings-for-eop-and-office365?view=o365-worldwide#eop-outbound-spam-policy-settings\">recommended values</a> can reduce the impact.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_enablemailboxintelligence",
+      "description": "\r\n     Turns on artificial intelligence (AI) that identifies users\u2019 email patterns with their frequent contacts to spot potential phishing attempts.\r\n    ",
+      "score": 8.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_mailboxintelligenceprotection",
+      "description": "\r\n     Enables enhanced impersonation results based on each user's individual sender map and allows you to define specific actions for impersonated messages.\r\n     <br/>\r\n     <br/>\r\n     This setting is available only if\u202f&lsquo;<strong>Enable mailbox intelligence&rsquo;</strong>\u202fis selected.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_mailboxintelligenceprotectionaction",
+      "description": "\r\n     This setting specifies what to do with messages for impersonation detections from mailbox intelligence results.\r\n     <br/>\r\n     <br/>\r\n     If a message is detected to be an impersonated user by mailbox intelligence, no action will be applied by default. We recommend moving the message to the recipients\u2019 junk email folder and strongly recommend quarantining it.\r\n     <br/>\r\n     <br/>\r\n     This setting is available only if the &lsquo;<strong>Ensure that intelligence for impersonation protection is enabled&rsquo;</strong> setting is properly configured.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_enabledomainstoprotect",
+      "description": "\r\n      Prevents specified domains from being impersonated\u202fby  the message sender's domain.\r\n      <br/>\r\n      <br/>\r\n      When you add domains to the  &lsquo;<strong>Enable domains to protect&rsquo;</strong> list, messages from\u202fsenders in those domains\u202fare subject to impersonation protection checks. The message is checked for impersonation\u202fif\u202fit\u2019s sent to a\u202frecipient\u202fthat the policy applies to.\r\n      <br/>\r\n      <br/>\r\n      If impersonation is detected in the sender's domain, the impersonation protection actions for domains are applied to the message.\r\n      <br/>\r\n      <br/>\r\n      By default, no sender domains are covered by impersonation protection, either in the default policy or in custom policies.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_phishthresholdlevel",
+      "description": "\r\n      The threshold controls the sensitivity with which machine learning models are applied to email messages to determine whether a phishing attempt has occurred.\r\n      <br/>\r\n      A higher value indicates greater sensitivity. The default value is 1, but 2 or 3 are the recommended values.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_similardomainssafetytips",
+      "description": "\r\n     This setting specifies whether to enable the safety tip that is shown to recipients for domain impersonation detections.\r\n     <br/>\r\n     <br/>\r\n     When the &lsquo;<strong>Show domain impersonation safety tip&rsquo;</strong> is enabled, the tip &ldquo;<strong>This sender might be impersonating a domain that's associated with your organization&rdquo;</strong> is shown to recipients in messages where the sender's email domain is included in domain impersonation protection.\r\n     <br/>\r\n     <br/>\r\n     This setting is available only if the &lsquo;<strong>Enable impersonated domain protection&rsquo;</strong> setting is configured properly.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_similaruserssafetytips",
+      "description": "\r\n     This setting specifies whether to enable the safety tip that is shown to recipients for user impersonation detections.\r\n     <br/>\r\n     <br/>\r\n     When the &lsquo;<strong>Show user impersonation safety tip&rsquo;</strong> is enabled, the tip &ldquo;<strong>This sender appears to be similar to someone who previously sent you email but may not be that person&rdquo;</strong> is shown to recipients in messages where the sender's email address is included in user impersonation protection.\r\n     <br/>\r\n     <br/>\r\n     This setting is available only if the &lsquo;<strong>Enable impersonated user protection&rsquo;</strong> setting is configured properly.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_targeteddomainprotectionaction",
+      "description": "\r\n     This setting specifies the action to take on detected domain impersonation messages.\r\n     <br/>\r\n     <br/>\r\n     If a message is detected from an impersonated domain, no action is taken by default. We recommend quarantining the message.\r\n     <br/>\r\n     <br/>\r\n     This setting is available only if &lsquo;<strong>Enable impersonated domain protection&rsquo;</strong> setting is configured properly.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_targeteduserprotectionaction",
+      "description": "\r\n     This setting specifies the action to take on detected user impersonation messages.\r\n     <br/>\r\n     <br/>\r\n     If a message is detected from an impersonated user, no default action will be taken. We recommend quarantining the message.\r\n     <br/>\r\n     <br/>\r\n     Whenever you select &lsquo;<strong>Quarantine the message&rsquo;</strong>, a &lsquo;<strong>Select quarantine policy&rsquo;</strong> box is available.\r\n     <br/>\r\n     Quarantine policies define who is allowed to do to quarantined messages.\r\n     <br/>\r\n     <br/>\r\n     This setting is available only if &lsquo;<strong>Enable impersonated user protection&rsquo;</strong> setting is configured properly.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_targetedusersprotection",
+      "description": "\r\n      Prevents specified internal or external email addresses from being impersonated as message senders in phishing attempts.\r\n      <br/>\r\n      By default, impersonated user protection is disabled, and no sender email addresses are covered by impersonation protection, whether in the default policy or in custom policies.\r\n      <br/>\r\n      <br/>\r\n      We highly recommend adding users (message senders) in key roles. Internally, protected senders might be your CEO, CFO, and other senior leaders. Externally, protected senders could include council members or your board of directors.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_unusualcharacterssafetytips",
+      "description": "\r\n     This setting specifies whether to enable the safety tip that is shown to recipients for unusual characters in domain and user impersonation detections.\r\n     <br/>\r\n     <br/>\r\n     When the &lsquo;<strong>Show user impersonation unusual safety tip&rsquo;</strong> is enabled, the tip is shown to recipients in messages where the sender's name or email address contains characters that are not typically used together, such as a mix of mathematical symbols and plain text or a mix of uppercase and lowercase letters.\r\n     <br/>\r\n     <br/>\r\n     Example tip:\r\n     <br/>\r\n     &lsquo;The email address MARY@CoNT\u1d0fSO.C\u1d0fM includes unexpected letters or numbers. We recommend you do not interact with this message.&rsquo;\r\n     <br/>\r\n     <br/>\r\n     This setting is available only if the &lsquo;<strong>Enable impersonated user protection&rsquo;</strong> setting is configured properly.\r\n    ",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_spam_notifications_only_for_admins",
+      "description": "In Microsoft 365 organizations with mailboxes in Exchange Online or standalone Exchange Online Protection (EOP) organizations without Exchange Online mailboxes, email messages are automatically protected against spam (junk email) by EOP. Configure Exchange Online Spam Policies to copy emails and notify someone when a sender in the organization has been blocked for sending spam emails. <p> <p><strong>Note</strong>: Audit and Remediation guidance may focus on the <strong>Default policy</strong> however, if a Custom Policy exists in the organization's tenant, then ensure the setting is set as <br />outlined in the highest priority policy listed.</p>",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_safeattachmentpolicy",
+      "description": "<p>The Safe Attachments policy helps protect users from malware in email attachments by <br />scanning attachments for viruses, malware, and other malicious content. When an email <br />attachment is received by a user, Safe Attachments will scan the attachment in a secure <br />environment and provide a verdict on whether the attachment is safe or not.</p> <p><h4>Rationale:</h4><br />Enabling Safe Attachments policy helps protect against malware threats in email <br />attachments by analyzing suspicious attachments in a secure, cloud-based environment <br />before they are delivered to the user's inbox. This provides an additional layer of <br />security and can prevent new or unseen types of malware from infiltrating the <br />organization's network.</p>",
+      "score": 5.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured securely&nbsp;</p><ul><li>Built-In Protection Policy - 19 users (100%)&nbsp;</li></ul>",
+      "count": "19",
+      "total": "19",
+      "scoreInPercentage": 100.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_safelinksforOfficeApps",
+      "description": "Enabling Safe Links policy for Office applications allows URL's that exist inside of Office documents and email applications opened by Office, Office Online and Office mobile to be processed against Defender for Office time-of-click verification and rewritten if required.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Built-In Protection Policy - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_antiphishingpolicies",
+      "description": "By default, Office 365 includes built-in features that help protect users from phishing attacks. Set up anti-phishing polices to increase this protection, for example by refining settings to better detect and prevent impersonation and spoofing attacks. The default policy applies to all users within the organization, and is a single view to fine-tune anti-phishing protection. Custom policies can be created and configured for specific users, groups or domains within the organization and will take precedence over the default policy for the scoped users. <p> Rationale: Protects users from phishing attacks (like impersonation and spoofing), and uses safety tips to warn users about potentially harmful messages.",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Office365 AntiPhish Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Apps",
+      "controlName": "mdo_blockmailforward",
+      "description": "<p>Exchange Online offers several methods of managing the flow of email messages. <br />These are Remote domain, Transport Rules, and Anti-spam outbound policies. These <br />methods work together to provide comprehensive coverage for potential automatic <br />forwarding channels:</p> <ul> <li>Outlook forwarding using inbox rules</li> <li>Outlook forwarding configured using OOF rule</li> <li>OWA forwarding setting (ForwardingSmtpAddress)</li> <li>Forwarding set by the admin using EAC (ForwardingAddress)</li> <li>Forwarding using Power Automate / Flow</li> </ul> <p><strong>NOTE:</strong></p> <ul> <li>In this control, remediation is carried out in two stages - Step 1 is manual and will not be monitored automatically by secure score, whereas Step 2 is monitored automatically.</li> <li>Any exclusions should be implemented based on organizational policy.</li> </ul> <p><h4>Rationale:</h4><br />Attackers often create these rules to exfiltrate data from your tenancy, this could be <br />accomplished via access to an end-user account or otherwise. An insider could also use <br />one of these methods as an secondary channel to exfiltrate sensitive data.</p>",
+      "score": 0.0,
+      "lastSynced": "2026-01-27T19:27:42Z",
+      "implementationStatus": "<p> 100% of users are affected by policies that are configured less securely than is recommended&nbsp;</p><ul><li>Default - 19 users (100%)&nbsp;</li></ul>",
+      "count": "0",
+      "total": "19",
+      "scoreInPercentage": 0.0
+    },
+    {
+      "controlCategory": "Identity",
+      "controlName": "AATP_AccountWithLeakedCredentials",
+      "description": "\r\n\t\tThis report lists users whose valid credentials have been leaked. \r\n\t\tWhen cybercriminals compromise valid passwords of legitimate users, the criminals often share those credentials. \r\n\t\tThis is usually done by posting them publicly on the dark web or paste sites or by trading or selling the credentials on the black market.<br><br>\r\n\t\tThe Microsoft leaked credentials service acquires username/password pairs by monitoring public and dark websites and by working with:<br><br>\r\n\t\t\u2022 Researchers<br>\r\n\t\t\u2022 Law enforcement<br>\r\n\t\t\u2022 Security teams at Microsoft<br>\r\n\t\t\u2022 Other trusted sources<br>\r\n\t",
+      "score": 5.0,
+      "lastSynced": "2026-01-28T10:33:48Z",
+      "implementationStatus": "",
+      "on": "true",
+      "scoreInPercentage": 100.0
+    }
+  ]
+}

@@ -123,7 +123,7 @@ def _keys_for_control(control_id: str) -> list[str]:
     if control_id == "SharePointSharingBlockedDomainListConfigured":
         return ["SharingDomainRestrictionMode", "SharingBlockedDomainList"]
     return []
-
+    
 
 def _subset(d: dict | None, keys: list[str]) -> dict:
     d = d or {}

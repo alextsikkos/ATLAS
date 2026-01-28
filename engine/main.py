@@ -493,50 +493,35 @@ def main():
         pass
     # --- end EXO prewarm ---
     # --- SPO app-only auth env (required to prevent interactive auth popups) ---
+    # --- SPO env ---
     try:
-        # SharePoint Online app-only auth
         spo_auth = (tenant or {}).get("spoAppAuth") or {}
-
         if spo_auth:
-            # NEW: the SPO runner reads ATLAS_SPO_CLIENT_ID
-            os.environ["ATLAS_SPO_CLIENT_ID"] = spo_auth.get("clientId", "")
+            def _set_env(k, v):
+                if v is None:
+                    v = ""
+                os.environ[str(k)] = str(v)
 
-            # Keep legacy/back-compat if anything else still reads APP_ID
-            os.environ["ATLAS_SPO_APP_ID"] = spo_auth.get("clientId", "")
+            _set_env("ATLAS_SPO_CLIENT_ID", spo_auth.get("clientId") or spo_auth.get("appId"))
+            _set_env("ATLAS_SPO_TENANT_ID", spo_auth.get("tenantId"))
+            _set_env("ATLAS_SPO_CERT_THUMBPRINT", spo_auth.get("certificateThumbprint"))
+            _set_env("ATLAS_SPO_CERT_PATH", spo_auth.get("certificatePath"))
+            _set_env("ATLAS_SPO_CERT_PASSWORD", spo_auth.get("certificatePassword"))
 
-            os.environ["ATLAS_SPO_TENANT_ID"] = spo_auth.get("tenantId", "")
-            os.environ["ATLAS_SPO_CERT_THUMBPRINT"] = spo_auth.get("certificateThumbprint", "")
-            os.environ["ATLAS_SPO_CERT_PATH"] = spo_auth.get("certificatePath", "")
-            os.environ["ATLAS_SPO_CERT_PASSWORD"] = spo_auth.get("certificatePassword", "")
-
-
-        _set_env("ATLAS_SPO_CLIENT_ID", spo_auth.get("clientId"))
-        _set_env("ATLAS_SPO_APP_ID", spo_auth.get("appId") or spo_auth.get("clientId"))  # <-- add this
-        _set_env("ATLAS_SPO_TENANT_ID", spo_auth.get("tenantId"))
-        _set_env("ATLAS_SPO_CERT_THUMBPRINT", spo_auth.get("certificateThumbprint"))
-        _set_env("ATLAS_SPO_CERT_PATH", spo_auth.get("certificatePath"))
-        _set_env("ATLAS_SPO_CERT_PASSWORD", spo_auth.get("certificatePassword"))
-
-        
-        teams_auth = tenant.get("teamsAppAuth") or {}
-        _set_env("ATLAS_TEAMS_CLIENT_ID", teams_auth.get("clientId"))
-        _set_env("ATLAS_TEAMS_APP_ID", teams_auth.get("appId") or teams_auth.get("clientId"))  # <-- add this
-        _set_env("ATLAS_TEAMS_TENANT_ID", teams_auth.get("tenantId"))
-        _set_env("ATLAS_TEAMS_CERT_THUMBPRINT", teams_auth.get("certificateThumbprint"))
-
-        # Aliases for modules/scripts that expect different env var names
-        _set_env("ATLAS_SPO_APP_ID", spo_auth.get("clientId"))
-        _set_env("ATLAS_SPO_TENANT", spo_auth.get("tenantId"))
-        _set_env("ATLAS_SPO_TENANTID", spo_auth.get("tenantId"))
-        _set_env("ATLAS_SPO_THUMBPRINT", spo_auth.get("certificateThumbprint"))
-
-        # Optional (only if you later support PFX-path auth)
-        _set_env("ATLAS_SPO_CERT_PATH", spo_auth.get("certificatePath"))
-        _set_env("ATLAS_SPO_CERT_PASSWORD", spo_auth.get("certificatePassword"))
-    except Exception:
-        # Never crash the run for env wiring; detectors will surface missingKeys if misconfigured.
-        pass
+            # Back-compat aliases (safe)
+            _set_env("ATLAS_SPO_APP_ID", spo_auth.get("appId") or spo_auth.get("clientId"))
+            _set_env("ATLAS_SPO_TENANT", spo_auth.get("tenantId"))
+            _set_env("ATLAS_SPO_TENANTID", spo_auth.get("tenantId"))
+            _set_env("ATLAS_SPO_THUMBPRINT", spo_auth.get("certificateThumbprint"))
+    except Exception as e:
+        # IMPORTANT: do not swallow silently while debugging
+        print(f"[WARN] SPO env wiring failed: {e}")
     # --- end SPO env ---
+    print("[DEBUG] SPO ENV:",
+      bool(os.getenv("ATLAS_SPO_CLIENT_ID")),
+      bool(os.getenv("ATLAS_SPO_TENANT_ID")),
+      bool(os.getenv("ATLAS_SPO_CERT_THUMBPRINT")))
+
 
     graph = GraphClient(tenant)
     headers = graph.headers
