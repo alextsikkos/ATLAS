@@ -1,15 +1,15 @@
 param(
   [Parameter(Mandatory=$true)]
-  [string]$AdminUrl,
+  [string] $AdminUrl,
 
   [Parameter(Mandatory=$true)]
-  [bool]$Enabled,
+  [string] $Enabled,
 
   [Parameter(Mandatory=$true)]
-  [int]$WarnAfterSeconds,
+  [int] $WarnAfterSeconds,
 
   [Parameter(Mandatory=$true)]
-  [int]$SignOutAfterSeconds,
+  [int] $SignOutAfterSeconds,
 
   [string] $ClientId,
   [string] $TenantId,
@@ -17,6 +17,13 @@ param(
   [string] $CertificatePath,
   [string] $CertificatePassword
 )
+try {
+  $EnabledBool = [System.Convert]::ToBoolean($Enabled)
+}
+catch {
+  throw "Invalid value for Enabled: '$Enabled'. Must be true/false or 1/0."
+}
+
 
 
 $ErrorActionPreference = "Stop"
@@ -59,14 +66,14 @@ try {
   if ($WarnAfterSeconds -gt 0) { $warnTs = New-TimeSpan -Seconds $WarnAfterSeconds }
   if ($SignOutAfterSeconds -gt 0) { $signoutTs = New-TimeSpan -Seconds $SignOutAfterSeconds }
 
-  if ($Enabled -and ($WarnAfterSeconds -le 0 -or $SignOutAfterSeconds -le 0)) {
+  if ($EnabledBool -and ($WarnAfterSeconds -le 0 -or $SignOutAfterSeconds -le 0)) {
     throw "When Enabled=true, WarnAfterSeconds and SignOutAfterSeconds must both be > 0."
   }
-  if ($Enabled -and ($WarnAfterSeconds -ge $SignOutAfterSeconds)) {
+  if ($EnabledBool -and ($WarnAfterSeconds -ge $SignOutAfterSeconds)) {
     throw "WarnAfterSeconds must be less than SignOutAfterSeconds."
   }
 
-  if ($Enabled) {
+  if ($EnabledBool) {
     Set-SPOBrowserIdleSignOut -Enabled:$true -WarnAfter $warnTs -SignOutAfter $signoutTs -ErrorAction Stop
   }
   else {
