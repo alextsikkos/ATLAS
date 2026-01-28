@@ -487,36 +487,42 @@ def main():
         from engine.detectors import mdo as mdo_det
         # This will trigger exo_snapshot.ps1 on first EXO call and populate tenant["_exo_ps_cache"].
         # We intentionally do this BEFORE control timing starts, so the EXO connect cost isn't blamed on a random control.
-        mdo_det._run_exo_ps("exo_mailtips_enabled.ps1", tenant, timeout_s=600)
+        mdo_det._run_exo_ps("exo_mailtips_enabled.ps1", tenant, timeout_s=60)
     except Exception:
         # Never let prewarm break the run; detectors will surface any issues during evaluation.
         pass
     # --- end EXO prewarm ---
     # --- SPO app-only auth env (required to prevent interactive auth popups) ---
     # --- SPO env ---
+    # --- SPO app-only auth env (required to prevent interactive auth popups) ---
     try:
         spo_auth = (tenant or {}).get("spoAppAuth") or {}
-        if spo_auth:
-            def _set_env(k, v):
-                if v is None:
-                    v = ""
-                os.environ[str(k)] = str(v)
 
+        def _set_env(k: str, v):
+            if v is None:
+                return
+            s = str(v).strip()
+            if s:
+                os.environ[k] = s
+
+        if spo_auth:
+            # Primary names used by engine/detectors/spo.py
             _set_env("ATLAS_SPO_CLIENT_ID", spo_auth.get("clientId") or spo_auth.get("appId"))
             _set_env("ATLAS_SPO_TENANT_ID", spo_auth.get("tenantId"))
             _set_env("ATLAS_SPO_CERT_THUMBPRINT", spo_auth.get("certificateThumbprint"))
             _set_env("ATLAS_SPO_CERT_PATH", spo_auth.get("certificatePath"))
             _set_env("ATLAS_SPO_CERT_PASSWORD", spo_auth.get("certificatePassword"))
 
-            # Back-compat aliases (safe)
+            # Optional back-compat aliases (harmless)
             _set_env("ATLAS_SPO_APP_ID", spo_auth.get("appId") or spo_auth.get("clientId"))
             _set_env("ATLAS_SPO_TENANT", spo_auth.get("tenantId"))
             _set_env("ATLAS_SPO_TENANTID", spo_auth.get("tenantId"))
             _set_env("ATLAS_SPO_THUMBPRINT", spo_auth.get("certificateThumbprint"))
+
     except Exception as e:
-        # IMPORTANT: do not swallow silently while debugging
         print(f"[WARN] SPO env wiring failed: {e}")
     # --- end SPO env ---
+
     print("[DEBUG] SPO ENV:",
       bool(os.getenv("ATLAS_SPO_CLIENT_ID")),
       bool(os.getenv("ATLAS_SPO_TENANT_ID")),
