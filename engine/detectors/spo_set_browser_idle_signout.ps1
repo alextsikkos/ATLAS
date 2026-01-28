@@ -23,17 +23,14 @@ param(
   [string]$CertificatePassword
 )
 # Normalize Enabled to boolean (ATLAS passes strings)
-if ($Enabled -is [string]) {
-  switch ($Enabled.ToLowerInvariant()) {
-    "true"  { $Enabled = $true }
-    "false" { $Enabled = $false }
-    "1"     { $Enabled = $true }
-    "0"     { $Enabled = $false }
-    default {
-      throw "Invalid value for -Enabled: '$Enabled'. Expected true/false/1/0."
-    }
-  }
+switch ($Enabled.Trim().ToLowerInvariant()) {
+  "true"  { $EnabledBool = $true }
+  "false" { $EnabledBool = $false }
+  "1"     { $EnabledBool = $true }
+  "0"     { $EnabledBool = $false }
+  default { throw "Invalid value for -Enabled: '$Enabled'. Expected true/false/1/0." }
 }
+
 
 function Get-AtlasSpoCertificate {
   param(
@@ -88,14 +85,6 @@ function Get-AtlasSpoCertificate {
   throw "No certificate auth provided. Supply CertificatePath+CertificatePassword or CertificateThumbprint."
 }
 
-try {
-  $EnabledBool = [System.Convert]::ToBoolean($Enabled)
-}
-catch {
-  throw "Invalid value for Enabled: '$Enabled'. Must be true/false or 1/0."
-}
-
-
 
 $ErrorActionPreference = "Stop"
 
@@ -134,10 +123,10 @@ try {
   }
 
   if ($EnabledBool) {
-    Set-SPOBrowserIdleSignOut -Enabled:$true -WarnAfter $warnTs -SignOutAfter $signoutTs -ErrorAction Stop
+    Set-SPOBrowserIdleSignOut -Enabled:$EnabledBool -WarnAfter $warnTs -SignOutAfter $signoutTs -ErrorAction Stop
   }
   else {
-    Set-SPOBrowserIdleSignOut -Enabled:$false -ErrorAction Stop
+    Set-SPOBrowserIdleSignOut -Enabled:$EnabledBool -ErrorAction Stop
   }
 
   $idle = Get-SPOBrowserIdleSignOut -ErrorAction Stop
