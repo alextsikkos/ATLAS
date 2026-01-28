@@ -3,52 +3,42 @@ import os
 import subprocess
 
 
-def _spo_auth_ps_args(tenant_conf: Dict[str, Any]) -> Tuple[List[str], List[str]]:
-    """
-    Build PS args for SPO auth from the tenant JSON (NOT env vars).
+def _spo_auth_ps_args(tenant_conf: dict) -> tuple[list[str], list[str]]:
+    spo_auth = (
+        (tenant_conf or {}).get("spoAppAuth")
+        or (tenant_conf or {}).get("spoAppOnlyAuth")
+        or {}
+    )
 
-    Supported tenant keys:
-      - tenant_conf["spoAppAuth"] or tenant_conf["spoAppOnlyAuth"]
-        with:
-          - clientId (or appId)
-          - tenantId
-          - certificateThumbprint   OR
-          - certificatePath + certificatePassword
-    """
-    spo_auth = tenant_conf.get("spoAppAuth") or tenant_conf.get("spoAppOnlyAuth") or {}
-
-    client_id = spo_auth.get("clientId") or spo_auth.get("appId")
-    tenant_id = spo_auth.get("tenantId")
-    thumbprint = spo_auth.get("certificateThumbprint")
-    cert_path = spo_auth.get("certificatePath")
+    client_id = (spo_auth.get("clientId") or spo_auth.get("appId") or "").strip()
+    tenant_id = (spo_auth.get("tenantId") or "").strip()
+    thumbprint = (spo_auth.get("certificateThumbprint") or "").strip()
+    cert_path = (spo_auth.get("certificatePath") or "").strip()
     cert_password = spo_auth.get("certificatePassword")
 
-    missing: List[str] = []
+    missing = []
     if not client_id:
-        missing.append("spoAppAuth.clientId")
+        missing.append("tenant.spoAppAuth.clientId")
     if not tenant_id:
-        missing.append("spoAppAuth.tenantId")
-
-    has_thumbprint = bool(thumbprint and str(thumbprint).strip())
-    has_path_mode = bool(cert_path and str(cert_path).strip())
-
-    if not has_thumbprint and not has_path_mode:
-        missing.append("spoAppAuth.certificateThumbprint OR spoAppAuth.certificatePath")
-
-    if has_path_mode and not (cert_password and str(cert_password).strip()):
-        missing.append("spoAppAuth.certificatePassword (required when using certificatePath)")
+        missing.append("tenant.spoAppAuth.tenantId")
+    if not thumbprint and not cert_path:
+        missing.append("tenant.spoAppAuth.certificateThumbprint OR certificatePath")
+    if cert_path and not (cert_password or "").strip():
+        missing.append("tenant.spoAppAuth.certificatePassword")
 
     if missing:
         return [], missing
 
-    args: List[str] = ["-ClientId", str(client_id), "-TenantId", str(tenant_id)]
+    ps_args = ["-ClientId", client_id, "-TenantId", tenant_id]
 
-    if has_thumbprint:
-        args += ["-CertificateThumbprint", str(thumbprint)]
+    if thumbprint:
+        ps_args += ["-CertificateThumbprint", thumbprint]
     else:
-        args += ["-CertificatePath", str(cert_path), "-CertificatePassword", str(cert_password)]
+        ps_args += ["-CertificatePath", cert_path, "-CertificatePassword", str(cert_password)]
 
-    return args, []
+    return ps_args, []
+
+
 
 
 def set_spo_domain_restriction(admin_url: str, mode: str, allowed_domains: str | None, blocked_domains: str | None) -> dict:
