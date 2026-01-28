@@ -86,12 +86,6 @@ $cert = Get-AtlasSpoCertificate -CertificateThumbprint $CertificateThumbprint -C
 
 Connect-SPOService -Url $AdminUrl -ClientId $ClientId -Tenant $TenantId -Certificate $cert -ErrorAction Stop
 
-
-
-else {
-  throw "App-only auth parameters missing; refusing to fall back to interactive auth."
-}
-
 # Convert JSON -> hashtable for splatting
 $obj = $SettingsJson | ConvertFrom-Json
 $ht = @{}
