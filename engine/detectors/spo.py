@@ -126,7 +126,7 @@ def set_spo_prevent_external_users_from_resharing(admin_url: str, enabled: bool)
 
     ps1_path = os.path.join(os.path.dirname(__file__), "spo_set_prevent_resharing.ps1")
 
-    auth_args, missing_keys = _spo_auth_ps_args(tenant_conf)
+    auth_args, missing_keys = _spo_auth_ps_args()
 
     if missing_keys:
         return {
