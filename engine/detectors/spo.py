@@ -59,10 +59,11 @@ def set_spo_browser_idle_signout(
         "-ExecutionPolicy", "Bypass",
         "-File", ps1_path,
         "-AdminUrl", str(admin_url).strip(),
-        "-Enabled", "$true" if bool(enabled) else "$false",
+        f"-Enabled:{'$true' if bool(enabled) else '$false'}",
         "-WarnAfterSeconds", str(int(warn_after_seconds)),
         "-SignOutAfterSeconds", str(int(signout_after_seconds)),
     ] + auth_args
+
 
     try:
         proc = subprocess.run(cmd, capture_output=True, text=True)

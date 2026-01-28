@@ -31,7 +31,7 @@
         "-AdminUrl",
         "https://6twcdy-admin.sharepoint.com",
         "-Enabled",
-        "True",
+        "$true",
         "-WarnAfterSeconds",
         "840",
         "-SignOutAfterSeconds",
@@ -48,5 +48,5 @@
     "reasonDetail": "Failed to apply SPO idle session sign-out"
   },
   "status": 500,
-  "durationSeconds": 14.349
+  "durationSeconds": 13.803
 }
