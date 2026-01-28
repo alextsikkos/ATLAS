@@ -1,8 +1,8 @@
 {
   "tenant": "example",
-  "controlId": "SharePointDomainRestrictionConfigured",
+  "controlId": "SharePointSharingAllowedDomainListConfigured",
   "action": "ensure_applied",
-  "displayName": "SharePoint: Domain restriction mode configured (allow/block list)",
+  "displayName": "SharePoint: Allowed domain list configured (when allow-list mode is enabled)",
   "approved": true,
   "mode": "enforce",
   "state": "COMPLIANT",
@@ -24,23 +24,31 @@
       ]
     },
     "before": {
-      "SharePointDomainRestrictionConfigured": {
-        "SharingDomainRestrictionMode": 1
+      "SharePointSharingAllowedDomainListConfigured": {
+        "SharingDomainRestrictionMode": 1,
+        "SharingAllowedDomainList": "partner.com vendor.com"
       }
     },
     "desired": {
-      "SharePointDomainRestrictionConfigured": {
-        "SharingDomainRestrictionMode": "AllowList"
+      "SharePointSharingAllowedDomainListConfigured": {
+        "SharingDomainRestrictionMode": "AllowList",
+        "SharingAllowedDomainList": "partner.com vendor.com"
       }
     },
     "after": {
-      "SharePointDomainRestrictionConfigured": {
-        "SharingDomainRestrictionMode": 1
+      "SharePointSharingAllowedDomainListConfigured": {
+        "SharingDomainRestrictionMode": 1,
+        "SharingAllowedDomainList": "partner.com vendor.com"
       }
     },
     "evaluate": {
       "SharingDomainRestrictionMode": 1,
-      "SharingDomainRestrictionMode_normalized": "1"
+      "SharingAllowedDomainList": "partner.com vendor.com",
+      "SharingDomainRestrictionMode_normalized": "AllowList",
+      "SharingAllowedDomainList_normalized": [
+        "partner.com",
+        "vendor.com"
+      ]
     },
     "applyResult": {
       "ok": true,
@@ -63,9 +71,9 @@
         "error": null,
         "tenant": {
           "AllowedDomainGuids": null,
-          "IdleSessionSignOutAfterSeconds": 0,
+          "IdleSessionSignOutAfterSeconds": 900,
           "SharingBlockedDomainList": null,
-          "IdleSessionSignOutEnabled": false,
+          "IdleSessionSignOutEnabled": true,
           "DefaultSharingLinkType": 2,
           "PreventExternalUsersFromResharing": true,
           "SharingDomainRestrictionMode": 1,
@@ -75,7 +83,7 @@
           "DefaultLinkPermission": 1,
           "LegacyAuthProtocolsEnabled": true,
           "SharingAllowedDomainList": "partner.com vendor.com",
-          "IdleSessionSignOutWarnAfterSeconds": 0,
+          "IdleSessionSignOutWarnAfterSeconds": 840,
           "TenantSyncClientRestriction": {
             "AllowedDomainList": [],
             "GrooveBlockOption": null,

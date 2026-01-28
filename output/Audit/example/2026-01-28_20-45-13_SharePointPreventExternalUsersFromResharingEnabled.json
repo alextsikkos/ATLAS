@@ -1,8 +1,8 @@
 {
   "tenant": "example",
-  "controlId": "SharePointLinkExpirationConfigured",
+  "controlId": "SharePointPreventExternalUsersFromResharingEnabled",
   "action": "ensure_applied",
-  "displayName": "SharePoint: Anonymous link expiration configured (Secure Score)",
+  "displayName": "SharePoint: Prevent external users from resharing is enabled",
   "approved": true,
   "mode": "enforce",
   "state": "COMPLIANT",
@@ -24,22 +24,23 @@
       ]
     },
     "before": {
-      "SharePointLinkExpirationConfigured": {
-        "RequireAnonymousLinksExpireInDays": 30
+      "SharePointPreventExternalUsersFromResharingEnabled": {
+        "PreventExternalUsersFromResharing": true
       }
     },
     "desired": {
-      "SharePointLinkExpirationConfigured": {
-        "RequireAnonymousLinksExpireInDays": 30
+      "SharePointPreventExternalUsersFromResharingEnabled": {
+        "PreventExternalUsersFromResharing": true
       }
     },
     "after": {
-      "SharePointLinkExpirationConfigured": {
-        "RequireAnonymousLinksExpireInDays": 30
+      "SharePointPreventExternalUsersFromResharingEnabled": {
+        "PreventExternalUsersFromResharing": true
       }
     },
     "evaluate": {
-      "RequireAnonymousLinksExpireInDays": 30
+      "PreventExternalUsersFromResharing": true,
+      "PreventExternalUsersFromResharing_normalized": true
     },
     "applyResult": {
       "ok": true,
@@ -62,9 +63,9 @@
         "error": null,
         "tenant": {
           "AllowedDomainGuids": null,
-          "IdleSessionSignOutAfterSeconds": 0,
+          "IdleSessionSignOutAfterSeconds": 900,
           "SharingBlockedDomainList": null,
-          "IdleSessionSignOutEnabled": false,
+          "IdleSessionSignOutEnabled": true,
           "DefaultSharingLinkType": 2,
           "PreventExternalUsersFromResharing": true,
           "SharingDomainRestrictionMode": 1,
@@ -74,7 +75,7 @@
           "DefaultLinkPermission": 1,
           "LegacyAuthProtocolsEnabled": true,
           "SharingAllowedDomainList": "partner.com vendor.com",
-          "IdleSessionSignOutWarnAfterSeconds": 0,
+          "IdleSessionSignOutWarnAfterSeconds": 840,
           "TenantSyncClientRestriction": {
             "AllowedDomainList": [],
             "GrooveBlockOption": null,

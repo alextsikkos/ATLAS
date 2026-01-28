@@ -61,5 +61,5 @@
     "reasonDetail": "Applied idle session sign-out but verification still shows drift"
   },
   "status": 200,
-  "durationSeconds": 6.125
+  "durationSeconds": 10.212
 }

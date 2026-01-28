@@ -62,9 +62,9 @@
         "error": null,
         "tenant": {
           "AllowedDomainGuids": null,
-          "IdleSessionSignOutAfterSeconds": 0,
+          "IdleSessionSignOutAfterSeconds": 900,
           "SharingBlockedDomainList": null,
-          "IdleSessionSignOutEnabled": false,
+          "IdleSessionSignOutEnabled": true,
           "DefaultSharingLinkType": 2,
           "PreventExternalUsersFromResharing": true,
           "SharingDomainRestrictionMode": 1,
@@ -74,7 +74,7 @@
           "DefaultLinkPermission": 1,
           "LegacyAuthProtocolsEnabled": true,
           "SharingAllowedDomainList": "partner.com vendor.com",
-          "IdleSessionSignOutWarnAfterSeconds": 0,
+          "IdleSessionSignOutWarnAfterSeconds": 840,
           "TenantSyncClientRestriction": {
             "AllowedDomainList": [],
             "GrooveBlockOption": null,
