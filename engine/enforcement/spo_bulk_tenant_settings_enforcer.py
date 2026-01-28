@@ -187,26 +187,6 @@ def _compute_state_for_control(control_id: str, tenant_settings: dict) -> tuple[
             return ("COMPLIANT" if perm == 1 else "DRIFTED"), details
         return ("COMPLIANT" if str(perm).strip().lower() == "view" else "DRIFTED"), details
 
-    if control_id == "SharePointIdleSessionTimeout":
-        cfg = (tenant or {}).get("spoIdleSessionSignOut") or {}
-        enabled = bool(cfg.get("enabled", True))
-        warn_after = int(cfg.get("warnAfterSeconds", 840))       # 14 minutes default
-        signout_after = int(cfg.get("signOutAfterSeconds", 900)) # 15 minutes default
-
-        r = set_spo_browser_idle_signout(
-            admin_url=_spo_admin_url_from_tenant(tenant),
-            enabled=enabled,
-            warn_after_seconds=warn_after,
-            signout_after_seconds=signout_after,
-        )
-        details["idleSessionApply"] = r
-
-        if not r.get("ok"):
-            return "ERROR", "SPO_IDLE_SIGNOUT_SET_FAILED", r.get("error") or "Failed to set idle sign-out", details, "ENFORCER_EXECUTED"
-
-        return "COMPLIANT", "ENFORCER_EXECUTED", "Idle session sign-out configured via Set-SPOBrowserIdleSignOut", details, "ENFORCER_EXECUTED"
-
-
 
     if control_id == "SharePointDomainRestrictionConfigured":
         mode = t.get("SharingDomainRestrictionMode")
@@ -418,11 +398,47 @@ def _spo_batch_enforcer(
     if batch.get("error"):
         return ("NOT_EVALUATED", "MISSING_SIGNAL", str(batch.get("error")), {"batch": batch}, 424)
     if control_id == "SharePointIdleSessionTimeout" and mode_eff == "enforce":
+        cfg = (tenant or {}).get("spoIdleSessionSignOut") or {}
+        enabled = bool(cfg.get("enabled", True))
+        warn_after = int(cfg.get("warnAfterSeconds", 840))
+        signout_after = int(cfg.get("signOutAfterSeconds", 900))
+
+        apply_r = set_spo_browser_idle_signout(
+            admin_url=admin_url,
+            enabled=enabled,
+            warn_after_seconds=warn_after,
+            signout_after_seconds=signout_after,
+        )
+
         details = {
             "adminUrl": admin_url,
-            "note": "UNSUPPORTED: Set-SPOTenant does not support IdleSessionSignOut* parameters in this environment",
+            "requested": {
+                "enabled": enabled,
+                "warnAfterSeconds": warn_after,
+                "signOutAfterSeconds": signout_after,
+            },
+            "applyResult": apply_r,
         }
-        return ("NOT_EVALUATED", "UNSUPPORTED_MODE", "Cannot enforce SharePoint idle session via SPO Management Shell (Set-SPOTenant)", details, 424)
+
+        if not (apply_r or {}).get("ok"):
+            return ("ERROR", "ENFORCER_ERROR", "Failed to apply SPO idle session sign-out", details, 500)
+
+        # IMPORTANT: refresh batch cache AFTER apply so evaluation uses the new snapshot
+        post = _spo_get_tenant_settings(admin_url)
+        details["afterRead"] = post
+
+        if not (post or {}).get("ok"):
+            return ("NOT_EVALUATED", "MISSING_SIGNAL", f"SPO read-after failed: {post.get('error')}", details, 424)
+
+        # force re-eval based on post snapshot
+        state, eval_details = _compute_state_for_control(control_id, post)
+        details["evaluateAfter"] = eval_details
+
+        if state == "COMPLIANT":
+            return ("COMPLIANT", "ENFORCER_EXECUTED", "Idle session sign-out configured via Set-SPOBrowserIdleSignOut", details, 200)
+
+        return ("DRIFTED", "ENFORCER_EXECUTED", "Applied idle session sign-out but verification still shows drift", details, 200)
+
 
     # Evaluate state from the best available snapshot.
     snap = batch.get("after") if (mode_eff == "enforce") else batch.get("before")
