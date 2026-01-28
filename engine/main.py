@@ -649,8 +649,6 @@ def main():
     # ============================
     # DEV SPEED: limit controls
     # ============================
-    import os
-
     only_raw = os.getenv("ATLAS_ONLY_CONTROLS", "").strip()
     if only_raw:
         only_set = {c.strip() for c in only_raw.split(",") if c.strip()}
@@ -665,8 +663,6 @@ def main():
         after = len(tenant.get("_atlas_matched_controls", []))
         print(f"=== ATLAS_ONLY_CONTROLS applied: {after}/{before} controls selected ===")
     # ============================
-
-    import os
 
     only_raw = (os.getenv("ATLAS_ONLY_CONTROLS") or "").strip()
     skip_raw = (os.getenv("ATLAS_SKIP_CONTROLS") or "").strip()
