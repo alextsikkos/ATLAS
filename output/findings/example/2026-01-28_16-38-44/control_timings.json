@@ -1,0 +1,17 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-28_16-38-44",
+  "count": 1,
+  "rows": [
+    {
+      "controlId": "SharePointIdleSessionTimeout",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "ERROR",
+      "reasonCode": "ENFORCER_ERROR",
+      "durationSeconds": 13.996
+    }
+  ]
+}

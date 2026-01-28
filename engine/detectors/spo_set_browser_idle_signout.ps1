@@ -5,27 +5,19 @@ param(
   [Parameter(Mandatory=$true)]
   [bool]$Enabled,
 
-  [Parameter(Mandatory=$false)]
-  [int]$WarnAfterSeconds = 0,
-
-  [Parameter(Mandatory=$false)]
-  [int]$SignOutAfterSeconds = 0,
+  [Parameter(Mandatory=$true)]
+  [int]$WarnAfterSeconds,
 
   [Parameter(Mandatory=$true)]
-  [string]$ClientId,
+  [int]$SignOutAfterSeconds,
 
-  [Parameter(Mandatory=$true)]
-  [string]$TenantId,
-
-  [Parameter(Mandatory=$false)]
-  [string]$CertificateThumbprint,
-
-  [Parameter(Mandatory=$false)]
-  [string]$CertificatePath,
-
-  [Parameter(Mandatory=$false)]
-  [string]$CertificatePassword
+  [string] $ClientId,
+  [string] $TenantId,
+  [string] $CertificateThumbprint,
+  [string] $CertificatePath,
+  [string] $CertificatePassword
 )
+
 
 $ErrorActionPreference = "Stop"
 
