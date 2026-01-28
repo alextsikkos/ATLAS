@@ -3,7 +3,8 @@ param(
   [string]$AdminUrl,
 
   [Parameter(Mandatory=$true)]
-  [bool]$Enabled,
+  [string]$Enabled,
+
 
   [Parameter(Mandatory=$true)]
   [int]$WarnAfterSeconds,
@@ -21,6 +22,19 @@ param(
   [string]$CertificatePath,
   [string]$CertificatePassword
 )
+# Normalize Enabled to boolean (ATLAS passes strings)
+if ($Enabled -is [string]) {
+  switch ($Enabled.ToLowerInvariant()) {
+    "true"  { $Enabled = $true }
+    "false" { $Enabled = $false }
+    "1"     { $Enabled = $true }
+    "0"     { $Enabled = $false }
+    default {
+      throw "Invalid value for -Enabled: '$Enabled'. Expected true/false/1/0."
+    }
+  }
+}
+
 function Get-AtlasSpoCertificate {
   param(
     [string]$CertificateThumbprint,
