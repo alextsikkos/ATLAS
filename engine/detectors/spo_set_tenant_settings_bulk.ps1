@@ -29,32 +29,13 @@ Import-Module Microsoft.Online.SharePoint.PowerShell -ErrorAction SilentlyContin
 if ($ClientId -and $TenantId -and (($CertificateThumbprint -and $CertificateThumbprint.Trim().Length -gt 0) -or ($CertificatePath -and $CertificatePath.Trim().Length -gt 0))) {
 
   if ($CertificateThumbprint -and $CertificateThumbprint.Trim().Length -gt 0) {
-
-    $tp = ($CertificateThumbprint -replace "\s","")
-    $cert = $null
-    $pathsTried = @()
-
-    $p1 = "Cert:\CurrentUser\My\$tp"
-    $pathsTried += $p1
-    try { $cert = Get-ChildItem $p1 -ErrorAction Stop } catch { $cert = $null }
-
-    if (-not $cert) {
-      $p2 = "Cert:\LocalMachine\My\$tp"
-      $pathsTried += $p2
-      try { $cert = Get-ChildItem $p2 -ErrorAction Stop } catch { $cert = $null }
-    }
-
-    if (-not $cert) {
-      throw "Certificate thumbprint not found in certificate stores. Tried: $($pathsTried -join ', ')"
-    }
-
-    if (-not $cert.HasPrivateKey) {
-      throw "Certificate found but has no private key. Thumbprint=$tp"
-    }
+    $tp = $CertificateThumbprint -replace "\s",""
+    $certPath = "Cert:\CurrentUser\My\$tp"
+    $cert = Get-ChildItem $certPath -ErrorAction Stop
+    if (-not $cert.HasPrivateKey) { throw "Certificate found but has no private key: $certPath" }
 
     Connect-SPOService -Url $AdminUrl -ClientId $ClientId -Tenant $TenantId -Certificate $cert -ErrorAction Stop
   }
-
 
   elseif ($CertificatePath -and $CertificatePath.Trim().Length -gt 0) {
     if ($CertificatePassword -and $CertificatePassword.Trim().Length -gt 0) {
