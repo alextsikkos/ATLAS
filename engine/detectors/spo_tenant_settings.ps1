@@ -1,11 +1,17 @@
 param(
-  [Parameter(Mandatory=$true)][string]$AdminUrl,
-  [string]$ClientId,
-  [string]$TenantId,
-  [string]$CertificateThumbprint,
-  [string]$CertificatePath,
-  [string]$CertificatePassword
+    [Parameter(Mandatory)]
+    [string] $AdminUrl,
+
+    [Parameter(Mandatory)]
+    [string] $SettingsJson,
+
+    [string] $ClientId,
+    [string] $TenantId,
+    [string] $CertificateThumbprint,
+    [string] $CertificatePath,
+    [string] $CertificatePassword
 )
+
 
 $ErrorActionPreference = "Stop"
 
