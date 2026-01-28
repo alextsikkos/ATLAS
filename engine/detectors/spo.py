@@ -32,6 +32,59 @@ def _spo_auth_ps_args() -> tuple[list[str], list[str]]:
 
     return ps_args, []
 
+def set_spo_browser_idle_signout(
+    admin_url: str,
+    enabled: bool,
+    warn_after_seconds: int,
+    signout_after_seconds: int,
+) -> dict:
+    if not admin_url or not str(admin_url).strip():
+        return {"ok": False, "error": "AdminUrl is required", "adminUrl": admin_url}
+
+    ps1_path = os.path.join(os.path.dirname(__file__), "spo_set_browser_idle_signout.ps1")
+
+    auth_args, missing_keys = _spo_auth_ps_args()
+    if missing_keys:
+        return {
+            "ok": False,
+            "error": "SPO app-only auth is configured but missing required keys; refusing to fall back to interactive auth",
+            "missingKeys": missing_keys,
+            "adminUrl": admin_url,
+        }
+
+    cmd = [
+        "powershell.exe",
+        "-NoProfile",
+        "-ExecutionPolicy", "Bypass",
+        "-File", ps1_path,
+        "-AdminUrl", str(admin_url).strip(),
+        "-Enabled", str(bool(enabled)).lower(),
+        "-WarnAfterSeconds", str(int(warn_after_seconds)),
+        "-SignOutAfterSeconds", str(int(signout_after_seconds)),
+    ] + auth_args
+
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True)
+    except Exception as e:
+        return {"ok": False, "error": f"Failed to execute PowerShell: {e}", "cmd": cmd}
+
+    out = (proc.stdout or "").strip()
+    err = (proc.stderr or "").strip()
+
+    if proc.returncode != 0:
+        return {
+            "ok": False,
+            "error": "Set-SPOBrowserIdleSignOut failed",
+            "stdout": out,
+            "stderr": err,
+            "exitCode": proc.returncode,
+            "cmd": cmd,
+        }
+
+    try:
+        return json.loads(out) if out else {"ok": True}
+    except Exception:
+        return {"ok": True, "raw": out, "stderr": err or None}
 
 def run_spo_tenant_settings(admin_url: str) -> dict:
 

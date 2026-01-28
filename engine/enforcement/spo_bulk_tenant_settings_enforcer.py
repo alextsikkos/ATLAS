@@ -1,5 +1,6 @@
 # engine/enforcement/spo_bulk_tenant_settings_enforcer.py
 from __future__ import annotations
+from engine.detectors.spo import set_spo_browser_idle_signout
 
 import time
 from typing import Dict, Tuple
@@ -123,7 +124,7 @@ def _keys_for_control(control_id: str) -> list[str]:
     if control_id == "SharePointSharingBlockedDomainListConfigured":
         return ["SharingDomainRestrictionMode", "SharingBlockedDomainList"]
     return []
-    
+
 
 def _subset(d: dict | None, keys: list[str]) -> dict:
     d = d or {}
@@ -187,7 +188,24 @@ def _compute_state_for_control(control_id: str, tenant_settings: dict) -> tuple[
         return ("COMPLIANT" if str(perm).strip().lower() == "view" else "DRIFTED"), details
 
     if control_id == "SharePointIdleSessionTimeout":
-        return "NOT_EVALUATED", {"error": "UNSUPPORTED: cannot evaluate/enforce idle session via SPO tenant settings snapshot in this module"}
+        cfg = (tenant or {}).get("spoIdleSessionSignOut") or {}
+        enabled = bool(cfg.get("enabled", True))
+        warn_after = int(cfg.get("warnAfterSeconds", 840))       # 14 minutes default
+        signout_after = int(cfg.get("signOutAfterSeconds", 900)) # 15 minutes default
+
+        r = set_spo_browser_idle_signout(
+            admin_url=_spo_admin_url_from_tenant(tenant),
+            enabled=enabled,
+            warn_after_seconds=warn_after,
+            signout_after_seconds=signout_after,
+        )
+        details["idleSessionApply"] = r
+
+        if not r.get("ok"):
+            return "ERROR", "SPO_IDLE_SIGNOUT_SET_FAILED", r.get("error") or "Failed to set idle sign-out", details, "ENFORCER_EXECUTED"
+
+        return "COMPLIANT", "ENFORCER_EXECUTED", "Idle session sign-out configured via Set-SPOBrowserIdleSignOut", details, "ENFORCER_EXECUTED"
+
 
 
     if control_id == "SharePointDomainRestrictionConfigured":

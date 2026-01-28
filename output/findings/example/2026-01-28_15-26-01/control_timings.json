@@ -1,0 +1,77 @@
+{
+  "tenant": "example",
+  "generatedAt": "2026-01-28_15-26-01",
+  "count": 7,
+  "rows": [
+    {
+      "controlId": "SharePointDefaultSharingRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 15.028
+    },
+    {
+      "controlId": "SharePointLinkExpirationConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointDefaultLinkTypeRestricted",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointIdleSessionTimeout",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "NOT_EVALUATED",
+      "reasonCode": "UNSUPPORTED_MODE",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointDomainRestrictionConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointSharingAllowedDomainListConfigured",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    },
+    {
+      "controlId": "SharePointPreventExternalUsersFromResharingEnabled",
+      "controlName": null,
+      "category": null,
+      "tier": null,
+      "mode": "enforce",
+      "state": "COMPLIANT",
+      "reasonCode": "ENFORCER_EXECUTED",
+      "durationSeconds": 0.0
+    }
+  ]
+}
