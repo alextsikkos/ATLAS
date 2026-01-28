@@ -63,5 +63,5 @@
     "reasonDetail": "SPO read failed: Interactive SPO auth is disabled. Configure spoAppAuth (clientId/tenantId/certificateThumbprint) in the tenant JSON."
   },
   "status": 424,
-  "durationSeconds": 0.286
+  "durationSeconds": 0.314
 }

@@ -50,69 +50,6 @@ def _spo_auth_ps_args(tenant_conf: Dict[str, Any]) -> Tuple[List[str], List[str]
 
     return args, []
 
-def set_spo_prevent_external_users_from_resharing(admin_url: str, enabled: bool) -> dict:
-    """
-    Applies: Set-SPOTenant -PreventExternalUsersFromResharing $true/$false
-    Returns a dict like run_spo_tenant_settings: {"ok": bool, "error": str|None, ...}
-    """
-    if not admin_url or not str(admin_url).strip():
-        return {
-            "ok": False,
-            "error": "AdminUrl is required (e.g. https://contoso-admin.sharepoint.com)",
-            "adminUrl": admin_url,
-        }
-
-    ps1_path = os.path.join(os.path.dirname(__file__), "spo_set_prevent_resharing.ps1")
-
-    auth_args, missing_keys = _spo_auth_ps_args()
-    if missing_keys:
-        return {
-            "ok": False,
-            "error": "SPO app-only auth is configured but missing required keys; refusing to fall back to interactive auth",
-            "missingKeys": missing_keys,
-            "adminUrl": admin_url,
-        }
-
-    # Powershell boolean literal
-    enabled_ps = "$true" if bool(enabled) else "$false"
-
-    cmd = [
-        "powershell.exe",
-        "-NoProfile",
-        "-ExecutionPolicy", "Bypass",
-        "-File", ps1_path,
-        "-AdminUrl", str(admin_url).strip(),
-        "-Enabled", enabled_ps,
-    ] + auth_args
-
-    try:
-        proc = subprocess.run(cmd, capture_output=True, text=True)
-    except Exception as e:
-        return {"ok": False, "error": f"Failed to execute PowerShell: {e}", "cmd": cmd}
-
-    out = (proc.stdout or "").strip()
-    err = (proc.stderr or "").strip()
-
-    # Keep it conservative: if exit code != 0, return error even if stdout exists
-    if proc.returncode != 0:
-        return {
-            "ok": False,
-            "error": "SPO Set-SPOTenant command failed",
-            "stdout": out,
-            "stderr": err,
-            "exitCode": proc.returncode,
-            "cmd": cmd,
-        }
-
-    return {
-        "ok": True,
-        "error": None,
-        "stdout": out,
-        "stderr": err if err else None,
-        "exitCode": proc.returncode,
-        "adminUrl": str(admin_url).strip(),
-        "enabled": bool(enabled),
-    }
 
 def set_spo_domain_restriction(admin_url: str, mode: str, allowed_domains: str | None, blocked_domains: str | None) -> dict:
     if not admin_url or not str(admin_url).strip():
@@ -184,7 +121,10 @@ def set_spo_tenant_settings_bulk(admin_url: str, settings: dict) -> dict:
 
     ps1_path = os.path.join(os.path.dirname(__file__), "spo_set_tenant_settings_bulk.ps1")
 
-    auth_args, missing_keys = _spo_auth_ps_args()
+    auth_args, missing_keys = _spo_auth_ps_args(tenant_conf)
+    result["authMode"] = "app-only" if auth_args else "interactive-disabled"
+    result["authArgsPresent"] = bool(auth_args)
+
     if missing_keys:
         return {
             "ok": False,
