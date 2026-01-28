@@ -495,7 +495,8 @@ def main():
     # --- SPO app-only auth env (required to prevent interactive auth popups) ---
     try:
         # SharePoint Online app-only auth
-        spo_auth = (tenant_conf or {}).get("spoAppAuth") or {}
+        spo_auth = (tenant or {}).get("spoAppAuth") or {}
+
         if spo_auth:
             # NEW: the SPO runner reads ATLAS_SPO_CLIENT_ID
             os.environ["ATLAS_SPO_CLIENT_ID"] = spo_auth.get("clientId", "")
